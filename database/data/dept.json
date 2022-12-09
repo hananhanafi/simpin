@@ -1,0 +1,4849 @@
+[{
+        "type": "header",
+        "version": "5.2.0",
+        "comment": "Export to JSON plugin for PHPMyAdmin"
+    },
+    {
+        "type": "database",
+        "name": "admin_simpin"
+    },
+    {
+        "type": "table",
+        "name": "p_departemen",
+        "database": "admin_simpin",
+        "data": [{
+                "id": "1",
+                "parent_id": "0",
+                "kode": "ACB1",
+                "departemen": "QUALITY CONTROL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "2",
+                "parent_id": "0",
+                "kode": "ACFL",
+                "departemen": "ACFL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "3",
+                "parent_id": "0",
+                "kode": "ACOF",
+                "departemen": "ACOF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "4",
+                "parent_id": "0",
+                "kode": "ACTC",
+                "departemen": "ACTC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "5",
+                "parent_id": "0",
+                "kode": "ADM1",
+                "departemen": "ADM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "6",
+                "parent_id": "0",
+                "kode": "ADMF",
+                "departemen": "ADMF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "7",
+                "parent_id": "0",
+                "kode": "ADMI",
+                "departemen": "ADMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "8",
+                "parent_id": "0",
+                "kode": "APF1",
+                "departemen": "APF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "9",
+                "parent_id": "0",
+                "kode": "APK1",
+                "departemen": "APK1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "10",
+                "parent_id": "0",
+                "kode": "APMF",
+                "departemen": "APMF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "11",
+                "parent_id": "0",
+                "kode": "APMK",
+                "departemen": "APMK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "12",
+                "parent_id": "0",
+                "kode": "ARM1",
+                "departemen": "ARM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "13",
+                "parent_id": "0",
+                "kode": "ARMI",
+                "departemen": "ARMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "14",
+                "parent_id": "0",
+                "kode": "AUD2",
+                "departemen": "AUD2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "15",
+                "parent_id": "0",
+                "kode": "AUDI",
+                "departemen": "AUDI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "16",
+                "parent_id": "0",
+                "kode": "BCS6",
+                "departemen": "BCS6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "17",
+                "parent_id": "0",
+                "kode": "BEMA",
+                "departemen": "BEMA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "18",
+                "parent_id": "0",
+                "kode": "BEMI",
+                "departemen": "BEMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "19",
+                "parent_id": "0",
+                "kode": "BENK",
+                "departemen": "BENK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "20",
+                "parent_id": "0",
+                "kode": "BENO",
+                "departemen": "BENO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "21",
+                "parent_id": "0",
+                "kode": "BFOP",
+                "departemen": "BFOP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "22",
+                "parent_id": "0",
+                "kode": "BMTL",
+                "departemen": "BMTL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "23",
+                "parent_id": "0",
+                "kode": "BNKL",
+                "departemen": "BNKL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "24",
+                "parent_id": "0",
+                "kode": "BPFF",
+                "departemen": "BPFF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "25",
+                "parent_id": "0",
+                "kode": "BPLT",
+                "departemen": "BPLT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "26",
+                "parent_id": "0",
+                "kode": "BPO3",
+                "departemen": "BPO3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "27",
+                "parent_id": "0",
+                "kode": "BPOF",
+                "departemen": "BPOF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "28",
+                "parent_id": "0",
+                "kode": "BPOU",
+                "departemen": "BPOU",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "29",
+                "parent_id": "0",
+                "kode": "BPR1",
+                "departemen": "BPR1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "30",
+                "parent_id": "0",
+                "kode": "BPR2",
+                "departemen": "BPR2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "31",
+                "parent_id": "0",
+                "kode": "BPR3",
+                "departemen": "BPR3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "32",
+                "parent_id": "0",
+                "kode": "BPR4",
+                "departemen": "BPR4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "33",
+                "parent_id": "0",
+                "kode": "BPR5",
+                "departemen": "BPR5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "34",
+                "parent_id": "0",
+                "kode": "BPR6",
+                "departemen": "BPR6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "35",
+                "parent_id": "0",
+                "kode": "BSC5",
+                "departemen": "BSC5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "36",
+                "parent_id": "0",
+                "kode": "BSC6",
+                "departemen": "BSC6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "37",
+                "parent_id": "0",
+                "kode": "CAGC",
+                "departemen": "CAGC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "38",
+                "parent_id": "0",
+                "kode": "CEF1",
+                "departemen": "CEF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "39",
+                "parent_id": "0",
+                "kode": "CEF3",
+                "departemen": "CEF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "40",
+                "parent_id": "0",
+                "kode": "CEM1",
+                "departemen": "CEM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "41",
+                "parent_id": "0",
+                "kode": "CEM2",
+                "departemen": "CEM2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "42",
+                "parent_id": "0",
+                "kode": "CEM3",
+                "departemen": "CEM3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "43",
+                "parent_id": "0",
+                "kode": "CFF1",
+                "departemen": "CFF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "44",
+                "parent_id": "0",
+                "kode": "CFF2",
+                "departemen": "CFF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "45",
+                "parent_id": "0",
+                "kode": "CFF3",
+                "departemen": "CFF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "46",
+                "parent_id": "0",
+                "kode": "CIVD",
+                "departemen": "CIVD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "47",
+                "parent_id": "0",
+                "kode": "CIVM",
+                "departemen": "CIVM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "48",
+                "parent_id": "0",
+                "kode": "CLDE",
+                "departemen": "CLDE",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "49",
+                "parent_id": "0",
+                "kode": "CLF1",
+                "departemen": "CLF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "50",
+                "parent_id": "0",
+                "kode": "CLF2",
+                "departemen": "CLF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "51",
+                "parent_id": "0",
+                "kode": "CLF3",
+                "departemen": "CLF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "52",
+                "parent_id": "0",
+                "kode": "CLN1",
+                "departemen": "CLN1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "53",
+                "parent_id": "0",
+                "kode": "CLN2",
+                "departemen": "CLN2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "54",
+                "parent_id": "0",
+                "kode": "CMKI",
+                "departemen": "CMKI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "55",
+                "parent_id": "0",
+                "kode": "CMLD",
+                "departemen": "CMLD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "56",
+                "parent_id": "0",
+                "kode": "CNCM",
+                "departemen": "CNCM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "57",
+                "parent_id": "0",
+                "kode": "CNF1",
+                "departemen": "CNF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "58",
+                "parent_id": "0",
+                "kode": "CNF2",
+                "departemen": "CNF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "59",
+                "parent_id": "0",
+                "kode": "CNF3",
+                "departemen": "CNF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "60",
+                "parent_id": "0",
+                "kode": "CODE",
+                "departemen": "CODE",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "61",
+                "parent_id": "0",
+                "kode": "COGS",
+                "departemen": "COGS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "62",
+                "parent_id": "0",
+                "kode": "COM1",
+                "departemen": "COM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "63",
+                "parent_id": "0",
+                "kode": "COMC",
+                "departemen": "COMC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "64",
+                "parent_id": "0",
+                "kode": "COMM",
+                "departemen": "COMM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "65",
+                "parent_id": "0",
+                "kode": "CONT",
+                "departemen": "CONT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "66",
+                "parent_id": "0",
+                "kode": "COST",
+                "departemen": "COST",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "67",
+                "parent_id": "0",
+                "kode": "CPHO",
+                "departemen": "CPHO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "68",
+                "parent_id": "0",
+                "kode": "CSEC",
+                "departemen": "CSEC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "69",
+                "parent_id": "0",
+                "kode": "CSF2",
+                "departemen": "CSF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "70",
+                "parent_id": "0",
+                "kode": "CTD1",
+                "departemen": "CTD1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "71",
+                "parent_id": "0",
+                "kode": "CTD3",
+                "departemen": "CTD3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "72",
+                "parent_id": "0",
+                "kode": "CTDI",
+                "departemen": "CTDI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "73",
+                "parent_id": "0",
+                "kode": "CUSS",
+                "departemen": "CUSS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "74",
+                "parent_id": "0",
+                "kode": "CUST",
+                "departemen": "CUST",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "75",
+                "parent_id": "0",
+                "kode": "CVMT",
+                "departemen": "CVMT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "76",
+                "parent_id": "0",
+                "kode": "DACC",
+                "departemen": "DACC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "77",
+                "parent_id": "0",
+                "kode": "DEAC",
+                "departemen": "DEAC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "78",
+                "parent_id": "0",
+                "kode": "DESC",
+                "departemen": "DESC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "79",
+                "parent_id": "0",
+                "kode": "DEVS",
+                "departemen": "DEVS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "80",
+                "parent_id": "0",
+                "kode": "DOM1",
+                "departemen": "DOM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "81",
+                "parent_id": "0",
+                "kode": "DOM2",
+                "departemen": "DOM2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "82",
+                "parent_id": "0",
+                "kode": "DOMI",
+                "departemen": "DOMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "83",
+                "parent_id": "0",
+                "kode": "DOMS",
+                "departemen": "DOMS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "84",
+                "parent_id": "0",
+                "kode": "EAST",
+                "departemen": "EAST",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "85",
+                "parent_id": "0",
+                "kode": "EIB2",
+                "departemen": "EIB2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "86",
+                "parent_id": "0",
+                "kode": "EIC1",
+                "departemen": "EIC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "87",
+                "parent_id": "0",
+                "kode": "EIC2",
+                "departemen": "EIC2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "88",
+                "parent_id": "0",
+                "kode": "EIC3",
+                "departemen": "EIC3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "89",
+                "parent_id": "0",
+                "kode": "EICC",
+                "departemen": "EICC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "90",
+                "parent_id": "0",
+                "kode": "ELC2",
+                "departemen": "ELC2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "91",
+                "parent_id": "0",
+                "kode": "ELC3",
+                "departemen": "ELC3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "92",
+                "parent_id": "0",
+                "kode": "ELCF",
+                "departemen": "ELCF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "93",
+                "parent_id": "0",
+                "kode": "ELCT",
+                "departemen": "ELCT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "94",
+                "parent_id": "0",
+                "kode": "ELEC",
+                "departemen": "ELEC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "95",
+                "parent_id": "0",
+                "kode": "ELS1",
+                "departemen": "ELS1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "96",
+                "parent_id": "0",
+                "kode": "EMPB",
+                "departemen": "EMPB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "97",
+                "parent_id": "0",
+                "kode": "EMPH",
+                "departemen": "EMPH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "98",
+                "parent_id": "0",
+                "kode": "EMPS",
+                "departemen": "EMPS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "99",
+                "parent_id": "0",
+                "kode": "ENG",
+                "departemen": "ENG",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "100",
+                "parent_id": "0",
+                "kode": "ENGA",
+                "departemen": "ENGA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "101",
+                "parent_id": "0",
+                "kode": "ENGF",
+                "departemen": "ENGF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "102",
+                "parent_id": "0",
+                "kode": "ENGI",
+                "departemen": "ENGI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "103",
+                "parent_id": "0",
+                "kode": "ENGS",
+                "departemen": "ENGS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "104",
+                "parent_id": "0",
+                "kode": "ERA2",
+                "departemen": "ERA2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "105",
+                "parent_id": "0",
+                "kode": "ERA3",
+                "departemen": "ERA3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "106",
+                "parent_id": "0",
+                "kode": "ERA4",
+                "departemen": "ERA4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "107",
+                "parent_id": "0",
+                "kode": "ERS3",
+                "departemen": "ERS3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "108",
+                "parent_id": "0",
+                "kode": "EXAD",
+                "departemen": "EXAD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "109",
+                "parent_id": "0",
+                "kode": "EXDO",
+                "departemen": "EXDO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "110",
+                "parent_id": "0",
+                "kode": "EXGB",
+                "departemen": "EXGB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "111",
+                "parent_id": "0",
+                "kode": "EXIS",
+                "departemen": "EXIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "112",
+                "parent_id": "0",
+                "kode": "EXO1",
+                "departemen": "EXO1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "113",
+                "parent_id": "0",
+                "kode": "EXOD",
+                "departemen": "EXOD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "114",
+                "parent_id": "0",
+                "kode": "EXPO",
+                "departemen": "EXPO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "115",
+                "parent_id": "0",
+                "kode": "EXPT",
+                "departemen": "EXPT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "116",
+                "parent_id": "0",
+                "kode": "FAGF",
+                "departemen": "FAGF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "117",
+                "parent_id": "0",
+                "kode": "FAMI",
+                "departemen": "FAMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "118",
+                "parent_id": "0",
+                "kode": "FCOA",
+                "departemen": "FCOA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "119",
+                "parent_id": "0",
+                "kode": "FIN1",
+                "departemen": "FIN1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "120",
+                "parent_id": "0",
+                "kode": "FINB",
+                "departemen": "FINB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "121",
+                "parent_id": "0",
+                "kode": "FINN",
+                "departemen": "FINN",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "122",
+                "parent_id": "0",
+                "kode": "FIT1",
+                "departemen": "FIT1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "123",
+                "parent_id": "0",
+                "kode": "FIT2",
+                "departemen": "FIT2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "124",
+                "parent_id": "0",
+                "kode": "FIT3",
+                "departemen": "FIT3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "125",
+                "parent_id": "0",
+                "kode": "FMHR",
+                "departemen": "FMHR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "126",
+                "parent_id": "0",
+                "kode": "FOM2",
+                "departemen": "FOM2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "127",
+                "parent_id": "0",
+                "kode": "FOP",
+                "departemen": "FOP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "128",
+                "parent_id": "0",
+                "kode": "FPF3",
+                "departemen": "FPF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "129",
+                "parent_id": "0",
+                "kode": "FPFI",
+                "departemen": "FPFI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "130",
+                "parent_id": "0",
+                "kode": "FRF1",
+                "departemen": "FRF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "131",
+                "parent_id": "0",
+                "kode": "FRF2",
+                "departemen": "FRF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "132",
+                "parent_id": "0",
+                "kode": "FRF3",
+                "departemen": "FRF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "133",
+                "parent_id": "0",
+                "kode": "FSVC",
+                "departemen": "FSVC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "134",
+                "parent_id": "0",
+                "kode": "FTSP",
+                "departemen": "FTSP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "135",
+                "parent_id": "0",
+                "kode": "GAAD",
+                "departemen": "GAAD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "136",
+                "parent_id": "0",
+                "kode": "GAC",
+                "departemen": "GAC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "137",
+                "parent_id": "0",
+                "kode": "GAC1",
+                "departemen": "GAC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "138",
+                "parent_id": "0",
+                "kode": "GAFS",
+                "departemen": "GAFS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "139",
+                "parent_id": "0",
+                "kode": "GAFT",
+                "departemen": "GAFT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "140",
+                "parent_id": "0",
+                "kode": "GAHS",
+                "departemen": "GAHS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "141",
+                "parent_id": "0",
+                "kode": "GAMI",
+                "departemen": "GAMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "142",
+                "parent_id": "0",
+                "kode": "GAP1",
+                "departemen": "GAP1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "143",
+                "parent_id": "0",
+                "kode": "GAP2",
+                "departemen": "GAP2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "144",
+                "parent_id": "0",
+                "kode": "GAP3",
+                "departemen": "GAP3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "145",
+                "parent_id": "0",
+                "kode": "GAP4",
+                "departemen": "GAP4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "146",
+                "parent_id": "0",
+                "kode": "GAP5",
+                "departemen": "GAP5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "147",
+                "parent_id": "0",
+                "kode": "GAP6",
+                "departemen": "GAP6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "148",
+                "parent_id": "0",
+                "kode": "GAP8",
+                "departemen": "GAP8",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "149",
+                "parent_id": "0",
+                "kode": "GASK",
+                "departemen": "GASK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "150",
+                "parent_id": "0",
+                "kode": "GATR",
+                "departemen": "GATR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "151",
+                "parent_id": "0",
+                "kode": "GBF",
+                "departemen": "GBF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "152",
+                "parent_id": "0",
+                "kode": "GBFO",
+                "departemen": "GBFO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "153",
+                "parent_id": "0",
+                "kode": "GBFS",
+                "departemen": "GBFS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "154",
+                "parent_id": "0",
+                "kode": "GBJ",
+                "departemen": "GBJ",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "155",
+                "parent_id": "0",
+                "kode": "GBJC",
+                "departemen": "GBJC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "156",
+                "parent_id": "0",
+                "kode": "GBLS",
+                "departemen": "GBLS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "157",
+                "parent_id": "0",
+                "kode": "GBMB",
+                "departemen": "GBMB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "158",
+                "parent_id": "0",
+                "kode": "GBP",
+                "departemen": "GBP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "159",
+                "parent_id": "0",
+                "kode": "GBPP",
+                "departemen": "GBPP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "160",
+                "parent_id": "0",
+                "kode": "GBPS",
+                "departemen": "GBPS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "161",
+                "parent_id": "0",
+                "kode": "GCEO",
+                "departemen": "GCEO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "162",
+                "parent_id": "0",
+                "kode": "GLGC",
+                "departemen": "GLGC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "163",
+                "parent_id": "0",
+                "kode": "GLGF",
+                "departemen": "GLGF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "164",
+                "parent_id": "0",
+                "kode": "GLMK",
+                "departemen": "GLMK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "165",
+                "parent_id": "0",
+                "kode": "GLO4",
+                "departemen": "GLO4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "166",
+                "parent_id": "0",
+                "kode": "GLO5",
+                "departemen": "GLO5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "167",
+                "parent_id": "0",
+                "kode": "GLO6",
+                "departemen": "GLO6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "168",
+                "parent_id": "0",
+                "kode": "GLO8",
+                "departemen": "GLO8",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "169",
+                "parent_id": "0",
+                "kode": "GMTL",
+                "departemen": "GMTL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "170",
+                "parent_id": "0",
+                "kode": "GPR1",
+                "departemen": "GPR1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "171",
+                "parent_id": "0",
+                "kode": "GPR2",
+                "departemen": "GPR2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "172",
+                "parent_id": "0",
+                "kode": "GPR3",
+                "departemen": "GPR3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "173",
+                "parent_id": "0",
+                "kode": "GPR4",
+                "departemen": "GPR4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "174",
+                "parent_id": "0",
+                "kode": "GPR5",
+                "departemen": "GPR5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "175",
+                "parent_id": "0",
+                "kode": "GPR6",
+                "departemen": "GPR6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "176",
+                "parent_id": "0",
+                "kode": "GSEF",
+                "departemen": "GSEF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "177",
+                "parent_id": "0",
+                "kode": "GSSF",
+                "departemen": "GSSF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "178",
+                "parent_id": "0",
+                "kode": "GSTF",
+                "departemen": "GSTF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "179",
+                "parent_id": "0",
+                "kode": "GVSR",
+                "departemen": "GVSR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "180",
+                "parent_id": "0",
+                "kode": "HEF2",
+                "departemen": "HEF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "181",
+                "parent_id": "0",
+                "kode": "HEF3",
+                "departemen": "HEF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "182",
+                "parent_id": "0",
+                "kode": "HEM1",
+                "departemen": "HEM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "183",
+                "parent_id": "0",
+                "kode": "HEM2",
+                "departemen": "HEM2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "184",
+                "parent_id": "0",
+                "kode": "HEM3",
+                "departemen": "HEM3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "185",
+                "parent_id": "0",
+                "kode": "HEMA",
+                "departemen": "HEMA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "186",
+                "parent_id": "0",
+                "kode": "HRIS",
+                "departemen": "HRIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "187",
+                "parent_id": "0",
+                "kode": "HRMI",
+                "departemen": "HRMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "188",
+                "parent_id": "0",
+                "kode": "HSEV",
+                "departemen": "HSEV",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "189",
+                "parent_id": "0",
+                "kode": "IHM1",
+                "departemen": "IHM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "190",
+                "parent_id": "0",
+                "kode": "IHMA",
+                "departemen": "IHMA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "191",
+                "parent_id": "0",
+                "kode": "IHMI",
+                "departemen": "IHMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "192",
+                "parent_id": "0",
+                "kode": "IHMS",
+                "departemen": "IHMS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "193",
+                "parent_id": "0",
+                "kode": "IMAD",
+                "departemen": "IMAD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "194",
+                "parent_id": "0",
+                "kode": "IMCB",
+                "departemen": "IMCB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "195",
+                "parent_id": "0",
+                "kode": "IMCG",
+                "departemen": "IMCG",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "196",
+                "parent_id": "0",
+                "kode": "IMCP",
+                "departemen": "IMCP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "197",
+                "parent_id": "0",
+                "kode": "IMCR",
+                "departemen": "IMCR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "198",
+                "parent_id": "0",
+                "kode": "IMEX",
+                "departemen": "IMEX",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "199",
+                "parent_id": "0",
+                "kode": "INS1",
+                "departemen": "INS1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "200",
+                "parent_id": "0",
+                "kode": "INS2",
+                "departemen": "INS2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "201",
+                "parent_id": "0",
+                "kode": "INS3",
+                "departemen": "INS3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "202",
+                "parent_id": "0",
+                "kode": "INSC",
+                "departemen": "INSC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "203",
+                "parent_id": "0",
+                "kode": "INVC",
+                "departemen": "INVC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "204",
+                "parent_id": "0",
+                "kode": "INVS",
+                "departemen": "INVS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "205",
+                "parent_id": "0",
+                "kode": "IRL4",
+                "departemen": "IRL4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "206",
+                "parent_id": "0",
+                "kode": "IRMI",
+                "departemen": "IRMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "207",
+                "parent_id": "0",
+                "kode": "ISJC",
+                "departemen": "ISJC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "208",
+                "parent_id": "0",
+                "kode": "ISJD",
+                "departemen": "ISJD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "209",
+                "parent_id": "0",
+                "kode": "ISP",
+                "departemen": "ISP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "210",
+                "parent_id": "0",
+                "kode": "ISPA",
+                "departemen": "ISPA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "211",
+                "parent_id": "0",
+                "kode": "ISPR",
+                "departemen": "ISPR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "212",
+                "parent_id": "0",
+                "kode": "IST3",
+                "departemen": "IST3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "213",
+                "parent_id": "0",
+                "kode": "ISTR",
+                "departemen": "ISTR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "214",
+                "parent_id": "0",
+                "kode": "ITAD",
+                "departemen": "ITAD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "215",
+                "parent_id": "0",
+                "kode": "ITAO",
+                "departemen": "ITAO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "216",
+                "parent_id": "0",
+                "kode": "ITBW",
+                "departemen": "ITBW",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "217",
+                "parent_id": "0",
+                "kode": "ITCL",
+                "departemen": "ITCL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "218",
+                "parent_id": "0",
+                "kode": "ITCS",
+                "departemen": "ITCS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "219",
+                "parent_id": "0",
+                "kode": "ITDB",
+                "departemen": "ITDB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "220",
+                "parent_id": "0",
+                "kode": "ITDS",
+                "departemen": "ITDS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "221",
+                "parent_id": "0",
+                "kode": "ITFC",
+                "departemen": "ITFC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "222",
+                "parent_id": "0",
+                "kode": "ITIS",
+                "departemen": "ITIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "223",
+                "parent_id": "0",
+                "kode": "ITLF",
+                "departemen": "ITLF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "224",
+                "parent_id": "0",
+                "kode": "ITLG",
+                "departemen": "ITLG",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "225",
+                "parent_id": "0",
+                "kode": "ITLP",
+                "departemen": "ITLP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "226",
+                "parent_id": "0",
+                "kode": "ITPL",
+                "departemen": "ITPL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "227",
+                "parent_id": "0",
+                "kode": "ITPZ",
+                "departemen": "ITPZ",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "228",
+                "parent_id": "0",
+                "kode": "ITSP",
+                "departemen": "ITSP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "229",
+                "parent_id": "0",
+                "kode": "IVCR",
+                "departemen": "IVCR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "230",
+                "parent_id": "0",
+                "kode": "JTMI",
+                "departemen": "JTMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "231",
+                "parent_id": "0",
+                "kode": "LAB1",
+                "departemen": "LAB1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "232",
+                "parent_id": "0",
+                "kode": "LAB2",
+                "departemen": "LAB2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "233",
+                "parent_id": "0",
+                "kode": "LAB3",
+                "departemen": "LAB3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "234",
+                "parent_id": "0",
+                "kode": "LAB4",
+                "departemen": "LAB4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "235",
+                "parent_id": "0",
+                "kode": "LAB5",
+                "departemen": "LAB5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "236",
+                "parent_id": "0",
+                "kode": "LAB6",
+                "departemen": "LAB6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "237",
+                "parent_id": "0",
+                "kode": "LABF",
+                "departemen": "LABF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "238",
+                "parent_id": "0",
+                "kode": "LABS",
+                "departemen": "LABS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "239",
+                "parent_id": "0",
+                "kode": "LBCF",
+                "departemen": "LBCF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "240",
+                "parent_id": "0",
+                "kode": "LBCH",
+                "departemen": "LBCH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "241",
+                "parent_id": "0",
+                "kode": "LBCR",
+                "departemen": "LBCR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "242",
+                "parent_id": "0",
+                "kode": "LBCT",
+                "departemen": "LBCT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "243",
+                "parent_id": "0",
+                "kode": "LBFF",
+                "departemen": "LBFF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "244",
+                "parent_id": "0",
+                "kode": "LBPF",
+                "departemen": "LBPF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "245",
+                "parent_id": "0",
+                "kode": "LBPM",
+                "departemen": "LBPM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "246",
+                "parent_id": "0",
+                "kode": "LBPY",
+                "departemen": "LBPY",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "247",
+                "parent_id": "0",
+                "kode": "LCO1",
+                "departemen": "LCO1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "248",
+                "parent_id": "0",
+                "kode": "LCOL",
+                "departemen": "LCOL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "249",
+                "parent_id": "0",
+                "kode": "LEGA",
+                "departemen": "LEGA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "250",
+                "parent_id": "0",
+                "kode": "LMT0",
+                "departemen": "LMT0",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "251",
+                "parent_id": "0",
+                "kode": "LMTK",
+                "departemen": "LMTK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "252",
+                "parent_id": "0",
+                "kode": "LMTO",
+                "departemen": "LMTO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "253",
+                "parent_id": "0",
+                "kode": "LOCL",
+                "departemen": "LOCL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "254",
+                "parent_id": "0",
+                "kode": "LSIS",
+                "departemen": "LSIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "255",
+                "parent_id": "0",
+                "kode": "LSMD",
+                "departemen": "LSMD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "256",
+                "parent_id": "0",
+                "kode": "MAGF",
+                "departemen": "MAGF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "257",
+                "parent_id": "0",
+                "kode": "MAIN",
+                "departemen": "MAIN",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "258",
+                "parent_id": "0",
+                "kode": "MASH",
+                "departemen": "MASH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "259",
+                "parent_id": "0",
+                "kode": "MATW",
+                "departemen": "MATW",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "260",
+                "parent_id": "0",
+                "kode": "MCBO",
+                "departemen": "MCBO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "261",
+                "parent_id": "0",
+                "kode": "MCC3",
+                "departemen": "MCC3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "262",
+                "parent_id": "0",
+                "kode": "MCFO",
+                "departemen": "MCFO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "263",
+                "parent_id": "0",
+                "kode": "MCHS",
+                "departemen": "MCHS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "264",
+                "parent_id": "0",
+                "kode": "MCP1",
+                "departemen": "MCP1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "265",
+                "parent_id": "0",
+                "kode": "MCPH",
+                "departemen": "MCPH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "266",
+                "parent_id": "0",
+                "kode": "MDEV",
+                "departemen": "MDEV",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "267",
+                "parent_id": "0",
+                "kode": "MDF1",
+                "departemen": "MDF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "268",
+                "parent_id": "0",
+                "kode": "MDF3",
+                "departemen": "MDF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "269",
+                "parent_id": "0",
+                "kode": "MDF4",
+                "departemen": "MDF4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "270",
+                "parent_id": "0",
+                "kode": "MDGB",
+                "departemen": "MDGB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "271",
+                "parent_id": "0",
+                "kode": "MDIR",
+                "departemen": "MDIR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "272",
+                "parent_id": "0",
+                "kode": "MDOK",
+                "departemen": "MDOK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "273",
+                "parent_id": "0",
+                "kode": "MDRN",
+                "departemen": "MDRN",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "274",
+                "parent_id": "0",
+                "kode": "MDW1",
+                "departemen": "MDW1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "275",
+                "parent_id": "0",
+                "kode": "MEB1",
+                "departemen": "MEB1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "276",
+                "parent_id": "0",
+                "kode": "MEC1",
+                "departemen": "MEC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "277",
+                "parent_id": "0",
+                "kode": "MEC2",
+                "departemen": "MEC2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "278",
+                "parent_id": "0",
+                "kode": "MEC3",
+                "departemen": "MEC3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "279",
+                "parent_id": "0",
+                "kode": "MECF",
+                "departemen": "MECF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "280",
+                "parent_id": "0",
+                "kode": "MECH",
+                "departemen": "MECH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "281",
+                "parent_id": "0",
+                "kode": "MEEF",
+                "departemen": "MEEF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "282",
+                "parent_id": "0",
+                "kode": "MEF2",
+                "departemen": "MEF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "283",
+                "parent_id": "0",
+                "kode": "MEF3",
+                "departemen": "MEF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "284",
+                "parent_id": "0",
+                "kode": "MEU0",
+                "departemen": "MEU0",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "285",
+                "parent_id": "0",
+                "kode": "MF12",
+                "departemen": "MF12",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "286",
+                "parent_id": "0",
+                "kode": "MFCK",
+                "departemen": "MFCK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "287",
+                "parent_id": "0",
+                "kode": "MGC",
+                "departemen": "MGC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "288",
+                "parent_id": "0",
+                "kode": "MGD",
+                "departemen": "MGD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "289",
+                "parent_id": "0",
+                "kode": "MGF",
+                "departemen": "MGF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "290",
+                "parent_id": "0",
+                "kode": "MGLS",
+                "departemen": "MGLS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "291",
+                "parent_id": "0",
+                "kode": "MGSD",
+                "departemen": "MGSD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "292",
+                "parent_id": "0",
+                "kode": "MI",
+                "departemen": "MI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "293",
+                "parent_id": "0",
+                "kode": "MIGB",
+                "departemen": "MIGB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "294",
+                "parent_id": "0",
+                "kode": "MKBR",
+                "departemen": "MKBR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "295",
+                "parent_id": "0",
+                "kode": "MKC1",
+                "departemen": "MKC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "296",
+                "parent_id": "0",
+                "kode": "MKCM",
+                "departemen": "MKCM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "297",
+                "parent_id": "0",
+                "kode": "MKE2",
+                "departemen": "MKE2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "298",
+                "parent_id": "0",
+                "kode": "MKED",
+                "departemen": "MKED",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "299",
+                "parent_id": "0",
+                "kode": "MKEF",
+                "departemen": "MKEF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "300",
+                "parent_id": "0",
+                "kode": "MKSP",
+                "departemen": "MKSP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "301",
+                "parent_id": "0",
+                "kode": "MKTE",
+                "departemen": "MKTE",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "302",
+                "parent_id": "0",
+                "kode": "MKTK",
+                "departemen": "MKTK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "303",
+                "parent_id": "0",
+                "kode": "MKTS",
+                "departemen": "MKTS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "304",
+                "parent_id": "0",
+                "kode": "MMS1",
+                "departemen": "MMS1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "305",
+                "parent_id": "0",
+                "kode": "MMS2",
+                "departemen": "MMS2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "306",
+                "parent_id": "0",
+                "kode": "MMS3",
+                "departemen": "MMS3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "307",
+                "parent_id": "0",
+                "kode": "MMSA",
+                "departemen": "MMSA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "308",
+                "parent_id": "0",
+                "kode": "MPA1",
+                "departemen": "MPA1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "309",
+                "parent_id": "0",
+                "kode": "MPA2",
+                "departemen": "MPA2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "310",
+                "parent_id": "0",
+                "kode": "MPA3",
+                "departemen": "MPA3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "311",
+                "parent_id": "0",
+                "kode": "MPA4",
+                "departemen": "MPA4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "312",
+                "parent_id": "0",
+                "kode": "MPC0",
+                "departemen": "MPC0",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "313",
+                "parent_id": "0",
+                "kode": "MPH",
+                "departemen": "MPH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "314",
+                "parent_id": "0",
+                "kode": "MPIS",
+                "departemen": "MPIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "315",
+                "parent_id": "0",
+                "kode": "MPS2",
+                "departemen": "MPS2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "316",
+                "parent_id": "0",
+                "kode": "MPSH",
+                "departemen": "MPSH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "317",
+                "parent_id": "0",
+                "kode": "MRA2",
+                "departemen": "MRA2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "318",
+                "parent_id": "0",
+                "kode": "MRD",
+                "departemen": "MRD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "319",
+                "parent_id": "0",
+                "kode": "MRGB",
+                "departemen": "MRGB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "320",
+                "parent_id": "0",
+                "kode": "MRM",
+                "departemen": "MRM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "321",
+                "parent_id": "0",
+                "kode": "MSCO",
+                "departemen": "MSCO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "322",
+                "parent_id": "0",
+                "kode": "MSIS",
+                "departemen": "MSIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "323",
+                "parent_id": "0",
+                "kode": "MSTR",
+                "departemen": "MSTR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "324",
+                "parent_id": "0",
+                "kode": "MT34",
+                "departemen": "MT34",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "325",
+                "parent_id": "0",
+                "kode": "MTC1",
+                "departemen": "MTC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "326",
+                "parent_id": "0",
+                "kode": "MTC2",
+                "departemen": "MTC2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "327",
+                "parent_id": "0",
+                "kode": "MTC3",
+                "departemen": "MTC3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "328",
+                "parent_id": "0",
+                "kode": "MTC4",
+                "departemen": "MTC4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "329",
+                "parent_id": "0",
+                "kode": "MTC5",
+                "departemen": "MTC5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "330",
+                "parent_id": "0",
+                "kode": "MTC6",
+                "departemen": "MTC6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "331",
+                "parent_id": "0",
+                "kode": "MTCF",
+                "departemen": "MTCF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "332",
+                "parent_id": "0",
+                "kode": "MTCJ",
+                "departemen": "MTCJ",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "333",
+                "parent_id": "0",
+                "kode": "MTCN",
+                "departemen": "MTCN",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "334",
+                "parent_id": "0",
+                "kode": "MTCU",
+                "departemen": "MTCU",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "335",
+                "parent_id": "0",
+                "kode": "MTCW",
+                "departemen": "MTCW",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "336",
+                "parent_id": "0",
+                "kode": "MTPR",
+                "departemen": "MTPR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "337",
+                "parent_id": "0",
+                "kode": "MYCU",
+                "departemen": "MYCU",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "338",
+                "parent_id": "0",
+                "kode": "NOEM",
+                "departemen": "NOEM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "339",
+                "parent_id": "0",
+                "kode": "OCPH",
+                "departemen": "OCPH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "340",
+                "parent_id": "0",
+                "kode": "OCPU",
+                "departemen": "OCPU",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "341",
+                "parent_id": "0",
+                "kode": "OD",
+                "departemen": "OD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "342",
+                "parent_id": "0",
+                "kode": "OEMS",
+                "departemen": "OEMS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "343",
+                "parent_id": "0",
+                "kode": "OPHF",
+                "departemen": "OPHF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "344",
+                "parent_id": "0",
+                "kode": "OPHO",
+                "departemen": "OPHO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "345",
+                "parent_id": "0",
+                "kode": "OPR1",
+                "departemen": "OPR1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "346",
+                "parent_id": "0",
+                "kode": "OPR2",
+                "departemen": "OPR2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "347",
+                "parent_id": "0",
+                "kode": "OPR3",
+                "departemen": "OPR3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "348",
+                "parent_id": "0",
+                "kode": "ORDK",
+                "departemen": "ORDK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "349",
+                "parent_id": "0",
+                "kode": "OSVC",
+                "departemen": "OSVC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "350",
+                "parent_id": "0",
+                "kode": "PACC",
+                "departemen": "PACC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "351",
+                "parent_id": "0",
+                "kode": "PACF",
+                "departemen": "PACF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "352",
+                "parent_id": "0",
+                "kode": "PAD3",
+                "departemen": "PAD3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "353",
+                "parent_id": "0",
+                "kode": "PAGC",
+                "departemen": "PAGC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "354",
+                "parent_id": "0",
+                "kode": "PAMI",
+                "departemen": "PAMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "355",
+                "parent_id": "0",
+                "kode": "PAOS",
+                "departemen": "PAOS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "356",
+                "parent_id": "0",
+                "kode": "PAPO",
+                "departemen": "PAPO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "357",
+                "parent_id": "0",
+                "kode": "PASK",
+                "departemen": "PASK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "358",
+                "parent_id": "0",
+                "kode": "PBR2",
+                "departemen": "PBR2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "359",
+                "parent_id": "0",
+                "kode": "PBR3",
+                "departemen": "PBR3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "360",
+                "parent_id": "0",
+                "kode": "PCS",
+                "departemen": "PCS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "361",
+                "parent_id": "0",
+                "kode": "PDDF",
+                "departemen": "PDDF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "362",
+                "parent_id": "0",
+                "kode": "PDDP",
+                "departemen": "PDDP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "363",
+                "parent_id": "0",
+                "kode": "PDDV",
+                "departemen": "PDDV",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "364",
+                "parent_id": "0",
+                "kode": "PDPL",
+                "departemen": "PDPL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "365",
+                "parent_id": "0",
+                "kode": "PETI",
+                "departemen": "PETI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "366",
+                "parent_id": "0",
+                "kode": "PGAC",
+                "departemen": "PGAC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "367",
+                "parent_id": "0",
+                "kode": "PL3",
+                "departemen": "PL3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "368",
+                "parent_id": "0",
+                "kode": "PL34",
+                "departemen": "PL34",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "369",
+                "parent_id": "0",
+                "kode": "PL6",
+                "departemen": "PL6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "370",
+                "parent_id": "0",
+                "kode": "PMMT",
+                "departemen": "PMMT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "371",
+                "parent_id": "0",
+                "kode": "PMTF",
+                "departemen": "PMTF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "372",
+                "parent_id": "0",
+                "kode": "PMTL",
+                "departemen": "PMTL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "373",
+                "parent_id": "0",
+                "kode": "POS1",
+                "departemen": "POS1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "374",
+                "parent_id": "0",
+                "kode": "PPCF",
+                "departemen": "PPCF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "375",
+                "parent_id": "0",
+                "kode": "PPCS",
+                "departemen": "PPCS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "376",
+                "parent_id": "0",
+                "kode": "PPF1",
+                "departemen": "PPF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "377",
+                "parent_id": "0",
+                "kode": "PPF3",
+                "departemen": "PPF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "378",
+                "parent_id": "0",
+                "kode": "PPIC",
+                "departemen": "PPIC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "379",
+                "parent_id": "0",
+                "kode": "PPIS",
+                "departemen": "PPIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "380",
+                "parent_id": "0",
+                "kode": "PPIV",
+                "departemen": "PPIV",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "381",
+                "parent_id": "0",
+                "kode": "PPLP",
+                "departemen": "PPLP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "382",
+                "parent_id": "0",
+                "kode": "PPS",
+                "departemen": "PPS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "383",
+                "parent_id": "0",
+                "kode": "PPSF",
+                "departemen": "PPSF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "384",
+                "parent_id": "0",
+                "kode": "PPSN",
+                "departemen": "PPSN",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "385",
+                "parent_id": "0",
+                "kode": "PRF1",
+                "departemen": "PRF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "386",
+                "parent_id": "0",
+                "kode": "PRJK",
+                "departemen": "PRJK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "387",
+                "parent_id": "0",
+                "kode": "PRMA",
+                "departemen": "PRMA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "388",
+                "parent_id": "0",
+                "kode": "PRO1",
+                "departemen": "PRO1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "389",
+                "parent_id": "0",
+                "kode": "PRO2",
+                "departemen": "PRO2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "390",
+                "parent_id": "0",
+                "kode": "PRO3",
+                "departemen": "PRO3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "391",
+                "parent_id": "0",
+                "kode": "PRO4",
+                "departemen": "PRO4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "392",
+                "parent_id": "0",
+                "kode": "PRO5",
+                "departemen": "PRO5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "393",
+                "parent_id": "0",
+                "kode": "PRO6",
+                "departemen": "PRO6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "394",
+                "parent_id": "0",
+                "kode": "PROJ",
+                "departemen": "PROJ",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "395",
+                "parent_id": "0",
+                "kode": "PROK",
+                "departemen": "PROK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "396",
+                "parent_id": "0",
+                "kode": "PROS",
+                "departemen": "PROS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "397",
+                "parent_id": "0",
+                "kode": "PRPA",
+                "departemen": "PRPA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "398",
+                "parent_id": "0",
+                "kode": "PRS1",
+                "departemen": "PRS1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "399",
+                "parent_id": "0",
+                "kode": "PRS2",
+                "departemen": "PRS2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "400",
+                "parent_id": "0",
+                "kode": "PRS3",
+                "departemen": "PRS3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "401",
+                "parent_id": "0",
+                "kode": "PRS4",
+                "departemen": "PRS4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "402",
+                "parent_id": "0",
+                "kode": "PRS5",
+                "departemen": "PRS5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "403",
+                "parent_id": "0",
+                "kode": "PRS6",
+                "departemen": "PRS6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "404",
+                "parent_id": "0",
+                "kode": "PRS8",
+                "departemen": "PRS8",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "405",
+                "parent_id": "0",
+                "kode": "PUIP",
+                "departemen": "PUIP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "406",
+                "parent_id": "0",
+                "kode": "PUPM",
+                "departemen": "PUPM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "407",
+                "parent_id": "0",
+                "kode": "PUR1",
+                "departemen": "PUR1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "408",
+                "parent_id": "0",
+                "kode": "PURF",
+                "departemen": "PURF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "409",
+                "parent_id": "0",
+                "kode": "PURG",
+                "departemen": "PURG",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "410",
+                "parent_id": "0",
+                "kode": "PURM",
+                "departemen": "PURM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "411",
+                "parent_id": "0",
+                "kode": "PURS",
+                "departemen": "PURS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "412",
+                "parent_id": "0",
+                "kode": "PUSP",
+                "departemen": "PUSP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "413",
+                "parent_id": "0",
+                "kode": "QAQC",
+                "departemen": "QAQC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "414",
+                "parent_id": "0",
+                "kode": "QC",
+                "departemen": "QC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "415",
+                "parent_id": "0",
+                "kode": "QC06",
+                "departemen": "QC06",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "416",
+                "parent_id": "0",
+                "kode": "QC12",
+                "departemen": "QC12",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "417",
+                "parent_id": "0",
+                "kode": "QC34",
+                "departemen": "QC34",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "418",
+                "parent_id": "0",
+                "kode": "QC56",
+                "departemen": "QC56",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "419",
+                "parent_id": "0",
+                "kode": "QCFG",
+                "departemen": "QCFG",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "420",
+                "parent_id": "0",
+                "kode": "QCGB",
+                "departemen": "QCGB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "421",
+                "parent_id": "0",
+                "kode": "QCIM",
+                "departemen": "QCIM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "422",
+                "parent_id": "0",
+                "kode": "QCIS",
+                "departemen": "QCIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "423",
+                "parent_id": "0",
+                "kode": "QCO1",
+                "departemen": "QCO1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "424",
+                "parent_id": "0",
+                "kode": "QCO2",
+                "departemen": "QCO2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "425",
+                "parent_id": "0",
+                "kode": "QCO3",
+                "departemen": "QCO3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "426",
+                "parent_id": "0",
+                "kode": "QCO4",
+                "departemen": "QCO4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "427",
+                "parent_id": "0",
+                "kode": "QCO5",
+                "departemen": "QCO5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "428",
+                "parent_id": "0",
+                "kode": "QCO6",
+                "departemen": "QCO6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "429",
+                "parent_id": "0",
+                "kode": "QCS",
+                "departemen": "QCS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "430",
+                "parent_id": "0",
+                "kode": "QDS",
+                "departemen": "QDS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "431",
+                "parent_id": "0",
+                "kode": "QIMC",
+                "departemen": "QIMC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "432",
+                "parent_id": "0",
+                "kode": "QLAB",
+                "departemen": "QLAB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "433",
+                "parent_id": "0",
+                "kode": "QMS1",
+                "departemen": "QMS1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "434",
+                "parent_id": "0",
+                "kode": "QPPC",
+                "departemen": "QPPC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "435",
+                "parent_id": "0",
+                "kode": "QSEM",
+                "departemen": "QSEM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "436",
+                "parent_id": "0",
+                "kode": "RAMA",
+                "departemen": "RAMA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "437",
+                "parent_id": "0",
+                "kode": "RAMO",
+                "departemen": "RAMO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "438",
+                "parent_id": "0",
+                "kode": "RAMS",
+                "departemen": "RAMS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "439",
+                "parent_id": "0",
+                "kode": "REC1",
+                "departemen": "REC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "440",
+                "parent_id": "0",
+                "kode": "REEP",
+                "departemen": "REEP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "441",
+                "parent_id": "0",
+                "kode": "RIS1",
+                "departemen": "RIS1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "442",
+                "parent_id": "0",
+                "kode": "RISK",
+                "departemen": "RISK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "443",
+                "parent_id": "0",
+                "kode": "RMWH",
+                "departemen": "RMWH",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "444",
+                "parent_id": "0",
+                "kode": "RPCK",
+                "departemen": "RPCK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "445",
+                "parent_id": "0",
+                "kode": "RPMI",
+                "departemen": "RPMI",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "446",
+                "parent_id": "0",
+                "kode": "SAM1",
+                "departemen": "SAM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "447",
+                "parent_id": "0",
+                "kode": "SCPT",
+                "departemen": "SCPT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "448",
+                "parent_id": "0",
+                "kode": "SDU1",
+                "departemen": "SDU1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "449",
+                "parent_id": "0",
+                "kode": "SEA7",
+                "departemen": "SEA7",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "450",
+                "parent_id": "0",
+                "kode": "SEA8",
+                "departemen": "SEA8",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "451",
+                "parent_id": "0",
+                "kode": "SECO",
+                "departemen": "SECO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "452",
+                "parent_id": "0",
+                "kode": "SECP",
+                "departemen": "SECP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "453",
+                "parent_id": "0",
+                "kode": "SECY",
+                "departemen": "SECY",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "454",
+                "parent_id": "0",
+                "kode": "SEM1",
+                "departemen": "SEM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "455",
+                "parent_id": "0",
+                "kode": "SFEV",
+                "departemen": "SFEV",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "456",
+                "parent_id": "0",
+                "kode": "SHIP",
+                "departemen": "SHIP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "457",
+                "parent_id": "0",
+                "kode": "SLAD",
+                "departemen": "SLAD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "458",
+                "parent_id": "0",
+                "kode": "SLIS",
+                "departemen": "SLIS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "459",
+                "parent_id": "0",
+                "kode": "SLMB",
+                "departemen": "SLMB",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "460",
+                "parent_id": "0",
+                "kode": "SPAR",
+                "departemen": "SPAR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "461",
+                "parent_id": "0",
+                "kode": "SPBR",
+                "departemen": "SPBR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "462",
+                "parent_id": "0",
+                "kode": "SPC1",
+                "departemen": "SPC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "463",
+                "parent_id": "0",
+                "kode": "SPC2",
+                "departemen": "SPC2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "464",
+                "parent_id": "0",
+                "kode": "SPC3",
+                "departemen": "SPC3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "465",
+                "parent_id": "0",
+                "kode": "SPC4",
+                "departemen": "SPC4",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "466",
+                "parent_id": "0",
+                "kode": "SPC5",
+                "departemen": "SPC5",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "467",
+                "parent_id": "0",
+                "kode": "SPC6",
+                "departemen": "SPC6",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "468",
+                "parent_id": "0",
+                "kode": "SPC8",
+                "departemen": "SPC8",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "469",
+                "parent_id": "0",
+                "kode": "SPRJ",
+                "departemen": "SPRJ",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "470",
+                "parent_id": "0",
+                "kode": "SPSC",
+                "departemen": "SPSC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "471",
+                "parent_id": "0",
+                "kode": "SSSL",
+                "departemen": "SSSL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "472",
+                "parent_id": "0",
+                "kode": "STO1",
+                "departemen": "STO1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "473",
+                "parent_id": "0",
+                "kode": "STO2",
+                "departemen": "STO2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "474",
+                "parent_id": "0",
+                "kode": "TAX1",
+                "departemen": "TAX1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "475",
+                "parent_id": "0",
+                "kode": "TBA1",
+                "departemen": "TBA1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "476",
+                "parent_id": "0",
+                "kode": "TBA2",
+                "departemen": "TBA2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "477",
+                "parent_id": "0",
+                "kode": "TBA3",
+                "departemen": "TBA3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "478",
+                "parent_id": "0",
+                "kode": "TBF1",
+                "departemen": "TBF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "479",
+                "parent_id": "0",
+                "kode": "TBF2",
+                "departemen": "TBF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "480",
+                "parent_id": "0",
+                "kode": "TBF3",
+                "departemen": "TBF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "481",
+                "parent_id": "0",
+                "kode": "TBM1",
+                "departemen": "TBM1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "482",
+                "parent_id": "0",
+                "kode": "TBM2",
+                "departemen": "TBM2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "483",
+                "parent_id": "0",
+                "kode": "TBM3",
+                "departemen": "TBM3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "484",
+                "parent_id": "0",
+                "kode": "TCSP",
+                "departemen": "TCSP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "485",
+                "parent_id": "0",
+                "kode": "TDAS",
+                "departemen": "TDAS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "486",
+                "parent_id": "0",
+                "kode": "TDOM",
+                "departemen": "TDOM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "487",
+                "parent_id": "0",
+                "kode": "TDOP",
+                "departemen": "TDOP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "488",
+                "parent_id": "0",
+                "kode": "TDPD",
+                "departemen": "TDPD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "489",
+                "parent_id": "0",
+                "kode": "TEDP",
+                "departemen": "TEDP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "490",
+                "parent_id": "0",
+                "kode": "TELM",
+                "departemen": "TELM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "491",
+                "parent_id": "0",
+                "kode": "TELU",
+                "departemen": "TELU",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "492",
+                "parent_id": "0",
+                "kode": "TEMP",
+                "departemen": "TEMP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "493",
+                "parent_id": "0",
+                "kode": "TEMS",
+                "departemen": "TEMS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "494",
+                "parent_id": "0",
+                "kode": "TEPD",
+                "departemen": "TEPD",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "495",
+                "parent_id": "0",
+                "kode": "TEXP",
+                "departemen": "TEXP",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "496",
+                "parent_id": "0",
+                "kode": "TQAF",
+                "departemen": "TQAF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "497",
+                "parent_id": "0",
+                "kode": "TQC1",
+                "departemen": "TQC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "498",
+                "parent_id": "0",
+                "kode": "TQC2",
+                "departemen": "TQC2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "499",
+                "parent_id": "0",
+                "kode": "TQC3",
+                "departemen": "TQC3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "500",
+                "parent_id": "0",
+                "kode": "TQLS",
+                "departemen": "TQLS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "501",
+                "parent_id": "0",
+                "kode": "TRDV",
+                "departemen": "TRDV",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "502",
+                "parent_id": "0",
+                "kode": "TREA",
+                "departemen": "TREA",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "503",
+                "parent_id": "0",
+                "kode": "TREC",
+                "departemen": "TREC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "504",
+                "parent_id": "0",
+                "kode": "TRES",
+                "departemen": "TRES",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "505",
+                "parent_id": "0",
+                "kode": "TRMF",
+                "departemen": "TRMF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "506",
+                "parent_id": "0",
+                "kode": "TRNG",
+                "departemen": "TRNG",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "507",
+                "parent_id": "0",
+                "kode": "TRPK",
+                "departemen": "TRPK",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "508",
+                "parent_id": "0",
+                "kode": "TRRM",
+                "departemen": "TRRM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "509",
+                "parent_id": "0",
+                "kode": "TRTR",
+                "departemen": "TRTR",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "510",
+                "parent_id": "0",
+                "kode": "UICS",
+                "departemen": "UICS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "511",
+                "parent_id": "0",
+                "kode": "UTL",
+                "departemen": "UTL",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "512",
+                "parent_id": "0",
+                "kode": "UTL1",
+                "departemen": "UTL1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "513",
+                "parent_id": "0",
+                "kode": "UTLF",
+                "departemen": "UTLF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "514",
+                "parent_id": "0",
+                "kode": "UTLM",
+                "departemen": "UTLM",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "515",
+                "parent_id": "0",
+                "kode": "UTLT",
+                "departemen": "UTLT",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "516",
+                "parent_id": "0",
+                "kode": "UTYS",
+                "departemen": "UTYS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "517",
+                "parent_id": "0",
+                "kode": "WDA1",
+                "departemen": "WDA1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "518",
+                "parent_id": "0",
+                "kode": "WDA2",
+                "departemen": "WDA2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "519",
+                "parent_id": "0",
+                "kode": "WDA3",
+                "departemen": "WDA3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "520",
+                "parent_id": "0",
+                "kode": "WHC",
+                "departemen": "WHC",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "521",
+                "parent_id": "0",
+                "kode": "WHC1",
+                "departemen": "WHC1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "522",
+                "parent_id": "0",
+                "kode": "WHF1",
+                "departemen": "WHF1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "523",
+                "parent_id": "0",
+                "kode": "WHF2",
+                "departemen": "WHF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "524",
+                "parent_id": "0",
+                "kode": "WHF3",
+                "departemen": "WHF3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "525",
+                "parent_id": "0",
+                "kode": "WHS",
+                "departemen": "WHS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "526",
+                "parent_id": "0",
+                "kode": "WKSS",
+                "departemen": "WKSS",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "527",
+                "parent_id": "0",
+                "kode": "WS13",
+                "departemen": "WS13",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "528",
+                "parent_id": "0",
+                "kode": "WSF2",
+                "departemen": "WSF2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "529",
+                "parent_id": "0",
+                "kode": "WSHF",
+                "departemen": "WSHF",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "530",
+                "parent_id": "0",
+                "kode": "WSHO",
+                "departemen": "WSHO",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "531",
+                "parent_id": "0",
+                "kode": "WST1",
+                "departemen": "WST1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "532",
+                "parent_id": "0",
+                "kode": "WST2",
+                "departemen": "WST2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "533",
+                "parent_id": "0",
+                "kode": "WST3",
+                "departemen": "WST3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "534",
+                "parent_id": "0",
+                "kode": "WSV1",
+                "departemen": "WSV1",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "535",
+                "parent_id": "0",
+                "kode": "WSV2",
+                "departemen": "WSV2",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "536",
+                "parent_id": "0",
+                "kode": "WSV3",
+                "departemen": "WSV3",
+                "created_at": null,
+                "updated_at": null,
+                "deleted_at": null
+            },
+            {
+                "id": "537",
+                "parent_id": "0",
+                "kode": "AAA",
+                "departemen": "AAABBB",
+                "created_at": "2022-07-23 12:26:30",
+                "updated_at": "2022-07-23 12:27:14",
+                "deleted_at": "2022-07-23 12:27:14"
+            }
+        ]
+    }
+]
