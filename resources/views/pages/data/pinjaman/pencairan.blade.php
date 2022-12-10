@@ -130,11 +130,26 @@ Data Pencairan Pinjaman
                 "data": "jml_pinjaman"
             },
             {
-                "data": "telepon",
-                'name': 'anggota.telepon',
+                "data": "masa"
+            },
+            // {
+            //     "data": "telepon",
+            //     'name': 'anggota.telepon',
+            // },
+            {
+                "data": "admin"
             },
             {
-                "data": "status"
+                "data": "asuransi"
+            },
+            {
+                "data": "nilai_pelunasan"
+            },
+            {
+                "data": "nilai_pencairan"
+            },
+            {
+                "data": "pencairan_date"
             },
             {
                 "data": "aksi"

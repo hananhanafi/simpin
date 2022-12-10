@@ -157,8 +157,8 @@ class ApprovalController extends Controller
     }
     public function pinjamanApprove(Request $request)
     {
-        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")->first();
-
+        // $pinjaman = Pinjaman::where('id', '=', "$request->id_pinjaman")->first();
+        $pinjaman = Pinjaman::find($request->id_pinjaman);
 
         // return $pinjaman;
         if ($pinjaman) {

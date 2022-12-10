@@ -236,7 +236,7 @@ Tambah Data Anggota
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Mulai Bekerja</label>
                                 <div class="col-sm-8">
-                                    <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir" placeholder="Tanggal Lahir" value="{{ old('tgl_lahir') }}">
+                                    <input type="date" name="masukkerja_date" class="form-control" id="masukkerja_date" placeholder="Tanggal Lahir" value="{{ old('masukkerja_date') }}">
                                 </div>
                             </div>
                         </div>

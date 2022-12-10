@@ -123,10 +123,11 @@ Data Pinjaman
             },
             {
                 "data": "alamat"
+                // name: 'anggota.alamat',
             },
             {
                 "data": "telepon",
-                'name': 'anggota.telepon',
+                // name: 'anggota.telepon',
             },
             {
                 "data": "status"

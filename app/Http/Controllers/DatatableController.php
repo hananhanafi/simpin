@@ -452,7 +452,7 @@ class DatatableController extends Controller
             //                 ->whereIn('t_anggota.status',[0,4])
             //                 ->where('t_anggota.nama','!=','')
             //                 ->orderBy('t_anggota.nama');
-            $pinjaman = Pinjaman::select(DB::raw('t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
+            $pinjaman = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
                 ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
                 ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
                 ->with(['jenispinjaman', 'anggota'])
@@ -465,7 +465,7 @@ class DatatableController extends Controller
             //                 ->where('t_anggota.nama','!=','')
             //                 ->orderBy('t_anggota.nama');
 
-            $pinjaman = Pinjaman::select(DB::raw('t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
+            $pinjaman = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
                 ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
                 ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
                 ->with(['jenispinjaman', 'anggota'])
@@ -524,8 +524,8 @@ class DatatableController extends Controller
                                     <i class="mdi mdi-chevron-down"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
-                                    <a class="dropdown-item dropdown-menu-end text-success" href="javascript:approve(' . $row->no_anggota . ')"><i class="fa fa-check"></i> Approve</a>
-                                    <a class="dropdown-item dropdown-menu-end text-danger" href="javascript:tolak(' . $row->no_anggota . ')"><i class="fa fa-times"></i> Tolak</a>
+                                    <a class="dropdown-item dropdown-menu-end text-success" href="javascript:approve(' . $row->id_pinjaman . ')"><i class="fa fa-check"></i> Approve</a>
+                                    <a class="dropdown-item dropdown-menu-end text-danger" href="javascript:tolak(' . $row->id_pinjaman . ')"><i class="fa fa-times"></i> Tolak</a>
                                 </div>
                             </div>';
                 } else {
@@ -536,7 +536,7 @@ class DatatableController extends Controller
                                     <i class="mdi mdi-chevron-down"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
-                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pinjaman.show', $row->no_anggota) . '">Detail</a>
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pinjaman.show', $row->id_pinjaman) . '">Detail</a>
                                     <div class="dropdown-divider"></div>
                                 </div>
                             </div>';
@@ -552,20 +552,22 @@ class DatatableController extends Controller
 
         if ($request->approval) {
 
-            $pencairan = Pinjaman::select(DB::raw('t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
+            $pencairan = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.nilai_pencairan,t_pembiayaan.nilai_pelunasan,t_pembiayaan.jangka_waktu,t_pembiayaan.asuransi,t_pembiayaan.admin_fee,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_pembiayaan.pencairan_date,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
                 ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
                 ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
                 ->with(['jenispinjaman', 'anggota'])
                 ->whereIn('t_pembiayaan.status_rekening', [0, 4])
                 ->where('t_anggota.nama', '!=', '')
+                ->where('t_pembiayaan.approv_by', '=', 1)
                 ->orderBy('t_anggota.nama');
         } else {
 
-            $pencairan = Pinjaman::select(DB::raw('t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
+            $pencairan = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.nilai_pencairan,t_pembiayaan.nilai_pelunasan,t_pembiayaan.jangka_waktu,t_pembiayaan.asuransi,t_pembiayaan.admin_fee,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_pembiayaan.pencairan_date,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
                 ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
                 ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
                 ->with(['jenispinjaman', 'anggota'])
                 ->where('t_anggota.nama', '!=', '')
+                ->where('t_pembiayaan.approv_by', '=', 1)
                 ->orderBy('t_anggota.nama');
         }
         // return $pinjaman->get();
@@ -595,23 +597,38 @@ class DatatableController extends Controller
             ->editColumn('jml_pinjaman', function ($row) {
                 return '<b>Rp. ' . number_format($row->jml_pinjaman, 0, ',', '.') . '</b>';
             })
-            ->addColumn('status', function ($row) {
-                $xstatus = '';
-                if ($row->status == 0) {
-                    $xstatus = "<span class='btn btn-sm btn-rounded btn-secondary'>Draft</span>";
-                } elseif ($row->status == 1) {
-                    $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Aktif</span>";
-                } elseif ($row->status == 2) {
-                    $xstatus = "<span class='btn btn-sm btn-rounded btn-info'>Pencairan</span>";
-                } elseif ($row->status == 3) {
-                    $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Pelunasan</span>";
-                } elseif ($row->status == 4) {
-                    $xstatus = '<span class="badge font-size-13 bg-warning">Pengajuan Penutupan</span>';
-                } elseif ($row->status == 5) {
-                    $xstatus = "<span class='btn btn-sm btn-rounded btn-danger'>Tidak Aktif</span>";
-                }
-                return $xstatus;
+            ->editColumn('masa', function ($row) {
+                return ($row->jangka_waktu);
             })
+            ->editColumn('admin', function ($row) {
+                return ($row->admin_fee);
+            })
+            // ->addColumn('status', function ($row) {
+            //     $xstatus = '';
+            //     if ($row->status == 0) {
+            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-secondary'>Draft</span>";
+            //     } elseif ($row->status == 1) {
+            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Aktif</span>";
+            //     } elseif ($row->status == 2) {
+            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-info'>Pencairan</span>";
+            //     } elseif ($row->status == 3) {
+            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Pelunasan</span>";
+            //     } elseif ($row->status == 4) {
+            //         $xstatus = '<span class="badge font-size-13 bg-warning">Pengajuan Penutupan</span>';
+            //     } elseif ($row->status == 5) {
+            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-danger'>Tidak Aktif</span>";
+            //     }
+            //     return $xstatus;
+            // })
+            // ->editColumn('asuransi', function ($row) {
+            //     return '<b>' . '$row->asuransi '. '</b>';
+            // })
+            // ->editColumn('nilai_pelunasan', function ($row) {
+            //     return '<b>' . '$row->nilai_pelunasan '. '</b>';
+            // })
+            // ->editColumn('nilai_pencairan', function ($row) {
+            //     return '<b>' . '$row->nilai_pencairan '. '</b>';
+            // })
             ->addColumn('aksi', function ($row) use ($request) {
                 if ($request->approval) {
                     $btn = '<div class="btn-group">
@@ -632,7 +649,7 @@ class DatatableController extends Controller
                                     <i class="mdi mdi-chevron-down"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
-                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pinjaman.showPencairan', $row->no_anggota) . '">Pencairan</a>
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pencairan.show', $row->no_anggota) . '">Pencairan</a>
                                    
                                     <div class="dropdown-divider"></div>
                                 </div>

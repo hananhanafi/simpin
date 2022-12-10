@@ -110,6 +110,7 @@
                                         @endphp
                                         @foreach ($pinjaman as $no => $item)
                                             <tr>
+                                                {{-- <?php dd($pinjaman);?> --}}
                                                 <td>{{ ($no+1) }}</td>
                                                 <td>{{ $item->no_rekening }}</td>
                                                 <td>{{ $item->kode }} - {{ $item->nama_produk }}</td>

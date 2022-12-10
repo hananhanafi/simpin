@@ -29,25 +29,28 @@ class PinjamanController extends Controller
     {
         return view('pages.data.pinjaman.index');
     }
-    public function show($nomorAnggota)
+    public function show($idPinjaman)
     {
+        $pinjamanAnggota = Pinjaman::find($idPinjaman);
+
+
         $anggota    =   Anggota::leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
             ->leftJoin('p_grade', 'p_grade.id', '=', 't_anggota.grade_id')
-            ->where('t_anggota.no_anggota', $nomorAnggota)
+            ->where('t_anggota.no_anggota', $pinjamanAnggota->no_anggota)
             ->first();
 
         $simpanan   =   Simpanan::selectRaw('t_simpanan.id, t_simpanan.no_rekening, t_simpanan.produk_id, p_produk.kode, p_produk.nama_produk, p_produk.tipe_produk, t_simpanan.saldo_akhir, t_simpanan.setoran_per_bln, t_simpanan.created_date, t_simpanan.status_rekening')
             ->leftJoin('p_produk', 't_simpanan.produk_id', '=', 'p_produk.id')
-            ->where('t_simpanan.no_anggota', $nomorAnggota)
+            ->where('t_simpanan.no_anggota',  $pinjamanAnggota->no_anggota)
             ->get();
-
+            
         $pinjaman   =   Pinjaman::selectRaw('t_pembiayaan.sisa_hutangs,t_pembiayaan.id, t_pembiayaan.no_rekening, t_pembiayaan.produk_id, p_produk.kode, 
-                                            p_produk.nama_produk, t_pembiayaan.jml_pinjaman, t_pembiayaan.jml_margin, 
-                                            t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
-                                            t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
-                                            t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening')
+            p_produk.nama_produk, t_pembiayaan.jml_pinjaman, t_pembiayaan.jml_margin, 
+            t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
+            t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
+            t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening')
             ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
-            ->where('t_pembiayaan.no_anggota', $nomorAnggota)
+            ->where('t_pembiayaan.no_anggota', $pinjamanAnggota->no_anggota)
             ->with('detail')
             ->get();
 
@@ -93,7 +96,6 @@ class PinjamanController extends Controller
 
     public function create(Request $request)
     {
-
         $produk     = Produk::whereHas('tipePr', function ($qry) {
             $qry->where('tipe_produk', 2);
         })->where('status_produk', 1)->orderBy('kode')->get();
@@ -171,6 +173,8 @@ class PinjamanController extends Controller
             $newPinjaman->total_pinjaman    = $totalPinjaman;
             $newPinjaman->jangka_waktu      = $request->jumlah_bulan;
             $newPinjaman->margin            = $request->jumlah_bunga_efektif;
+            $newPinjaman->asuransi          = $request->asuransi;
+            $newPinjaman->admin_fee          = $request->admin_bank;
             $newPinjaman->saldo_akhir_pokok = $sisaPokok;
             $newPinjaman->saldo_akhir_margin = 0;
             $newPinjaman->cicilan           = 0;
@@ -180,9 +184,14 @@ class PinjamanController extends Controller
             $newPinjaman->nilai_pelunasan   = 0;
             $newPinjaman->pelunasan_note    = '-';
             $newPinjaman->penutupan_note    = '-';
-            $newPinjaman->tanggal_mulai     = date('Y-m-d');
-            $newPinjaman->tanggal_akhir     = date('Y-m-d');
-            $newPinjaman->created_date      = date('Y-m-d');
+            $newPinjaman->tanggal_mulai     = date('Y-m-d H:i:s');
+            $newPinjaman->tanggal_akhir     = date('Y-m-d H:i:s');
+            $newPinjaman->created_date      = date('Y-m-d H:i:s');
+            // $newPinjaman->update_date       = date('Y-m-d');
+            // $newPinjaman->pencairan_date    = date('Y-m-d');
+            // $newPinjaman->approv_date       = date('Y-m-d');
+            // $newPinjaman->approv_lunas_date = date('Y-m-d');
+            // $newPinjaman->delete_date       = date('Y-m-d');
             $newPinjaman->created_by        = Auth::user()->id;
             $newPinjaman->update_by         = 0;
             $newPinjaman->approv_by         = 0;

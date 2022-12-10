@@ -55,7 +55,7 @@ Data Aktivasi Pinjaman
 </div>
 <form id="aproval-form" method="post">
     @csrf
-    <input type="hidden" name="id_pinjaman" id="id_pinjaman">
+    <input type="hidden" name="id_pinjaman">
 </form>
 @endsection
 
@@ -153,7 +153,8 @@ Data Aktivasi Pinjaman
     function tolak(uuid) {
         var url = "{{ route('approval.pinjaman.approve') }}";
         $('#aproval-form').attr('action', url);
-        $('#id_pinjaman').val(uuid)
+        // $('#id_pinjaman').val(uuid)
+        $("input[name='id_pinjaman']").val(uuid);
         swal({
                 title: "Apakah Anda Yakin !",
                 text: "Ingin Menolak Data Ini ?.",
@@ -173,8 +174,7 @@ Data Aktivasi Pinjaman
     }
 
     function approve(id) {
-        console.log(id)
-        $('#id_pinjaman').val(id);
+        $("input[name='id_pinjaman']").val(id);
         $('#modal-approve').modal('show')
 
     }
@@ -197,12 +197,12 @@ Data Aktivasi Pinjaman
         <div class="modal-content">
             <form action="{{ route('approval.pinjaman.approve') }}" method="POST" id="post-approve">
                 @csrf
+                <input type="hidden" name="id_pinjaman">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">Form Approval Pinjaman</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="value" name="id_pinjaman" id="id-pinjaman">
                     <div class="form-group mb-4">
                         <h6 class="card-title">Alasan Di Approve</h6>
                         <textarea class="form-control" name="keterangan" id="keterangan" required placeholder="Masukan Keterangan"></textarea>

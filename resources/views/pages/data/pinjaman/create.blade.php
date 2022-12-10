@@ -154,6 +154,11 @@ Tambah Data Pinjaman Baru
 
 <script>
     $('#form-tambah').parsley();
+    
+    var produkList = <?php echo json_encode($produk); ?>;
+    var jangkaWaktuList = null
+    var selectedProduk = null;
+    
     $(document).ready(function() {
         $('#no_anggota').select2({
             width: '100%',
@@ -236,15 +241,24 @@ Tambah Data Pinjaman Baru
     }
 
     function pilihProduk(val) {
-
+        // console.log('val produk',val)  
         var value = val.split('__')
+        const produkID = value[0]
+        console.log("val",value)
+        console.log("prdukid",produkID)
+        selectedProduk = produkList.find(produk=>produk.id==produkID)
+        console.log("selectedProduk",selectedProduk)
         $.ajax({
             url: "{{ route('ajax.margin-by-produk') }}",
             dataType: "JSON",
             data: {
-                produkid: value[0]
+                produkid: produkID
             },
             success: function(data) {
+                console.log("jangka waktu", data)
+                
+                jangkaWaktuList = data.data
+                console.log("jwlist",jangkaWaktuList)
                 var i_margin = "<option value=''>-Pilih-</option>";
                 if (data.status == true) {
                     for (var i = 0; i < data.data.length; i++) {
@@ -265,6 +279,12 @@ Tambah Data Pinjaman Baru
         var get = val.split('__')
         $('#jumlah_bulan').val(get[0])
         $('#jumlah_bunga').val(get[1])
+
+        const jumlahBulan = get[0]
+        const adminFee = selectedProduk.admin_fee
+        const asuransi = jangkaWaktuList.find(jw=>jw.jangka_waktu==jumlahBulan).asuransi
+        $('#admin_bank').val(adminFee)
+        $('#asuransi').val(asuransi)
 
         pageSimulasi(get[0], get[1])
     }

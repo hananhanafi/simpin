@@ -37,6 +37,8 @@ class AnggotaController extends Controller
         try {
             DB::beginTransaction();
 
+            $gaji = intval(str_replace('.','',$request->gaji));
+
             list($gradeId, $simpPokok, $simpWajib) = explode('__', $request->grade_id);
 
             $anggota = new Anggota;
@@ -62,17 +64,18 @@ class AnggotaController extends Controller
             $anggota->agama             = $request->agama;
             $anggota->grade_id          = $gradeId;
             $anggota->profit_id         = $request->profit_id;
-            $anggota->gaji              = $request->gaji;
-            $anggota->gaji_updatedt     = date('Y-m-d H:i:s');
+            $anggota->gaji              = $gaji;
+            $anggota->gaji_updated     = date('Y-m-d H:i:s');
             $anggota->bank_nama         = $request->bank_nama;
             $anggota->bank_code         = $request->bank_code;
             $anggota->bank_cabang       = '';
             $anggota->bank_norek        = $request->bank_norek;
-            $anggota->status_ebanking   = $request->status_ebanking;;
+            $anggota->status_ebanking   = $request->status_ebanking;
             $anggota->passwd            = '';
             $anggota->status_anggota    = 0;
             $anggota->status_emp        = '';
-            $anggota->masukkerja_date   = date('Y-m-d H:i:s');
+            // $anggota->masukkerja_date   = date('Y-m-d H:i:s');
+            $anggota->masukkerja_date   = $request->masukkerja_date;
             $anggota->catatan           = '';
             $anggota->reg_date          = date('Y-m-d H:i:s');
             $anggota->reg_by            = Auth::user()->id;
@@ -124,6 +127,7 @@ class AnggotaController extends Controller
     {
         try {
             DB::beginTransaction();
+            $gaji = intval(str_replace('.','',$request->gaji));
 
             list($gradeId, $simpPokok, $simpWajib) = explode('__', $request->grade_id);
 
@@ -150,13 +154,13 @@ class AnggotaController extends Controller
             $anggota->agama             = $request->agama;
             $anggota->grade_id          = $gradeId;
             $anggota->profit_id         = $request->profit_id;
-            $anggota->gaji              = '';
-            $anggota->gaji_updatedt     = date('Y-m-d H:i:s');
+            $anggota->gaji              = $gaji;
+            $anggota->gaji_updated     = date('Y-m-d H:i:s');
             $anggota->bank_nama         = $request->bank_nama;
             $anggota->bank_code         = $request->bank_code;
             $anggota->bank_cabang       = '';
             $anggota->bank_norek        = $request->bank_norek;
-            $anggota->status_ebanking   = '';
+            $anggota->status_ebanking   = $request->status_ebanking;
             $anggota->passwd            = '';
             $anggota->status_anggota    = 0;
             $anggota->status_emp        = '';
