@@ -598,37 +598,40 @@ class DatatableController extends Controller
                 return '<b>Rp. ' . number_format($row->jml_pinjaman, 0, ',', '.') . '</b>';
             })
             ->editColumn('masa', function ($row) {
-                return ($row->jangka_waktu);
+                return '<b>' . $row->jangka_waktu . '</b>';
             })
             ->editColumn('admin', function ($row) {
-                return ($row->admin_fee);
+                return '<b>Rp. ' . number_format($row->admin_fee, 0, ',', '.') . '</b>';
             })
-            // ->addColumn('status', function ($row) {
-            //     $xstatus = '';
-            //     if ($row->status == 0) {
-            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-secondary'>Draft</span>";
-            //     } elseif ($row->status == 1) {
-            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Aktif</span>";
-            //     } elseif ($row->status == 2) {
-            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-info'>Pencairan</span>";
-            //     } elseif ($row->status == 3) {
-            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Pelunasan</span>";
-            //     } elseif ($row->status == 4) {
-            //         $xstatus = '<span class="badge font-size-13 bg-warning">Pengajuan Penutupan</span>';
-            //     } elseif ($row->status == 5) {
-            //         $xstatus = "<span class='btn btn-sm btn-rounded btn-danger'>Tidak Aktif</span>";
-            //     }
-            //     return $xstatus;
-            // })
-            // ->editColumn('asuransi', function ($row) {
-            //     return '<b>' . '$row->asuransi '. '</b>';
-            // })
-            // ->editColumn('nilai_pelunasan', function ($row) {
-            //     return '<b>' . '$row->nilai_pelunasan '. '</b>';
-            // })
-            // ->editColumn('nilai_pencairan', function ($row) {
-            //     return '<b>' . '$row->nilai_pencairan '. '</b>';
-            // })
+            ->editColumn('asuransi', function ($row) {
+                return '<b>Rp. ' . number_format($row->asuransi, 0, ',', '.') . '</b>';
+            })
+            ->editColumn('nilai_pelunasan', function ($row) {
+                return '<b>Rp. ' . number_format($row->nilai_pelunasan, 0, ',', '.') . '</b>';
+            })
+            ->editColumn('nilai_pencairan', function ($row) {
+                return '<b>Rp. ' . number_format($row->nilai_pencairan, 0, ',', '.') . '</b>';
+            })
+            ->editColumn('pencairan_date', function ($row) {
+                return '<b>' . $row->pencairan_date . '</b>';
+            })
+            ->addColumn('status', function ($row) {
+                $xstatus = '';
+                if ($row->status == 0) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-secondary'>Draft</span>";
+                } elseif ($row->status == 1) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Aktif</span>";
+                } elseif ($row->status == 2) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-info'>Pencairan</span>";
+                } elseif ($row->status == 3) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Pelunasan</span>";
+                } elseif ($row->status == 4) {
+                    $xstatus = '<span class="badge font-size-13 bg-warning">Pengajuan Penutupan</span>';
+                } elseif ($row->status == 5) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-danger'>Tidak Aktif</span>";
+                }
+                return $xstatus;
+            })
             ->addColumn('aksi', function ($row) use ($request) {
                 if ($request->approval) {
                     $btn = '<div class="btn-group">
@@ -657,7 +660,7 @@ class DatatableController extends Controller
                 }
                 return $btn;
             })
-            ->rawColumns(['no_rekening', 'no_anggota', 'nama', 'alamat', 'telepon', 'status', 'nama_produk', 'aksi', 'jml_pinjaman'])
+            ->rawColumns(['no_rekening', 'no_anggota', 'nama', 'jml_pinjaman', 'masa', 'admin', 'asuransi', 'nilai_pelunasan', 'nilai_pencairan', 'pencairan_date', 'status', 'aksi'])
             ->toJson();
     }
 

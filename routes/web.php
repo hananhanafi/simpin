@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('pengguna', 'PenggunaController');
 
         Route::resource('pencairan', 'PencairanController');
+        Route::post('pencairan-approve', 'PencairanController@pencairanApprove')->name('pencairan.approve');
     });
     Route::name('laporan.')->namespace('Laporan')->prefix('laporan')->group(function () {
         Route::get('anggota', 'LaporanController@anggota')->name('anggota');

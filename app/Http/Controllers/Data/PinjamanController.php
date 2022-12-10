@@ -145,7 +145,11 @@ class PinjamanController extends Controller
 
 
             $bungaEfektif   = $request->jumlah_bunga_efektif;
-            $jumlahPinjaman = str_replace('.', '', $request->jumlah_pinjaman);
+            
+            $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
+            $asuransi = intVal(str_replace('.', '', $request->asuransi));
+            $adminFee = intVal(str_replace('.', '', $request->admin_bank));
+            $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee);
 
             $margin         = $bungaEfektif / 100 * $jumlahPinjaman;
             $totalPinjaman  = $margin + $jumlahPinjaman;
@@ -173,14 +177,14 @@ class PinjamanController extends Controller
             $newPinjaman->total_pinjaman    = $totalPinjaman;
             $newPinjaman->jangka_waktu      = $request->jumlah_bulan;
             $newPinjaman->margin            = $request->jumlah_bunga_efektif;
-            $newPinjaman->asuransi          = $request->asuransi;
-            $newPinjaman->admin_fee          = $request->admin_bank;
+            $newPinjaman->asuransi          = $asuransi;
+            $newPinjaman->admin_fee          = $adminFee;
             $newPinjaman->saldo_akhir_pokok = $sisaPokok;
             $newPinjaman->saldo_akhir_margin = 0;
             $newPinjaman->cicilan           = 0;
             $newPinjaman->rev_margin        = 0;
             $newPinjaman->status_rekening   = 0;
-            $newPinjaman->nilai_pencairan   = 0;
+            $newPinjaman->nilai_pencairan   = $nilaiPencairan;
             $newPinjaman->nilai_pelunasan   = 0;
             $newPinjaman->pelunasan_note    = '-';
             $newPinjaman->penutupan_note    = '-';

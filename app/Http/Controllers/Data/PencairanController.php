@@ -44,4 +44,59 @@ class PencairanController extends Controller
             ->with('total_potongan', $total_potongan)
             ->with('anggota', $anggota);
     }
+
+    
+    public function pencairanApprove(Request $request)
+    {
+        // $pinjaman = Pinjaman::where('id', '=', "$request->id_pinjaman")->first();
+        $pinjaman = Pinjaman::find($request->id_pinjaman);
+
+        // return $pinjaman;
+        if ($pinjaman) {
+
+
+            if ($pinjaman->status_rekening == 4) {
+
+                $pinjaman->status_rekening   = 5;
+                $pinjaman->update_by         = Auth::user()->id;
+                $pinjaman->update_date       = date('Y-m-d H:i:s');
+                $pinjaman->save();
+
+                Session::flash('success', 'Data Pinjaman Telah Di Terminasi');
+            } else {
+                
+                $pinjaman->status_rekening   = 2;
+                $pinjaman->pencairan_by      = Auth::user()->id;
+                $pinjaman->pencairan_date    = date('Y-m-d H:i:s');
+                $pinjaman->update_by         = Auth::user()->id;
+                $pinjaman->update_date       = date('Y-m-d H:i:s');
+                $pinjaman->save();
+
+                Session::flash('success', 'Data Pinjaman Telah Dicairkan');
+
+                // if ($pinjaman->approv_by == 1) {
+                //     $pinjaman->status_rekening   = 1;
+                //     $pinjaman->pencairan_by      = 0;
+                //     $pinjaman->update_by         = Auth::user()->id;
+                //     $pinjaman->pencairan_date    = '';
+                //     $pinjaman->save();
+
+                //     Session::flash('success', 'Data Pinjaman Telah Dicairkan');
+                // } else {
+                //     $pinjaman->status_rekening   = 1;
+                //     $pinjaman->approv_note       = $request->keterangan;
+                //     $pinjaman->approv_by         = 1;
+                //     $pinjaman->update_by         = Auth::user()->id;
+                //     $pinjaman->update_date       = date('Y-m-d H:i:s');
+                //     $pinjaman->save();
+
+                //     Session::flash('success', 'Data Pinjaman Telah Dicairkan');
+                // }
+            }
+            
+        } else {
+            Session::flash('fail', 'Data Pinjaman Tidak Di Temukan');
+        }
+        return redirect()->route('data.pencairan.show', $pinjaman->no_anggota);
+    }
 }

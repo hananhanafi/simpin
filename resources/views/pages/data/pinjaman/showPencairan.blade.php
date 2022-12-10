@@ -32,7 +32,7 @@
                         <p class="card-title-desc">Data berasal dari Sumber yang tersimpan dalam database</code>.</p>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{ route('data.pinjaman.index') }}" class="btn btn-info btn-sm" style="float: right;margin-left:5px;"><i class="fa fa-chevron-left"></i> Kembali</a>
+                        <a href="{{ route('data.pinjaman.pencairan') }}" class="btn btn-info btn-sm" style="float: right;margin-left:5px;"><i class="fa fa-chevron-left"></i> Kembali</a>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,14 @@
                                                 @endif
                                                 
                                                 <td class="text-center">
-                                                    <a href="{{ route('data.pinjaman.mutasi',['no_rekening'=>$item->no_rekening]) }}" class="btn btn-warning btn-circle edit_anggota"><i class="fa fa-info"></i></a>
+                                                    {{-- <a href="{{ route('data.pinjaman.mutasi',['no_rekening'=>$item->no_rekening]) }}" class="btn btn-warning btn-circle edit_anggota"><i class="fa fa-info"></i></a> --}}
+                                                    @php
+                                                        if($item->status == 1):
+                                                    @endphp
+                                                    <button type="button" class="btn btn-primary btn-sm" onclick="cairkan(<?php echo $item->id; ?>)">Cairkan</button>
+                                                    @php
+                                                        endif;
+                                                    @endphp
                                                 </td>
                                             </tr>
                                             @php
@@ -148,6 +155,15 @@
         </div>
     </div>
 </div>
+
+<form id="aproval-form" method="post">
+    @csrf
+    <input type="hidden" name="id_pinjaman">
+</form>
+{{-- <form id="cairkan-form-<?php echo $item->id; ?>" action="{{ route('data.pencairan.approve') }}" method="POST" class="d-none">
+    @csrf
+    <input type="hidden" name="id_pinjaman" value="{{ $anggota->id }}">
+</form> --}}
 @endsection
 
 @section('footscript')
@@ -161,3 +177,29 @@
     }
 </style>
 @endsection
+
+<link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert.css">
+<script type="text/javascript" charset="utf8" src="{{ asset('assets') }}/sweetalert/sweetalert.min.js"></script>
+<script>
+    function cairkan(id) {
+        var url = "{{ route('data.pencairan.approve') }}";
+        $('#aproval-form').attr('action', url);
+        $("input[name='id_pinjaman']").val(id);
+        swal({
+                title: "Apakah Anda Yakin !",
+                text: "Ingin Mencairkan Pinjaman Ini ?.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#802d34",
+                confirmButtonText: "Iya",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: false,
+                closeOnCancel: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    $('#aproval-form').submit();
+                }
+            });
+    }
+</script>
