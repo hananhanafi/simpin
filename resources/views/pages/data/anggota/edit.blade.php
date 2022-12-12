@@ -214,6 +214,12 @@
                                     <input type="text" name="bank_nama" class="form-control" id="bank_nama" placeholder="Masukan Atas Nama Rekening" value="{{ $anggota->bank_nama }}">
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Tanggal Mulai Bekerja</label>
+                                <div class="col-sm-9">
+                                    <input type="date" name="masukkerja_date" class="form-control" id="masukkerja_date" placeholder="Tanggal Mulai Kerja" value="{{ $anggota->masukkerja_date }}">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <hr>

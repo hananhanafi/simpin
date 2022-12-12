@@ -157,6 +157,14 @@
                                                 </font>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td width="30%">Tanggal Masuk Kerja</td>
+                                            <td width="70%">
+                                                <font color="<?php echo $warna; ?>">
+                                                    <?php echo $anggota->masukkerja_date; ?>
+                                                </font>
+                                            </td>
+                                        </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>

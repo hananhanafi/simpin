@@ -164,7 +164,7 @@ class AnggotaController extends Controller
             $anggota->passwd            = '';
             $anggota->status_anggota    = 0;
             $anggota->status_emp        = '';
-            $anggota->masukkerja_date   = date('Y-m-d H:i:s');
+            $anggota->masukkerja_date   = $request->masukkerja_date;
             $anggota->catatan           = '';
             $anggota->reg_date          = date('Y-m-d H:i:s');
             $anggota->reg_by            = 0;
