@@ -30,6 +30,7 @@ Tambah Data Pencairan
                         <h4 class="card-title">Form Tambah Data Pinjaman Baru Sukarela Berjangka (SSB)</h4>
                         <p class="card-title-desc">Data berasal dari Sumber yang tersimpan dalam database</code>.</p>
                     </div>
+
                     <div class="col-md-6">
                         <a href="{{ route('data.pinjaman.pencairan') }}" class="btn btn-info btn-sm" style="float: right"><i class="fa fa-chevron-left"></i> Kembali</a>
                     </div>
