@@ -30,7 +30,7 @@ class PencairanController extends Controller
                                             p_produk.nama_produk, t_pembiayaan.jml_pinjaman, t_pembiayaan.jml_margin, 
                                             t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
                                             t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
-                                            t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening')
+                                            t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening, t_pembiayaan.nilai_pencairan')
             ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
             ->where('t_pembiayaan.no_anggota', $nomorAnggota)
             ->with('detail')
@@ -45,7 +45,6 @@ class PencairanController extends Controller
             ->with('anggota', $anggota);
     }
 
-    
     public function pencairanApprove(Request $request)
     {
         // $pinjaman = Pinjaman::where('id', '=', "$request->id_pinjaman")->first();
@@ -64,7 +63,6 @@ class PencairanController extends Controller
 
                 Session::flash('success', 'Data Pinjaman Telah Di Terminasi');
             } else {
-                
                 $pinjaman->status_rekening   = 2;
                 $pinjaman->pencairan_by      = Auth::user()->id;
                 $pinjaman->pencairan_date    = date('Y-m-d H:i:s');
@@ -93,7 +91,6 @@ class PencairanController extends Controller
                 //     Session::flash('success', 'Data Pinjaman Telah Dicairkan');
                 // }
             }
-            
         } else {
             Session::flash('fail', 'Data Pinjaman Tidak Di Temukan');
         }

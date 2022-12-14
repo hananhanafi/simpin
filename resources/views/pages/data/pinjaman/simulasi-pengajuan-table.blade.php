@@ -31,12 +31,16 @@
                 // dd($rangeBulan);
                 @endphp
                 <tr>
-                    <th style="width:40%;padding:0.2rem">NIK</th>
+                    <th style="width:40%;padding:0.2rem">NIK </th>
                     <th style="width:60%;padding:0.2rem">{{ $anggota->nik ?? '' }}</th>
                 </tr>
                 <tr>
                     <th style="width:40%;padding:0.2rem">Nama</th>
                     <th style="width:60%;padding:0.2rem">{{ $anggota->nama ?? '' }}</th>
+                </tr>
+                <tr>
+                    <th style="width:40%;padding:0.2rem">Masa Kerja</th>
+                    <th style="width:60%;padding:0.2rem">{{ $anggota->masukkerja_date ?? '' }}</th>
                 </tr>
                 <tr>
                     <th style="width:40%;padding:0.2rem">Plafon Pinjaman</th>

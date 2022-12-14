@@ -154,11 +154,9 @@ Tambah Data Pinjaman Baru
 
 <script>
     $('#form-tambah').parsley();
-    
     var produkList = <?php echo json_encode($produk); ?>;
     var jangkaWaktuList = null
     var selectedProduk = null;
-    
     $(document).ready(function() {
         $('#no_anggota').select2({
             width: '100%',
@@ -167,7 +165,7 @@ Tambah Data Pinjaman Baru
                 dataType: 'json',
                 placeholder: 'Ketik Minimal 2 Karakter',
                 minimumInputLength: 2,
-                processResults: function (data, params) {
+                processResults: function(data, params) {
                     // parse the results into the format expected by Select2
                     // since we are using custom formatting functions we do not need to
                     // alter the remote JSON data, except to indicate that infinite
@@ -256,10 +254,10 @@ Tambah Data Pinjaman Baru
         // console.log('val produk',val)  
         var value = val.split('__')
         const produkID = value[0]
-        console.log("val",value)
-        console.log("prdukid",produkID)
-        selectedProduk = produkList.find(produk=>produk.id==produkID)
-        console.log("selectedProduk",selectedProduk)
+        console.log("val", value)
+        console.log("prdukid", produkID)
+        selectedProduk = produkList.find(produk => produk.id == produkID)
+        console.log("selectedProduk", selectedProduk)
         $.ajax({
             url: "{{ route('ajax.margin-by-produk') }}",
             dataType: "JSON",
@@ -268,9 +266,9 @@ Tambah Data Pinjaman Baru
             },
             success: function(data) {
                 console.log("jangka waktu", data)
-                
+
                 jangkaWaktuList = data.data
-                console.log("jwlist",jangkaWaktuList)
+                console.log("jwlist", jangkaWaktuList)
                 var i_margin = "<option value=''>-Pilih-</option>";
                 if (data.status == true) {
                     for (var i = 0; i < data.data.length; i++) {
@@ -294,7 +292,7 @@ Tambah Data Pinjaman Baru
 
         const jumlahBulan = get[0]
         const adminFee = selectedProduk.admin_fee
-        const asuransi = jangkaWaktuList.find(jw=>jw.jangka_waktu==jumlahBulan).asuransi
+        const asuransi = jangkaWaktuList.find(jw => jw.jangka_waktu == jumlahBulan).asuransi
         $('#admin_bank').val(adminFee)
         $('#asuransi').val(asuransi)
 

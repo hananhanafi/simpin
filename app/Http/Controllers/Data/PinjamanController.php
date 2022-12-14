@@ -43,12 +43,12 @@ class PinjamanController extends Controller
             ->leftJoin('p_produk', 't_simpanan.produk_id', '=', 'p_produk.id')
             ->where('t_simpanan.no_anggota',  $pinjamanAnggota->no_anggota)
             ->get();
-            
+
         $pinjaman   =   Pinjaman::selectRaw('t_pembiayaan.sisa_hutangs,t_pembiayaan.id, t_pembiayaan.no_rekening, t_pembiayaan.produk_id, p_produk.kode, 
-            p_produk.nama_produk, t_pembiayaan.jml_pinjaman, t_pembiayaan.jml_margin, 
-            t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
-            t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
-            t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening')
+        p_produk.nama_produk, t_pembiayaan.jml_pinjaman, t_pembiayaan.jml_margin, 
+        t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
+        t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
+        t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening')
             ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
             ->where('t_pembiayaan.no_anggota', $pinjamanAnggota->no_anggota)
             ->with('detail')
@@ -145,7 +145,6 @@ class PinjamanController extends Controller
 
 
             $bungaEfektif   = $request->jumlah_bunga_efektif;
-            
             $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
             $asuransi = intVal(str_replace('.', '', $request->asuransi));
             $adminFee = intVal(str_replace('.', '', $request->admin_bank));
@@ -203,6 +202,19 @@ class PinjamanController extends Controller
             $newPinjaman->approv_note       = '-';
             $newPinjaman->approv_lunas_by   = 0;
             $newPinjaman->delete_by         = 0;
+            // $newPinjaman->save();
+
+            if ($bulan >= 12) {
+                $danaditahan = $totalAngsuran;
+            } else {
+                $danaditahan = 0;
+            }
+
+            $newPinjaman                    = new Pinjaman();
+            $newPinjaman->approv_lunas_by   = 0;
+            $newPinjaman->delete_by         = 0;
+            $newPinjaman->angusran         = $totalAngsuran;
+            $newPinjaman->dana_ditahan        = $danaditahan;
             $newPinjaman->save();
 
             $idPinjaman = $newPinjaman->id;

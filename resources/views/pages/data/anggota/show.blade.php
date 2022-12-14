@@ -157,6 +157,8 @@
                                                 </font>
                                             </td>
                                         </tr>
+<<<<<<< HEAD
+=======
                                         <tr>
                                             <td width="30%">Tanggal Masuk Kerja</td>
                                             <td width="70%">
@@ -165,6 +167,7 @@
                                                 </font>
                                             </td>
                                         </tr>
+>>>>>>> d4892d727c0c85e89ef90fe804fecae1680a37a2
                                         <?php } ?>
                                     </tbody>
                                 </table>
