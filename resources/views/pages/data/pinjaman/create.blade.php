@@ -154,11 +154,9 @@ Tambah Data Pinjaman Baru
 
 <script>
     $('#form-tambah').parsley();
-
     var produkList = <?php echo json_encode($produk); ?>;
     var jangkaWaktuList = null
     var selectedProduk = null;
-
     $(document).ready(function() {
         $('#no_anggota').select2({
             width: '100%',
@@ -167,6 +165,18 @@ Tambah Data Pinjaman Baru
                 dataType: 'json',
                 placeholder: 'Ketik Minimal 2 Karakter',
                 minimumInputLength: 2,
+                processResults: function(data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    return {
+                        results: data.results,
+                        pagination: {
+                            more: false
+                        }
+                    };
+                },
             }
         })
         var produk_id = $('#produk_id').val();

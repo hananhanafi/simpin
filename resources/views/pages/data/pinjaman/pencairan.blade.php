@@ -31,6 +31,9 @@ Data Pencairan Pinjaman
                         <h4 class="card-title">List Data Pencairan Pinjaman</h4>
                     </div>
 
+                    <div class="col-md-6">
+                        <a href="{{ route('data.pinjaman.addPencairan') }}" class="btn btn-info btn-sm" style="float: right"><i class="fa fa-plus-circle"></i> Tambah Data</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -40,7 +43,7 @@ Data Pencairan Pinjaman
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">No Rekening</th>
-                            <!-- <th class="text-center">No Anggota</th> -->
+                            <th class="text-center">No Anggota</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Jumlah Pinjaman</th>
                             <th class="text-center">Masa</th>
@@ -49,6 +52,7 @@ Data Pencairan Pinjaman
                             <th class="text-center">Pelunasan Pinjaman</th>
                             <th class="text-center">Diterima</th>
                             <th class="text-center">Data Mengendap</th>
+                            <th class="text-center">Tanggal Pencairan</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -119,6 +123,9 @@ Data Pencairan Pinjaman
             // {
             //     "data": "no_anggota"
             // },
+            {
+                "data": "no_anggota"
+            },
             {
                 "data": "nama",
                 name: 'anggota.nama',

@@ -45,7 +45,6 @@ class PencairanController extends Controller
             ->with('anggota', $anggota);
     }
 
-
     public function pencairanApprove(Request $request)
     {
         // $pinjaman = Pinjaman::where('id', '=', "$request->id_pinjaman")->first();
@@ -64,7 +63,6 @@ class PencairanController extends Controller
 
                 Session::flash('success', 'Data Pinjaman Telah Di Terminasi');
             } else {
-
                 $pinjaman->status_rekening   = 2;
                 $pinjaman->pencairan_by      = Auth::user()->id;
                 $pinjaman->pencairan_date    = date('Y-m-d H:i:s');
