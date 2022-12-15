@@ -82,27 +82,27 @@ Info Pencairan Pinjaman
                             <tbody>
                                 <tr>
                                     <td width="40%">Total Pinjaman</td>
-                                    <td width="60%">Rp. <?php echo ($anggota->gaji); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pinjaman,'0',',','.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Jumlah Pencairan</td>
-                                    <td width="60%">Rp. <?php echo ($total_potongan); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pencairan,'0',',','.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Biaya Administrasi</td>
-                                    <td width="60%">Rp. <?php echo ($total_potongan); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_admin,'0',',','.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Biaya Asuransi</td>
-                                    <td width="60%">Rp. <?php echo ($total_potongan); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_asuransi,'0',',','.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Pelunasan Hutang</td>
-                                    <td width="60%">Rp. <?php echo ($total_potongan); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pelunasan,'0',',','.')); ?></td>
                                 </tr>
                                 <tr>
-                                    <td width="40%">Dana Mengendap</td>
-                                    <td width="60%">Rp. <?php echo ($total_potongan); ?></td>
+                                    <td width="40%">Dana Ditahan</td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_dana_ditahan,'0',',','.')); ?></td>
                                 </tr>
                             </tbody>
 
@@ -145,7 +145,7 @@ Info Pencairan Pinjaman
                                     <td class="text-center">
                                         {{-- <a href="{{ route('data.pinjaman.mutasi',['no_rekening'=>$item->no_rekening]) }}" class="btn btn-warning btn-circle edit_anggota"><i class="fa fa-info"></i></a> --}}
                                         @php
-                                        if($item->status == 1):
+                                        if($item->status_rekening == 1):
                                         @endphp
                                         <button type="button" class="btn btn-primary btn-sm" onclick="cairkan(<?php echo $item->id; ?>)">Cairkan</button>
                                         @php

@@ -51,7 +51,7 @@ Data Pencairan Pinjaman
                             <th class="text-center">Asuransi</th>
                             <th class="text-center">Pelunasan Pinjaman</th>
                             <th class="text-center">Diterima</th>
-                            <th class="text-center">Data Mengendap</th>
+                            <th class="text-center">Dana Ditahan</th>
                             <th class="text-center">Tanggal Pencairan</th>
                             <th class="text-center">Aksi</th>
                         </tr>
@@ -153,7 +153,10 @@ Data Pencairan Pinjaman
                 "data": "nilai_pencairan"
             },
             {
-                "data": "data_mengendap"
+                "data": "dana_ditahan"
+            },
+            {
+                "data": "pencairan_date"
             },
             {
                 "data": "aksi"

@@ -183,15 +183,23 @@ Tambah Data Pinjaman Baru
         pilihProduk(produk_id);
         $('#jumlah_pinjaman,#asuransi,#admin_bank').on({
             keyup: function() {
+                console.log("a1a")
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val);
                 $(this).val(input_val);
             },
             blur: function() {
+                console.log("aa2")
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val, true, true);
                 $(this).val(input_val);
-            }
+            },
+            change: function() {
+                console.log("aa3")
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val, true, true);
+                $(this).val(input_val);
+            }, 
         });
     });
 
@@ -218,6 +226,11 @@ Tambah Data Pinjaman Baru
 
         var saldo = $('#jumlah_pinjaman').val()
         var jenis_ssb = $('#jenis_ssb').val()
+        
+        const saldoInt = parseInt(saldo.replaceAll('.',''))
+        const adminFee = (saldoInt*0.0125)
+        $('#admin_bank').val(numberToCurrency(adminFee))
+
 
         $('#pages-simulasi').load("{{ route('ajax.pinjaman.pengajuan') }}?produk_id=" + id_produk + '&bunga=' + bunga +
             '&bulan=' + bulan + '&saldo=' + saldo + '&bunga_efektif=' + efektif + '&no_anggota=' + no_anggota[0])
@@ -254,10 +267,7 @@ Tambah Data Pinjaman Baru
         // console.log('val produk',val)  
         var value = val.split('__')
         const produkID = value[0]
-        console.log("val", value)
-        console.log("prdukid", produkID)
         selectedProduk = produkList.find(produk => produk.id == produkID)
-        console.log("selectedProduk", selectedProduk)
         $.ajax({
             url: "{{ route('ajax.margin-by-produk') }}",
             dataType: "JSON",
@@ -265,10 +275,8 @@ Tambah Data Pinjaman Baru
                 produkid: produkID
             },
             success: function(data) {
-                console.log("jangka waktu", data)
 
                 jangkaWaktuList = data.data
-                console.log("jwlist", jangkaWaktuList)
                 var i_margin = "<option value=''>-Pilih-</option>";
                 if (data.status == true) {
                     for (var i = 0; i < data.data.length; i++) {
@@ -291,9 +299,9 @@ Tambah Data Pinjaman Baru
         $('#jumlah_bunga').val(get[1])
 
         const jumlahBulan = get[0]
-        const adminFee = selectedProduk.admin_fee
+        // const adminFee = selectedProduk.admin_fee
+        // $('#admin_bank').val(adminFee)
         const asuransi = jangkaWaktuList.find(jw => jw.jangka_waktu == jumlahBulan).asuransi
-        $('#admin_bank').val(adminFee)
         $('#asuransi').val(asuransi)
 
         pageSimulasi(get[0], get[1])

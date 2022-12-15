@@ -148,7 +148,6 @@ class PinjamanController extends Controller
             $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
             $asuransi = intVal(str_replace('.', '', $request->asuransi));
             $adminFee = intVal(str_replace('.', '', $request->admin_bank));
-            $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee);
 
             $margin         = $bungaEfektif / 100 * $jumlahPinjaman;
             $totalPinjaman  = $margin + $jumlahPinjaman;
@@ -183,7 +182,6 @@ class PinjamanController extends Controller
             $newPinjaman->cicilan           = 0;
             $newPinjaman->rev_margin        = 0;
             $newPinjaman->status_rekening   = 0;
-            $newPinjaman->nilai_pencairan   = $nilaiPencairan;
             $newPinjaman->nilai_pelunasan   = 0;
             $newPinjaman->pelunasan_note    = '-';
             $newPinjaman->penutupan_note    = '-';
@@ -210,11 +208,10 @@ class PinjamanController extends Controller
                 $danaditahan = 0;
             }
 
-            $newPinjaman                    = new Pinjaman();
-            $newPinjaman->approv_lunas_by   = 0;
-            $newPinjaman->delete_by         = 0;
-            $newPinjaman->angusran         = $totalAngsuran;
+            // $newPinjaman->angsuran         = $totalAngsuran;
             $newPinjaman->dana_ditahan        = $danaditahan;
+            $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee + $danaditahan);
+            $newPinjaman->nilai_pencairan   = $nilaiPencairan;
             $newPinjaman->save();
 
             $idPinjaman = $newPinjaman->id;
