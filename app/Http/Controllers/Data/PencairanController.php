@@ -31,7 +31,7 @@ class PencairanController extends Controller
                                             t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
                                             t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
                                             t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening, t_pembiayaan.nilai_pencairan,
-                                            t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_ditahan, t_pembiayaan.asuransi')
+                                            t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi')
             ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
             ->where('t_pembiayaan.no_anggota', $nomorAnggota)
             ->with('detail')
@@ -56,19 +56,19 @@ class PencairanController extends Controller
         // $pinjamanArr = (array) $pinjaman;
         $pinjamanArr = json_decode(json_encode($pinjaman), true);
         // dd($pinjamanArr);
-        
-        $total_pinjaman = array_sum(array_column($pinjamanArr, 'jml_pinjaman')); 
-        $total_pencairan = array_sum(array_column($pinjamanArr, 'nilai_pencairan')); 
-        $total_admin = array_sum(array_column($pinjamanArr, 'admin_fee')); 
-        $total_asuransi = array_sum(array_column($pinjamanArr, 'asuransi')); 
-        $total_pelunasan = array_sum(array_column($pinjamanArr, 'nilai_pelunasan')); 
-        $total_dana_ditahan = array_sum(array_column($pinjamanArr, 'dana_ditahan')); 
+
+        $total_pinjaman = array_sum(array_column($pinjamanArr, 'jml_pinjaman'));
+        $total_pencairan = array_sum(array_column($pinjamanArr, 'nilai_pencairan'));
+        $total_admin = array_sum(array_column($pinjamanArr, 'admin_fee'));
+        $total_asuransi = array_sum(array_column($pinjamanArr, 'asuransi'));
+        $total_pelunasan = array_sum(array_column($pinjamanArr, 'nilai_pelunasan'));
+        $total_dana_mengendap = array_sum(array_column($pinjamanArr, 'dana_mengendap'));
         $anggota->total_pinjaman = $total_pinjaman;
         $anggota->total_pencairan = $total_pencairan;
         $anggota->total_admin = $total_admin;
         $anggota->total_asuransi = $total_asuransi;
         $anggota->total_pelunasan = $total_pelunasan;
-        $anggota->total_dana_ditahan = $total_dana_ditahan;
+        $anggota->total_dana_mengendap = $total_dana_mengendap;
 
 
         return view('pages.data.pinjaman.showPencairan')

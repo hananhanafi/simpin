@@ -68,13 +68,6 @@ Info Pencairan Pinjaman
                                 </tr>
                             </tbody>
                         </table>
-                        <table id="table" class="table table-striped table-bordered no-wrap">
-                            <tbody>
-                                <tr>
-                                    <td width="40%">Total Pencairan</td>
-                                    <td width="60%">Rp. <?php echo ($total_potongan); ?></td>
-                                </tr>
-                        </table>
                     </div>
 
                     <div class="pb-3 col-md-6">
@@ -82,27 +75,27 @@ Info Pencairan Pinjaman
                             <tbody>
                                 <tr>
                                     <td width="40%">Total Pinjaman</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pinjaman,'0',',','.')); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pinjaman, '0', ',', '.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Jumlah Pencairan</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pencairan,'0',',','.')); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pencairan, '0', ',', '.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Biaya Administrasi</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_admin,'0',',','.')); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_admin, '0', ',', '.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Biaya Asuransi</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_asuransi,'0',',','.')); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_asuransi, '0', ',', '.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Pelunasan Hutang</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pelunasan,'0',',','.')); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pelunasan, '0', ',', '.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Dana Ditahan</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_dana_ditahan,'0',',','.')); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_dana_mengendap, '0', ',', '.')); ?></td>
                                 </tr>
                             </tbody>
 

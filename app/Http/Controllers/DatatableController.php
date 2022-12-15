@@ -552,7 +552,7 @@ class DatatableController extends Controller
 
         if ($request->approval) {
 
-            $pencairan = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.nilai_pencairan,t_pembiayaan.nilai_pelunasan,t_pembiayaan.jangka_waktu,t_pembiayaan.asuransi,t_pembiayaan.admin_fee,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_pembiayaan.pencairan_date,t_pembiayaan.dana_ditahan,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
+            $pencairan = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.nilai_pencairan,t_pembiayaan.nilai_pelunasan,t_pembiayaan.jangka_waktu,t_pembiayaan.asuransi,t_pembiayaan.admin_fee,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_pembiayaan.pencairan_date,t_pembiayaan.dana_mengendap,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
                 ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
                 ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
                 ->with(['jenispinjaman', 'anggota'])
@@ -562,7 +562,7 @@ class DatatableController extends Controller
                 ->orderBy('t_anggota.nama');
         } else {
 
-            $pencairan = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.nilai_pencairan,t_pembiayaan.nilai_pelunasan,t_pembiayaan.jangka_waktu,t_pembiayaan.asuransi,t_pembiayaan.admin_fee,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_pembiayaan.pencairan_date,t_pembiayaan.dana_ditahan,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
+            $pencairan = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.nilai_pencairan,t_pembiayaan.nilai_pelunasan,t_pembiayaan.jangka_waktu,t_pembiayaan.asuransi,t_pembiayaan.admin_fee,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_pembiayaan.pencairan_date,t_pembiayaan.dana_mengendap,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
                 ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
                 ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
                 ->with(['jenispinjaman', 'anggota'])
@@ -612,8 +612,8 @@ class DatatableController extends Controller
             ->editColumn('nilai_pencairan', function ($row) {
                 return '<b>Rp. ' . number_format($row->nilai_pencairan, 0, ',', '.') . '</b>';
             })
-            ->editColumn('dana_ditahan', function ($row) {
-                return '<b>Rp. ' . number_format($row->dana_ditahan, 0, ',', '.') . '</b>';
+            ->editColumn('dana_mengendap', function ($row) {
+                return '<b>Rp. ' . number_format($row->dana_mengendap, 0, ',', '.') . '</b>';
             })
             ->editColumn('pencairan_date', function ($row) {
                 return '<b>' . $row->pencairan_date . '</b>';
@@ -663,7 +663,7 @@ class DatatableController extends Controller
                 }
                 return $btn;
             })
-            ->rawColumns(['no_rekening', 'no_anggota', 'nama', 'jml_pinjaman', 'masa', 'admin', 'asuransi', 'nilai_pelunasan', 'nilai_pencairan', 'dana_ditahan', 'pencairan_date', 'status', 'aksi'])
+            ->rawColumns(['no_rekening', 'no_anggota', 'nama', 'jml_pinjaman', 'masa', 'admin', 'asuransi', 'nilai_pelunasan', 'nilai_pencairan', 'dana_mengendap', 'pencairan_date', 'status', 'aksi'])
             ->toJson();
     }
 
