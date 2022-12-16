@@ -78,24 +78,24 @@ Info Pencairan Pinjaman
                                     <td width="60%">Rp. <?php echo (number_format($anggota->total_pinjaman, '0', ',', '.')); ?></td>
                                 </tr>
                                 <tr>
-                                    <td width="40%">Jumlah Pencairan</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pencairan, '0', ',', '.')); ?></td>
-                                </tr>
-                                <tr>
                                     <td width="40%">Biaya Administrasi</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_admin, '0', ',', '.')); ?></td>
+                                    <td width="60%"><input type='text' value='Rp. <?php echo (number_format($anggota->total_admin, '0', ',', '.')); ?>' /></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Biaya Asuransi</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_asuransi, '0', ',', '.')); ?></td>
+                                    <td width="60%"><input type='text' value='Rp. <?php echo (number_format($anggota->total_asuransi, '0', ',', '.')); ?>' /> </td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Pelunasan Hutang</td>
                                     <td width="60%">Rp. <?php echo (number_format($anggota->total_pelunasan, '0', ',', '.')); ?></td>
                                 </tr>
                                 <tr>
-                                    <td width="40%">Dana Ditahan</td>
+                                    <td width="40%">Dana Mengendap</td>
                                     <td width="60%">Rp. <?php echo (number_format($anggota->total_dana_mengendap, '0', ',', '.')); ?></td>
+                                </tr>
+                                <tr>
+                                    <td width="40%">Jumlah Pencairan</td>
+                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pencairan, '0', ',', '.')); ?></td>
                                 </tr>
                             </tbody>
 

@@ -31,9 +31,6 @@ Data Pencairan Pinjaman
                         <h4 class="card-title">List Data Pencairan Pinjaman</h4>
                     </div>
 
-                    <div class="col-md-6">
-                        <a href="{{ route('data.pinjaman.addPencairan') }}" class="btn btn-info btn-sm" style="float: right"><i class="fa fa-plus-circle"></i> Tambah Data</a>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
