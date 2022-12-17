@@ -655,7 +655,7 @@ class DatatableController extends Controller
                                     <i class="mdi mdi-chevron-down"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
-                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pencairan.show', $row->no_anggota) . '">Pencairan</a>
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pencairan.show', $row->id_pinjaman) . '">Pencairan</a>
                                    
                                     <div class="dropdown-divider"></div>
                                 </div>

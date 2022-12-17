@@ -11,31 +11,46 @@ use App\Models\Master\Produk;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class PencairanController extends Controller
 {
-    public function show($nomorAnggota)
+    public function show($idPencairan)
     {
-        $anggota    =   Anggota::leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
-            ->leftJoin('p_grade', 'p_grade.id', '=', 't_anggota.grade_id')
-            ->where('t_anggota.no_anggota', $nomorAnggota)
-            ->first();
-
-        $simpanan   =   Simpanan::selectRaw('t_simpanan.id, t_simpanan.no_rekening, t_simpanan.produk_id, p_produk.kode, p_produk.nama_produk, p_produk.tipe_produk, t_simpanan.saldo_akhir, t_simpanan.setoran_per_bln, t_simpanan.created_date, t_simpanan.status_rekening')
-            ->leftJoin('p_produk', 't_simpanan.produk_id', '=', 'p_produk.id')
-            ->where('t_simpanan.no_anggota', $nomorAnggota)
-            ->get();
-
-        $pinjaman   =   Pinjaman::selectRaw('t_pembiayaan.sisa_hutangs,t_pembiayaan.id, t_pembiayaan.no_rekening, t_pembiayaan.produk_id, p_produk.kode, 
+        
+        $pinjamanDetail   =   Pinjaman::selectRaw('t_pembiayaan.sisa_hutangs,t_pembiayaan.id, t_pembiayaan.no_anggota, t_pembiayaan.no_rekening, t_pembiayaan.produk_id, p_produk.kode, 
                                             p_produk.nama_produk, t_pembiayaan.jml_pinjaman, t_pembiayaan.jml_margin, 
                                             t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
                                             t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
                                             t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening, t_pembiayaan.nilai_pencairan,
                                             t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi')
             ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
-            ->where('t_pembiayaan.no_anggota', $nomorAnggota)
+            ->where('t_pembiayaan.id', $idPencairan)
             ->with('detail')
+            ->firstOrFail();
+
+        $pinjaman   =   Pinjaman::selectRaw('t_pembiayaan.sisa_hutangs,t_pembiayaan.id, t_pembiayaan.no_rekening, t_pembiayaan.produk_id, p_produk.kode, 
+                p_produk.nama_produk, t_pembiayaan.jml_pinjaman, t_pembiayaan.jml_margin, 
+                t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
+                t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
+                t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening, t_pembiayaan.nilai_pencairan,
+                t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi')
+        ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
+        ->where('t_pembiayaan.no_anggota', $pinjamanDetail->no_anggota)
+        ->with('detail')
+        ->get();
+
+        $anggota    =   Anggota::leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
+            ->leftJoin('p_grade', 'p_grade.id', '=', 't_anggota.grade_id')
+            ->where('t_anggota.no_anggota', $pinjamanDetail->no_anggota)
+            ->first();
+
+        $simpanan   =   Simpanan::selectRaw('t_simpanan.id, t_simpanan.no_rekening, t_simpanan.produk_id, p_produk.kode, p_produk.nama_produk, p_produk.tipe_produk, t_simpanan.saldo_akhir, t_simpanan.setoran_per_bln, t_simpanan.created_date, t_simpanan.status_rekening')
+            ->leftJoin('p_produk', 't_simpanan.produk_id', '=', 'p_produk.id')
+            ->where('t_simpanan.no_anggota', $pinjamanDetail->no_anggota)
             ->get();
+
 
         // print($pinjaman);
 
@@ -74,8 +89,30 @@ class PencairanController extends Controller
         return view('pages.data.pinjaman.showPencairan')
             ->with('simpanan', $simpanan)
             ->with('pinjaman', $pinjaman)
+            ->with('pinjamanDetail', $pinjamanDetail)
             ->with('total_potongan', $total_potongan)
             ->with('anggota', $anggota);
+    }
+
+    public function updateJumlahPencairan(Request $request){
+
+        try {
+            DB::beginTransaction();
+            $pinjaman = Pinjaman::find($request->id);
+    
+            $pinjaman->admin_fee         = $request->admin_fee_new;
+            $pinjaman->asuransi         = $request->asuransi_new;
+            $pinjaman->dana_mengendap         = $request->dana_mengendap_new;
+            $pinjaman->nilai_pencairan         = $request->nilai_pencairan_new;
+            $pinjaman->update_by         = Auth::user()->id;
+            $pinjaman->update_date       = date('Y-m-d H:i:s');
+            $pinjaman->save();
+            Session::flash('success', 'Jumlah Pencairan Baru Berhasil Disimpan');
+        } catch (Exception $ex) {
+            DB::rollback();
+            Session::flash('fail', 'Jumlah Pencairan Baru Tidak Berhasil Disimpan');
+        }
+        return back();
     }
 
     public function pencairanApprove(Request $request)

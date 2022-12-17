@@ -183,19 +183,16 @@ Tambah Data Pinjaman Baru
         pilihProduk(produk_id);
         $('#jumlah_pinjaman,#asuransi,#admin_bank').on({
             keyup: function() {
-                console.log("a1a")
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val);
                 $(this).val(input_val);
             },
             blur: function() {
-                console.log("aa2")
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val, true, true);
                 $(this).val(input_val);
             },
             change: function() {
-                console.log("aa3")
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val, true, true);
                 $(this).val(input_val);

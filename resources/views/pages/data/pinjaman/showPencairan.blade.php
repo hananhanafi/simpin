@@ -66,6 +66,10 @@ Info Pencairan Pinjaman
                                     <td width="40%">Status Anggota</td>
                                     <td width="60%"><?php echo ($anggota->status); ?></td>
                                 </tr>
+                                <tr>
+                                    <td width="40%">Total Pinjaman</td>
+                                    <td width="60%"><?php echo ($anggota->total_pinjaman); ?></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -74,40 +78,65 @@ Info Pencairan Pinjaman
                         <table id="table" class="table table-striped table-bordered no-wrap">
                             <tbody>
                                 <tr>
-                                    <td width="40%">Total Pinjaman</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pinjaman, '0', ',', '.')); ?></td>
+                                    <td width="40%">Pengajuan Pinjaman</td>
+                                    <td width="60%">
+                                        <input type="hidden" name="jml_pinjaman" id="jml_pinjaman" value="{{ number_format($pinjamanDetail->jml_pinjaman, '0', ',', '.') }}">
+                                        Rp. <?php echo (number_format($pinjamanDetail->jml_pinjaman, '0', ',', '.')); ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Biaya Administrasi</td>
-                                    <td width="60%"><input type='text' value='Rp. <?php echo (number_format($anggota->total_admin, '0', ',', '.')); ?>' /></td>
+                                    <td width="60%">
+                                        <div style="display: flex;width:100%; align-items:center">
+                                            <span style="margin-right: 8px">Rp. </span><input type="text" name="admin_fee" class="form-control" id="admin_fee" placeholder="Biaya Administrasi" required data-parsley-required-message="Biaya Administrasi harus diisi" value="{{ number_format($pinjamanDetail->admin_fee, '0', ',', '.') }}">
+                                        </div>
+                                        {{-- <input type='text' value='Rp. <?php echo (number_format($pinjamanDetail->admin_fee, '0', ',', '.')); ?>' /> --}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Biaya Asuransi</td>
-                                    <td width="60%"><input type='text' value='Rp. <?php echo (number_format($anggota->total_asuransi, '0', ',', '.')); ?>' /> </td>
+                                    <td width="60%">
+                                        <div style="display: flex;width:100%; align-items:center">
+                                            <span style="margin-right: 8px">Rp. </span><input type="text" name="asuransi" class="form-control" id="asuransi" placeholder="Biaya Administrasi" required data-parsley-required-message="Biaya Administrasi harus diisi" value="{{ number_format($pinjamanDetail->asuransi, '0', ',', '.') }}">
+                                        </div>
+                                        {{-- <input type='text' value='Rp. <?php echo (number_format($pinjamanDetail->asuransi, '0', ',', '.')); ?>' />  --}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Pelunasan Hutang</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pelunasan, '0', ',', '.')); ?></td>
+                                    <td width="60%">Rp. <?php echo (number_format($pinjamanDetail->nilai_pelunasan, '0', ',', '.')); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Dana Mengendap</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_dana_mengendap, '0', ',', '.')); ?></td>
+                                    <td width="60%">
+                                        <input type="hidden" name="dana_mengendap" id="dana_mengendap" value="{{ number_format($pinjamanDetail->dana_mengendap, '0', ',', '.') }}">
+                                        Rp. <?php echo (number_format($pinjamanDetail->dana_mengendap, '0', ',', '.')); ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Jumlah Pencairan</td>
-                                    <td width="60%">Rp. <?php echo (number_format($anggota->total_pencairan, '0', ',', '.')); ?></td>
+                                    <td width="60%">
+                                        <input type="hidden" name="nilai_pencairan" id="nilai_pencairan" value="{{ number_format($pinjamanDetail->nilai_pencairan, '0', ',', '.') }}">
+                                        Rp. <span id="nilai_pencairan_label"><?php echo (number_format($pinjamanDetail->nilai_pencairan, '0', ',', '.')); ?></span>
+                                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px" onclick="updateJumlahPencairanPost()">Simpan</button>
+                                        
+                                    </td>
                                 </tr>
+                                {{-- <tr>
+                                    <td width="40%"></td>
+                                    <td width="60%"><button type="button" class="btn btn-primary btn-sm">Perbarui</button></td>
+                                </tr> --}}
                             </tbody>
 
                         </table>
-
+                        
                     </div>
                     <div class="pb-3 col-md-12 table-responsive">
                         <h4>Data Pinjaman</h4>
                         <table id="table" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    {{-- <th>No</th> --}}
                                     <th>No Pinjaman</th>
                                     <th>Jenis Pinjaman</th>
                                     <th>Sisa Pinjaman</th>
@@ -118,47 +147,41 @@ Info Pencairan Pinjaman
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
+                                {{-- @php
                                 $saldo = $cicilan = 0;
                                 @endphp
-                                @foreach ($pinjaman as $no => $item)
+                                @foreach ($pinjaman as $no => $item) --}}
                                 <tr>
-                                    <td>{{ ($no+1) }}</td>
-                                    <td>{{ $item->no_rekening }}</td>
-                                    <td>{{ $item->kode }} - {{ $item->nama_produk }}</td>
-                                    <td class="text-right">Rp.{{ number_format($item->sisa_hutangs,0,',','.') }}</td>
-                                    <td class="text-right">Rp.{{ number_format($item->detail[0]->total_angsuran,0,',','.') }}</td>
-                                    <td class="text-center">{!! $item->xstatus !!}</td>
-                                    @if ($item->status_rekening == 0)
+                                    {{-- <td>{{ ($no+1) }}</td> --}}
+                                    <td>{{ $pinjamanDetail->no_rekening }}</td>
+                                    <td>{{ $pinjamanDetail->kode }} - {{ $pinjamanDetail->nama_produk }}</td>
+                                    <td class="text-right">Rp.{{ number_format($pinjamanDetail->sisa_hutangs,0,',','.') }}</td>
+                                    <td class="text-right">Rp.{{ number_format($pinjamanDetail->detail[0]->total_angsuran,0,',','.') }}</td>
+                                    <td class="text-center">{!! $pinjamanDetail->xstatus !!}</td>
+                                    @if ($pinjamanDetail->status_rekening == 0)
                                     <td></td>
                                     @else
-                                    <td class="text-center">{{ date('d-m-Y',strtotime($item->created_date)) }}</td>
+                                    <td class="text-center">{{ date('d-m-Y',strtotime($pinjamanDetail->created_date)) }}</td>
                                     @endif
 
                                     <td class="text-center">
-                                        {{-- <a href="{{ route('data.pinjaman.mutasi',['no_rekening'=>$item->no_rekening]) }}" class="btn btn-warning btn-circle edit_anggota"><i class="fa fa-info"></i></a> --}}
-                                        @php
-                                        if($item->status_rekening == 1):
-                                        @endphp
-                                        <button type="button" class="btn btn-primary btn-sm" onclick="cairkan(<?php echo $item->id; ?>)">Cairkan</button>
-                                        @php
-                                        endif;
-                                        @endphp
+                                        {{-- <a href="{{ route('data.pinjaman.mutasi',['no_rekening'=>$pinjamanDetail->no_rekening]) }}" class="btn btn-warning btn-circle edit_anggota"><i class="fa fa-info"></i></a> --}}
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="cairkan(<?php echo $pinjamanDetail->id; ?>,<?php echo $pinjamanDetail->status_rekening; ?>)">Cairkan</button>
                                     </td>
                                 </tr>
-                                @php
+                                {{-- @php
                                 $saldo += $item->sisa_hutangs;
                                 $cicilan += $item->cicilan;
                                 @endphp
-                                @endforeach
-                                <tr>
+                                @endforeach --}}
+                                {{-- <tr>
                                     <td colspan="3" class="text-right">JUMLAH</td>
                                     <td class="text-right">Rp.{{ number_format($saldo,0,',','.') }}</td>
                                     <td class="text-right">Rp.{{ number_format($cicilan,0,',','.') }}</td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
 
@@ -172,6 +195,14 @@ Info Pencairan Pinjaman
     <form id="aproval-form" method="post">
         @csrf
         <input type="hidden" name="id_pinjaman">
+    </form>
+    <form id="update-form" action="{{ route('data.pencairan.updateJumlahPencairan') }}" method="post">
+        @csrf
+        <input type="hidden" name="id" value="{{$pinjamanDetail->id}}">
+        <input type="hidden" name="asuransi_new">
+        <input type="hidden" name="admin_fee_new">
+        <input type="hidden" name="dana_mengendap_new">
+        <input type="hidden" name="nilai_pencairan_new">
     </form>
     {{-- <form id="cairkan-form-<?php echo $item->id; ?>" action="{{ route('data.pencairan.approve') }}" method="POST" class="d-none">
     @csrf
@@ -194,26 +225,89 @@ Info Pencairan Pinjaman
 
     <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert.css">
     <script type="text/javascript" charset="utf8" src="{{ asset('assets') }}/sweetalert/sweetalert.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js') }}/parsley.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js') }}/currency.js"></script>
+    <script type="text/javascript" src="{{ asset('js') }}/financial.js"></script>
     <script>
-        function cairkan(id) {
-            var url = "{{ route('data.pencairan.approve') }}";
-            $('#aproval-form').attr('action', url);
-            $("input[name='id_pinjaman']").val(id);
-            swal({
-                    title: "Apakah Anda Yakin !",
-                    text: "Ingin Mencairkan Pinjaman Ini ?.",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#802d34",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Cancel",
-                    closeOnConfirm: false,
-                    closeOnCancel: true
-                },
-                function(isConfirm) {
-                    if (isConfirm) {
-                        $('#aproval-form').submit();
-                    }
-                });
+        
+    var isUpdated = false;
+    $(document).ready(function() {
+        $('#asuransi,#admin_fee').on({
+            keyup: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val);
+                $(this).val(input_val);
+                isUpdated = true;
+                updateJumlahPencairan();
+            },
+            blur: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val, true, true);
+                $(this).val(input_val);
+            },
+            change: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val, true, true);
+                $(this).val(input_val);
+            }, 
+        });
+
+        function updateJumlahPencairan(){
+            const admin_fee_new = parseInt($('#admin_fee').val().replaceAll('.',''));
+            const asuransi_new = parseInt($('#asuransi').val().replaceAll('.',''));
+
+            const dana_mengendap = parseInt($('#dana_mengendap').val().replaceAll('.',''));
+            const jml_pinjaman = parseInt($('#jml_pinjaman').val().replaceAll('.',''));
+            
+            $("input[name='admin_fee_new']").val(admin_fee_new);
+            $("input[name='asuransi_new']").val(asuransi_new);
+            $("input[name='dana_mengendap_new']").val(dana_mengendap);
+            nilai_pencairan_new = jml_pinjaman - (admin_fee_new + asuransi_new + dana_mengendap)
+            
+            $("input[name='nilai_pencairan']").val(nilai_pencairan_new);
+            $("input[name='nilai_pencairan_new']").val(nilai_pencairan_new);
+            $('#nilai_pencairan_label').text(numberToCurrency(nilai_pencairan_new))
+            
         }
+        
+    });
+
+        function updateJumlahPencairanPost(){
+            
+            if($("input[name='nilai_pencairan_new']").val() < 0){
+                alert('Jumlah pencairan tidak boleh minus atau kurang dari 0')
+                return ;
+            }
+            if(isUpdated){
+                $('#update-form').submit();
+            }else {
+                alert("Silahkan perbarui biaya administrasi atau asuransi terlebih dahulu")
+            }
+        }
+        function cairkan(id,status) {
+            if(status == 1){
+                var url = "{{ route('data.pencairan.approve') }}";
+                $('#aproval-form').attr('action', url);
+                $("input[name='id_pinjaman']").val(id);
+                swal({
+                        title: "Apakah Anda Yakin !",
+                        text: "Ingin Mencairkan Pinjaman Ini ?.",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#802d34",
+                        confirmButtonText: "Iya",
+                        cancelButtonText: "Cancel",
+                        closeOnConfirm: false,
+                        closeOnCancel: true
+                    },
+                    function(isConfirm) {
+                        if (isConfirm) {
+                            $('#aproval-form').submit();
+                        }
+                    });
+            }else {
+                alert("Pinjaman sudah dicairkan")
+            }
+        };
     </script>
