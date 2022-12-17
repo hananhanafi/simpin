@@ -222,7 +222,7 @@
 
         request += 'no_anggota=' + no_anggota + '&'
         request += 'bulan=' + bulan + '&'
-        request += 'saldo=' + saldo + '&'
+        request += 'saldo=' + parseInt(saldo.replaceAll('.','')) + '&'
         request += 'totalAngsuran=' + totalAngsuran
 
         console.log('asd', totalAngsuran)

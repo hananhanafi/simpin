@@ -60,14 +60,14 @@ Plafon Pinjaman
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Masa
                                     Kerja</label>
                                 <div class="col-sm-7">
-                                    <input type="number" name="masa_kerja" class="form-control" id="masa_kerja" placeholder="Masa Kerja (Tahun)" value="{{ old('masa_kerja') }}" onkeyup="pagePlafon(0,0)">
+                                    <input type="number" name="masa_kerja" class="form-control" id="masa_kerja" placeholder="Masa Kerja (Tahun)" value="{{ $masa_kerja }}" onkeyup="pagePlafon(0,0)">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Gaji
                                     Pokok<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="gaji_pokok" class="form-control" id="gaji_pokok" placeholder="Gaji Pokok" required value="{{ $anggota->gaji }}" onkeyup="pagePlafon(this.value,0)">
+                                    <input type="text" name="gaji_pokok" class="form-control" id="gaji_pokok" placeholder="Gaji Pokok" required value="{{ number_format($anggota->gaji, '0', ',', '.') }}" onkeyup="pagePlafon(this.value,0)">
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@ Plafon Pinjaman
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Pengajuan
                                     Baru<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="jml_pengajuan_baru" class="form-control" id="jml_pengajuan_baru" placeholder="Jumlah Pengajuan Baru" required data-parsley-required-message="Jumlah Pengajuan Harus Diisi" value="{{ $request->saldo }}" onkeyup="pagePlafon(0,0)">
+                                    <input type="text" name="jml_pengajuan_baru" class="form-control" id="jml_pengajuan_baru" placeholder="Jumlah Pengajuan Baru" required data-parsley-required-message="Jumlah Pengajuan Harus Diisi" value="{{ number_format($request->saldo, '0', ',', '.') }}" onkeyup="pagePlafon(0,0)">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -90,7 +90,7 @@ Plafon Pinjaman
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Angsuran<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required data-parsley-required-message="Angsuran Harus Diisi" value="{{ $request->totalAngsuran }}" onkeyup="pagePlafon(0,0)">
+                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required data-parsley-required-message="Angsuran Harus Diisi" value="{{ number_format($request->totalAngsuran, '0', ',', '.') }}" onkeyup="pagePlafon(0,0)">
                                 </div>
                             </div>
                             {{-- <div class="row mb-3" id="bunga-efektif">

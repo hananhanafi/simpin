@@ -258,6 +258,7 @@ Tambah Data Pinjaman Baru
     function pilihAnggota(val) {
         var get = val.split('__')
         $('#nama').val(get[1])
+        pageSimulasi(0,0);
     }
 
     function pilihProduk(val) {
