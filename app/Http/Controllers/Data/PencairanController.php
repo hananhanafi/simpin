@@ -107,6 +107,7 @@ class PencairanController extends Controller
             $pinjaman->update_by         = Auth::user()->id;
             $pinjaman->update_date       = date('Y-m-d H:i:s');
             $pinjaman->save();
+            DB::commit();
             Session::flash('success', 'Jumlah Pencairan Baru Berhasil Disimpan');
         } catch (Exception $ex) {
             DB::rollback();
@@ -164,6 +165,6 @@ class PencairanController extends Controller
         } else {
             Session::flash('fail', 'Data Pinjaman Tidak Di Temukan');
         }
-        return redirect()->route('data.pencairan.show', $pinjaman->no_anggota);
+        return redirect()->route('data.pencairan.show', $pinjaman->id);
     }
 }
