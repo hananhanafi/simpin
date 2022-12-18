@@ -68,7 +68,7 @@ Info Pencairan Pinjaman
                                 </tr>
                                 <tr>
                                     <td width="40%">Total Pinjaman</td>
-                                    <td width="60%"><?php echo ($anggota->total_pinjaman); ?></td>
+                                    <td width="60%"><?php echo (number_format($anggota->total_pinjaman, '0', ',', '.')); ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -119,7 +119,7 @@ Info Pencairan Pinjaman
                                         <input type="hidden" name="nilai_pencairan" id="nilai_pencairan" value="{{ number_format($pinjamanDetail->nilai_pencairan, '0', ',', '.') }}">
                                         Rp. <span id="nilai_pencairan_label"><?php echo (number_format($pinjamanDetail->nilai_pencairan, '0', ',', '.')); ?></span>
                                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px" onclick="updateJumlahPencairanPost()">Simpan</button>
-                                        
+
                                     </td>
                                 </tr>
                                 {{-- <tr>
@@ -129,7 +129,7 @@ Info Pencairan Pinjaman
                             </tbody>
 
                         </table>
-                        
+
                     </div>
                     <div class="pb-3 col-md-12 table-responsive">
                         <h4>Data Pinjaman</h4>
@@ -177,10 +177,10 @@ Info Pencairan Pinjaman
                                 {{-- <tr>
                                     <td colspan="3" class="text-right">JUMLAH</td>
                                     <td class="text-right">Rp.{{ number_format($saldo,0,',','.') }}</td>
-                                    <td class="text-right">Rp.{{ number_format($cicilan,0,',','.') }}</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
+                                <td class="text-right">Rp.{{ number_format($cicilan,0,',','.') }}</td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
                                 </tr> --}}
                             </tbody>
                         </table>
@@ -230,63 +230,63 @@ Info Pencairan Pinjaman
     <script type="text/javascript" src="{{ asset('js') }}/currency.js"></script>
     <script type="text/javascript" src="{{ asset('js') }}/financial.js"></script>
     <script>
-        
-    var isUpdated = false;
-    $(document).ready(function() {
-        $('#asuransi,#admin_fee').on({
-            keyup: function() {
-                let input_val = $(this).val();
-                input_val = numberToCurrency(input_val);
-                $(this).val(input_val);
-                isUpdated = true;
-                updateJumlahPencairan();
-            },
-            blur: function() {
-                let input_val = $(this).val();
-                input_val = numberToCurrency(input_val, true, true);
-                $(this).val(input_val);
-            },
-            change: function() {
-                let input_val = $(this).val();
-                input_val = numberToCurrency(input_val, true, true);
-                $(this).val(input_val);
-            }, 
+        var isUpdated = false;
+        $(document).ready(function() {
+            $('#asuransi,#admin_fee').on({
+                keyup: function() {
+                    let input_val = $(this).val();
+                    input_val = numberToCurrency(input_val);
+                    $(this).val(input_val);
+                    isUpdated = true;
+                    updateJumlahPencairan();
+                },
+                blur: function() {
+                    let input_val = $(this).val();
+                    input_val = numberToCurrency(input_val, true, true);
+                    $(this).val(input_val);
+                },
+                change: function() {
+                    let input_val = $(this).val();
+                    input_val = numberToCurrency(input_val, true, true);
+                    $(this).val(input_val);
+                },
+            });
+
+            function updateJumlahPencairan() {
+                const admin_fee_new = parseInt($('#admin_fee').val().replaceAll('.', ''));
+                const asuransi_new = parseInt($('#asuransi').val().replaceAll('.', ''));
+
+                const dana_mengendap = parseInt($('#dana_mengendap').val().replaceAll('.', ''));
+                const jml_pinjaman = parseInt($('#jml_pinjaman').val().replaceAll('.', ''));
+
+                $("input[name='admin_fee_new']").val(admin_fee_new);
+                $("input[name='asuransi_new']").val(asuransi_new);
+                $("input[name='dana_mengendap_new']").val(dana_mengendap);
+                nilai_pencairan_new = jml_pinjaman - (admin_fee_new + asuransi_new + dana_mengendap)
+
+                $("input[name='nilai_pencairan']").val(nilai_pencairan_new);
+                $("input[name='nilai_pencairan_new']").val(nilai_pencairan_new);
+                $('#nilai_pencairan_label').text(numberToCurrency(nilai_pencairan_new))
+
+            }
+
         });
 
-        function updateJumlahPencairan(){
-            const admin_fee_new = parseInt($('#admin_fee').val().replaceAll('.',''));
-            const asuransi_new = parseInt($('#asuransi').val().replaceAll('.',''));
+        function updateJumlahPencairanPost() {
 
-            const dana_mengendap = parseInt($('#dana_mengendap').val().replaceAll('.',''));
-            const jml_pinjaman = parseInt($('#jml_pinjaman').val().replaceAll('.',''));
-            
-            $("input[name='admin_fee_new']").val(admin_fee_new);
-            $("input[name='asuransi_new']").val(asuransi_new);
-            $("input[name='dana_mengendap_new']").val(dana_mengendap);
-            nilai_pencairan_new = jml_pinjaman - (admin_fee_new + asuransi_new + dana_mengendap)
-            
-            $("input[name='nilai_pencairan']").val(nilai_pencairan_new);
-            $("input[name='nilai_pencairan_new']").val(nilai_pencairan_new);
-            $('#nilai_pencairan_label').text(numberToCurrency(nilai_pencairan_new))
-            
-        }
-        
-    });
-
-        function updateJumlahPencairanPost(){
-            
-            if($("input[name='nilai_pencairan_new']").val() < 0){
+            if ($("input[name='nilai_pencairan_new']").val() < 0) {
                 alert('Jumlah pencairan tidak boleh minus atau kurang dari 0')
-                return ;
+                return;
             }
-            if(isUpdated){
+            if (isUpdated) {
                 $('#update-form').submit();
-            }else {
+            } else {
                 alert("Silahkan perbarui biaya administrasi atau asuransi terlebih dahulu")
             }
         }
-        function cairkan(id,status) {
-            if(status == 1){
+
+        function cairkan(id, status) {
+            if (status == 1) {
                 var url = "{{ route('data.pencairan.approve') }}";
                 $('#aproval-form').attr('action', url);
                 $("input[name='id_pinjaman']").val(id);
@@ -306,7 +306,7 @@ Info Pencairan Pinjaman
                             $('#aproval-form').submit();
                         }
                     });
-            }else {
+            } else {
                 alert("Pinjaman sudah dicairkan")
             }
         };

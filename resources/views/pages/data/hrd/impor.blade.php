@@ -8,14 +8,12 @@ impor
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Tambah Data Impor</h4>
+            <h4 class="mb-sm-0 font-size-18">Form Data Potongan HRD</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Data</a></li>
-                    <li class="breadcrumb-item">SHU</li>
-                    <li class="breadcrumb-item active">Tambah</li>
-
+                    <li class="breadcrumb-item">Potongan HRD</li>
                 </ol>
             </div>
 
@@ -27,76 +25,31 @@ impor
         <div class="card">
             <div class="card-header">
                 <div class="row">
-
-                    <div class="col-md-6">
-                        <h4 class="card-title">Form Tambah Data SHU</h4>
-                        <p class="card-title-desc">Form untuk menambah data SHU</code>.</p>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <a href="{{ route('data.shu.index') }}" class="btn btn-info btn-sm" style="float: right"><i class="fa fa-chevron-left"></i> Kembali</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 @include('includes.alert')
-                <form action="{{ route('data.shu.store') }}" method="POST" id="form-tambah" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-6">
-                            @csrf
-                            {{-- <div class="row mb-3">
-                                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tahun<small
-                                            class="text-danger">*</small></label>
-                                    <div class="col-sm-7">
-                                        <select class="form-control select2" style="width: 100%;" name="tahun"
-                                            id="tahun">
-                                            @php
-                                                for ($i = 1; $i <= 10; $i++) {
-                                                    $it = date('Y') - 10 + $i;
-                                                    echo "<option value=\"" . $it . "\"";
-                                                    if ($it == $thn) {
-                                                        echo ' selected';
-                                                    }
-                                                    echo '>' . $it . '</option>';
-                                                }
-                                            @endphp
-                                        </select>
-                                    </div>
-                                </div> --}}
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Upload File
-                                    Alokasi SHU<small class="text-danger">*</small>
-                                </label>
-                                {{-- <div class="col-sm-7">
-                                        <input type="text" name="alokasi_shu" class="form-control" id="alokasi_shu"
-                                            placeholder="Jumlah Alokasi SHU" required
-                                            data-parsley-required-message="Jumlah Alokasi SHU Harus Diisi"
-                                            value="{{ old('alokasi_shu') }}" onkeyup="pageSimulasi(0,0)">
-                            </div> --}}
-                            <div class="col-sm-7">
-                                <input type="file" class="form-control" name="file" id="file" placeholder="Silahkan Pilih File" accept=".xls, .xlsx">
-                                <button type="submit" class="btn mt-3 btn-primary waves-effect waves-light">Import</button>
-                                <div class="form-group mt-4">
-                                    <h6 class="card-title">Unduh Contoh File</h6>
-                                    <a href="{{ asset('file/contoh-alokasi-shu.xlsx') }}" class="text-success"><i class="fa fa-download"></i> Unduh</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- <div class="pb-3 col-md-12">
-                                <hr>
-                                <div id="pages-simulasi"></div>
-                            </div> --}}
+                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th class="text-center">No Rekening</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Total Potongan</th>
+                            <th class="text-center">Potongan Koperasi</th>
+                            <th class="text-center">Potongan Simpas</th>
+                            <th class="text-center">Potongan DKM</th>
+                            <th class="text-center">Sisa Potongan</th>
+                            <th class="text-center">Potongan Pokok</th>
+                            <th class="text-center">Potongan Wajib</th>
+                            <th class="text-center">Status</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-
-            {{-- <hr>
-                        <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <button type="submit" class="btn btn-primary btn-sm w-md"><i class="fa fa-save"></i> Simpan
-                                    Data</button>
-                            </div>
-                        </div> --}}
-            </form>
         </div>
     </div>
 </div>

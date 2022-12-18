@@ -155,7 +155,7 @@
     <ul class="sub-menu {{ request()->is('*data/hrd*') ? 'mm-collapse mm-show' : '' }}" aria-expanded="true">
         <li {{ request()->is('*data/hrd/imporHRD*') ? 'mm-active' : '' }}>
             <a href="{{ route('data.hrd.imporHRD') }}" {{ request()->is('*data/hrd/imporHRD*') ? 'active' : '' }}>
-                <span data-key="t-calendar">Impor</span>
+                <span data-key="t-calendar">Info</span>
             </a>
         </li>
     </ul>

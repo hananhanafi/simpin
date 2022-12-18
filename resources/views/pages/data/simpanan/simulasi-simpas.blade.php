@@ -2,7 +2,7 @@
     <div class="col-md-10 text-right">
         <a href="javascript:PlafonSimulasi('{{ $request->no_anggota }}','{{ $request->saldo }}','{{ $request->bulan }}','{{ $request->totalAngsuran }}' )" class=" btn btn-success"><i class="fa fa-download"></i> Plafon SIMPAS </a>
     </div>
-    <div class="col-md-14 text-right">
+    <div class="col-md-2 text-right">
         <a href="javascript:unduhSimulasi('{{ $request->produk_id }}','{{ $request->bunga }}','{{ $request->bulan }}','{{ $request->saldo }}','{{ $request->bunga_efektif }}')" class="btn btn-success"><i class="fa fa-download"></i> Unduh Hasil Simulasi</a>
     </div>
 
