@@ -20,9 +20,10 @@
                 <tr>
                     <th class="text-center">#</th>
                     <th class="text-center">Akhir</th>
-                    <th class="text-center">Tabungan Per Bulan</th>
+                    <th class="text-center">Saldo Awal</th>
+                    <th class="text-center">Angsuran</th>
                     <th class="text-center">Bunga ({{ $bunga }}%)</th>
-                    <th class="text-center">Saldo</th>
+                    <th class="text-center">Saldo Akhir</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,16 +40,19 @@
                 $tabunganEfektif = $getTabungan['tabunganEfektif'];
                 $angsuran = $getTabungan['angsuran'];
                 $saldoPerBulan = $tabPerBulan;
+                $bungaPerBulan = 0;
                 @endphp
-                @for ($i = 1; $i <= $bulan + 1; $i++) @php if ($i> 1) {
-                    $bungaPerBulan = ($bunga * $saldoPerBulan) / 100 / 12;
-                    }
-                    @endphp
+                @for ($i = 1; $i <= $bulan; $i++) 
                     <tr>
                         <td class="text-center">{{ $i }}</td>
                         <td class="text-center">
                             <input type="hidden" name="simulasi[simpas][blnThn][{{ $i }}]" value="{{ $rangeBulan[0][$i]['bulan'] }}">
                             {{ isset($rangeBulan[0][$i]['bulan']) ? $rangeBulan[0][$i]['bulan'] : '-' }}
+                        </td>
+                        
+                        <td class="text-center">
+                            <input type="hidden" name="simulasi[simpas][saldoAwal][{{ $i }}]" value="{{ $totaltabPerBulan }}">
+                            Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}
                         </td>
                         <td class="text-center">
                             @if ($i == $bulan + 1)
@@ -61,30 +65,60 @@
                             Rp. {{ number_format($tabPerBulan, 0, ',', '.') }}
                             @endif
                         </td>
+                        @php 
+                        if ($i> 1) {
+                            // $totaltabPerBulan += $tabPerBulan + $bungaPerBulan;
+                            $totaltabPerBulan += $tabPerBulan + $bungaPerBulan;
+                            $tempBungaPerbulan = $bungaPerBulan;
+                            $bungaPerBulan = ($bunga * $totaltabPerBulan) / 100 / 12;
+                            $totaltabPerBulan = $totaltabPerBulan - $tempBungaPerbulan + $bungaPerBulan;
+                            
+                        }else {
+                            // $totaltabPerBulan += $tabPerBulan;
+                            $bungaPerBulan = ($bunga * $tabPerBulan) / 100 / 12;
+                            $totaltabPerBulan = $tabPerBulan + $bungaPerBulan;
+                            $bungaPerBulan = ($bunga * $totaltabPerBulan) / 100 / 12;
+                            $totaltabPerBulan = $tabPerBulan + $bungaPerBulan;
+                        }
+                        
+                        @endphp
                         <td class="text-center">
-                            @if ($i == 1)
-                            <input type="hidden" name="simulasi[simpas][bungaHarian][{{ $i }}]" value="0">
+                            {{-- @if ($i == 1)
+                            <input type="hidden" name="simulasi[simpas][bungaHarian][{{ $i }}]" value="0"> --}}
                             {{-- @elseif ($i==($bulan+1))
                                     <input type="hidden" name="simulasi[simpas][bungaHarian][{{ $i }}]" value="0">
                             Rp. {{ number_format(($saldo - $saldoPerBulan),0,',','.') }} --}}
-                            @else
+                            {{-- @else
                             <input type="hidden" name="simulasi[simpas][bungaHarian][{{ $i }}]" value="{{ $bungaPerBulan }}">
                             Rp. {{ number_format($bungaPerBulan, 0, ',', '.') }}
-                            @endif
+                            @endif --}}
+                            <input type="hidden" name="simulasi[simpas][bungaHarian][{{ $i }}]" value="{{ $bungaPerBulan }}">
+                            Rp. {{ number_format($bungaPerBulan, 0, ',', '.') }}
                         </td>
                         <td class="text-center">
                             @php
-                            if ($i != 1) {
+                            // if ($i != 1) {
+                            //     if ($i == $bulan + 1) {
+                            //         $totalBunga += $saldo - $saldoPerBulan;
+                            //         $saldoPerBulan = $saldo;
+                            //     } else {
+                            //         $saldoPerBulan += $tabPerBulan + $bungaPerBulan;
+                            //         $totalBunga += $bungaPerBulan;
+                            //     }
+                            // }
+
                             if ($i == $bulan + 1) {
-                            $totalBunga += $saldo - $saldoPerBulan;
-                            $saldoPerBulan = $saldo;
+                                $totalBunga += $saldo - $saldoPerBulan;
+                                // $saldoPerBulan = $saldo;
                             } else {
-                            $saldoPerBulan += $tabPerBulan + $bungaPerBulan;
-                            $totalBunga += $bungaPerBulan;
+                                // $saldoPerBulan += $tabPerBulan + $bungaPerBulan;
+                                $totalBunga += $bungaPerBulan;
                             }
-                            }
-                            if ($i < $bulan + 1) { $totaltabPerBulan +=$tabPerBulan; } @endphp <input type="hidden" name="simulasi[simpas][saldoPerBulan][{{ $i }}]" value="{{ $saldoPerBulan }}">
-                                Rp. {{ number_format($saldoPerBulan, 0, ',', '.') }}
+                            // if ($i < $bulan + 1) { $totaltabPerBulan +=$tabPerBulan; } 
+                            
+                            @endphp 
+                            <input type="hidden" name="simulasi[simpas][totaltabPerBulan][{{ $i }}]" value="{{ $totaltabPerBulan }}">
+                                Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}
                         </td>
                     </tr>
                     @endfor
@@ -94,11 +128,11 @@
                         <th class="text-center"></th>
                         <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
                         <th class="text-center">Rp. {{ number_format($totalBunga, 0, ',', '.') }}</th>
-                        <th class="text-center">Rp. {{ number_format($saldoPerBulan, 0, ',', '.') }}</th>
+                        <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
                         <input type="hidden" name="simulasi[simpas][totalTabungan]" value="{{ $totaltabPerBulan }}">
                         <input type="hidden" name="simulasi[simpas][totalBunga]" value="{{ $totalBunga }}">
-                        <input type="hidden" name="simulasi[simpas][saldoTotal]" value="{{ $saldoPerBulan }}">
-                        <input type="hidden" name="simulasi[simpas][saldoPembulatan]" value="{{ FunctionHelper::roundUpToAny($saldoPerBulan) }}">
+                        <input type="hidden" name="simulasi[simpas][saldoTotal]" value="{{ $totaltabPerBulan }}">
+                        <input type="hidden" name="simulasi[simpas][saldoPembulatan]" value="{{ FunctionHelper::roundUpToAny($totaltabPerBulan) }}">
                     </tr>
                     {{-- <tr>
                         <th class="text-right" colspan="4">Dibulatkan >>>>>>> </th>

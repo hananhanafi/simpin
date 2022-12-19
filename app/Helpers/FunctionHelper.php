@@ -210,10 +210,25 @@ class FunctionHelper
         return $i * $p * pow((1 + $i), $n) / (1 - pow((1 + $i), $n));
     }
 
+    static function PMTnew($rate, $nper, $pv, $fv, $type)
+    {
+        return (-$fv - $pv * pow(1 + $rate, $nper)) /
+        (1 + $rate * $type) /
+        ((pow(1 + $rate, $nper) - 1) / $rate);
+    }
+
+    static function ceiling($number, $significance) {
+    if ($significance != null) {
+        return (is_numeric($number) && is_numeric($significance) ) ? (ceil($number / $significance) * $significance) : $number;
+    } else {
+        return $number;
+    }}
+
     static function bungaEfektif($bungaPA, $jumlahBulan, $jumlahPinjaman)
     {
         $bungaPA    = $bungaPA / 12;
-        $angs       = abs(self::PMT2($bungaPA, $jumlahBulan, $jumlahPinjaman));
+        // $angs       = abs(self::PMT2($bungaPA, $jumlahBulan, $jumlahPinjaman));
+        $angs       = self::ceiling(abs(self::PMTnew($bungaPA, $jumlahBulan, 0, $jumlahPinjaman, 1)),100);
         $efektif    = ((($angs * $jumlahBulan) - $jumlahPinjaman) * 12) / ($jumlahBulan * $jumlahPinjaman);
         return $efektif * 100;
         // return $bungaPA;
@@ -222,7 +237,8 @@ class FunctionHelper
     static function bungaEfektifRate($bungaPA, $jumlahBulan, $jumlahPinjaman)
     {
         $bungaPA    = $bungaPA / 12;
-        $angs       = abs(self::PMT2($bungaPA, $jumlahBulan, $jumlahPinjaman));
+        // $angs       = abs(self::PMT2($bungaPA, $jumlahBulan, $jumlahPinjaman));
+        $angs       = self::ceiling(abs(self::PMTnew($bungaPA, $jumlahBulan, 0, $jumlahPinjaman, 1)),100);
         $efektif    = ((($angs * $jumlahBulan) - $jumlahPinjaman) * 12) / ($jumlahBulan * $jumlahPinjaman);
         return $efektif * 100;
         // return $bungaPA;
@@ -238,8 +254,10 @@ class FunctionHelper
         //     $bungaEfektif2 = $bungaEfektif/2;
 
         $tabunganEfektif    = $jumlahPinjaman / (100 + $bungaEfektif2) * 100;
-        $tabunganPerBulan   = $tabunganEfektif / $jumlahBln;
-        $angsuran           = abs(self::PMT2(($bungaPA / 100) / 12, $jumlahBln, $jumlahPinjaman));
+        // $tabunganPerBulan   = $tabunganEfektif / $jumlahBln;
+        // $angsuran           = abs(self::PMT2(($bungaPA / 100) / 12, $jumlahBln, $jumlahPinjaman));
+        $angsuran           = self::ceiling(abs(self::PMTnew(($bungaPA / 100) / 12, $jumlahBln, 0, $jumlahPinjaman, 1)),100);
+        $tabunganPerBulan   = $angsuran;
 
         return [
             'tabunganEfektif'   => $tabunganEfektif,
