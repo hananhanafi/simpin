@@ -97,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pinjaman', 'DatatableController@pinjaman')->name('pinjaman');
         Route::get('pencairan', 'DatatableController@pencairan')->name('pencairan');
         Route::get('pelunasan', 'DatatableController@pelunasan')->name('pelunasan');
+        Route::get('potonganHRD', 'DatatableController@potonganHRD')->name('potonganHRD');
         Route::get('shu', 'DatatableController@shu')->name('shu');
         Route::get('pengguna', 'DatatableController@pengguna')->name('pengguna');
         Route::get('anggota', 'DatatableController@anggota')->name('anggota');
@@ -172,3 +173,4 @@ Route::get('/export/master-departemen', 'Exports@master_departemen')->name('expo
 Route::get('/export/master-profit', 'Exports@master_profit')->name('export.master_profit');
 Route::get('/export/master-sumber', 'Exports@master_sumber')->name('export.master_sumber');
 Route::get('/export/sertifikat-ssb/{id}', 'Exports@sertifikat_ssb')->name('export.sertifikat_ssb');
+Route::get('/export/potongan-hrd', 'Exports@potongan_hrd')->name('export.potongan_hrd');

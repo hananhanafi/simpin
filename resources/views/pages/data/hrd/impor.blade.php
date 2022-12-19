@@ -23,6 +23,13 @@ impor
 <div class="row">
     <div class="col-12">
         <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="{{ route('export.potongan_hrd') }}" class="btn btn-info btn-sm" style="float: right"><i class="fa fa-file-excel"></i> Cetak Excel</a>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 @include('includes.alert')
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
@@ -82,46 +89,83 @@ impor
 <script type="text/javascript" src="{{ asset('js') }}/financial.js"></script>
 <script type="text/javascript" charset="utf8" src="{{ asset('assets') }}/sweetalert/sweetalert.min.js"></script>
 
+<!-- Required datatable js -->
+<script src="{{ asset('assets') }}/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('assets') }}/libs/jszip/jszip.min.js"></script>
+<script src="{{ asset('assets') }}/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="{{ asset('assets') }}/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="{{ asset('assets') }}/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('assets') }}/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{ asset('js') }}/parsley.min.js"></script>
+
 <script>
-    $('#alokasi_shu').on({
-        keyup: function() {
-            let input_val = $(this).val();
-            input_val = numberToCurrency(input_val);
-            $(this).val(input_val);
+    var dt = $('#datatable').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "{{ route('datatable.potonganHRD') }}",
+            "dataType": "json",
         },
-        blur: function() {
-            let input_val = $(this).val();
-            input_val = numberToCurrency(input_val, true, true);
-            $(this).val(input_val);
-        }
+        "columns": [{
+                "data": 'DT_RowIndex'
+            },
+            {
+                "data": "kode_profit",
+                // name: 'profits.kode',
+            },
+            {
+                "data": "no_anggota"
+            },
+            {
+                "data": "nama",
+                // name: 'anggota.nama',
+            },
+            {
+                "data": "total_potongan"
+            },
+            {
+                "data": "potongan_pokok"
+            },
+            {
+                "data": "potongan_wajib"
+            },
+            {
+                "data": "potongan_simpas"
+            },
+            {
+                "data": "potongan_koperasi"
+            },
+            {
+                "data": "potongan_dkm"
+            },
+            {
+                "data": "sisa_potongan"
+            },
+        ],
+        "columnDefs": [{
+                "className": 'text-center',
+                "targets": [0,1,2,3,4,5,6,7,8,9,10]
+            },
+            {
+                "searchable": false,
+                "targets": [0,1,2,4,5,6,7,8,9,10]
+            },
+            {
+                "orderable": false,
+                "targets": [0]
+            }
+        ],
     });
-    pageSimulasi();
 
-    function pageSimulasi() {
-        var alokasi_shu = $('#alokasi_shu').val();
-        var tahun = $('#tahun').val();
-
-        var pengurus_persen = $('#pengurus_persen').val()
-        var pengawas_persen = $('#pengawas_persen').val()
-        var karyawan_persen = $('#karyawan_persen').val()
-        var pendidikan_persen = $('#pendidikan_persen').val()
-        var shu_pengurus_persen = $('input[name=shu_pengurus_persen]').val()
-
-        var shu_anggota_persen = $('input[name=shu_anggota_persen]').val()
-        var anggota_usipa = $('#anggota_usipa').val()
-        var anggota_angkutan = $('#anggota_angkutan').val()
-        var anggota_s_toko = $('#anggota_s_toko').val()
-        var anggota_toko = $('#anggota_toko').val()
-        var anggota_rat_simpan = $('#anggota_rat_simpan').val()
-
-        $('#pages-simulasi').load("{{ route('ajax.shu.simulasi') }}?tahun=" + tahun + '&alokasi_shu=' + alokasi_shu +
-            '&shu_anggota_persen=' + shu_anggota_persen + '&anggota_usipa=' + anggota_usipa + '&anggota_angkutan=' +
-            anggota_angkutan + '&anggota_s_toko=' + anggota_s_toko + '&anggota_toko=' + anggota_toko +
-            '&anggota_rat_simpan=' + anggota_rat_simpan +
-            // pengurus
-            '&shu_pengurus_persen=' + shu_pengurus_persen +
-            '&pengurus_persen=' + pengurus_persen + '&pengawas_persen=' + pengawas_persen + '&karyawan_persen=' +
-            karyawan_persen + '&pendidikan_persen=' + pendidikan_persen);
-    }
 </script>
 @endsection

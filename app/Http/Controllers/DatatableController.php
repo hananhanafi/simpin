@@ -746,6 +746,50 @@ class DatatableController extends Controller
             ->toJson();
     }
 
+    public function potonganHRD(Request $request)
+    {
+        $anggota = Anggota::orderBy('no_anggota');
+        
+        return DataTables::of($anggota)
+            ->addIndexColumn()
+            ->editColumn('no_anggota', function ($row) {
+                return '<b>' . $row->no_anggota . '</b>';
+            })
+            ->editColumn('nama', function ($row) {
+                return '<b>' . $row->nama . '</b>';
+            })
+            ->editColumn('kode_profit', function ($row) {
+                if ($row->profits===NULL){
+                    return '<b>' . '-' . '</b>';
+                }else {
+                    return '<b>' . $row->profits->kode . '</b>';
+                }
+            })
+            ->editColumn('total_potongan', function ($row) {
+                return '<b>' . 'total_potongan' . '</b>';
+            })
+            ->editColumn('potongan_pokok', function ($row) {
+                return '<b>' . 'potongan_pokok' . '</b>';
+            })
+            ->editColumn('potongan_wajib', function ($row) {
+                return '<b>' . 'potongan_wajib' . '</b>';
+            })
+            ->editColumn('potongan_simpas', function ($row) {
+                return '<b>' . 'potongan_simpas' . '</b>';
+            })
+            ->editColumn('potongan_koperasi', function ($row) {
+                return '<b>' . 'potongan_koperasi' . '</b>';
+            })
+            ->editColumn('potongan_dkm', function ($row) {
+                return '<b>' . 'potongan_dkm' . '</b>';
+            })
+            ->editColumn('sisa_potongan', function ($row) {
+                return '<b>' . 'sisa_potongan' . '</b>';
+            })
+            ->rawColumns(['kode_profit', 'no_anggota', 'nama', 'total_potongan', 'potongan_pokok', 'potongan_wajib', 'potongan_simpas', 'potongan_koperasi', 'potongan_dkm', 'sisa_potongan'])
+            ->toJson();
+    }
+
     public function shu(Request $request)
     {
 

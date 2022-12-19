@@ -19,6 +19,8 @@ use App\Models\Master\Departemen;
 use App\Models\Master\ProfitCenter;
 use App\Models\Master\SumberDana;
 
+use App\Models\Data\Anggota;
+
 use App\Models\Data\Simpanan;
 
 
@@ -122,6 +124,37 @@ class Exports extends Controller
             $exportData[] = $collect;
         }
         return  Excel::download(new ExportArray($exportData),'master_profit_center.xlsx');
+    }
+
+
+    public function potongan_hrd()
+    {
+        $anggota = new Anggota;
+        $anggota = $anggota->get();
+        $exportData = array();
+        $exportData[] = ['','','Potongan HRD'];
+        $exportData[] = [''];
+        $exportData[] = ['NO','KODE PC','KODPEG','NAMA','TOTAL POTONGAN', 'POTONGAN POKOK', 'POTONGAN WAJIB', 'POTONGAN SIMPAS', 'POTONGAN KOPERASI', 'POTONGAN DKM', 'SISA POTONGAN'];
+        $no=1;
+        foreach($anggota as $a){
+            $collect[0] = $no++;
+            if($a->profits===null){
+                $collect[1] = '-';
+            }else{
+                $collect[1] = $a->profits->kode;
+            }
+            $collect[2] = $a->no_anggota;
+            $collect[3] = $a->nama;
+            $collect[4] = 'total_potongan';
+            $collect[5] = 'simpanan_pokok';
+            $collect[6] = 'simpanan_wajib';
+            $collect[7] = 'simpanan_simpas';
+            $collect[8] = 'simpanan_koperasi';
+            $collect[9] = 'simpanan_dkm';
+            $collect[10] = 'sisa_potongan';
+            $exportData[] = $collect;
+        }
+        return  Excel::download(new ExportArray($exportData),'potongan_hrd.xlsx');
     }
 
     public function master_sumber()

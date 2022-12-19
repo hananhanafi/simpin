@@ -141,7 +141,7 @@ Pelunasan Pinjaman
         ],
         "columnDefs": [{
                 "className": 'text-center',
-                "targets": [0]
+                "targets": [0,1,2,3,4,5]
             },
             {
                 "searchable": false,
