@@ -167,6 +167,7 @@ Data Simpanan
                 $('#id-simpanan').val(id)
                 $('#no-anggota').val(noanggota)
                 $('#nama-anggota').val(nama)
+                $('#id_simpanan').val(id)
                 $('#modal-tutup').modal('show')
             }
         });
@@ -202,6 +203,7 @@ Data Simpanan
         <div class="modal-content">
             <form action="{{ route('data.simpanan.penutupan') }}" method="POST">
                 @csrf
+                <input type="hidden" class="form-control" name="id_simpanan" id="id-simpanan" >
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">Form Penutupan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -210,7 +212,6 @@ Data Simpanan
                     <div class="form-group mb-2">
                         <h6 class="card-title">Tanggal Penutupan</h6>
                         <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ date('Y-m-d') }}">
-                        {{-- <input type="text" class="form-control" name="id_simpanan" id="id-simpanan" > --}}
                     </div>
                     <div class="form-group mb-2">
                         <h6 class="card-title">Nomor Rekening</h6>
@@ -238,11 +239,11 @@ Data Simpanan
                     </div>
                     <div class="form-group mb-2">
                         <h6 class="card-title">Pinalti</h6>
-                        <input type="text" class="form-control" name="pinalti" id="pinalti">
+                        <input type="number" class="form-control" name="pinalti" id="pinalti">
                     </div>
                     <div class="form-group mb-2">
                         <h6 class="card-title">PPH</h6>
-                        <input type="text" class="form-control" name="pph" id="pph">
+                        <input type="number" class="form-control" name="pph" id="pph">
                     </div>
                     <div class="form-group mb-2">
                         <h6 class="card-title">Alasan Penutupan</h6>

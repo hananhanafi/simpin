@@ -32,7 +32,9 @@
                         </div>
                         <div class="col-md-2">
                             <!--<button id="generatePDF" class="btn btn-success">Cetak PDF</button>-->
-                            <a href="http://mafiska.net/dev/kopkarmi/simpin/export/sertifikat-ssb/{{$simpanan->id}}" class="btn btn-info btn-sm" style="float: right;margin:0 2px"><i class="fa fa-file-pdf"></i> Cetak PDF</a>
+                            {{-- <a href="http://mafiska.net/dev/kopkarmi/simpin/export/sertifikat-ssb/{{$simpanan->id}}" class="btn btn-info btn-sm" style="float: right;margin:0 2px"><i class="fa fa-file-pdf"></i> Cetak PDF</a> --}}
+                            <a href="{{ route('export.sertifikat_ssb', $simpanan->id) }}" class="btn btn-info btn-sm" style="float: right;margin:0 2px"><i class="fa fa-file-pdf"></i> Cetak PDF</a>
+                            {{-- <a href="http://localhost:8000/export/sertifikat-ssb/{{$simpanan->id}}" class="btn btn-info btn-sm" style="float: right;margin:0 2px"><i class="fa fa-file-pdf"></i> Cetak PDF</a> --}}
                         </div>
 
                     </div>
@@ -94,7 +96,8 @@
                                     <tr>
                                         <td>Jenis Simpanan</td>
                                         <td>:</td>
-                                        <td> {{ strtoupper($simpanan->detail[0]->jenis) }}</td>
+                                        {{-- <td> {{ strtoupper($simpanan->detail[0]->jenis) }}</td> --}}
+                                        <td> {{ strtoupper($simpanan->produk->nama_produk) }}</td>
                                     </tr>
                                     <tr>
                                         <td>Tanggal Penempatan</td>

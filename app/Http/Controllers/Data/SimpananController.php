@@ -198,6 +198,7 @@ class SimpananController extends Controller
                 $simpanan->delete_note      = $request->keterangan;
                 $simpanan->update_date      = date('Y-m-d H:i:s');
                 $simpanan->update_by        = Auth::user()->id;
+                $simpanan->saldo_akhir        = $request->saldo - ($request->pinalti+$request->pph);
                 $simpanan->save();
 
                 $anggota = Anggota::where('no_anggota', $request->no_anggota)->first();
@@ -210,7 +211,8 @@ class SimpananController extends Controller
                 $tutup->nama            = $request->nama;
                 $tutup->jenis_simpanan  = $request->jenis_simpanan;
                 $tutup->tgl_pembukaan   = $request->tgl_pembukaan;
-                $tutup->saldo           = $request->saldo;
+                // $tutup->saldo           = $request->saldo;
+                $simpanan->saldo        = $request->saldo - ($request->pinalti+$request->pph);
                 $tutup->pinalti         = $request->pinalti;
                 $tutup->pph             = $request->pph;
                 $tutup->keterangan      = $request->keterangan;
@@ -271,6 +273,8 @@ class SimpananController extends Controller
     public function sertifPdf($id)
     {
         $simpanan     = Simpanan::where('id', $id)->with(['produk', 'anggota', 'detail', 'detailsimpas'])->first();
+        // $produk     = Produk::where('id', $id)->with(['produk', 'anggota', 'detail', 'detailsimpas'])->first();
+        // dd($simpanan->detail);
         return view('pages.data.simpanan.sertif-print')
             ->with('id', $id)
             ->with('simpanan', $simpanan);

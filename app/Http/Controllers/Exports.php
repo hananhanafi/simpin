@@ -145,6 +145,8 @@ class Exports extends Controller
     public function sertifikat_ssb($id)
     {
 
+        $simpanan = Simpanan::where('id', $id)->with(['produk', 'anggota', 'detail', 'detailsimpas'])->first();
+        
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
@@ -239,11 +241,14 @@ class Exports extends Controller
         $sheet->getStyle('A22:F31')->getAlignment()->setHorizontal('left');
 
         $sheet->setCellValue('A1', "SERTIFIKAT");
-        $sheet->setCellValue('A2', "Simpanan Sukarela Berjangka");
+        // $sheet->setCellValue('A2', "Simpanan Sukarela Berjangka");
+        $sheet->setCellValue('A2',  $simpanan->produk->nama_produk);
+       
         $sheet->setCellValue('A3', "Copy Ke 1");
 
         $sheet->setCellValue('A18', "TANDA TANGAN");
-        $sheet->setCellValue('A19', "Simpanan Sukarela Berjangka");
+        // $sheet->setCellValue('A19', "Simpanan Sukarela Berjangka");
+        $sheet->setCellValue('A19', $simpanan->produk->nama_produk);
         $sheet->setCellValue('A20', "Copy Ke 2");
 
         $sheet->setCellValue('A34', "TTD 1");
@@ -298,8 +303,6 @@ class Exports extends Controller
         $sheet->setCellValue('A15', "Koperasi Karyawan Mulia Industri");
         $sheet->setCellValue('A16', "22 Desember 2022");
 
-        $simpanan = Simpanan::where('id', $id)->with(['produk', 'anggota', 'detail', 'detailsimpas'])->first();
-
         $created = $simpanan->created_at;
         $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months -1 day';
         $tempo = date('d M Y', strtotime($add_month, strtotime($created)));
@@ -311,7 +314,8 @@ class Exports extends Controller
         $word_5=  strtoupper(Terbilang::make($simpanan->saldo_akhir, ' rupiah')) ;
         $word_6 = $simpanan->jangka_waktu;
         $word_7 = $simpanan->jumlah_bunga .'%';
-        $word_8 = strtoupper($simpanan->detail[0]->jenis);
+        // $word_8 = strtoupper($simpanan->detail[0]->jenis);
+        $word_8 = strtoupper($simpanan->produk->nama_produk);
         $word_9 = date('d M Y', strtotime($simpanan->created_at));
         $word_10 = $tempo;
 
