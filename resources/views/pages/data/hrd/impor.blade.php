@@ -29,8 +29,8 @@ impor
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">No Rekening</th>
-                            <th class="text-center">NIK</th>
+                            <th class="text-center">KODE PC</th>
+                            <th class="text-center">KDPEG</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Total Potongan</th>
                             <th class="text-center">Potongan Pokok</th>
@@ -39,7 +39,6 @@ impor
                             <th class="text-center">Potongan Koperasi</th>
                             <th class="text-center">Potongan DKM</th>
                             <th class="text-center">Sisa Potongan</th>
-                            <th class="text-center">Status</th>
                         </tr>
                     </thead>
                 </table>
