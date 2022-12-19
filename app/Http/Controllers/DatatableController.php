@@ -663,6 +663,88 @@ class DatatableController extends Controller
             ->toJson();
     }
 
+    public function pelunasan(Request $request)
+    {
+        $pelunasan = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.nilai_pencairan,t_pembiayaan.nilai_pelunasan,t_pembiayaan.jangka_waktu,t_pembiayaan.asuransi,t_pembiayaan.admin_fee,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_pembiayaan.pencairan_date,t_pembiayaan.dana_mengendap,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
+            ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
+            ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
+            ->with(['jenispinjaman', 'anggota'])
+            ->where('t_anggota.nama', '!=', '')
+            ->where('t_pembiayaan.approv_by', '=', 1)
+            ->orderBy('t_anggota.nama');
+
+        // return $pinjaman->get();
+        return DataTables::of($pelunasan)
+            ->addIndexColumn()
+            ->editColumn('no_rekening', function ($row) {
+                return '<b>' . $row->no_rekening . '</b>';
+            })
+            ->editColumn('no_anggota', function ($row) {
+                return '<b>' . $row->no_anggota . '</b>';
+            })
+            ->editColumn('nama', function ($row) {
+                return '<b>' . $row->nama . '</b>';
+            })
+            ->editColumn('nilai_pelunasan', function ($row) {
+                return '<b>Rp. ' . number_format($row->nilai_pelunasan, 0, ',', '.') . '</b>';
+            })
+            ->editColumn('jml_pinjaman', function ($row) {
+                return '<b>Rp. ' . number_format($row->jml_pinjaman, 0, ',', '.') . '</b>';
+            })
+            ->editColumn('pencairan_date', function ($row) {
+                return '<b>' . $row->pencairan_date . '</b>';
+            })
+            ->addColumn('status', function ($row) {
+                $xstatus = '';
+                if ($row->status == 0) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-secondary'>Draft</span>";
+                } elseif ($row->status == 1) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Aktif</span>";
+                } elseif ($row->status == 2) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-info'>Pencairan</span>";
+                } elseif ($row->status == 3) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Pelunasan</span>";
+                } elseif ($row->status == 4) {
+                    $xstatus = '<span class="badge font-size-13 bg-warning">Pengajuan Penutupan</span>';
+                } elseif ($row->status == 5) {
+                    $xstatus = "<span class='btn btn-sm btn-rounded btn-danger'>Tidak Aktif</span>";
+                }
+                return $xstatus;
+            })
+            ->addColumn('aksi', function ($row) use ($request) {
+                if ($request->approval) {
+                    $btn = '<div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-sm">Aksi</button>
+                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" style="">
+                                    <a class="dropdown-item dropdown-menu-end text-success" href="javascript:approve(' . $row->no_anggota . ')"><i class="fa fa-check"></i> Approve</a>
+                                    <a class="dropdown-item dropdown-menu-end text-danger" href="javascript:tolak(' . $row->no_anggota . ')"><i class="fa fa-times"></i> Tolak</a>
+                                </div>
+                            </div>';
+                } else {
+                    //button untuk proses untuk pencairan
+                    $btn = '<div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-sm">Aksi</button>
+                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" style="">
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman'=>$row->id_pinjaman, 'type'=>1]) . '">Pelunasan Sesuai Cicilan</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman'=>$row->id_pinjaman, 'type'=>2]) . '">Pelunasan Dipercepat</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman'=>$row->id_pinjaman, 'type'=>3]) . '">Pelunasan Topup</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </div>';
+                }
+                return $btn;
+            })
+            ->rawColumns(['no_rekening', 'no_anggota', 'nama', 'pencairan_date', 'jml_pinjaman', 'nilai_pelunasan', 'aksi'])
+            ->toJson();
+    }
 
     public function shu(Request $request)
     {

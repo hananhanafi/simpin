@@ -173,6 +173,7 @@ class PinjamanController extends Controller
             $newPinjaman->jml_pinjaman      = $jumlahPinjaman;
             $newPinjaman->jml_margin        = $margin;
             $newPinjaman->total_pinjaman    = $totalPinjaman;
+            $newPinjaman->sisa_hutangs    = $sisaHutang;
             $newPinjaman->jangka_waktu      = $request->jumlah_bulan;
             $newPinjaman->margin            = $request->jumlah_bunga_efektif;
             $newPinjaman->asuransi          = $asuransi;
@@ -209,6 +210,7 @@ class PinjamanController extends Controller
             }
 
             // $newPinjaman->angsuran         = $totalAngsuran;
+            $newPinjaman->angsuran        = $totalAngsuran;
             $newPinjaman->dana_mengendap        = $danaditahan;
             $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee + $danaditahan);
             $newPinjaman->nilai_pencairan   = $nilaiPencairan;

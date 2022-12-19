@@ -46,6 +46,38 @@ class AjaxController extends Controller
 
         return $result;
     }
+    
+    public function noRekening(Request $request)
+    {
+
+        if ($request->q != '') {
+            $anggota = Anggota::where('status_anggota', 1)
+                ->where('nama', 'like', "%$request->q%")
+                ->orderBy('no_anggota')
+                ->get();
+        } else {
+
+            $anggota = Anggota::where('status_anggota', 1)
+                ->orderBy('no_anggota')
+                ->get();
+        }
+
+
+        $data = [];
+        foreach ($anggota as $key => $val) {
+            $row = [];
+            $row['id'] = $val->bank_norek . '__' . $val->no_anggota;
+            $row['text'] = $val->bank_norek . ' - ' . $val->nama;
+            $data[] = $row;
+        }
+
+        $result = [
+            'results' => $data,
+            'pagination' => ['more' => false]
+        ];
+
+        return $result;
+    }
 
     public function pencairan($nomorrekening)
     {

@@ -74,6 +74,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('pencairan', 'PencairanController');
         Route::post('pencairan-approve', 'PencairanController@pencairanApprove')->name('pencairan.approve');
         Route::post('pencairan-update-jumlah-pencairan', 'PencairanController@updateJumlahPencairan')->name('pencairan.updateJumlahPencairan');
+
+        Route::resource('pelunasan', 'PelunasanController');
+        Route::get('add-pelunasan', 'PelunasanController@addPelunasan')->name('pelunasan.addPelunasan');
+        Route::post('pelunasan-cicilan', 'PelunasanController@pelunasanCicilan')->name('pelunasan.cicilan');
     });
     Route::name('laporan.')->namespace('Laporan')->prefix('laporan')->group(function () {
         Route::get('anggota', 'LaporanController@anggota')->name('anggota');
@@ -92,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('simpanan-sertif', 'DatatableController@simpanan_sertif')->name('simpanan.sertif');
         Route::get('pinjaman', 'DatatableController@pinjaman')->name('pinjaman');
         Route::get('pencairan', 'DatatableController@pencairan')->name('pencairan');
+        Route::get('pelunasan', 'DatatableController@pelunasan')->name('pelunasan');
         Route::get('shu', 'DatatableController@shu')->name('shu');
         Route::get('pengguna', 'DatatableController@pengguna')->name('pengguna');
         Route::get('anggota', 'DatatableController@anggota')->name('anggota');
@@ -122,6 +127,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::get('anggota', 'AjaxController@anggota')->name('anggota');
+        Route::get('noRekening', 'AjaxController@noRekening')->name('noRekening');
         Route::get('margin-by-produk', 'AjaxController@marginByProduk')->name('margin-by-produk');
         Route::get('simpanan-simulasi', 'AjaxController@simpananSimulasi')->name('simpanan.simulasi');
         Route::get('pinjaman-simulasi', 'AjaxController@pinjamanSimulasi')->name('pinjaman.simulasi');

@@ -43,11 +43,12 @@ Pelunasan Pinjaman
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">No Rekening</th>
+                            {{-- <th class="text-center">No Rekening</th> --}}
                             <th class="text-center">No Anggota</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">Tanggal Pelunasan</th>
-                            <th class="text-center">Jumlah Pelunasan</th>
+                            <th class="text-center">Jumlah Pinjaman</th>
+                            <th class="text-center">Pelunasan Pinjaman</th>
+                            {{-- <th class="text-center">Tanggal Pelunasan</th> --}}
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -56,33 +57,127 @@ Pelunasan Pinjaman
         </div>
     </div>
 </div>
+<form id="aproval-form" method="post">
+    @csrf
+    <input type="hidden" name="id_pinjaman" id="id_pinjaman">
+</form>
 @endsection
 
-@section('footscript')
-<link rel="stylesheet" href="{{ asset('packages/select2/dist/css/select2.css') }}">
-<script src="{{ asset('packages/select2/dist/js/select2.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js') }}/parsley.min.js"></script>
-<script type="text/javascript" src="{{ asset('js') }}/currency.js"></script>
-<script type="text/javascript" src="{{ asset('js') }}/financial.js"></script>
+@section('css')
+<!-- DataTables -->
+<link href="{{ asset('assets') }}/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets') }}/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-<script>
+<!-- Responsive datatable examples -->
+<link href="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert.css">
 
-
-</script>
 <style>
-    .parsley-errors-list li {
-        color: red !important;
-        font-style: italic;
-    }
-
-    td,
-    th {
-        font-size: 10px !important;
-        padding: 0.30rem !important;
+    td {
+        font-size: 11px !important;
     }
 
     .text-right {
         text-align: right !important;
     }
 </style>
+@endsection
+
+@section('footscript')
+<!-- Required datatable js -->
+<script src="{{ asset('assets') }}/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('assets') }}/libs/jszip/jszip.min.js"></script>
+<script src="{{ asset('assets') }}/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="{{ asset('assets') }}/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="{{ asset('assets') }}/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('assets') }}/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{ asset('js') }}/parsley.min.js"></script>
+<script>
+    var dt = $('#datatable').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "{{ route('datatable.pelunasan') }}",
+            "dataType": "json",
+        },
+        "columns": [{
+                "data": 'DT_RowIndex'
+            },
+            // {
+            //     "data": "no_rekening"
+            // },
+            // {
+            //     "data": "no_anggota"
+            // },
+            {
+                "data": "no_anggota"
+            },
+            {
+                "data": "nama",
+                name: 'anggota.nama',
+            },
+            {
+                "data": "jml_pinjaman"
+            },
+            {
+                "data": "nilai_pelunasan"
+            },
+            // {
+            //     "data": "pencairan_date"
+            // },
+            {
+                "data": "aksi"
+            },
+        ],
+        "columnDefs": [{
+                "className": 'text-center',
+                "targets": [0]
+            },
+            {
+                "searchable": false,
+                "targets": [0]
+            },
+            {
+                "orderable": false,
+                "targets": [0]
+            }
+        ],
+    });
+
+
+    function hapus(uuid) {
+        var url = "{{ route('data.pinjaman.index') }}/" + uuid;
+        $('#delete-form').attr('action', url);
+
+        swal({
+                title: "Apakah Anda Yakin !",
+                text: "Ingin Menghapus Data Ini ?.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ya, Hapus",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: false,
+                closeOnCancel: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    $('#delete-form').submit();
+                }
+            });
+    }
+</script>
+@endsection
+
+@section('modal')
 @endsection
