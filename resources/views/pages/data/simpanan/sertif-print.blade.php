@@ -188,7 +188,8 @@
                                 <tr>
                                     <td>Jenis Simpanan</td>
                                     <td>:</td>
-                                    <td> {{ strtoupper($simpanan->detail[0]->jenis) }}</td>
+                                    {{-- <td> {{ strtoupper($simpanan->detail[0]->jenis) }}</td> --}}
+                                    <td> {{ strtoupper($simpanan->produk->nama_produk) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Penempatan</td>
