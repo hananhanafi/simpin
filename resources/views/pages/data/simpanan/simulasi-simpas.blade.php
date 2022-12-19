@@ -127,8 +127,10 @@
                         <th class="text-center"></th>
                         <th class="text-center"></th>
                         <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
+                        <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
                         <th class="text-center">Rp. {{ number_format($totalBunga, 0, ',', '.') }}</th>
                         <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
+                        <input type="hidden" name="simulasi[simpas][saldoAwal]" value="{{ $totaltabPerBulan }}">
                         <input type="hidden" name="simulasi[simpas][totalTabungan]" value="{{ $totaltabPerBulan }}">
                         <input type="hidden" name="simulasi[simpas][totalBunga]" value="{{ $totalBunga }}">
                         <input type="hidden" name="simulasi[simpas][saldoTotal]" value="{{ $totaltabPerBulan }}">
