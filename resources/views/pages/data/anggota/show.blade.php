@@ -84,7 +84,7 @@ Detail Data Anggota
                                 </tr>
                                 <tr>
                                     <td width="30%">Profit Center</td>
-                                    <td width="70%"><?php echo $anggota->profit_nama; ?></td>
+                                    <td width="70%"><?php echo $anggota->profit; ?></td>
                                 </tr>
                                 <tr>
                                     <td width="30%">Status</td>
