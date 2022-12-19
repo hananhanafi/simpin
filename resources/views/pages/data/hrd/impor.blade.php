@@ -23,13 +23,6 @@ impor
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="{{ route('data.shu.index') }}" class="btn btn-info btn-sm" style="float: right"><i class="fa fa-chevron-left"></i> Kembali</a>
-                    </div>
-                </div>
-            </div>
             <div class="card-body">
                 @include('includes.alert')
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
@@ -37,14 +30,15 @@ impor
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">No Rekening</th>
+                            <th class="text-center">NIK</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Total Potongan</th>
-                            <th class="text-center">Potongan Koperasi</th>
-                            <th class="text-center">Potongan Simpas</th>
-                            <th class="text-center">Potongan DKM</th>
-                            <th class="text-center">Sisa Potongan</th>
                             <th class="text-center">Potongan Pokok</th>
                             <th class="text-center">Potongan Wajib</th>
+                            <th class="text-center">Potongan Simpas</th>
+                            <th class="text-center">Potongan Koperasi</th>
+                            <th class="text-center">Potongan DKM</th>
+                            <th class="text-center">Sisa Potongan</th>
                             <th class="text-center">Status</th>
                         </tr>
                     </thead>

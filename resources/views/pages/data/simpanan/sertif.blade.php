@@ -27,12 +27,10 @@ Cetak Sertifikat Simpanan
                 <div class="row">
 
                     <div class="col-md-6">
-                        <h4 class="card-title">List Data Simpanan</h4>
+                        <h4 class="card-title">Cetak Data Sertifikat</h4>
                         <p class="card-title-desc">Data berasal dari Sumber yang tersimpan dalam database</code>.</p>
                     </div>
-                    <div class="col-md-6">
-                        {{-- <a href="{{ route('data.simpanan.create') }}" class="btn btn-info btn-sm" style="float: right"><i class="fa fa-plus-circle"></i> Tambah Data</a> --}}
-                    </div>
+
                 </div>
             </div>
             <div class="card-body">
@@ -153,45 +151,6 @@ Cetak Sertifikat Simpanan
         ],
 
     });
-
-    function penutupan(id, nama, noanggota) {
-        $.ajax({
-            url: "{{ route('data.simpanan.index') }}/" + id + '/detail',
-            dataType: 'JSON',
-            success: function(res) {
-                $('#no-rekening').val(res.no_rekening)
-                $('#jenis_simpanan').val(res.jenis_simpanan)
-                $('#tgl_pembukaan').val(res.created_date)
-                $('#saldo').val(res.saldo_akhir)
-                $('#id-simpanan').val(id)
-                $('#no-anggota').val(noanggota)
-                $('#nama-anggota').val(nama)
-                $('#modal-tutup').modal('show')
-            }
-        });
-    }
-
-    function hapus(uuid) {
-        var url = "{{ route('data.simpanan.index ') }}/" + uuid;
-        $('#delete-form').attr('action', url);
-
-        swal({
-                title: "Apakah Anda Yakin !",
-                text: "Ingin Menghapus Data Ini ?.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ya, Hapus",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: false,
-                closeOnCancel: true
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    $('#delete-form').submit();
-                }
-            });
-    }
 </script>
 @endsection
 

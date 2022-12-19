@@ -159,6 +159,18 @@ Tambah Data Simpanan Baru
                 dataType: 'json',
                 placeholder: 'Ketik Minimal 2 Karakter',
                 minimumInputLength: 2,
+                processResults: function(data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    return {
+                        results: data.results,
+                        pagination: {
+                            more: false
+                        }
+                    };
+                },
             }
         })
         var produk_id = $('#produk_id').val();

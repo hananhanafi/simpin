@@ -432,11 +432,7 @@ class DatatableController extends Controller
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
                                     <a class="dropdown-item dropdown-menu-end" href="' . route('data.simpanan.sertif-pdf', $row->id) . '">Cetak Sertifikat</a>
-                                    <div class="dropdown-divider"></div>
-                                    ' . $tutup . '
-                                    <a class="dropdown-item dropdown-menu-end" href="javascript:hapus(\'' . $row->id . '\')">Hapus</a>
-                                </div>
-                            </div>';
+                                </div>';
                 return $btn;
             })
             ->rawColumns(['no_rekening', 'no_anggota', 'nama', 'jenis_simpanan', 'saldo_akhir', 'status', 'aksi'])
