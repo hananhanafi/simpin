@@ -256,7 +256,8 @@ class FunctionHelper
         $tabunganEfektif    = $jumlahPinjaman / (100 + $bungaEfektif2) * 100;
         // $tabunganPerBulan   = $tabunganEfektif / $jumlahBln;
         // $angsuran           = abs(self::PMT2(($bungaPA / 100) / 12, $jumlahBln, $jumlahPinjaman));
-        $angsuran           = self::ceiling(abs(self::PMTnew(($bungaPA / 100) / 12, $jumlahBln, 0, $jumlahPinjaman, 1)),100);
+        // $angsuran           = self::ceiling(abs(self::PMTnew(($bungaPA / 100) / 12, $jumlahBln, 0, $jumlahPinjaman, 1)),100);
+        $angsuran           = abs(self::PMTnew(($bungaPA / 100) / 12, $jumlahBln, 0, $jumlahPinjaman, 0));
         $tabunganPerBulan   = $angsuran;
 
         return [

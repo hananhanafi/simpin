@@ -66,20 +66,22 @@
                             @endif
                         </td>
                         @php 
-                        if ($i> 1) {
-                            // $totaltabPerBulan += $tabPerBulan + $bungaPerBulan;
-                            $totaltabPerBulan += $tabPerBulan + $bungaPerBulan;
-                            $tempBungaPerbulan = $bungaPerBulan;
-                            $bungaPerBulan = ($bunga * $totaltabPerBulan) / 100 / 12;
-                            $totaltabPerBulan = $totaltabPerBulan - $tempBungaPerbulan + $bungaPerBulan;
+                        // if ($i> 1) {
+                        //     // $totaltabPerBulan += $tabPerBulan + $bungaPerBulan;
+                        //     $totaltabPerBulan += $tabPerBulan + $bungaPerBulan;
+                        //     $tempBungaPerbulan = $bungaPerBulan;
+                        //     $bungaPerBulan = ($bunga * $totaltabPerBulan) / 100 / 12;
+                        //     $totaltabPerBulan = $totaltabPerBulan - $tempBungaPerbulan + $bungaPerBulan;
                             
-                        }else {
-                            // $totaltabPerBulan += $tabPerBulan;
-                            $bungaPerBulan = ($bunga * $tabPerBulan) / 100 / 12;
-                            $totaltabPerBulan = $tabPerBulan + $bungaPerBulan;
-                            $bungaPerBulan = ($bunga * $totaltabPerBulan) / 100 / 12;
-                            $totaltabPerBulan = $tabPerBulan + $bungaPerBulan;
-                        }
+                        // }else {
+                        //     // $totaltabPerBulan += $tabPerBulan;
+                        //     $bungaPerBulan = ($bunga * $tabPerBulan) / 100 / 12;
+                        //     $totaltabPerBulan = $tabPerBulan + $bungaPerBulan;
+                        //     $bungaPerBulan = ($bunga * $totaltabPerBulan) / 100 / 12;
+                        //     $totaltabPerBulan = $tabPerBulan + $bungaPerBulan;
+                        // }
+                        
+                        $bungaPerBulan = ($bunga * $totaltabPerBulan) / 100 / 12;
                         
                         @endphp
                         <td class="text-center">
@@ -107,14 +109,17 @@
                             //     }
                             // }
 
-                            if ($i == $bulan + 1) {
-                                $totalBunga += $saldo - $saldoPerBulan;
-                                // $saldoPerBulan = $saldo;
-                            } else {
-                                // $saldoPerBulan += $tabPerBulan + $bungaPerBulan;
-                                $totalBunga += $bungaPerBulan;
-                            }
+                            // if ($i == $bulan + 1) {
+                            //     $totalBunga += $saldo - $saldoPerBulan;
+                            //     // $saldoPerBulan = $saldo;
+                            // } else {
+                            //     // $saldoPerBulan += $tabPerBulan + $bungaPerBulan;
+                            //     $totalBunga += $bungaPerBulan;
+                            // }
                             // if ($i < $bulan + 1) { $totaltabPerBulan +=$tabPerBulan; } 
+                            
+                            $totalBunga += $bungaPerBulan;
+                            $totaltabPerBulan += $tabPerBulan + $bungaPerBulan;
                             
                             @endphp 
                             <input type="hidden" name="simulasi[simpas][totaltabPerBulan][{{ $i }}]" value="{{ $totaltabPerBulan }}">
@@ -130,7 +135,7 @@
                         <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
                         <th class="text-center">Rp. {{ number_format($totalBunga, 0, ',', '.') }}</th>
                         <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
-                        <input type="hidden" name="simulasi[simpas][saldoAwal]" value="{{ $totaltabPerBulan }}">
+                        <input type="hidden" name="simulasi[simpas][totalSaldoAwal]" value="{{ $totaltabPerBulan }}">
                         <input type="hidden" name="simulasi[simpas][totalTabungan]" value="{{ $totaltabPerBulan }}">
                         <input type="hidden" name="simulasi[simpas][totalBunga]" value="{{ $totalBunga }}">
                         <input type="hidden" name="simulasi[simpas][saldoTotal]" value="{{ $totaltabPerBulan }}">

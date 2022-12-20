@@ -26,7 +26,7 @@
         $angsuran = $getTabungan['angsuran'];
         $saldoPerBulan = $tabPerBulan;
     @endphp
-    @for ($i = 1; $i <= $bulan + 1; $i++)
+    @for ($i = 1; $i <= $bulan; $i++)
         @php
             if ($i > 1) {
                 $bungaPerBulan = ($bunga * $saldoPerBulan) / 100 / 12;
