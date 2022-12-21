@@ -18,7 +18,7 @@
     }
     @endphp
 
-    <div class="col-md-12" style="{{ $hide rollover }}">
+    <div class="col-md-12" style="{{ $hiderollover }}">
         <h4>SSB (SIMPANAN SUKARELA BERJANGKA)</h4>
         <h5>BUNGA ROLLOVER</h5>
         <table class="table table-bordered table-striped simulasi">
