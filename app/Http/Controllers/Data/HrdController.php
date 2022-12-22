@@ -27,9 +27,15 @@ class HrdController extends Controller
 {
 
 
-    public function imporHRD()
+    public function show()
     {
 
-        return view('pages.data.hrd.impor');
+        return view('pages.data.hrd.show');
+    }
+
+    public function upload()
+    {
+
+        return view('pages.data.hrd.upload');
     }
 }

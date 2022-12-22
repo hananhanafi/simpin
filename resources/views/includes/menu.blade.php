@@ -153,12 +153,19 @@
         <span data-key="t-multi-level">Potongan HRD</span>
     </a>
     <ul class="sub-menu {{ request()->is('*data/hrd*') ? 'mm-collapse mm-show' : '' }}" aria-expanded="true">
-        <li {{ request()->is('*data/hrd/imporHRD*') ? 'mm-active' : '' }}>
-            <a href="{{ route('data.hrd.imporHRD') }}" {{ request()->is('*data/hrd/imporHRD*') ? 'active' : '' }}>
+        <li {{ request()->is('*data/hrd/show*') ? 'mm-active' : '' }}>
+            <a href="{{ route('data.hrd.show') }}" {{ request()->is('*data/hrd/show*') ? 'active' : '' }}>
                 <span data-key="t-calendar">Info</span>
             </a>
         </li>
+
+        <li {{ request()->is('*data/hrd/upload*') ? 'mm-active' : '' }}>
+            <a href="{{ route('data.hrd.upload') }}" {{ request()->is('*data/hrd/upload*') ? 'active' : '' }}>
+                <span data-key="t-calendar">Upload</span>
+            </a>
+        </li>
     </ul>
+
 </li>
 <li class="{{ request()->is('*data/shu*') ? 'mm-active' : '' }}">
     <a href="javascript: void(0);" class="has-arrow {{ request()->is('*data/shu*') ? 'mm-active' : '' }}">

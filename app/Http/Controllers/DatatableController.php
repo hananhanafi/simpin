@@ -731,11 +731,11 @@ class DatatableController extends Controller
                                     <i class="mdi mdi-chevron-down"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
-                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman'=>$row->id_pinjaman, 'type'=>1]) . '">Pelunasan Sesuai Cicilan</a>
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman' => $row->id_pinjaman, 'type' => 1]) . '">Pelunasan Sesuai Cicilan</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman'=>$row->id_pinjaman, 'type'=>2]) . '">Pelunasan Dipercepat</a>
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman' => $row->id_pinjaman, 'type' => 2]) . '">Pelunasan Dipercepat</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman'=>$row->id_pinjaman, 'type'=>3]) . '">Pelunasan Topup</a>
+                                    <a class="dropdown-item dropdown-menu-end" href="' . route('data.pelunasan.addPelunasan', ['idPinjaman' => $row->id_pinjaman, 'type' => 3]) . '">Pelunasan Topup</a>
                                     <div class="dropdown-divider"></div>
                                 </div>
                             </div>';
@@ -749,7 +749,7 @@ class DatatableController extends Controller
     public function potonganHRD(Request $request)
     {
         $anggota = Anggota::orderBy('no_anggota');
-        
+
         return DataTables::of($anggota)
             ->addIndexColumn()
             ->editColumn('no_anggota', function ($row) {
@@ -759,9 +759,9 @@ class DatatableController extends Controller
                 return '<b>' . $row->nama . '</b>';
             })
             ->editColumn('kode_profit', function ($row) {
-                if ($row->profits===NULL){
+                if ($row->profits === NULL) {
                     return '<b>' . '-' . '</b>';
-                }else {
+                } else {
                     return '<b>' . $row->profits->kode . '</b>';
                 }
             })
@@ -786,7 +786,7 @@ class DatatableController extends Controller
             ->editColumn('sisa_potongan', function ($row) {
                 return '<b>' . 'sisa_potongan' . '</b>';
             })
-            ->rawColumns(['kode_profit', 'no_anggota', 'nama', 'total_potongan', 'potongan_pokok', 'potongan_wajib', 'potongan_simpas', 'potongan_koperasi', 'potongan_dkm', 'sisa_potongan'])
+            ->rawColumns(['kode_profit', 'no_anggota', 'nama', '', '', '', '', '', '', ''])
             ->toJson();
     }
 

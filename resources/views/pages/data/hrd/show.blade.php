@@ -26,6 +26,7 @@ impor
             <div class="card-header">
                 <div class="row">
                     <div class="col-12">
+                        <div id="buttonExport" class="pull-right"></div>
                         <a href="{{ route('export.potongan_hrd') }}" class="btn btn-info btn-sm" style="float: right"><i class="fa fa-file-excel"></i> Cetak Excel</a>
                     </div>
                 </div>
@@ -120,15 +121,13 @@ impor
                 "data": 'DT_RowIndex'
             },
             {
-                "data": "kode_profit",
-                // name: 'profits.kode',
+                "data": "kode_profit"
             },
             {
                 "data": "no_anggota"
             },
             {
-                "data": "nama",
-                // name: 'anggota.nama',
+                "data": "nama"
             },
             {
                 "data": "total_potongan"
@@ -154,11 +153,11 @@ impor
         ],
         "columnDefs": [{
                 "className": 'text-center',
-                "targets": [0,1,2,3,4,5,6,7,8,9,10]
+                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             },
             {
                 "searchable": false,
-                "targets": [0,1,2,4,5,6,7,8,9,10]
+                "targets": [0, 1, 2, 4, 5, 6, 7, 8, 9, 10]
             },
             {
                 "orderable": false,
@@ -166,6 +165,5 @@ impor
             }
         ],
     });
-
 </script>
 @endsection

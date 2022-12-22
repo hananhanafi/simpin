@@ -64,7 +64,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pinjaman-pelunasan', 'PinjamanController@pelunasan')->name('pinjaman.pelunasan');
 
         Route::resource('hrd', 'HrdController');
-        Route::get('ImporHRD', 'HrdController@imporHRD')->name('hrd.imporHRD');
+        Route::get('show', 'HrdController@show')->name('hrd.show');
+        Route::get('upload', 'HrdController@upload')->name('hrd.upload');
         //Route::get('pinjaman-mutasi', 'HrdController@mutasi')->name('pinjaman.mutasi');
 
         Route::resource('shu', 'ShuController');
