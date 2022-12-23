@@ -51,7 +51,7 @@
                         </td>
                         
                         <td class="text-center">
-                            <input type="hidden" name="simulasi[simpas][saldoAwal][{{ $i }}]" value="{{ $totaltabPerBulan }}">
+                            <input type="hidden" name="simulasi[simpas][saldoPerBulan][{{ $i }}]" value="{{ $totaltabPerBulan }}">
                             Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}
                         </td>
                         <td class="text-center">
