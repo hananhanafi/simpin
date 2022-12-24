@@ -669,7 +669,6 @@ class DatatableController extends Controller
             ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
             ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
             ->with(['jenispinjaman', 'anggota'])
-            ->whereIn('t_pembiayaan.status_rekening', [2, 3])
             ->where('t_anggota.nama', '!=', '')
             ->where('t_pembiayaan.approv_by', '=', 1)
             ->orderBy('t_anggota.nama');
@@ -769,6 +768,12 @@ class DatatableController extends Controller
             ->editColumn('total_potongan', function ($row) {
                 return '<b>' . 'total_potongan' . '</b>';
             })
+            ->editColumn('potongan_koperasi', function ($row) {
+                return '<b>' . 'potongan_koperasi' . '</b>';
+            })
+            ->editColumn('potongan_sembako', function ($row) {
+                return '<b>' . 'potongan_sembako' . '</b>';
+            })
             ->editColumn('potongan_pokok', function ($row) {
                 return '<b>' . 'potongan_pokok' . '</b>';
             })
@@ -777,9 +782,6 @@ class DatatableController extends Controller
             })
             ->editColumn('potongan_simpas', function ($row) {
                 return '<b>' . 'potongan_simpas' . '</b>';
-            })
-            ->editColumn('potongan_koperasi', function ($row) {
-                return '<b>' . 'potongan_koperasi' . '</b>';
             })
             ->editColumn('potongan_dkm', function ($row) {
                 return '<b>' . 'potongan_dkm' . '</b>';

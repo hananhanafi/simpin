@@ -85,6 +85,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('simpanan', 'LaporanController@simpanan')->name('simpanan');
         Route::get('simp_ssb', 'LaporanController@simp_ssb')->name('simp-ssb');
         Route::get('simpas', 'LaporanController@simpas')->name('simpas');
+        Route::get('pinjaman', 'LaporanController@pinjaman')->name('pinjaman');
+        Route::get('asuransi', 'LaporanController@asuransi')->name('asuransi');
+        Route::get('pinjaman', 'LaporanController@pinjaman')->name('pinjaman');
     });
     Route::name('datatable.')->prefix('datatable')->group(function () {
         Route::get('produk-kategori', 'DatatableController@produkType')->name('produk-kategori');

@@ -286,12 +286,12 @@
 
 
 <li {{ request()->is('*laporan*') ? 'mm-active' : '' }}>
-    <a href="#" {{ request()->is('*laporan*') ? 'active' : '' }}>
-        <span data-key="t-calendar">Lap. Pembiayaan</span>
+    <a href="{{ route('laporan.pinjaman') }}" {{ request()->is('*laporan*') ? 'active' : '' }}>
+        <span data-key="t-calendar">Lap. Pinjaman</span>
     </a>
 </li>
 <li {{ request()->is('*laporan*') ? 'mm-active' : '' }}>
-    <a href="#" {{ request()->is('*laporan*') ? 'active' : '' }}>
+    <a href="{{ route('laporan.asuransi') }}" {{ request()->is('*laporan*') ? 'active' : '' }}>
         <span data-key="t-calendar">Lap. Asuransi</span>
     </a>
 </li>

@@ -215,10 +215,10 @@ Detail Data Simpanan
                                             <th class="text-center">{{ $totalHari }}</th>
                                             <th class="text-center"></th>
                                             <th class="text-center"></th>
-                                            <th class="text-right">{{ number_format($totalJumlahBunga, 0, ',', '.') }}
+                                            <th class="text-center">{{ number_format($totalJumlahBunga, 0, ',', '.') }}
                                             </th>
-                                            <th class="text-right"></th>
-                                            <th class="text-right">{{ number_format($totalJumlahBunga, 0, ',', '.') }}
+                                            <th class="text-center"></th>
+                                            <th class="text-center">{{ number_format($totalJumlahBunga, 0, ',', '.') }}
                                             </th>
                                         </tr>
                                     </tbody>
@@ -292,7 +292,7 @@ Detail Data Simpanan
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th class="text-right" colspan="4">Dibulatkan >>>>>>> </th>
+                                            <th class="text-center" colspan="4">Dibulatkan</th>
                                             <th class="text-center">Rp.
                                                 {{ number_format($simpanan->detailsimpas[0]->total_saldo_pembulatan, 0, ',', '.') }}
                                             </th>
@@ -309,6 +309,36 @@ Detail Data Simpanan
             </div>
         </div>
     </div>
+</div>
+<div class="pb-3 col-12 table-responsive">
+    <h4>Data Pelunasan</h4>
+    <table id="table" class="table">
+        <div class="col-md-12 text-right">
+            <a href="" class=" btn btn-success"><i class="fa fa-download"></i> Cetak Data Angsuran </a>
+        </div>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>No Rekening</th>
+                <th>Tipe Pelunasan</th>
+                <th>Cicilan Ke-</th>
+                <th>Nilai Transaksi</th>
+                <th>Tgl Transaksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>123123</td>
+                <td> qweqwe</td>
+                <td>poi</td>
+                <td>qwe</td>
+                <td>asd</td>
+            </tr>
+
+        </tbody>
+    </table>
+
 </div>
 @endsection
 

@@ -39,14 +39,15 @@ impor
                             <th class="text-center">No</th>
                             <th class="text-center">KODE PC</th>
                             <th class="text-center">KDPEG</th>
-                            <th class="text-center">Nama</th>
-                            <th class="text-center">Total Potongan</th>
-                            <th class="text-center">Potongan Pokok</th>
-                            <th class="text-center">Potongan Wajib</th>
-                            <th class="text-center">Potongan Simpas</th>
-                            <th class="text-center">Potongan Koperasi</th>
-                            <th class="text-center">Potongan DKM</th>
-                            <th class="text-center">Sisa Potongan</th>
+                            <th class="text-center">NAMA</th>
+                            <th class="text-center">TOTAL POTONGAN</th>
+                            <th class="text-center">POTONGAN KOPERASI</th>
+                            <th class="text-center">POTONGAN SEMBAKO</th>
+                            <th class="text-center">POTONGAN SIMPAS</th>
+                            <th class="text-center">POTONGAN DKM</th>
+                            <th class="text-center">SISA POTONGAN</th>
+                            <th class="text-center">POTONGAN POKOK</th>
+                            <th class="text-center">POTONGAN WAJIB</th>
                         </tr>
                     </thead>
                 </table>
@@ -133,22 +134,25 @@ impor
                 "data": "total_potongan"
             },
             {
-                "data": "potongan_pokok"
+                "data": "potongan_koperasi"
             },
             {
-                "data": "potongan_wajib"
+                "data": "potongan_sembako"
             },
             {
                 "data": "potongan_simpas"
-            },
-            {
-                "data": "potongan_koperasi"
             },
             {
                 "data": "potongan_dkm"
             },
             {
                 "data": "sisa_potongan"
+            },
+            {
+                "data": "potongan_pokok"
+            },
+            {
+                "data": "potongan_wajib"
             },
         ],
         "columnDefs": [{
