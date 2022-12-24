@@ -132,21 +132,9 @@ Tambah Data Pelunasan
                             </div>
 
                             <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jumlah Pinjaman TopUp<small class="text-danger">*</small></label>
-                                <div class="col-sm-7">
-                                    <input type="text" name="pinjaman[jumlah_pinjaman_topup]" class="form-control" id="jumlah_pinjaman_topup" placeholder="Jumlah Pinjaman" required data-parsley-required-message="Jumlah Pinjaman Harus Diisi" value="{{ number_format($pinjamanDetail->sisa_hutangs, '0', ',', '.') }}" onkeyup="" readonly>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jumlah Pinjaman Baru<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="pinjaman[jumlah_pinjaman_baru]" class="form-control" id="jumlah_pinjaman_baru" placeholder="Jumlah Pinjaman" required data-parsley-required-message="Jumlah Pinjaman Harus Diisi" value="{{ 0 }}" onkeyup="">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jumlah Total Pinjaman<small class="text-danger">*</small></label>
-                                <div class="col-sm-7">
-                                    <input type="text" name="pinjaman[jumlah_pinjaman]" class="form-control" id="jumlah_pinjaman" placeholder="Total Pinjaman" required data-parsley-required-message="Jumlah Pinjaman Harus Diisi" value="{{ number_format($pinjamanDetail->sisa_hutangs, '0', ',', '.') }}" onkeyup="" readonly>
+                                    <input type="text" name="pinjaman[jumlah_pinjaman]" class="form-control" id="jumlah_pinjaman" placeholder="Jumlah Pinjaman" required data-parsley-required-message="Jumlah Pinjaman Harus Diisi" value="{{ 0 }}" onkeyup="">
                                 </div>
                             </div>
 
@@ -328,7 +316,7 @@ Tambah Data Pelunasan
         })
         // var produk_id = $('#produk_id').val();
         // pilihProduk(produk_id);
-        $('#jumlah_pinjaman_topup,#jumlah_pinjaman_baru,#asuransi,#admin_bank').on({
+        $('#jumlah_pinjaman,#asuransi,#admin_bank').on({
             keyup: function() {
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val);
@@ -342,11 +330,10 @@ Tambah Data Pelunasan
         });
 
         
-        $('#jumlah_pinjaman_topup,#jumlah_pinjaman_baru').on({
+        $('#jumlah_pinjaman').on({
             keyup: function() {
-                const pinjamanTopup = parseInt($('#jumlah_pinjaman_topup').val().replaceAll('.',''))
-                const pinjamanBaru = parseInt($('#jumlah_pinjaman_baru').val().replaceAll('.',''))
-                const saldoInt = pinjamanTopup+pinjamanBaru;
+                const pinjamanBaru = parseInt($('#jumlah_pinjaman').val().replaceAll('.',''))
+                const saldoInt = pinjamanBaru;
                 const adminFee = Math.ceil(saldoInt*0.0125)
                 console.log("adminFee",adminFee)
                 $('#admin_bank').val(numberToCurrency(adminFee))
@@ -355,12 +342,12 @@ Tambah Data Pelunasan
         });
     });
 
-    function jumlahCicilanChangeHandler(jml_cicilan) {
-        let angsuran = $("input[name='angsuran']").val()
-        angsuran = parseInt(angsuran.replaceAll('.', ''))
-        const totalPelunasan = jml_cicilan * angsuran
-        $("input[name='nilai_trans']").val(numberToCurrency(totalPelunasan))
-    }
+    // function jumlahCicilanChangeHandler(jml_cicilan) {
+    //     let angsuran = $("input[name='angsuran']").val()
+    //     angsuran = parseInt(angsuran.replaceAll('.', ''))
+    //     const totalPelunasan = jml_cicilan * angsuran
+    //     $("input[name='nilai_trans']").val(numberToCurrency(totalPelunasan))
+    // }
 
     function pageSimulasi(bulan = 0, bunga = 0) {
 
@@ -385,7 +372,7 @@ Tambah Data Pelunasan
         var efektif = bungaEfektifRate(bunga, bulan, 1)
         $('#jumlah_bunga_efektif').val(efektif.toFixed(6))
 
-        var saldo = $('#jumlah_pinjaman_topup').val()
+        var saldo = $('#jumlah_pinjaman').val()
         var jenis_ssb = $('#jenis_ssb').val()
 
         $('#pages-simulasi').load("{{ route('ajax.pinjaman.pengajuan') }}?produk_id=" + id_produk + '&bunga=' + bunga +
@@ -403,7 +390,7 @@ Tambah Data Pelunasan
         var id_produk = value[0] + '__' + value[1]
 
         var jumlah_bunga_efektif = val
-        var saldo = $('#jumlah_pinjaman_topup').val()
+        var saldo = $('#jumlah_pinjaman').val()
         var jenis_ssb = $('#jenis_ssb').val()
 
         var bPA = bungaPA(val, bulan, 1);

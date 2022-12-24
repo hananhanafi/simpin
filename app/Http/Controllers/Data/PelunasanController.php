@@ -164,7 +164,30 @@ class PelunasanController extends Controller
                 // dd($request->pinjaman['produk_id']);
                 $cicilanke = $request->cicilan_ke;
                 // $jumlahCicilan = (intVal($request->jangka_waktu) - intVal($cicilanke)-1);
-                // $nilaiTrans = intVal(str_replace('.', '', $request->nilai_trans));
+                $nilaiTrans = intVal(str_replace('.', '', $request->total_pelunasan));
+                $jumlahPinjaman = intVal(str_replace('.', '', $request->pinjaman['jumlah_pinjaman']));
+                $nilaiPelunasanHutangLama = intVal(str_replace('.', '', $request->total_pelunasan));
+                $asuransi = intVal(str_replace('.', '', $request->pinjaman['asuransi']));
+                $adminFee = intVal(str_replace('.', '', $request->pinjaman['admin_bank']));
+                $bulan          = $request->pinjaman['jumlah_bulan'];
+                $bunga          = $request->pinjaman['jumlah_bunga'];
+                $margin         = $bunga / 100 * $jumlahPinjaman;
+                $sisaHutang         = $jumlahPinjaman + $margin;
+                $totalAngsuran      = $sisaHutang / $bulan;
+                if ($bulan >= 12) {
+                    $danaditahan = $totalAngsuran;
+                } else {
+                    $danaditahan = 0;
+                }
+                $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee + $danaditahan + $nilaiPelunasanHutangLama);
+
+                // dd($nilaiPencairan);
+
+                if($nilaiPencairan<0) {
+                    DB::rollback();
+                    Session::flash('fail', 'Jumlah pencairan tidak boleh lebih kecil dari sisa hutang');
+                    return back();
+                }
                 
                 for ($i = $cicilanke; $i <= ($request->jangka_waktu); $i++) {
                     
@@ -191,17 +214,9 @@ class PelunasanController extends Controller
                 
                 list($idProduk, $tipeProduk, $namaProduk) = explode('__', $request->pinjaman['produk_id']);
                 $rekening       = Simpanan::where('no_anggota', $request->no_anggota)->first();
-                $jumlahPinjaman = intVal(str_replace('.', '', $request->pinjaman['jumlah_pinjaman_baru']));
-                $nilaiTrans = intVal(str_replace('.', '', $request->pinjaman['jumlah_pinjaman_topup']));
-                $bunga          = $request->pinjaman['jumlah_bunga'];
-                $margin         = $bunga / 100 * $jumlahPinjaman;
+                // $jumlahPinjamanBaru = intVal(str_replace('.', '', $request->pinjaman['jumlah_pinjaman_baru']));
                 $totalPinjaman  = $margin + $jumlahPinjaman;
-                $sisaHutang         = $jumlahPinjaman + $margin;
-                $asuransi = intVal(str_replace('.', '', $request->pinjaman['asuransi']));
-                $adminFee = intVal(str_replace('.', '', $request->pinjaman['admin_bank']));
                 $sisaPokok          = $jumlahPinjaman;
-                $bulan          = $request->pinjaman['jumlah_bulan'];
-                $totalAngsuran      = $sisaHutang / $bulan;
                 $totalAngsuranPokok = $totalAngsuranMargin = $subTotalAngsuran = 0;
 
 
@@ -250,16 +265,10 @@ class PelunasanController extends Controller
                 
                 // $newPinjaman->save();
 
-                if ($bulan >= 12) {
-                    $danaditahan = $totalAngsuran;
-                } else {
-                    $danaditahan = 0;
-                }
 
                 // $newPinjaman->angsuran         = $totalAngsuran;
                 $newPinjaman->angsuran        = $totalAngsuran;
                 $newPinjaman->dana_mengendap        = $danaditahan;
-                $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee + $danaditahan);
                 $newPinjaman->nilai_pencairan   = $nilaiPencairan;
                 $newPinjaman->save();
 
