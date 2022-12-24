@@ -669,6 +669,7 @@ class DatatableController extends Controller
             ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
             ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
             ->with(['jenispinjaman', 'anggota'])
+            ->whereIn('t_pembiayaan.status_rekening', [2, 3])
             ->where('t_anggota.nama', '!=', '')
             ->where('t_pembiayaan.approv_by', '=', 1)
             ->orderBy('t_anggota.nama');

@@ -13,7 +13,11 @@ use App\Models\Data\PembiayaanTransaksi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\FinancialHelper;
+use App\Helpers\FunctionHelper;
 use Exception;
+use App\Models\Data\PinjamanDetail;
+use Illuminate\Support\Str;
 
 class PelunasanController extends Controller
 {
@@ -99,8 +103,14 @@ class PelunasanController extends Controller
         $anggota->total_pelunasan = $total_pelunasan;
         $anggota->total_dana_mengendap = $total_dana_mengendap;
 
+        
+        $produk     = Produk::whereHas('tipePr', function ($qry) {
+            $qry->where('tipe_produk', 2);
+        })->where('status_produk', 1)->orderBy('kode')->get();
+
 
         return view('pages.data.pelunasan.addPelunasan')
+            ->with('produk', $produk)
             ->with('simpanan', $simpanan)
             ->with('pinjaman', $pinjaman)
             ->with('pelunasan', $pelunasan)
@@ -121,14 +131,15 @@ class PelunasanController extends Controller
             // return $request;
             DB::beginTransaction();
             $pinjaman = Pinjaman::find($request->id_pinjaman);
-            $noTrans = $request->no_anggota . "_" . $request->id_pinjaman . "_" . $request->type . "_" . $request->cicilan;
-            list($noRekening, $noAnggota)          = explode('__', $request->no_rekening);
-            $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
-            $sisaHutang = intVal(str_replace('.', '', $request->sisa_hutang));
-            $nilaiTrans = intVal(str_replace('.', '', $request->nilai_trans));
             if($request->type==2){
                 $cicilanke = $request->cicilan;
                 for ($i = 1; $i <= ($request->jumlah_cicilan); $i++) {
+                    
+                    list($noRekening, $noAnggota)          = explode('__', $request->no_rekening);
+                    $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
+                    $sisaHutang = intVal(str_replace('.', '', $request->sisa_hutang));
+                    $nilaiTrans = intVal(str_replace('.', '', $request->nilai_trans));
+
                     $transAmount = $nilaiTrans/$request->jumlah_cicilan;
                     $noTrans = $request->no_anggota . "_" . $request->id_pinjaman . "_" . $request->type . "_" . $cicilanke;
                     $newPembiayaanTransaksi = new PembiayaanTransaksi();
@@ -149,7 +160,151 @@ class PelunasanController extends Controller
                     $cicilanke++;
                 }
             }
+            else if($request->type==3){
+                // dd($request->pinjaman['produk_id']);
+                $cicilanke = $request->cicilan_ke;
+                // $jumlahCicilan = (intVal($request->jangka_waktu) - intVal($cicilanke)-1);
+                // $nilaiTrans = intVal(str_replace('.', '', $request->nilai_trans));
+                
+                for ($i = $cicilanke; $i <= ($request->jangka_waktu); $i++) {
+                    
+                    $angsuran = intVal(str_replace('.', '', $request->angsuran));
+                    // $transAmount = $request->jumlah_cicilan;
+                    $noTrans = $request->no_anggota . "_" . $request->id_pinjaman . "_" . $request->type . "_" . $i;
+                    $newPembiayaanTransaksi = new PembiayaanTransaksi();
+                    $newPembiayaanTransaksi->no_rekening = $request->anggota_no_rekening;
+                    $newPembiayaanTransaksi->tgl_trans = date('Y-m-d H:i:s');
+                    $newPembiayaanTransaksi->no_trans = $noTrans;
+                    $newPembiayaanTransaksi->kode_trans = $noTrans;
+                    $newPembiayaanTransaksi->tipe_trans = $request->type;
+                    $newPembiayaanTransaksi->cicilan_ke = $i;
+                    $newPembiayaanTransaksi->nilai_trans = $angsuran;
+                    $newPembiayaanTransaksi->margin_trans = 0;
+                    $newPembiayaanTransaksi->keterangan = "";
+                    $newPembiayaanTransaksi->user_trans = $request->no_anggota;
+                    $newPembiayaanTransaksi->date_trans = date('Y-m-d H:i:s');
+                    $newPembiayaanTransaksi->created_at = date('Y-m-d H:i:s');
+                    $newPembiayaanTransaksi->id_pembiayaan = $request->id_pinjaman;
+                    $newPembiayaanTransaksi->save();
+                }
+
+                
+                list($idProduk, $tipeProduk, $namaProduk) = explode('__', $request->pinjaman['produk_id']);
+                $rekening       = Simpanan::where('no_anggota', $request->no_anggota)->first();
+                $jumlahPinjaman = intVal(str_replace('.', '', $request->pinjaman['jumlah_pinjaman_baru']));
+                $nilaiTrans = intVal(str_replace('.', '', $request->pinjaman['jumlah_pinjaman_topup']));
+                $bunga          = $request->pinjaman['jumlah_bunga'];
+                $margin         = $bunga / 100 * $jumlahPinjaman;
+                $totalPinjaman  = $margin + $jumlahPinjaman;
+                $sisaHutang         = $jumlahPinjaman + $margin;
+                $asuransi = intVal(str_replace('.', '', $request->pinjaman['asuransi']));
+                $adminFee = intVal(str_replace('.', '', $request->pinjaman['admin_bank']));
+                $sisaPokok          = $jumlahPinjaman;
+                $bulan          = $request->pinjaman['jumlah_bulan'];
+                $totalAngsuran      = $sisaHutang / $bulan;
+                $totalAngsuranPokok = $totalAngsuranMargin = $subTotalAngsuran = 0;
+
+
+                $newPinjaman                    = new Pinjaman();
+                $newPinjaman->no_rekening       = $request->anggota_no_rekening;
+                $newPinjaman->no_anggota        = $request->no_anggota;
+                $newPinjaman->produk_id         = $idProduk;
+                $newPinjaman->norek_simpanan    = ($rekening) ? $rekening->no_rekening : '';
+                $newPinjaman->jml_pinjaman      = $jumlahPinjaman;
+                $newPinjaman->jml_margin        = $margin;
+                $newPinjaman->total_pinjaman    = $totalPinjaman;
+                $newPinjaman->sisa_hutangs    = $sisaHutang;
+                $newPinjaman->jangka_waktu      = $request->pinjaman['jumlah_bulan'];
+                $newPinjaman->margin            = $request->pinjaman['jumlah_bunga_efektif'];
+                $newPinjaman->asuransi          = $asuransi;
+                $newPinjaman->admin_fee          = $adminFee;
+                $newPinjaman->saldo_akhir_pokok = $sisaPokok;
+                $newPinjaman->saldo_akhir_margin = 0;
+                $newPinjaman->cicilan           = 0;
+                $newPinjaman->rev_margin        = 0;
+                $newPinjaman->status_rekening   = 1;
+                $newPinjaman->nilai_pelunasan   = 0;
+                $newPinjaman->pelunasan_note    = '-';
+                $newPinjaman->penutupan_note    = '-';
+                $newPinjaman->tanggal_mulai     = date('Y-m-d H:i:s');
+                $newPinjaman->tanggal_akhir     = date('Y-m-d H:i:s');
+                $newPinjaman->created_date      = date('Y-m-d H:i:s');
+                // $newPinjaman->update_date       = date('Y-m-d');
+                // $newPinjaman->pencairan_date    = date('Y-m-d');
+                // $newPinjaman->approv_date       = date('Y-m-d');
+                // $newPinjaman->approv_lunas_date = date('Y-m-d');
+                // $newPinjaman->delete_date       = date('Y-m-d');
+                $newPinjaman->created_by        = Auth::user()->id;
+                $newPinjaman->update_by         = 0;
+                $newPinjaman->approv_by         = 0;
+                $newPinjaman->pencairan_by      = 0;
+                $newPinjaman->approv_note       = '-';
+                $newPinjaman->approv_lunas_by   = 0;
+                $newPinjaman->delete_by         = 0;
+                
+                $newPinjaman->status_rekening   = 1;
+                $newPinjaman->approv_note       = "PELUNASAN TOPUP";
+                $newPinjaman->approv_by         = 1;
+                $newPinjaman->update_by         = Auth::user()->id;
+                $newPinjaman->update_date       = date('Y-m-d H:i:s');
+                
+                // $newPinjaman->save();
+
+                if ($bulan >= 12) {
+                    $danaditahan = $totalAngsuran;
+                } else {
+                    $danaditahan = 0;
+                }
+
+                // $newPinjaman->angsuran         = $totalAngsuran;
+                $newPinjaman->angsuran        = $totalAngsuran;
+                $newPinjaman->dana_mengendap        = $danaditahan;
+                $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee + $danaditahan);
+                $newPinjaman->nilai_pencairan   = $nilaiPencairan;
+                $newPinjaman->save();
+
+                $financial          = new FinancialHelper;
+                $startBulan         = date('n');
+                $startTahun         = date('Y');
+                $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $bulan + 1);
+                $bungaEfektif   = $request->pinjaman['jumlah_bunga_efektif'];
+                $saldo              = $jumlahPinjaman;
+                $idPinjaman = $newPinjaman->id;
+
+                for ($i = 1; $i <= ($request->pinjaman['jumlah_bulan']); $i++) {
+                    $angsuran       = round(abs($financial->PPMT(($bungaEfektif / 100) / $bulan, $i, $bulan, $saldo)));
+                    $angsuranMargin = $totalAngsuran - $angsuran;
+    
+                    $pinjamanDetail                 = new PinjamanDetail();
+                    $pinjamanDetail->uuid           = Str::uuid();
+                    $pinjamanDetail->tabungan_id    = $idPinjaman;
+                    $pinjamanDetail->bulan          = isset($rangeBulan[0][$i]['bln']) ? $rangeBulan[0][$i]['bln'] : 0;
+                    $pinjamanDetail->tahun          = isset($rangeBulan[0][$i]['thn']) ? $rangeBulan[0][$i]['thn'] : 0;;
+                    $pinjamanDetail->jlh_hari       = isset($rangeBulan[0][$i]['jlh_hari']) ? $rangeBulan[0][$i]['jlh_hari'] : 0;
+                    $pinjamanDetail->bunga_flat     = $bungaEfektif;
+                    $pinjamanDetail->bunga_pa       = $bunga;
+                    $pinjamanDetail->sisa_hutang    = $sisaHutang;
+                    $pinjamanDetail->sisa_pokok     = $sisaPokok;
+                    $pinjamanDetail->angsuran_pokok = $angsuran;
+                    $pinjamanDetail->angsuran_margin = $angsuranMargin;
+                    $pinjamanDetail->total_angsuran = $totalAngsuran;
+                    $pinjamanDetail->save();
+    
+                    $sisaPokok -= $angsuran;
+                    $sisaHutang -= $totalAngsuran;
+                    $subTotalAngsuran += $totalAngsuran;
+                    $totalAngsuranPokok += $angsuran;
+                    $totalAngsuranMargin += $angsuranMargin;
+                }
+            }
             else{
+                
+                $noTrans = $request->no_anggota . "_" . $request->id_pinjaman . "_" . $request->type . "_" . $request->cicilan;
+                list($noRekening, $noAnggota)          = explode('__', $request->no_rekening);
+                $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
+                $sisaHutang = intVal(str_replace('.', '', $request->sisa_hutang));
+                $nilaiTrans = intVal(str_replace('.', '', $request->nilai_trans));
+                
                 $newPembiayaanTransaksi = new PembiayaanTransaksi();
                 $newPembiayaanTransaksi->no_rekening = $noRekening;
                 $newPembiayaanTransaksi->tgl_trans = $request->tgl_trans;
