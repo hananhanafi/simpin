@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Terbilang;
 use App\Exports\ExportArray;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -130,13 +130,58 @@ class Exports extends Controller
     public function potongan_hrd()
     {
         $anggota = new Anggota;
-        $anggota = $anggota->get();
+        // $anggota = $anggota->get();
+        
+        $anggota = Anggota::select(DB::raw('*'))
+            ->with(['simpananAnggota' => function($q) {
+                $q
+                ->with(['detailSimpas' => function($q2) {
+                    $q2
+                    ->whereNull('deleted_at');
+                }])
+                ->where([
+                    ['produk_id','=',4],
+                    ['status_rekening','=', 1]
+                ]);
+            },
+            'pinjamanAnggota' => function($q) {
+                $q->whereIn('status_rekening',[2,3])
+                ->where('sisa_hutangs','>','0');
+            }
+            ])
+            ->orderBy('t_anggota.no_anggota')->get();
+
         $exportData = array();
         $exportData[] = ['','','Potongan HRD'];
         $exportData[] = [''];
-        $exportData[] = ['NO','KODE PC','KODPEG','NAMA','TOTAL POTONGAN', 'POTONGAN POKOK', 'POTONGAN WAJIB', 'POTONGAN SIMPAS', 'POTONGAN KOPERASI', 'POTONGAN DKM', 'SISA POTONGAN'];
+        $exportData[] = ['NO','KODE PC','KODPEG','NAMA','TOTAL POTONGAN', 'POTONGAN POKOK', 'POTONGAN WAJIB', 'POTONGAN SIMPAS', 'POTONGAN SEMBAKO', 'POTONGAN KOPERASI', 'POTONGAN DKM', 'SISA POTONGAN'];
         $no=1;
         foreach($anggota as $a){
+            if(count($a->simpananAnggota)>0){
+                $simpananArr = json_decode(json_encode($a->simpananAnggota), true);
+                $detailSimpasArr = array_map(function($val){
+                    if(count($val['detail_simpas'])> 0){
+                        return $val['detail_simpas'][0]['tabungan_per_bulan'];
+                    }else{
+                        return 0;
+                    }
+                },$simpananArr);
+                $totalAngsuranSimpas = array_sum($detailSimpasArr);
+            }else {
+                $totalAngsuranSimpas = 0;
+            }
+            if(count($a->pinjamanAnggota)>0){
+                $pinjamanArr = json_decode(json_encode($a->pinjamanAnggota), true);
+                $totalAngsuranPinjaman = array_sum(array_column($pinjamanArr,'angsuran'));
+                $totalHutang = array_sum(array_column($pinjamanArr,'sisa_hutangs'));
+
+            }else {
+                $totalAngsuranPinjaman = 0; 
+                $totalHutang = 0; 
+            }
+            
+            $totalPotongan = $totalAngsuranSimpas + $totalAngsuranPinjaman;
+
             $collect[0] = $no++;
             if($a->profits===null){
                 $collect[1] = '-';
@@ -145,13 +190,14 @@ class Exports extends Controller
             }
             $collect[2] = $a->no_anggota;
             $collect[3] = $a->nama;
-            $collect[4] = 'total_potongan';
-            $collect[5] = 'simpanan_pokok';
-            $collect[6] = 'simpanan_wajib';
-            $collect[7] = 'simpanan_simpas';
-            $collect[8] = 'simpanan_koperasi';
-            $collect[9] = 'simpanan_dkm';
-            $collect[10] = 'sisa_potongan';
+            $collect[4] = $totalPotongan;
+            $collect[5] = $a->sim_pokok;
+            $collect[6] = $a->sim_wajib;
+            $collect[7] = $totalAngsuranSimpas;
+            $collect[8] = 'simpanan_sembako';
+            $collect[9] = $totalAngsuranPinjaman;
+            $collect[10] = 'simpanan_dkm';
+            $collect[11] = $totalHutang;
             $exportData[] = $collect;
         }
         return  Excel::download(new ExportArray($exportData),'potongan_hrd.xlsx');

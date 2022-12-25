@@ -26,7 +26,7 @@ class Simpanan extends Model
 
     function detailsimpas()
     {
-        return $this->hasMany(SimpananSimpasDetail::class, 'simpanan_id');
+        return $this->hasMany(SimpananSimpasDetail::class, 'simpanan_id', 'id');
     }
     
     function anggota()

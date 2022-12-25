@@ -41,13 +41,13 @@ impor
                             <th class="text-center">KDPEG</th>
                             <th class="text-center">NAMA</th>
                             <th class="text-center">TOTAL POTONGAN</th>
-                            <th class="text-center">POTONGAN KOPERASI</th>
-                            <th class="text-center">POTONGAN SEMBAKO</th>
-                            <th class="text-center">POTONGAN SIMPAS</th>
-                            <th class="text-center">POTONGAN DKM</th>
-                            <th class="text-center">SISA POTONGAN</th>
                             <th class="text-center">POTONGAN POKOK</th>
                             <th class="text-center">POTONGAN WAJIB</th>
+                            <th class="text-center">POTONGAN SIMPAS</th>
+                            <th class="text-center">POTONGAN KOPERASI</th>
+                            <th class="text-center">POTONGAN SEMBAKO</th>
+                            <th class="text-center">POTONGAN DKM</th>
+                            <th class="text-center">SISA POTONGAN</th>
                         </tr>
                     </thead>
                 </table>
@@ -134,13 +134,19 @@ impor
                 "data": "total_potongan"
             },
             {
+                "data": "potongan_pokok"
+            },
+            {
+                "data": "potongan_wajib"
+            },
+            {
+                "data": "potongan_simpas"
+            },
+            {
                 "data": "potongan_koperasi"
             },
             {
                 "data": "potongan_sembako"
-            },
-            {
-                "data": "potongan_simpas"
             },
             {
                 "data": "potongan_dkm"
@@ -148,24 +154,18 @@ impor
             {
                 "data": "sisa_potongan"
             },
-            {
-                "data": "potongan_pokok"
-            },
-            {
-                "data": "potongan_wajib"
-            },
         ],
         "columnDefs": [{
                 "className": 'text-center',
-                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
             },
             {
                 "searchable": false,
-                "targets": [0, 1, 2, 4, 5, 6, 7, 8, 9, 10]
+                "targets": [0, 1, 4, 5, 6, 7, 8, 9, 10, 11]
             },
             {
                 "orderable": false,
-                "targets": [0]
+                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
             }
         ],
     });

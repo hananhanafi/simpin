@@ -64,6 +64,8 @@ class AnggotaController extends Controller
             $anggota->agama             = $request->agama;
             $anggota->grade_id          = $gradeId;
             $anggota->profit_id         = $request->profit_id;
+            $anggota->sim_pokok         = $simpPokok;
+            $anggota->sim_wajib         = $simpWajib;
             $anggota->gaji              = $gaji;
             $anggota->gaji_updated     = date('Y-m-d H:i:s');
             $anggota->bank_nama         = $request->bank_nama;
@@ -154,6 +156,8 @@ class AnggotaController extends Controller
             $anggota->agama             = $request->agama;
             $anggota->grade_id          = $gradeId;
             $anggota->profit_id         = $request->profit_id;
+            $anggota->sim_pokok         = $simpPokok;
+            $anggota->sim_wajib         = $simpWajib;
             $anggota->gaji              = $gaji;
             $anggota->gaji_updated     = date('Y-m-d H:i:s');
             $anggota->bank_nama         = $request->bank_nama;

@@ -185,13 +185,13 @@ Edit Data Anggota
                                 <div class="row mb-3">
                                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Simpanan Pokok</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="simpanan_pokok" class="form-control" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
+                                        <input type="text" name="simpanan_pokok" class="form-control" id="simpanan_pokok" value="{{ $anggota->sim_pokok }}" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Simpanan Wajib</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="simpanan_wajib" class="form-control" id="simpanan_wajib" value="{{ old('simpanan_wajib') }}">
+                                        <input type="text" name="simpanan_wajib" class="form-control" id="simpanan_wajib" value="{{ $anggota->sim_wajib }}" readonly>
                                     </div>
                                 </div>
 

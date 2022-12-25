@@ -50,6 +50,11 @@ class Anggota extends Model
     {
         return $this->hasMany(Simpanan::class, 'no_anggota', 'no_anggota');
     }
+    
+    function pinjamanAnggota()
+    {
+        return $this->hasMany(Pinjaman::class, 'no_anggota', 'no_anggota');
+    }
 
     function pembiayaanAnggota()
     {
