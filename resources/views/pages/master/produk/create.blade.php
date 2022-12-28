@@ -113,7 +113,7 @@ Tambah Data Master Produk
                                                 <input type="number" name="margin_flat[{{ $i }}]" class="form-control" id="bunga_efektif_{{ $i }}" placeholder="Margin Flat" step=0.01 readonly>
                                         </td> --}}
                                         <td class="text-center">
-                                            <input type="number" name="asuransi[{{ $i }}]" class="form-control" placeholder="Persentase Asuransi" step=0.01>
+                                            <input type="number" name="asuransi[{{ $i }}]" class="form-control" placeholder="Persentase Asuransi" step="any">
                                         </td>
                                         <td>
                                             <button type="button" id="{{ $i }}" class="btn btn-sm btn-danger btn_remove"><i class="fa fa-times"></i></button>

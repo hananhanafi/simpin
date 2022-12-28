@@ -30,6 +30,7 @@
                 @php
                 // $tabPerBulan = $simpas;
                 $totaltabPerBulan = 0;
+                $totalAngsuran = 0;
                 $saldoPerBulan = 0;
 
                 $totalBunga = 0;
@@ -120,6 +121,7 @@
                             
                             $totalBunga += $bungaPerBulan;
                             $totaltabPerBulan += $tabPerBulan + $bungaPerBulan;
+                            $totalAngsuran += $tabPerBulan;
                             
                             @endphp 
                             <input type="hidden" name="simulasi[simpas][totaltabPerBulan][{{ $i }}]" value="{{ $totaltabPerBulan }}">
@@ -132,11 +134,11 @@
                         <th class="text-center"></th>
                         <th class="text-center"></th>
                         <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
-                        <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
+                        <th class="text-center">Rp. {{ number_format($totalAngsuran, 0, ',', '.') }}</th>
                         <th class="text-center">Rp. {{ number_format($totalBunga, 0, ',', '.') }}</th>
                         <th class="text-center">Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}</th>
                         <input type="hidden" name="simulasi[simpas][totalSaldoAwal]" value="{{ $totaltabPerBulan }}">
-                        <input type="hidden" name="simulasi[simpas][totalTabungan]" value="{{ $totaltabPerBulan }}">
+                        <input type="hidden" name="simulasi[simpas][totalTabungan]" value="{{ $totalAngsuran }}">
                         <input type="hidden" name="simulasi[simpas][totalBunga]" value="{{ $totalBunga }}">
                         <input type="hidden" name="simulasi[simpas][saldoTotal]" value="{{ $totaltabPerBulan }}">
                         <input type="hidden" name="simulasi[simpas][saldoPembulatan]" value="{{ FunctionHelper::roundUpToAny($totaltabPerBulan) }}">

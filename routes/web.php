@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pinjaman-plafon', 'PinjamanController@plafon')->name('pinjaman.plafon');
         Route::get('pinjaman-plafon-xls', 'PinjamanController@plafonXls')->name('pinjaman.plafon.xls');
         Route::get('pinjaman-pengajuan-xls', 'PinjamanController@pinjamanPengajuanXls')->name('pinjaman.pengajuan.xls');
+        Route::get('pinjaman-pengajuan-pdf', 'PinjamanController@pinjamanPengajuanPdf')->name('pinjaman.pengajuan.pdf');
         Route::get('pinjaman-pencairan', 'PinjamanController@pencairan')->name('pinjaman.pencairan');
         Route::get('pinjaman-addPencairan', 'PinjamanController@addPencairan')->name('pinjaman.addPencairan');
         Route::get('pinjaman-addPelunasan', 'PinjamanController@addPelunasan')->name('pinjaman.addPelunasan');

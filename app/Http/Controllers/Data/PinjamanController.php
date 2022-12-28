@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Data;
 
+use PDF;
 use App\Exports\PlafonPinjaman;
 use Exception;
 use Illuminate\Support\Str;
@@ -294,6 +295,68 @@ class PinjamanController extends Controller
             ->with('anggota', $anggota)
             ->with('masa_kerja', $masa_kerja)
             ->with('request', $request);
+    }
+
+    public function pinjamanPengajuanPdf(Request $request)
+    {
+        // dd($request);
+        // return $request;
+        $gaji40 = 0;
+
+        if ($request->gaji) {
+            $gaji40 = str_replace('.', '', $request->gaji) * 0.4;
+            $request->gaji = str_replace('.', '', $request->gaji);
+        }
+        // return $gaji40;
+        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")->get();
+
+        // $bunga = $request->bunga;
+        $jml_baru = str_replace('.', '', $request->jml_pengajuan_baru ?? 0);
+        $angsuran = str_replace('.', '', $request->angsuran ?? 0);
+        // $bunga_efektif = $request->bunga_efektif;
+        // $bulan = $request->bulan;
+        if ($request->no_anggota) {
+            $anggota = Anggota::where('no_anggota', $request->no_anggota)->firstOrFail();
+        } else {
+            $anggota = null;
+        }
+
+        // $startBulan = date('n');
+        // $startTahun = date('Y');
+        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $bulan);
+        // $produk = Produk::find($produk_id);
+        // $saldo = ($request->saldo == null ? 0 : $saldo);
+        // $bulan = ($request->bulan == null ? 1 : $bulan);
+        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, ($bulan + 1));
+        // $simpas     = FunctionHelper::hitungSimpas($bulan, $bunga_efektif, $bunga, $saldo);
+        $financial = new FinancialHelper;
+        // return view('pages.data.pinjaman.simulasi-plafon-table')
+        //     ->with('pinjaman', $pinjaman)
+        //     ->with('jml_baru', $jml_baru)
+        //     ->with('gaji40', $gaji40)
+        //     ->with('anggota', $anggota)
+        //     ->with('financial', $financial)
+        //     ->with('request', $request)
+        //     ->with('angsuran', $angsuran)
+        //     // ->with('produk', $produk)
+        //     // ->with('simpas', $simpas)
+        //     // ->with('rangeBulan', $rangeBulan)
+        //     // ->with('bunga_efektif', $bunga_efektif)
+        //     // ->with('bunga', $bunga);
+        // ;
+        
+        $pdf = PDF::loadView('pages.data.pinjaman.simulasi-plafon-pdf', [
+            'pinjaman' => $pinjaman,
+            'jml_baru' => $jml_baru,
+            'gaji40' => $gaji40,
+            'anggota' => $anggota,
+            'financial' => $financial,
+            'request' => $request,
+            'angsuran' => $angsuran,
+        ]);
+        
+
+        return $pdf->download('plafonpinjaman.pdf');
     }
 
     public function mutasi(Request $request)

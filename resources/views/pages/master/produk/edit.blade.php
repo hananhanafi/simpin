@@ -168,7 +168,7 @@
                                                     <td class="text-center">
                                                         <input type="number" name="asuransi[{{ $item->id }}]"
                                                             class="form-control" placeholder="Persentase Asuransi"
-                                                            step=0.01 value="{{ $item->asuransi }}">
+                                                            step="any" value="{{ $item->asuransi }}">
                                                     </td>
                                                     <td>
                                                         <button type="button" id="{{ $item->id }}"

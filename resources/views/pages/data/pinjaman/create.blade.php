@@ -299,8 +299,11 @@ Tambah Data Pinjaman Baru
         const jumlahBulan = get[0]
         // const adminFee = selectedProduk.admin_fee
         // $('#admin_bank').val(adminFee)
+        var jumlahPinjaman = $('#jumlah_pinjaman').val()
+        const jumlahPinjamanInt = parseInt(jumlahPinjaman.replaceAll('.', ''))
         const asuransi = jangkaWaktuList.find(jw => jw.jangka_waktu == jumlahBulan).asuransi
-        $('#asuransi').val(asuransi)
+        let calculateAsuransi = (jumlahPinjamanInt * asuransi)/100
+        $('#asuransi').val(numberToCurrency(calculateAsuransi))
 
         pageSimulasi(get[0], get[1])
     }

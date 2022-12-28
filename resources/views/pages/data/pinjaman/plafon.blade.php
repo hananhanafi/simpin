@@ -168,6 +168,7 @@ Plafon Pinjaman
                 $(this).val(input_val);
             }
         });
+        pagePlafon();
     });
 
     function pagePlafon(gaji = 0, no_anggota = 0) {
@@ -258,6 +259,22 @@ Plafon Pinjaman
         request += 'angsuran=' + angsuran
 
         window.open("{{ route('data.pinjaman.plafon.xls') }}?" + request, '_blank');
+
+    }
+    
+
+    function unduhSimulasiNew(no_anggota, masa_kerja, gaji, bulan, jml_pengajuan_baru, angsuran) {
+
+        var request = ''
+
+        request += 'no_anggota=' + no_anggota + '&'
+        request += 'masa=' + masa_kerja + '&'
+        request += 'gaji=' + gaji + '&'
+        request += 'bulan=' + bulan + '&'
+        request += 'jml_pengajuan_baru=' + jml_pengajuan_baru + '&'
+        request += 'angsuran=' + angsuran
+
+        window.open("{{ route('data.pinjaman.pengajuan.pdf') }}?" + request, '_blank');
 
     }
 </script>

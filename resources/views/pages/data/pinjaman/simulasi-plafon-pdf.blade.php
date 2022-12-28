@@ -12,20 +12,20 @@
                 <table class="table table-borderless">
                     <thead>
                         <tr>
-                            <th style="width:40%;padding:0.2rem">Nama</th>
-                            <th style="width:60%;padding:0.2rem">{{ $anggota->nama }}</th>
+                            <th style="width:40%;padding:0.2rem;">Nama</th>
+                            <th style="width:60%;padding:0.2rem;">{{ $anggota->nama }}</th>
                         </tr>
                         <tr>
-                            <th style="width:40%;padding:0.2rem">NIK</th>
-                            <th style="width:60%;padding:0.2rem">{{ $anggota->nik }}</th>
+                            <th style="width:40%;padding:0.2rem;">NIK</th>
+                            <th style="width:60%;padding:0.2rem;">{{ $anggota->nik }}</th>
                         </tr>
                         <tr>
-                            <th style="width:40%;padding:0.2rem">Masa Kerja</th>
-                            <th style="width:60%;padding:0.2rem">{{ $request->masa }} + 1 Tahun</th>
+                            <th style="width:40%;padding:0.2rem;">Masa Kerja</th>
+                            <th style="width:60%;padding:0.2rem;">{{ $request->masa }} + 1 Tahun</th>
                         </tr>
                         <tr>
-                            <th style="width:40%;padding:0.2rem">Usia</th>
-                            <th style="width:60%;padding:0.2rem">{{ $anggota->age }} Tahun</th>
+                            <th style="width:40%;padding:0.2rem;">Usia</th>
+                            <th style="width:60%;padding:0.2rem;">{{ $anggota->age }} Tahun</th>
                         </tr>
                     </thead>
                 </table>
@@ -34,23 +34,20 @@
                 <table class="table table-borderless">
                     <thead>
                         <tr>
-                            <th style="width:40%;padding:0.2rem">Gaji Pokok</th>
-                            <th style="width:60%;padding:0.2rem">Rp.
+                            <th style="width:40%;padding:0.2rem;">Gaji Pokok</th>
+                            <th style="width:60%;padding:0.2rem;">Rp.
                                 {{ number_format($request->gaji, 0, ',', '.') }}
                             </th>
                         </tr>
                         <tr>
-                            <th style="width:40%;padding:0.2rem">40% Gaji Pokok</th>
-                            <th style="width:60%;padding:0.2rem">Rp.
+                            <th style="width:40%;padding:0.2rem;">40% Gaji Pokok</th>
+                            <th style="width:60%;padding:0.2rem;">Rp.
                                 {{ number_format($gaji40, 0, ',', '.') }}
                                 {{-- {{ $request->gaji * 40 }} --}}
                             </th>
                         </tr>
                     </thead>
                 </table>
-            </div>
-            <div class="col-md-2 text-right">
-                <a href="javascript:unduhSimulasiNew('{{ $anggota->no_anggota }}','{{ $request->masa }}','{{ $request->gaji }}','{{ $request->bulan }}','{{ $request->jml_pengajuan_baru }}','{{ $angsuran }}')" class="btn btn-success"><i class="fa fa-download"></i> Unduh Hasil </a>
             </div>
         </div>
 

@@ -38,10 +38,12 @@
                 @php
                 $totalHari = 0;
                 $totalJumlahBunga = 0;
+                $totalJumlahBungaPph = 0;
                 $saldoBunga = $saldo;
                 $totalTerima = 0;
                 @endphp
-                @for ($i = 1; $i <= $bulan; $i++) <tr>
+                @for ($i = 1; $i <= $bulan; $i++) 
+                <tr>
                     <td class="text-center">{{ $i }}</td>
                     <td class="text-center">
                         <input type="hidden" name="simulasi[ssb][rollover][blnThn][{{ $i }}]" value="{{ $rangeBulan[0][$i]['bulan'] }}">
@@ -67,32 +69,38 @@
                     $totalJumlahBunga += $jlhBunga;
 
                     $jlhBungaPph = (10 / 100) * $jlhBunga;
-                    if ($jlhBunga <= 240000) { $jlhBungaPph=0; $jlhDiterima=$jlhBunga - $jlhBungaPph; } else { $jlhDiterima=$jlhBunga - $jlhBungaPph; } $totalTerima +=$jlhDiterima; @endphp <td class="text-right">
+                    if ($jlhBunga <= 240000) { $jlhBungaPph=0; $jlhDiterima=$jlhBunga - $jlhBungaPph; } 
+                    else { $jlhDiterima=$jlhBunga - $jlhBungaPph; } 
+                    $totalTerima +=$jlhDiterima; 
+                    $totalJumlahBungaPph += $jlhBungaPph;
+                    @endphp 
+                    <td class="text-right">
                         <input type="hidden" name="simulasi[ssb][rollover][jlhBunga][{{ $i }}]" value="{{ $jlhBunga }}">
                         {{ number_format($jlhBunga, 0, ',', '.') }}
-                        </td>
-                        <td class="text-right">
-                            <input type="hidden" name="simulasi[ssb][rollover][bungapph][{{ $i }}]" value="{{ $jlhBungaPph }}">
-                            {{ number_format($jlhBungaPph, 0, ',', '.') }}
-                        </td>
-                        <td class="text-right">
-                            <input type="hidden" name="simulasi[ssb][rollover][jumlahditerima][{{ $i }}]" value="{{ $jlhDiterima }}">
-                            {{ number_format($jlhDiterima, 0, ',', '.') }}
-                        </td>
-                        </tr>
-                        @endfor
-                        <tr>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-center">{{ $totalHari }}</th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-right">{{ number_format($totalJumlahBunga, 0, ',', '.') }}</th>
-                            <th class="text-right"></th>
-                            <th class="text-right">{{ number_format($totalTerima, 0, ',', '.') }}</th>
-                            <input type="hidden" name="simulasi[ssb][rollover][totalHari]" value="{{ $totalHari }}">
-                            <input type="hidden" name="simulasi[ssb][rollover][totalJumlahBunga]" value="{{ $totalJumlahBunga }}">
-                        </tr>
+                    </td>
+                    <td class="text-right">
+                        <input type="hidden" name="simulasi[ssb][rollover][bungapph][{{ $i }}]" value="{{ $jlhBungaPph }}">
+                        {{ number_format($jlhBungaPph, 0, ',', '.') }}
+                    </td>
+                    <td class="text-right">
+                        <input type="hidden" name="simulasi[ssb][rollover][jumlahditerima][{{ $i }}]" value="{{ $jlhDiterima }}">
+                        {{ number_format($jlhDiterima, 0, ',', '.') }}
+                    </td>
+                </tr>
+                @endfor
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                    <th class="text-center">{{ $totalHari }}</th>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                    <th class="text-right">{{ number_format($totalJumlahBunga, 0, ',', '.') }}</th>
+                    <th class="text-right">{{ number_format($totalJumlahBungaPph, 0, ',', '.') }}</th>
+                    <th class="text-right">{{ number_format($totalTerima, 0, ',', '.') }}</th>
+                    <input type="hidden" name="simulasi[ssb][rollover][totalHari]" value="{{ $totalHari }}">
+                    <input type="hidden" name="simulasi[ssb][rollover][totalJumlahBunga]" value="{{ $totalJumlahBunga }}">
+                    <input type="hidden" name="simulasi[ssb][rollover][totalJumlahBungaPph]" value="{{ $totalJumlahBungaPph }}">
+                </tr>
             </tbody>
         </table>
 
@@ -117,9 +125,11 @@
             <tbody>
                 @php
                 $totalJumlahBunga = 0;
+                $totalJumlahBungaPph = 0;
                 $totalTerima = 0;
                 @endphp
-                @for ($i = 1; $i <= $bulan; $i++) <tr>
+                @for ($i = 1; $i <= $bulan; $i++) 
+                <tr>
                     <td class="text-center">
                         {{ $i }}
                     </td>
@@ -140,26 +150,31 @@
                         <input type="hidden" name="simulasi[ssb][dibayar][bungaHarian][{{ $i }}]" value="{{ $bunga }}">
                     </td>
                     @php
-                    $totalHari = $rangeBulan['totalHari'];
-                    $jlhBunga = FunctionHelper::jumlahBungaSSB($rangeBulan[0][$i]['bln'], $rangeBulan[0][$i]['thn'], $saldo, $bunga, $totalHari);
-                    // $saldoBunga = $saldo;
-                    // $saldo += $jlhBunga;
-                    $totalJumlahBunga += $jlhBunga;
-                    $jlhBungaPph = (10 / 100) * $jlhBunga;
-                    if ($jlhBunga <= 240000) { $jlhBungaPph=0; $jlhDiterima=$jlhBunga - $jlhBungaPph; } else { $jlhDiterima=$jlhBunga - $jlhBungaPph; } $totalTerima +=$jlhDiterima; @endphp <td class="text-right">
+                        $totalHari = $rangeBulan['totalHari'];
+                        $jlhBunga = FunctionHelper::jumlahBungaSSB($rangeBulan[0][$i]['bln'], $rangeBulan[0][$i]['thn'], $saldo, $bunga, $totalHari);
+                        // $saldoBunga = $saldo;
+                        // $saldo += $jlhBunga;
+                        $totalJumlahBunga += $jlhBunga;
+                        $jlhBungaPph = (10 / 100) * $jlhBunga;
+                        if ($jlhBunga <= 240000) { $jlhBungaPph=0; $jlhDiterima=$jlhBunga - $jlhBungaPph; } 
+                        else { $jlhDiterima=$jlhBunga - $jlhBungaPph; } 
+                        $totalTerima +=$jlhDiterima; 
+                        $totalJumlahBungaPph += $jlhBungaPph;
+                    @endphp 
+                    <td class="text-right">
                         {{ number_format($jlhBunga, 0, ',', '.') }}
                         <input type="hidden" name="simulasi[ssb][dibayar][jlhBunga][{{ $i }}]" value="{{ $jlhBunga }}">
-                        </td>
-                        <td class="text-right">
-                            <input type="hidden" name="simulasi[ssb][dibayar][bungapph][{{ $i }}]" value="{{ $jlhBungaPph }}">
-                            {{ number_format($jlhBungaPph, 0, ',', '.') }}
-                        </td>
-                        <td class="text-right">
-                            <input type="hidden" name="simulasi[ssb][dibayar][jumlahditerima][{{ $i }}]" value="{{ $jlhDiterima }}">
-                            {{ number_format($jlhDiterima, 0, ',', '.') }}
-                        </td>
-                        </tr>
-                        @endfor
+                    </td>
+                    <td class="text-right">
+                        <input type="hidden" name="simulasi[ssb][dibayar][bungapph][{{ $i }}]" value="{{ $jlhBungaPph }}">
+                        {{ number_format($jlhBungaPph, 0, ',', '.') }}
+                    </td>
+                    <td class="text-right">
+                        <input type="hidden" name="simulasi[ssb][dibayar][jumlahditerima][{{ $i }}]" value="{{ $jlhDiterima }}">
+                        {{ number_format($jlhDiterima, 0, ',', '.') }}
+                    </td>
+                </tr>
+                @endfor
                         <tr>
                             <th class="text-center"></th>
                             <th class="text-center"></th>
