@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
@@ -32,18 +33,18 @@ class Exports extends Controller
         $produk = new ProdukKategori;
         $produk = $produk->get();
         $exportData = array();
-        $exportData[] = ['','','Master Data Produk Type'];
+        $exportData[] = ['', '', 'Master Data Produk Type'];
         $exportData[] = [''];
-        $exportData[] = ['NO','KODE','NAMA PRODUK','TIPE PRODUK'];
-        $no=1;
-        foreach($produk as $a){
+        $exportData[] = ['NO', 'KODE', 'NAMA PRODUK', 'TIPE PRODUK'];
+        $no = 1;
+        foreach ($produk as $a) {
             $collect[0] = $no++;
             $collect[1] = $a->kode;
             $collect[2] = $a->nama;
             $collect[3] = $a->tipe_produk;
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData),'master_produk_tipe.xlsx');
+        return  Excel::download(new ExportArray($exportData), 'master_produk_tipe.xlsx');
     }
 
     public function master_produk()
@@ -51,11 +52,11 @@ class Exports extends Controller
         $produk = new Produk;
         $produk = $produk->get();
         $exportData = array();
-        $exportData[] = ['','','Master Produk'];
+        $exportData[] = ['', '', 'Master Produk'];
         $exportData[] = [''];
-        $exportData[] = ['NO','KODE','NAMA PRODUK','TIPE PRODUK','JENIS','ADMIN FEE'];
-        $no=1;
-        foreach($produk as $a){
+        $exportData[] = ['NO', 'KODE', 'NAMA PRODUK', 'TIPE PRODUK', 'JENIS', 'ADMIN FEE'];
+        $no = 1;
+        foreach ($produk as $a) {
             $collect[0] = $no++;
             $collect[1] = $a->kode;
             $collect[2] = $a->nama_produk;
@@ -64,7 +65,7 @@ class Exports extends Controller
             $collect[5] = $a->admin_fee;
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData),'master_produk.xlsx');
+        return  Excel::download(new ExportArray($exportData), 'master_produk.xlsx');
     }
 
     public function master_grade()
@@ -72,11 +73,11 @@ class Exports extends Controller
         $produk = new Grade;
         $produk = $produk->get();
         $exportData = array();
-        $exportData[] = ['','','Master Grade'];
+        $exportData[] = ['', '', 'Master Grade'];
         $exportData[] = [''];
-        $exportData[] = ['NO','KODE','NAMA GRADE','SIMPANAN POKOK (RP)','SIMPANAN WAJIB (RP)','SIMPANAN SUKARELA (RP)'];
-        $no=1;
-        foreach($produk as $a){
+        $exportData[] = ['NO', 'KODE', 'NAMA GRADE', 'SIMPANAN POKOK (RP)', 'SIMPANAN WAJIB (RP)', 'SIMPANAN SUKARELA (RP)'];
+        $no = 1;
+        foreach ($produk as $a) {
             $collect[0] = $no++;
             $collect[1] = $a->kode;
             $collect[2] = $a->grade_name;
@@ -85,7 +86,7 @@ class Exports extends Controller
             $collect[5] = number_format($a->simp_sukarela);
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData),'master_grade.xlsx');
+        return  Excel::download(new ExportArray($exportData), 'master_grade.xlsx');
     }
 
     public function master_departemen()
@@ -93,18 +94,18 @@ class Exports extends Controller
         $produk = new Departemen;
         $produk = $produk->get();
         $exportData = array();
-        $exportData[] = ['','','Master Departemen'];
+        $exportData[] = ['', '', 'Master Departemen'];
         $exportData[] = [''];
-        $exportData[] = ['NO','KODE','NAMA DEPARTEMEN','SUB DEPARTEMEN'];
-        $no=1;
-        foreach($produk as $a){
+        $exportData[] = ['NO', 'KODE', 'NAMA DEPARTEMEN', 'SUB DEPARTEMEN'];
+        $no = 1;
+        foreach ($produk as $a) {
             $collect[0] = $no++;
             $collect[1] = $a->kode;
             $collect[2] = $a->departemen;
             $collect[3] = ' ';
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData),'master_departemen.xlsx');
+        return  Excel::download(new ExportArray($exportData), 'master_departemen.xlsx');
     }
 
     public function master_profit()
@@ -112,18 +113,18 @@ class Exports extends Controller
         $produk = new ProfitCenter;
         $produk = $produk->get();
         $exportData = array();
-        $exportData[] = ['','','Master Profit Center'];
+        $exportData[] = ['', '', 'Master Profit Center'];
         $exportData[] = [''];
-        $exportData[] = ['NO','KODE','NAMA PROFIT CENTER','KETERANGAN'];
-        $no=1;
-        foreach($produk as $a){
+        $exportData[] = ['NO', 'KODE', 'NAMA PROFIT CENTER', 'KETERANGAN'];
+        $no = 1;
+        foreach ($produk as $a) {
             $collect[0] = $no++;
             $collect[1] = $a->kode;
             $collect[2] = $a->nama;
             $collect[3] = $a->desc;
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData),'master_profit_center.xlsx');
+        return  Excel::download(new ExportArray($exportData), 'master_profit_center.xlsx');
     }
 
 
@@ -131,61 +132,61 @@ class Exports extends Controller
     {
         $anggota = new Anggota;
         // $anggota = $anggota->get();
-        
+
         $anggota = Anggota::select(DB::raw('*'))
-            ->with(['simpananAnggota' => function($q) {
-                $q
-                ->with(['detailSimpas' => function($q2) {
-                    $q2
-                    ->whereNull('deleted_at');
-                }])
-                ->where([
-                    ['produk_id','=',4],
-                    ['status_rekening','=', 1]
-                ]);
-            },
-            'pinjamanAnggota' => function($q) {
-                $q->whereIn('status_rekening',[2,3])
-                ->where('sisa_hutangs','>','0');
-            }
+            ->with([
+                'simpananAnggota' => function ($q) {
+                    $q
+                        ->with(['detailSimpas' => function ($q2) {
+                            $q2
+                                ->whereNull('deleted_at');
+                        }])
+                        ->where([
+                            ['produk_id', '=', 4],
+                            ['status_rekening', '=', 1]
+                        ]);
+                },
+                'pinjamanAnggota' => function ($q) {
+                    $q->whereIn('status_rekening', [2, 3])
+                        ->where('sisa_hutangs', '>', '0');
+                }
             ])
             ->orderBy('t_anggota.no_anggota')->get();
 
         $exportData = array();
-        $exportData[] = ['','','Potongan HRD'];
+        $exportData[] = ['', '', 'Potongan HRD'];
         $exportData[] = [''];
-        $exportData[] = ['NO','KODE PC','KODPEG','NAMA','TOTAL POTONGAN', 'POTONGAN POKOK', 'POTONGAN WAJIB', 'POTONGAN SIMPAS', 'POTONGAN SEMBAKO', 'POTONGAN KOPERASI', 'POTONGAN DKM', 'SISA POTONGAN'];
-        $no=1;
-        foreach($anggota as $a){
-            if(count($a->simpananAnggota)>0){
+        $exportData[] = ['NO', 'KODE PC', 'KODPEG', 'NAMA', 'TOTAL POTONGAN', 'POTONGAN KOPERASI', 'POTONGAN SEMBAKO', 'POTONGAN SIMPAS', 'POTONGAN DKM', 'SISA POTONGAN', 'POTONGAN POKOK', 'POTONGAN WAJIB'];
+        $no = 1;
+        foreach ($anggota as $a) {
+            if (count($a->simpananAnggota) > 0) {
                 $simpananArr = json_decode(json_encode($a->simpananAnggota), true);
-                $detailSimpasArr = array_map(function($val){
-                    if(count($val['detail_simpas'])> 0){
+                $detailSimpasArr = array_map(function ($val) {
+                    if (count($val['detail_simpas']) > 0) {
                         return $val['detail_simpas'][0]['tabungan_per_bulan'];
-                    }else{
+                    } else {
                         return 0;
                     }
-                },$simpananArr);
+                }, $simpananArr);
                 $totalAngsuranSimpas = array_sum($detailSimpasArr);
-            }else {
+            } else {
                 $totalAngsuranSimpas = 0;
             }
-            if(count($a->pinjamanAnggota)>0){
+            if (count($a->pinjamanAnggota) > 0) {
                 $pinjamanArr = json_decode(json_encode($a->pinjamanAnggota), true);
-                $totalAngsuranPinjaman = array_sum(array_column($pinjamanArr,'angsuran'));
-                $totalHutang = array_sum(array_column($pinjamanArr,'sisa_hutangs'));
-
-            }else {
-                $totalAngsuranPinjaman = 0; 
-                $totalHutang = 0; 
+                $totalAngsuranPinjaman = array_sum(array_column($pinjamanArr, 'angsuran'));
+                $totalHutang = array_sum(array_column($pinjamanArr, 'sisa_hutangs'));
+            } else {
+                $totalAngsuranPinjaman = 0;
+                $totalHutang = 0;
             }
-            
+
             $totalPotongan = $totalAngsuranSimpas + $totalAngsuranPinjaman;
 
             $collect[0] = $no++;
-            if($a->profits===null){
+            if ($a->profits === null) {
                 $collect[1] = '-';
-            }else{
+            } else {
                 $collect[1] = $a->profits->kode;
             }
             $collect[2] = $a->no_anggota;
@@ -200,7 +201,7 @@ class Exports extends Controller
             $collect[11] = $totalHutang;
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData),'potongan_hrd.xlsx');
+        return  Excel::download(new ExportArray($exportData), 'potongan_hrd.xlsx');
     }
 
     public function master_sumber()
@@ -208,24 +209,24 @@ class Exports extends Controller
         $produk = new SumberDana;
         $produk = $produk->get();
         $exportData = array();
-        $exportData[] = ['','','Master Sumber Dana'];
+        $exportData[] = ['', '', 'Master Sumber Dana'];
         $exportData[] = [''];
-        $exportData[] = ['NO','KODE','SUMBER DANA'];
-        $no=1;
-        foreach($produk as $a){
+        $exportData[] = ['NO', 'KODE', 'SUMBER DANA'];
+        $no = 1;
+        foreach ($produk as $a) {
             $collect[0] = $no++;
             $collect[1] = $a->kode;
             $collect[2] = $a->sumber_dana;
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData),'master_sumber_dana.xlsx');
+        return  Excel::download(new ExportArray($exportData), 'master_sumber_dana.xlsx');
     }
 
     public function sertifikat_ssb($id)
     {
 
         $simpanan = Simpanan::where('id', $id)->with(['produk', 'anggota', 'detail', 'detailsimpas'])->first();
-        
+
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
@@ -322,7 +323,7 @@ class Exports extends Controller
         $sheet->setCellValue('A1', "SERTIFIKAT");
         // $sheet->setCellValue('A2', "Simpanan Sukarela Berjangka");
         $sheet->setCellValue('A2',  $simpanan->produk->nama_produk);
-       
+
         $sheet->setCellValue('A3', "Copy Ke 1");
 
         $sheet->setCellValue('A18', "TANDA TANGAN");
@@ -357,16 +358,16 @@ class Exports extends Controller
         $sheet->setCellValue('D30', ':');
         $sheet->setCellValue('D31', ':');
 
-        $sheet->setCellValue('A5','Nomor Sertifikat');
-        $sheet->setCellValue('A6','Nomor Anggota');
-        $sheet->setCellValue('A7','Nama Anggota');
-        $sheet->setCellValue('A8','Jumlah Nominal');
-        $sheet->setCellValue('A9','Terbilang');
-        $sheet->setCellValue('A10','Jangka Waktu');
-        $sheet->setCellValue('A11','Bunga per tahun	');
-        $sheet->setCellValue('A12','Jenis Simpanan');
-        $sheet->setCellValue('A13','Tanggal Penempatan');
-        $sheet->setCellValue('A14','Tangga Jatuh Tempo');
+        $sheet->setCellValue('A5', 'Nomor Sertifikat');
+        $sheet->setCellValue('A6', 'Nomor Anggota');
+        $sheet->setCellValue('A7', 'Nama Anggota');
+        $sheet->setCellValue('A8', 'Jumlah Nominal');
+        $sheet->setCellValue('A9', 'Terbilang');
+        $sheet->setCellValue('A10', 'Jangka Waktu');
+        $sheet->setCellValue('A11', 'Bunga per tahun	');
+        $sheet->setCellValue('A12', 'Jenis Simpanan');
+        $sheet->setCellValue('A13', 'Tanggal Penempatan');
+        $sheet->setCellValue('A14', 'Tangga Jatuh Tempo');
 
         $sheet->setCellValue('A22', 'Nomor Sertifikat');
         $sheet->setCellValue('A23', 'Nomor Anggota');
@@ -389,25 +390,25 @@ class Exports extends Controller
         $word_1 = date('Y', strtotime($simpanan->created_at)) . $simpanan->id . $simpanan->no_anggota;
         $word_2 = $simpanan->no_anggota;
         $word_3 = $simpanan->nama;
-        $word_4 = 'Rp. '. number_format($simpanan->saldo_akhir, 0, ',', '.');
-        $word_5=  strtoupper(Terbilang::make($simpanan->saldo_akhir, ' rupiah')) ;
+        $word_4 = 'Rp. ' . number_format($simpanan->saldo_akhir, 0, ',', '.');
+        $word_5 =  strtoupper(Terbilang::make($simpanan->saldo_akhir, ' rupiah'));
         $word_6 = $simpanan->jangka_waktu;
-        $word_7 = $simpanan->jumlah_bunga .'%';
+        $word_7 = $simpanan->jumlah_bunga . '%';
         // $word_8 = strtoupper($simpanan->detail[0]->jenis);
         $word_8 = strtoupper($simpanan->produk->nama_produk);
         $word_9 = date('d M Y', strtotime($simpanan->created_at));
         $word_10 = $tempo;
 
-        $sheet->setCellValue('E5',$word_1);
-        $sheet->setCellValue('E6',$word_2);
-        $sheet->setCellValue('E7',$word_3);
-        $sheet->setCellValue('E8',$word_4);
-        $sheet->setCellValue('E9',$word_5);
-        $sheet->setCellValue('E10',$word_6);
-        $sheet->setCellValue('E11',$word_7);
-        $sheet->setCellValue('E12',$word_8);
-        $sheet->setCellValue('E13',$word_9);
-        $sheet->setCellValue('E14',$word_10);
+        $sheet->setCellValue('E5', $word_1);
+        $sheet->setCellValue('E6', $word_2);
+        $sheet->setCellValue('E7', $word_3);
+        $sheet->setCellValue('E8', $word_4);
+        $sheet->setCellValue('E9', $word_5);
+        $sheet->setCellValue('E10', $word_6);
+        $sheet->setCellValue('E11', $word_7);
+        $sheet->setCellValue('E12', $word_8);
+        $sheet->setCellValue('E13', $word_9);
+        $sheet->setCellValue('E14', $word_10);
 
         $sheet->setCellValue('E22', $word_1);
         $sheet->setCellValue('E23', $word_2);
@@ -445,8 +446,5 @@ class Exports extends Controller
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf($spreadsheet);
         ob_end_clean();
         $writer->save('php://output');
-
-
     }
 }
-?>

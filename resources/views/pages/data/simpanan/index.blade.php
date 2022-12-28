@@ -203,7 +203,7 @@ Data Simpanan
         <div class="modal-content">
             <form action="{{ route('data.simpanan.penutupan') }}" method="POST">
                 @csrf
-                <input type="hidden" class="form-control" name="id_simpanan" id="id-simpanan" >
+                <input type="hidden" class="form-control" name="id_simpanan" id="id-simpanan">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">Form Penutupan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

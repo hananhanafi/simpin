@@ -44,10 +44,10 @@ class PelunasanController extends Controller
                 t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
                 t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening, t_pembiayaan.nilai_pencairan,
                 t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi,t_pembiayaan.angsuran')
-        ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
-        ->where('t_pembiayaan.no_anggota', $pinjamanDetail->no_anggota)
-        ->with('detail')
-        ->get();
+            ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
+            ->where('t_pembiayaan.no_anggota', $pinjamanDetail->no_anggota)
+            ->with('detail')
+            ->get();
 
         $anggota    =   Anggota::leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
             ->leftJoin('p_grade', 'p_grade.id', '=', 't_anggota.grade_id')
@@ -60,12 +60,12 @@ class PelunasanController extends Controller
             ->get();
 
         $pelunasan = PembiayaanTransaksi::selectRaw('*')
-        ->where('t_pembiayaan_transaksi.id_pembiayaan', $request->idPinjaman)
-        ->get();
-        
+            ->where('t_pembiayaan_transaksi.id_pembiayaan', $request->idPinjaman)
+            ->get();
+
         $getCicilan = PembiayaanTransaksi::selectRaw('max(cicilan_ke) as cicilan')
-        ->where('t_pembiayaan_transaksi.id_pembiayaan', $request->idPinjaman)
-        ->first();
+            ->where('t_pembiayaan_transaksi.id_pembiayaan', $request->idPinjaman)
+            ->first();
 
         $cicilan = $getCicilan ? $getCicilan->cicilan + 1 : 1;
         $type_label = $request->type == 2 ? 'Pelunasan Dipercepat' : ($request->type == 3 ? 'Pelunasan Topup' : 'Pelunasan Sesuai Cicilan');
@@ -103,7 +103,7 @@ class PelunasanController extends Controller
         $anggota->total_pelunasan = $total_pelunasan;
         $anggota->total_dana_mengendap = $total_dana_mengendap;
 
-        
+
         $produk     = Produk::whereHas('tipePr', function ($qry) {
             $qry->where('tipe_produk', 2);
         })->where('status_produk', 1)->orderBy('kode')->get();
@@ -131,16 +131,16 @@ class PelunasanController extends Controller
             // return $request;
             DB::beginTransaction();
             $pinjaman = Pinjaman::find($request->id_pinjaman);
-            if($request->type==2){
+            if ($request->type == 2) {
                 $cicilanke = $request->cicilan;
                 for ($i = 1; $i <= ($request->jumlah_cicilan); $i++) {
-                    
+
                     list($noRekening, $noAnggota)          = explode('__', $request->no_rekening);
                     $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
                     $sisaHutang = intVal(str_replace('.', '', $request->sisa_hutang));
                     $nilaiTrans = intVal(str_replace('.', '', $request->nilai_trans));
 
-                    $transAmount = $nilaiTrans/$request->jumlah_cicilan;
+                    $transAmount = $nilaiTrans / $request->jumlah_cicilan;
                     $noTrans = $request->no_anggota . "_" . $request->id_pinjaman . "_" . $request->type . "_" . $cicilanke;
                     $newPembiayaanTransaksi = new PembiayaanTransaksi();
                     $newPembiayaanTransaksi->no_rekening = $noRekening;
@@ -159,8 +159,7 @@ class PelunasanController extends Controller
                     $newPembiayaanTransaksi->save();
                     $cicilanke++;
                 }
-            }
-            else if($request->type==3){
+            } else if ($request->type == 3) {
                 // dd($request->pinjaman['produk_id']);
                 $cicilanke = $request->cicilan_ke;
                 // $jumlahCicilan = (intVal($request->jangka_waktu) - intVal($cicilanke)-1);
@@ -183,14 +182,14 @@ class PelunasanController extends Controller
 
                 // dd($nilaiPencairan);
 
-                if($nilaiPencairan<0) {
+                if ($nilaiPencairan < 0) {
                     DB::rollback();
                     Session::flash('fail', 'Jumlah pencairan tidak boleh lebih kecil dari sisa hutang');
                     return back();
                 }
-                
+
                 for ($i = $cicilanke; $i <= ($request->jangka_waktu); $i++) {
-                    
+
                     $angsuran = intVal(str_replace('.', '', $request->angsuran));
                     // $transAmount = $request->jumlah_cicilan;
                     $noTrans = $request->no_anggota . "_" . $request->id_pinjaman . "_" . $request->type . "_" . $i;
@@ -211,7 +210,7 @@ class PelunasanController extends Controller
                     $newPembiayaanTransaksi->save();
                 }
 
-                
+
                 list($idProduk, $tipeProduk, $namaProduk) = explode('__', $request->pinjaman['produk_id']);
                 $rekening       = Simpanan::where('no_anggota', $request->no_anggota)->first();
                 // $jumlahPinjamanBaru = intVal(str_replace('.', '', $request->pinjaman['jumlah_pinjaman_baru']));
@@ -256,13 +255,13 @@ class PelunasanController extends Controller
                 $newPinjaman->approv_note       = '-';
                 $newPinjaman->approv_lunas_by   = 0;
                 $newPinjaman->delete_by         = 0;
-                
+
                 $newPinjaman->status_rekening   = 1;
                 $newPinjaman->approv_note       = "PELUNASAN TOPUP";
                 $newPinjaman->approv_by         = 1;
                 $newPinjaman->update_by         = Auth::user()->id;
                 $newPinjaman->update_date       = date('Y-m-d H:i:s');
-                
+
                 // $newPinjaman->save();
 
 
@@ -283,7 +282,7 @@ class PelunasanController extends Controller
                 for ($i = 1; $i <= ($request->pinjaman['jumlah_bulan']); $i++) {
                     $angsuran       = round(abs($financial->PPMT(($bungaEfektif / 100) / $bulan, $i, $bulan, $saldo)));
                     $angsuranMargin = $totalAngsuran - $angsuran;
-    
+
                     $pinjamanDetail                 = new PinjamanDetail();
                     $pinjamanDetail->uuid           = Str::uuid();
                     $pinjamanDetail->tabungan_id    = $idPinjaman;
@@ -298,22 +297,21 @@ class PelunasanController extends Controller
                     $pinjamanDetail->angsuran_margin = $angsuranMargin;
                     $pinjamanDetail->total_angsuran = $totalAngsuran;
                     $pinjamanDetail->save();
-    
+
                     $sisaPokok -= $angsuran;
                     $sisaHutang -= $totalAngsuran;
                     $subTotalAngsuran += $totalAngsuran;
                     $totalAngsuranPokok += $angsuran;
                     $totalAngsuranMargin += $angsuranMargin;
                 }
-            }
-            else{
-                
+            } else {
+
                 $noTrans = $request->no_anggota . "_" . $request->id_pinjaman . "_" . $request->type . "_" . $request->cicilan;
                 list($noRekening, $noAnggota)          = explode('__', $request->no_rekening);
                 $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
                 $sisaHutang = intVal(str_replace('.', '', $request->sisa_hutang));
                 $nilaiTrans = intVal(str_replace('.', '', $request->nilai_trans));
-                
+
                 $newPembiayaanTransaksi = new PembiayaanTransaksi();
                 $newPembiayaanTransaksi->no_rekening = $noRekening;
                 $newPembiayaanTransaksi->tgl_trans = $request->tgl_trans;
@@ -331,9 +329,9 @@ class PelunasanController extends Controller
                 $newPembiayaanTransaksi->save();
             }
             $sisa_hutang =  $pinjaman->sisa_hutangs - $nilaiTrans;
-            $pinjaman->sisa_hutangs = $sisa_hutang; 
-            $pinjaman->status_rekening = 3; 
-            $pinjaman->nilai_pelunasan = $pinjaman->nilai_pelunasan + $nilaiTrans; 
+            $pinjaman->sisa_hutangs = $sisa_hutang;
+            $pinjaman->status_rekening = 3;
+            $pinjaman->nilai_pelunasan = $pinjaman->nilai_pelunasan + $nilaiTrans;
             $pinjaman->save();
 
 

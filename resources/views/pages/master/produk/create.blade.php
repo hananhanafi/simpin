@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Tambah Data Master Produk
+Tambah Data Master Produk
 @endsection
 
 @section('content')
@@ -59,7 +59,7 @@
                                     <select class="form-control select2" style="width: 100%;" name="tipe_produk" required data-parsley-required-message="Tipe Produk Harus Di Pilih" onchange="kodeProduk(this.value)">
                                         <option value="">-Pilih-</option>
                                         @foreach($kategori as $row)
-                                            <option value = "{{$row->kode}}-{{ $row->tipe_produk }}-{{strtolower($row->nama)}}" {{ old('tipe_produk') == $row->kode ? 'selected' : '' }}>{{ $row->kode }} - {{$row->nama}}</option>
+                                        <option value="{{$row->kode}}-{{ $row->tipe_produk }}-{{strtolower($row->nama)}}" {{ old('tipe_produk') == $row->kode ? 'selected' : '' }}>{{ $row->kode }} - {{$row->nama}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -101,26 +101,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($i=1; $i<=10 ;$i++)
-                                        <tr id="row{{ $i }}">
-                                            <td class="text-center">{{ $i }}</td>
-                                            <td class="text-center">
-                                                <input type="number" name="jangka_waktu[{{ $i }}]" class="form-control" id="jangka_waktu_{{ $i }}" placeholder="Dalam Bulan" onkeyup="hitungEfektif({{ $i }})">
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="number" name="margin[{{ $i }}]" class="form-control" id="bunga_pa_{{ $i }}" placeholder="Persentase Margin" step=0.01 onkeyup="hitungEfektif({{ $i }})">
-                                            </td>
-                                            {{-- <td class="text-center">
+                                    @for ($i=1; $i<=10 ;$i++) <tr id="row{{ $i }}">
+                                        <td class="text-center">{{ $i }}</td>
+                                        <td class="text-center">
+                                            <input type="number" name="jangka_waktu[{{ $i }}]" class="form-control" id="jangka_waktu_{{ $i }}" placeholder="Dalam Bulan" onkeyup="hitungEfektif({{ $i }})">
+                                        </td>
+                                        <td class="text-center">
+                                            <input type="number" name="margin[{{ $i }}]" class="form-control" id="bunga_pa_{{ $i }}" placeholder="Persentase Margin" step=0.01 onkeyup="hitungEfektif({{ $i }})">
+                                        </td>
+                                        {{-- <td class="text-center">
                                                 <input type="number" name="margin_flat[{{ $i }}]" class="form-control" id="bunga_efektif_{{ $i }}" placeholder="Margin Flat" step=0.01 readonly>
-                                            </td> --}}
-                                            <td class="text-center">
-                                                <input type="number" name="asuransi[{{ $i }}]" class="form-control" placeholder="Persentase Asuransi" step=0.01>
-                                            </td>
-                                            <td>
-                                                <button type="button" id="{{ $i }}" class="btn btn-sm btn-danger btn_remove"><i class="fa fa-times"></i></button>
-                                            </td>
+                                        </td> --}}
+                                        <td class="text-center">
+                                            <input type="number" name="asuransi[{{ $i }}]" class="form-control" placeholder="Persentase Asuransi" step=0.01>
+                                        </td>
+                                        <td>
+                                            <button type="button" id="{{ $i }}" class="btn btn-sm btn-danger btn_remove"><i class="fa fa-times"></i></button>
+                                        </td>
                                         </tr>
-                                    @endfor
+                                        @endfor
                                 </tbody>
                             </table>
                         </div>
@@ -145,9 +144,9 @@
 <script type="text/javascript" src="{{ asset('js') }}/currency.js"></script>
 <script>
     $('#form-tambah').parsley();
-    $(document).ready(function(){
+    $(document).ready(function() {
 
-		var no ='{{ $i }}';
+        var no = '{{ $i }}';
         var html
 
         // $('#div-margin').hide();
@@ -157,7 +156,7 @@
                 input_val = numberToCurrency(input_val);
                 $(this).val(input_val);
             },
-            blur: function() { 
+            blur: function() {
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val, true, true);
                 $(this).val(input_val);
@@ -169,43 +168,43 @@
                 input_val = numberToCurrency(input_val);
                 $(this).val(input_val);
             },
-            blur: function() { 
+            blur: function() {
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val, true, true);
                 $(this).val(input_val);
             }
         });
-		$('#tambah').click(function(){
+        $('#tambah').click(function() {
 
-            html = '<tr id="row'+no+'">\
-                        <td class="text-center">'+no+'</td>\
+            html = '<tr id="row' + no + '">\
+                        <td class="text-center">' + no + '</td>\
                         <td>\
-                            <input type="number" name="jangka_waktu['+no+']" class="form-control" placeholder="Dalam Bulan"/>\
+                            <input type="number" name="jangka_waktu[' + no + ']" class="form-control" placeholder="Dalam Bulan"/>\
                         </td>\
                         <td>\
-                            <input type="number" name="margin['+no+']" class="form-control" placeholder="Persentase Margin" step=0.01/>\
+                            <input type="number" name="margin[' + no + ']" class="form-control" placeholder="Persentase Margin" step=0.01/>\
                         </td>\
                         <td>\
-                            <input type="number" name="margin_flat['+no+']" class="form-control" placeholder="Margin Flat" step=0.01/>\
+                            <input type="number" name="margin_flat[' + no + ']" class="form-control" placeholder="Margin Flat" step=0.01/>\
                         </td>\
                         <td>\
-                            <input type="number" name="asuransi['+no+']" class="form-control" placeholder="Persentase Asuransi" step=0.01>\
+                            <input type="number" name="asuransi[' + no + ']" class="form-control" placeholder="Persentase Asuransi" step=0.01>\
                         </td>\
                         <td>\
-                            <button type="button" id="'+no+'" class="btn btn-danger btn-sm btn_remove"><i class="fa fa-times"></i></button>\
+                            <button type="button" id="' + no + '" class="btn btn-danger btn-sm btn_remove"><i class="fa fa-times"></i></button>\
                         </td>\
                     </tr>';
 
-			$('#dynamic-form').append(html);
+            $('#dynamic-form').append(html);
             no++;
-		});
-		$(document).on('click', '.btn_remove', function(){
-			var button_id = $(this).attr("id");
-			$('#row'+button_id+'').remove();
-		});
-	});
+        });
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+    });
 
-    function kodeProduk(val){
+    function kodeProduk(val) {
         // if()
         // alert(val)
         // var kode = val.split('-')
@@ -216,25 +215,25 @@
         //     $('#div-asuransi').show()
         // }
         // else{
-            $('#div-margin').show();
-            $('#tambah').show()
-            $('#tipe-margin').show()
-            $('#div-asuransi').hide()
+        $('#div-margin').show();
+        $('#tambah').show()
+        $('#tipe-margin').show()
+        $('#div-asuransi').hide()
         // }
     }
 
-    function hitungEfektif(i){
-        var jangka_waktu = $('#jangka_waktu_'+i).val();
-        var bunga_pa = $('#bunga_pa_'+i).val();
-        var bunga_efektif = $('#bunga_efektif_'+i);
-        
+    function hitungEfektif(i) {
+        var jangka_waktu = $('#jangka_waktu_' + i).val();
+        var bunga_pa = $('#bunga_pa_' + i).val();
+        var bunga_efektif = $('#bunga_efektif_' + i);
+
         var bunga = hitungBungaEfektif(bunga_pa, jangka_waktu);
         bunga_efektif.val(bunga.toFixed(2))
     }
 </script>
 <style>
-    .parsley-errors-list li{
-        color : red !important;
+    .parsley-errors-list li {
+        color: red !important;
         font-style: italic;
     }
 </style>

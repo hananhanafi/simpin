@@ -20,7 +20,7 @@
 
     <div class="col-md-12" style="{{ $hiderollover }}">
         <h4>SSB (SIMPANAN SUKARELA BERJANGKA)</h4>
-        <h5>BUNGA ROLLOVER</h5>
+        <h5>MAJEMUK</h5>
         <table class="table table-bordered table-striped simulasi">
             <thead>
                 <tr>
@@ -100,7 +100,7 @@
 
     <div class="col-md-12" style="{{ $hidedibayar }}">
         <h4>SSB (SIMPANAN SUKARELA BERJANGKA)</h4>
-        <h5>BUNGA DIBAYAR</h5>
+        <h5>DIBAYAR</h5>
         <table class="table table-bordered table-striped simulasi">
             <thead>
                 <tr>

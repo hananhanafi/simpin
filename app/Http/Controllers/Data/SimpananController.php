@@ -198,7 +198,7 @@ class SimpananController extends Controller
                 $simpanan->delete_note      = $request->keterangan;
                 $simpanan->update_date      = date('Y-m-d H:i:s');
                 $simpanan->update_by        = Auth::user()->id;
-                $simpanan->saldo_akhir        = $request->saldo - ($request->pinalti+$request->pph);
+                $simpanan->saldo_akhir        = $request->saldo - ($request->pinalti + $request->pph);
                 $simpanan->save();
 
                 $anggota = Anggota::where('no_anggota', $request->no_anggota)->first();
@@ -212,7 +212,7 @@ class SimpananController extends Controller
                 $tutup->jenis_simpanan  = $request->jenis_simpanan;
                 $tutup->tgl_pembukaan   = $request->tgl_pembukaan;
                 // $tutup->saldo           = $request->saldo;
-                $simpanan->saldo        = $request->saldo - ($request->pinalti+$request->pph);
+                $simpanan->saldo        = $request->saldo - ($request->pinalti + $request->pph);
                 $tutup->pinalti         = $request->pinalti;
                 $tutup->pph             = $request->pph;
                 $tutup->keterangan      = $request->keterangan;
@@ -228,6 +228,35 @@ class SimpananController extends Controller
             Session::flash('error', 'Terjadi Kesalahan');
         }
         return redirect()->route('data.simpanan.index');
+    }
+
+    public function pencairanApprove(Request $request)
+    {
+        $simpanan = Simpanan::find($request->id_simpanan);
+
+        if ($simpanan) {
+            if ($simpanan->status_rekening == 4) {
+
+                $simpanan->status_rekening   = 5;
+                $simpanan->update_by         = Auth::user()->id;
+                $simpanan->update_date       = date('Y-m-d H:i:s');
+                $simpanan->save();
+
+                Session::flash('success', 'Data Pinjaman Telah Di Terminasi');
+            } else {
+                $simpanan->status_rekening   = 2;
+                $simpanan->pencairan_by      = Auth::user()->id;
+                $simpanan->pencairan_date    = date('Y-m-d H:i:s');
+                $simpanan->update_by         = Auth::user()->id;
+                $simpanan->update_date       = date('Y-m-d H:i:s');
+                $simpanan->save();
+
+                Session::flash('success', 'Data Pinjaman Telah Dicairkan');
+            }
+        } else {
+            Session::flash('fail', 'Data Pinjaman Tidak Di Temukan');
+        }
+        return redirect()->route('data.pencairan.show', $simpanan->id);
     }
 
     public function detail($id)

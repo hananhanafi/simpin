@@ -89,12 +89,12 @@ Tambah Data Simpanan Baru
                             </div>
                             <div class="row mb-3" id="div-ssb">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jenis
-                                    SSB</label>
+                                    Bunga</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" style="width: 100%;" name="jenis_ssb" id="jenis_ssb" onchange="pageSimulasi(0,0)">
                                         <option value="">-Pilih Jenis-</option>
-                                        <option value="rollover">ROLLOVER</option>
-                                        <option value="dibayar">DI BAYAR</option>
+                                        <option value="rollover">MAJEMUK</option>
+                                        <option value="dibayar">DIBAYAR</option>
                                     </select>
                                 </div>
                             </div>

@@ -755,24 +755,25 @@ class DatatableController extends Controller
         //     ->where('t_anggota.nama', '!=', '')
         //     ->where('t_pembiayaan.approv_by', '=', 1)
         //     ->orderBy('t_anggota.nama');
-        
+
         // $anggota = Anggota::orderBy('no_anggota');
         $anggota = Anggota::select(DB::raw('*'))
-            ->with(['simpananAnggota' => function($q) {
-                $q
-                ->with(['detailSimpas' => function($q2) {
-                    $q2
-                    ->whereNull('deleted_at');
-                }])
-                ->where([
-                    ['produk_id','=',4],
-                    ['status_rekening','=', 1]
-                ]);
-            },
-            'pinjamanAnggota' => function($q) {
-                $q->whereIn('status_rekening',[2,3])
-                ->where('sisa_hutangs','>','0');
-            }
+            ->with([
+                'simpananAnggota' => function ($q) {
+                    $q
+                        ->with(['detailSimpas' => function ($q2) {
+                            $q2
+                                ->whereNull('deleted_at');
+                        }])
+                        ->where([
+                            ['produk_id', '=', 4],
+                            ['status_rekening', '=', 1]
+                        ]);
+                },
+                'pinjamanAnggota' => function ($q) {
+                    $q->whereIn('status_rekening', [2, 3])
+                        ->where('sisa_hutangs', '>', '0');
+                }
             ])
             ->orderBy('t_anggota.no_anggota');
 
@@ -794,38 +795,30 @@ class DatatableController extends Controller
             })
             ->editColumn('total_potongan', function ($row) {
                 $simpananArr = json_decode(json_encode($row->simpananAnggota), true);
-                $detailSimpasArr = array_map(function($val){
-                    if(count($val['detail_simpas'])> 0){
+                $detailSimpasArr = array_map(function ($val) {
+                    if (count($val['detail_simpas']) > 0) {
                         return $val['detail_simpas'][0]['tabungan_per_bulan'];
-                    }else{
+                    } else {
                         return 0;
                     }
-                },$simpananArr);
+                }, $simpananArr);
                 $totalAngsuranSimpas = array_sum($detailSimpasArr);
                 $pinjamanArr = json_decode(json_encode($row->pinjamanAnggota), true);
-                $totalAngsuran = array_sum(array_column($pinjamanArr,'angsuran'));
+                $totalAngsuran = array_sum(array_column($pinjamanArr, 'angsuran'));
                 $totalPotongan = $totalAngsuranSimpas + $totalAngsuran;
                 return '<b>' . number_format($totalPotongan, 0) . '</b>';
             })
             ->editColumn('potongan_koperasi', function ($row) {
-                // return '<b>' . 'potongan_koperasi' . '</b>';
-                
                 if (count($row->pinjamanAnggota) < 1) {
                     return '<b>' . 0 . '</b>';
                 } else {
                     $pinjamanArr = json_decode(json_encode($row->pinjamanAnggota), true);
-                    $totalAngsuran = array_sum(array_column($pinjamanArr,'angsuran'));
+                    $totalAngsuran = array_sum(array_column($pinjamanArr, 'angsuran'));
                     return '<b>' . number_format($totalAngsuran, 0) . '</b>';
                 }
             })
             ->editColumn('potongan_sembako', function ($row) {
                 return '<b>' . 0 . '</b>';
-            })
-            ->editColumn('potongan_pokok', function ($row) {
-                return '<b>' . number_format($row->sim_pokok, 0) . '</b>';
-            })
-            ->editColumn('potongan_wajib', function ($row) {
-                return '<b>' . number_format($row->sim_wajib, 0) . '</b>';
             })
             ->editColumn('potongan_simpas', function ($row) {
                 if (count($row->simpananAnggota) < 1) {
@@ -833,13 +826,13 @@ class DatatableController extends Controller
                 } else {
                     // return '<b>' . $row->simpananAnggota . '</b>';
                     $simpananArr = json_decode(json_encode($row->simpananAnggota), true);
-                    $detailSimpasArr = array_map(function($val){
-                        if(count($val['detail_simpas'])> 0){
+                    $detailSimpasArr = array_map(function ($val) {
+                        if (count($val['detail_simpas']) > 0) {
                             return $val['detail_simpas'][0]['tabungan_per_bulan'];
-                        }else{
+                        } else {
                             return 0;
                         }
-                    },$simpananArr);
+                    }, $simpananArr);
                     $totalAngsuranSimpas = array_sum($detailSimpasArr);
                     return '<b>' . number_format($totalAngsuranSimpas, 0) . '</b>';
                 }
@@ -849,10 +842,16 @@ class DatatableController extends Controller
             })
             ->editColumn('sisa_potongan', function ($row) {
                 $pinjamanArr = json_decode(json_encode($row->pinjamanAnggota), true);
-                $totalHutang = array_sum(array_column($pinjamanArr,'sisa_hutangs'));
+                $totalHutang = array_sum(array_column($pinjamanArr, 'sisa_hutangs'));
                 return '<b>' . number_format($totalHutang, 0) . '</b>';
             })
-            ->rawColumns(['kode_profit', 'no_anggota', 'nama', 'potongan_pokok', 'potongan_wajib', 'potongan_simpas', 'potongan_koperasi', 'sisa_potongan', 'total_potongan', 'potongan_sembako', 'potongan_dkm'])
+            ->editColumn('potongan_pokok', function ($row) {
+                return '<b>' . number_format($row->sim_pokok, 0) . '</b>';
+            })
+            ->editColumn('potongan_wajib', function ($row) {
+                return '<b>' . number_format($row->sim_wajib, 0) . '</b>';
+            })
+            ->rawColumns(['kode_profit', 'no_anggota', 'nama', 'total_potongan', 'potongan_koperasi', 'potongan_sembako', 'potongan_simpas',  'potongan_dkm', 'sisa_potongan', 'potongan_pokok', 'potongan_wajib'])
             ->toJson();
     }
 

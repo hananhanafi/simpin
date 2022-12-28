@@ -18,7 +18,7 @@ class PencairanController extends Controller
 {
     public function show($idPencairan)
     {
-        
+
         $pinjamanDetail   =   Pinjaman::selectRaw('t_pembiayaan.sisa_hutangs,t_pembiayaan.id, t_pembiayaan.no_anggota, t_pembiayaan.no_rekening, t_pembiayaan.produk_id, p_produk.kode, 
                                             p_produk.nama_produk, t_pembiayaan.jml_pinjaman, t_pembiayaan.jml_margin, 
                                             t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
@@ -36,10 +36,10 @@ class PencairanController extends Controller
                 t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
                 t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening, t_pembiayaan.nilai_pencairan,
                 t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi')
-        ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
-        ->where('t_pembiayaan.no_anggota', $pinjamanDetail->no_anggota)
-        ->with('detail')
-        ->get();
+            ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
+            ->where('t_pembiayaan.no_anggota', $pinjamanDetail->no_anggota)
+            ->with('detail')
+            ->get();
 
         $anggota    =   Anggota::leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
             ->leftJoin('p_grade', 'p_grade.id', '=', 't_anggota.grade_id')
@@ -94,12 +94,13 @@ class PencairanController extends Controller
             ->with('anggota', $anggota);
     }
 
-    public function updateJumlahPencairan(Request $request){
+    public function updateJumlahPencairan(Request $request)
+    {
 
         try {
             DB::beginTransaction();
             $pinjaman = Pinjaman::find($request->id);
-    
+
             $pinjaman->admin_fee         = $request->admin_fee_new;
             $pinjaman->asuransi         = $request->asuransi_new;
             $pinjaman->dana_mengendap         = $request->dana_mengendap_new;

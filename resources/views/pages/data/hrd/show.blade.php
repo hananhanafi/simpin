@@ -8,7 +8,7 @@ impor
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Form Data Potongan HRD</h4>
+            <h4 class="mb-sm-0 font-size-18">Form Data Potongan Payroll Mulia</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
@@ -33,21 +33,21 @@ impor
             </div>
             <div class="card-body">
                 @include('includes.alert')
-                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100 scrollmenu">
                     <thead>
                         <tr>
-                            <th class="text-center">No</th>
+                            <!-- <th class="text-center">No</th> -->
                             <th class="text-center">KODE PC</th>
                             <th class="text-center">KDPEG</th>
                             <th class="text-center">NAMA</th>
                             <th class="text-center">TOTAL POTONGAN</th>
-                            <th class="text-center">POTONGAN POKOK</th>
-                            <th class="text-center">POTONGAN WAJIB</th>
-                            <th class="text-center">POTONGAN SIMPAS</th>
                             <th class="text-center">POTONGAN KOPERASI</th>
                             <th class="text-center">POTONGAN SEMBAKO</th>
+                            <th class="text-center">POTONGAN SIMPAS</th>
                             <th class="text-center">POTONGAN DKM</th>
                             <th class="text-center">SISA POTONGAN</th>
+                            <th class="text-center">POTONGAN POKOK</th>
+                            <th class="text-center">POTONGAN WAJIB</th>
                         </tr>
                     </thead>
                 </table>
@@ -119,9 +119,6 @@ impor
             "dataType": "json",
         },
         "columns": [{
-                "data": 'DT_RowIndex'
-            },
-            {
                 "data": "kode_profit"
             },
             {
@@ -134,19 +131,13 @@ impor
                 "data": "total_potongan"
             },
             {
-                "data": "potongan_pokok"
-            },
-            {
-                "data": "potongan_wajib"
-            },
-            {
-                "data": "potongan_simpas"
-            },
-            {
                 "data": "potongan_koperasi"
             },
             {
                 "data": "potongan_sembako"
+            },
+            {
+                "data": "potongan_simpas"
             },
             {
                 "data": "potongan_dkm"
@@ -154,18 +145,24 @@ impor
             {
                 "data": "sisa_potongan"
             },
+            {
+                "data": "potongan_pokok"
+            },
+            {
+                "data": "potongan_wajib"
+            },
         ],
         "columnDefs": [{
                 "className": 'text-center',
-                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             },
             {
                 "searchable": false,
-                "targets": [0, 1, 4, 5, 6, 7, 8, 9, 10, 11]
+                "targets": [0, 1, 4, 5, 6, 7, 8, 9, 10]
             },
             {
                 "orderable": false,
-                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             }
         ],
     });

@@ -196,7 +196,7 @@ Tambah Data Pinjaman Baru
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val, true, true);
                 $(this).val(input_val);
-            }, 
+            },
         });
     });
 
@@ -223,9 +223,9 @@ Tambah Data Pinjaman Baru
 
         var saldo = $('#jumlah_pinjaman').val()
         var jenis_ssb = $('#jenis_ssb').val()
-        
-        const saldoInt = parseInt(saldo.replaceAll('.',''))
-        const adminFee = (saldoInt*0.0125)
+
+        const saldoInt = parseInt(saldo.replaceAll('.', ''))
+        const adminFee = (saldoInt * 0.0125)
         $('#admin_bank').val(numberToCurrency(adminFee))
 
 
@@ -258,7 +258,7 @@ Tambah Data Pinjaman Baru
     function pilihAnggota(val) {
         var get = val.split('__')
         $('#nama').val(get[1])
-        pageSimulasi(0,0);
+        pageSimulasi(0, 0);
     }
 
     function pilihProduk(val) {
