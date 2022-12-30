@@ -5,67 +5,98 @@
         @elseif ($request->gaji == '' || $request->gaji == null)
         <h2>Silahkan Isi Gaji Pokok Terlebih Dahulu</h2>
         @else
-        <h4>PLAFON PINJAMAN</h4>
+        <h3>PLAFON PINJAMAN</h3>
 
         <div class="row">
-            <div class="col-md-5">
-                <table class="table table-borderless">
-                    <thead>
+            <div class="col-12">
+                <table class="table" style="border-collapse: collapse;width:100%">
+                    <tbody>
                         <tr>
-                            <th style="width:40%;padding:0.2rem;">Nama</th>
-                            <th style="width:60%;padding:0.2rem;">{{ $anggota->nama }}</th>
-                        </tr>
-                        <tr>
-                            <th style="width:40%;padding:0.2rem;">NIK</th>
-                            <th style="width:60%;padding:0.2rem;">{{ $anggota->nik }}</th>
-                        </tr>
-                        <tr>
-                            <th style="width:40%;padding:0.2rem;">Masa Kerja</th>
-                            <th style="width:60%;padding:0.2rem;">{{ $request->masa }} + 1 Tahun</th>
-                        </tr>
-                        <tr>
-                            <th style="width:40%;padding:0.2rem;">Usia</th>
-                            <th style="width:60%;padding:0.2rem;">{{ $anggota->age }} Tahun</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="col-md-4">
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th style="width:40%;padding:0.2rem;">Gaji Pokok</th>
-                            <th style="width:60%;padding:0.2rem;">Rp.
+                            <td style="width:40%;padding-bottom:0.5rem;width: 100%">Nama</td>
+                            <td>:</td>
+                            <td style="width:60%;padding-bottom:0.5rem;width: 100%">{{ $anggota->nama }}</td>
+                            <td style="width: 100%"></td>
+                            <td style="width:40%;padding-bottom:0.5rem;width: 100%">Gaji Pokok</td>
+                            <td>:</td>
+                            <td style="width:60%;padding-bottom:0.5rem;width: 100%">Rp.
                                 {{ number_format($request->gaji, 0, ',', '.') }}
-                            </th>
+                            </td>
                         </tr>
                         <tr>
-                            <th style="width:40%;padding:0.2rem;">40% Gaji Pokok</th>
-                            <th style="width:60%;padding:0.2rem;">Rp.
+                            <td style="width:40%;padding-bottom:0.5rem;width: 100%">NIK</td>
+                            <td>:</td>
+                            <td style="width:60%;padding-bottom:0.5rem;width: 100%">{{ $anggota->nik }}</td>
+                            <td style="width: 100%"></td>
+                            <td style="width:40%;padding-bottom:0.5rem;width: 100%">40% Gaji Pokok</td>
+                            <td>:</td>
+                            <td style="width:60%;padding-bottom:0.5rem;width: 100%">Rp.
                                 {{ number_format($gaji40, 0, ',', '.') }}
                                 {{-- {{ $request->gaji * 40 }} --}}
-                            </th>
+                            </td>
                         </tr>
-                    </thead>
+                        <tr>
+                            <td style="width:40%;padding-bottom:0.5rem;width: 100%">Masa Kerja</td>
+                            <td>:</td>
+                            <td style="width:60%;padding-bottom:0.5rem;width: 100%">{{ $request->masa }} + 1 Tahun</td>
+                            <td style="width: 100%"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width:40%;padding-bottom:0.5rem;width: 100%">Usia</td>
+                            <td>:</td>
+                            <td style="width:60%;padding-bottom:0.5rem;width: 100%">{{ $anggota->age }} Tahun</td>
+                            <td style="width: 100%"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
+            {{-- <div class="col-md-4">
+                <table class="table" style="border-collapse: collapse">
+                    <tbody>
+                        <tr>
+                            <td style="width:40%;padding-bottom:0.5rem;width: 100%border:1px solid black;">Gaji Pokok</td>
+                            <td style="width:60%;padding-bottom:0.5rem;width: 100%border:1px solid black;">Rp.
+                                {{ number_format($request->gaji, 0, ',', '.') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:40%;padding-bottom:0.5rem;width: 100%border:1px solid black;">40% Gaji Pokok</td>
+                            <td style="width:60%;padding-bottom:0.5rem;width: 100%border:1px solid black;">Rp.
+                                {{ number_format($gaji40, 0, ',', '.') }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> --}}
         </div>
 
         <hr>
-        <h6>ANGSURAN YANG SUDAH ADA</h6>
+        <h4>ANGSURAN YANG SUDAH ADA</h4>
         <div class="row">
             <div class="col-12">
-                <table class="table">
-                    <thead>
+                <table class="table" style="border-collapse: collapse;width:100%">
+                    {{-- <thead>
                         <tr>
-                            <th>Produk</th>
-                            <th>Jumlah</th>
-                            <th>Masa</th>
-                            <th>Angsuran</th>
-                            <th>Tanggal Mulai</th>
+                            <th style="border-bottom: 1px solid black">Produk</th>
+                            <th style="border-bottom: 1px solid black">Jumlah</th>
+                            <th style="border-bottom: 1px solid black">Masa</th>
+                            <th style="border-bottom: 1px solid black">Angsuran</th>
+                            <th style="border-bottom: 1px solid black">Tanggal Mulai</th>
                         </tr>
-                    </thead>
+                    </thead> --}}
                     <tbody>
+                        <tr>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Produk</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Jumlah</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Masa</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Angsuran</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Tanggal Mulai</td>
+                        </tr>
                         @php
                         $totalPinjaman = 0;
                         $ntotalAngsuran = 0;
@@ -77,13 +108,13 @@
                         $angs = $pinjam->detail[0]->total_angsuran;
                         @endphp
                         <tr>
-                            <td>{{ $pinjam->namaproduks }}</td>
-                            <td>Rp. {{ number_format($pnj, 0, ',', '.') }}</td>
-                            <td>{{ $pinjam->jangka_waktu ?? '-' }} bulan</td>
-                            <td>Rp.
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $pinjam->namaproduks }}</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($pnj, 0, ',', '.') }}</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $pinjam->jangka_waktu ?? '-' }} bulan</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp.
                                 {{ number_format($angs ?? '0', 0, ',', '.') }}
                             </td>
-                            <td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">
                                 {{ date('M-Y', strtotime($pinjam->tanggal_mulai)) ?? '-' }}
                             </td>
                         </tr>
@@ -93,11 +124,11 @@
                         @endphp
                         @endforeach
                         <tr>
-                            <td><strong>T O T A L</strong></td>
-                            <td><strong>Rp. {{ number_format($totalPinjaman, 0, ',', '.') }}</strong></td>
-                            <td></td>
-                            <td><strong>Rp. {{ number_format($totalAngsuran, 0, ',', '.') }}</strong></td>
-                            <td></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"><strong>T O T A L</strong></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"><strong>Rp. {{ number_format($totalPinjaman, 0, ',', '.') }}</strong></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"><strong>Rp. {{ number_format($totalAngsuran, 0, ',', '.') }}</strong></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"></td>
                         </tr>
                     </tbody>
 
@@ -105,19 +136,19 @@
             </div>
         </div>
 
-        <hr>
-        <h6>PINJAMAN BARU</h6>
+        {{-- <hr> --}}
+        <h4>PINJAMAN BARU</h4>
         <div class="row">
             <div class="col-12">
-                <table class="table">
-                    <thead>
+                <table class="table" style="border-collapse: collapse;width:100%">
+                    {{-- <thead>
                         <tr>
                             <th>Produk</th>
                             <th>Jumlah</th>
                             <th>Masa</th>
                             <th>Angsuran</th>
                         </tr>
-                    </thead>
+                    </thead> --}}
                     @php
                     $pinj_baru = $request->jml_pengajuan_baru;
                     $bulan_baru = $request->bulan;
@@ -125,22 +156,28 @@
                     @endphp
                     <tbody>
                         <tr>
-                            <td>Pinjaman Baru</td>
-                            <td>Rp. {{ $pinj_baru ?? 0 }}</td>
-                            <td>{{ $bulan_baru ?? 0 }} bulan</td>
-                            <td>Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Produk</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Jumlah</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Masa</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Angsuran</td>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Pinjaman Baru</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ $pinj_baru ?? 0 }}</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $bulan_baru ?? 0 }} bulan</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <hr>
-        <h6>ANGSURAN SETELAH PERMOHONAN</h6>
+        {{-- <hr> --}}
+        <h4>ANGSURAN SETELAH PERMOHONAN</h4>
         <div class="row">
             <div class="col-12">
-                <table class="table">
-                    <thead>
+                <table class="table" style="border-collapse: collapse;width:100%">
+                    {{-- <thead>
                         <tr>
                             <th>Produk</th>
                             <th>Jumlah</th>
@@ -148,8 +185,15 @@
                             <th>Angsuran</th>
                             <th>Tanggal Mulai</th>
                         </tr>
-                    </thead>
+                    </thead> --}}
                     <tbody>
+                        <tr>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Produk</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Jumlah</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Masa</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Angsuran</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Tanggal Mulai</td>
+                        </tr>
                         @php
                         $ntotalAngsuran = 0;
                         @endphp
@@ -160,23 +204,23 @@
                         $ntotalAngsuran += $angs;
                         @endphp
                         <tr>
-                            <td>{{ $p->namaproduks }}</td>
-                            <td>Rp. {{ number_format($pinjaman, 0, ',', '.') }}</td>
-                            <td>{{ $p->jangka_waktu }} bulan</td>
-                            <td>Rp.
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $p->namaproduks }}</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($pinjaman, 0, ',', '.') }}</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $p->jangka_waktu }} bulan</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp.
                                 {{ number_format($angs, 0, ',', '.') }}
                             </td>
-                            <td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">
                                 {{ date('M-Y', strtotime($p->tanggal_mulai)) }}
                             </td>
                         </tr>
                         @endforeach
                         <tr>
-                            <td>Pinjaman Baru</td>
-                            <td>Rp. {{ $pinj_baru ?? 0 }}</td>
-                            <td>{{ $bulan_baru ?? 0 }} bulan</td>
-                            <td>Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>
-                            <td></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Pinjaman Baru</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ $pinj_baru ?? 0 }}</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $bulan_baru ?? 0 }} bulan</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -185,42 +229,42 @@
                         $ntotalAngsuran += $angsuran;
                         @endphp
                         <tr>
-                            <td><strong>T O T A L</strong></td>
-                            <td><strong>Rp. {{ number_format($totalPinjaman, 0, ',', '.') }}</strong></td>
-                            {{-- <td><strong>Rp. {{ $angsuran }}</strong></td> --}}
-                            <td></td>
-                            <td><strong>Rp. {{ number_format($ntotalAngsuran, 0, ',', '.') }}</strong></td>
-                            <td></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"><strong>T O T A L</strong></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"><strong>Rp. {{ number_format($totalPinjaman, 0, ',', '.') }}</strong></td>
+                            {{-- <td style="border-bottom: .2px solid black;padding-bottom:.5rem"><strong>Rp. {{ $angsuran }}</strong></td> --}}
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"><strong>Rp. {{ number_format($ntotalAngsuran, 0, ',', '.') }}</strong></td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem"></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
 
-        <hr>
+        {{-- <hr> --}}
         <div class="row">
             <div class="col-12">
-                <table class="table table-borderless">
+                <table class="table" style="border-collapse: collapse;width:100%">
                     @php
                     $persen = ceil(($ntotalAngsuran / $request->gaji) * 100);
                     @endphp
-                    <thead>
+                    <tbody>
                         <tr>
-                            <th colspan="3">
-                                <h6>PRESENTASE DARI GAJI</h6>
-                            </th>
-                            <th>
-                                <h6>{{ number_format($persen, 2) }}%
+                            <td colspan="3">
+                                <h4>PRESENTASE DARI GAJI</h4>
+                            </td>
+                            <td>
+                                <h4>{{ number_format($persen, 2) }}%
                                     {{-- {!! $ntotalAngsuran < $totalAngsuran
                                             ? '<span class="text-success">DISETUJUI</span>'
                                             : '<span class="text-danger">DITOLAK</span>' !!} --}}
-                                </h6>
+                                </h4>
                                 {{-- @if ($ntotalAngsuran < $totalAngsuran)
                                         <p class="text-success">DISETUJUI</p>
                                     @endif --}}
-                            </th>
+                            </td>
                         </tr>
-                    </thead>
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -82,7 +82,7 @@ Tambah Data Master Produk
                             <div class="row mb-2" id="div-asuransi">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Asuransi</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="asuransis" class="form-control" id="asuransi" placeholder="Asuransi" value="{{ old('asuransi') }}">
+                                    <input type="text" name="asuransis" class="form-control" id="asuransi" placeholder="Asuransi" required data-parsley-required-message="Asuransi Harus Di Isi" value="{{ old('asuransi') }}">
                                 </div>
                             </div>
                         </div>

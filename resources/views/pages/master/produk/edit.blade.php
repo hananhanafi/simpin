@@ -111,7 +111,9 @@
                                             class="col-sm-3 col-form-label">Asuransi</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="asuransis" class="form-control" id="asuransi"
-                                                step="0.1" placeholder="Asuransi" value="{{ $produk->asuransi }}">
+                                                step="0.1" placeholder="Asuransi" 
+                                                required data-parsley-required-message="Asuransi Harus Di Isi"
+                                                value="{{ $produk->asuransi }}">
                                         </div>
                                     </div>
                                 @endif
