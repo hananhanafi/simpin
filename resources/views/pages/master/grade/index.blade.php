@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Master Grade Anggota
+Master Grade Anggota
 @endsection
 
 @section('content')
@@ -46,7 +46,6 @@
                             <th class="text-center">Nama Grade</th>
                             <th class="text-center">Simpanan Pokok</th>
                             <th class="text-center">Simpanan Wajib</th>
-                            <th class="text-center">Simpanan Sukarela</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -62,72 +61,88 @@
 @endsection
 
 @section('css')
-    <!-- DataTables -->
-    <link href="{{ asset('assets') }}/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets') }}/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<!-- DataTables -->
+<link href="{{ asset('assets') }}/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets') }}/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- Responsive datatable examples -->
-    <link href="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{asset('assets')}}/sweetalert/sweetalert.css">
+<!-- Responsive datatable examples -->
+<link href="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{asset('assets')}}/sweetalert/sweetalert.css">
 
-    <style>
-        td{
-            font-size:11px !important;
-        }
-        .text-right{
-            text-align:right !important;
-        }
-    </style>
+<style>
+    td {
+        font-size: 11px !important;
+    }
+
+    .text-right {
+        text-align: right !important;
+    }
+</style>
 @endsection
 
 @section('footscript')
-    <!-- Required datatable js -->
-    <script src="{{ asset('assets') }}/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <!-- Buttons examples -->
-    <script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/jszip/jszip.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/pdfmake/build/pdfmake.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/pdfmake/build/vfs_fonts.js"></script>
-    <script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- Required datatable js -->
+<script src="{{ asset('assets') }}/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('assets') }}/libs/jszip/jszip.min.js"></script>
+<script src="{{ asset('assets') }}/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="{{ asset('assets') }}/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 
-    <!-- Responsive examples -->
-    <script src="{{ asset('assets') }}/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="{{ asset('assets') }}/sweetalert/sweetalert.min.js"></script>
+<!-- Responsive examples -->
+<script src="{{ asset('assets') }}/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('assets') }}/sweetalert/sweetalert.min.js"></script>
 
-    <script>
-        var dt = $('#datatable').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax":{
-                    "url": "{{ route('datatable.grade') }}",
-                    "dataType": "json",
-                },
-            "columns": [
-                { "data": 'DT_RowIndex' },
-                { "data": "kode" },
-                { "data": "grade_name" },
-                { "data": "simpanan_pokok" },
-                { "data": "simpanan_wajib" },
-                { "data": "simpanan_sukarela" },
-                { "data": "aksi" },
-            ],
-            "columnDefs": [
-                { "className": 'text-center', "targets": [0,1,6] },
-                { "className": 'text-right', "targets": [3,4,5] },
-            ]
-        });
+<script>
+    var dt = $('#datatable').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "{{ route('datatable.grade') }}",
+            "dataType": "json",
+        },
+        "columns": [{
+                "data": 'DT_RowIndex'
+            },
+            {
+                "data": "kode"
+            },
+            {
+                "data": "grade_name"
+            },
+            {
+                "data": "simpanan_pokok"
+            },
+            {
+                "data": "simpanan_wajib"
+            },
+            {
+                "data": "aksi"
+            },
+        ],
+        "columnDefs": [{
+                "className": 'text-center',
+                "targets": [0, 1, 5]
+            },
+            {
+                "className": 'text-right',
+                "targets": [3, 4, 5]
+            },
+        ]
+    });
 
 
-        function hapus(uuid){
-            var url = '{{ route("master.grade.index") }}/' + uuid;
-            $('#delete-form').attr('action', url);
+    function hapus(uuid) {
+        var url = '{{ route("master.grade.index") }}/' + uuid;
+        $('#delete-form').attr('action', url);
 
-            swal({
+        swal({
                 title: "Apakah Anda Yakin !",
                 text: "Ingin Menghapus Data Ini ?.",
                 type: "warning",
@@ -138,15 +153,13 @@
                 closeOnConfirm: false,
                 closeOnCancel: true
             },
-            function (isConfirm) {
+            function(isConfirm) {
                 if (isConfirm) {
                     $('#delete-form').submit();
                 }
             });
-        }
-
-
-    </script>
+    }
+</script>
 @endsection
 
 @section('modal')

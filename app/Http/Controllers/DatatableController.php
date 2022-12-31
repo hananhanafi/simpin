@@ -147,9 +147,6 @@ class DatatableController extends Controller
             ->editColumn('simpanan_wajib', function ($row) {
                 return '<b>Rp. ' . number_format($row->simp_wajib, 0, ',', '.') . '</b>';
             })
-            ->editColumn('simpanan_sukarela', function ($row) {
-                return '<b>Rp. ' . number_format($row->simp_sukarela, 0, ',', '.') . '</b>';
-            })
             ->addColumn('aksi', function ($row) {
                 $btn = '<div class="btn-group">
                         <button type="button" class="btn btn-primary btn-sm">Aksi</button>
@@ -164,7 +161,7 @@ class DatatableController extends Controller
                     </div>';
                 return $btn;
             })
-            ->rawColumns(['kode', 'grade_name', 'simpanan_pokok', 'simpanan_wajib', 'simpanan_sukarela', 'aksi'])
+            ->rawColumns(['kode', 'grade_name', 'simpanan_pokok', 'simpanan_wajib', 'aksi'])
             ->toJson();
     }
     public function departemen()
