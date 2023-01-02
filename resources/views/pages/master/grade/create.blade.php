@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Tambah Data Master Grade Anggota
+Tambah Data Master Grade Anggota
 @endsection
 
 @section('content')
@@ -65,12 +65,12 @@
                                     <input type="number" name="simp_wajib" class="form-control" id="simp_wajib" placeholder="Simpanan Wajib" required required data-parsley-required-message="Simpanan Wajib Harus Diisi" value="{{ old('simp_wajib') }}">
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <!-- <div class="row mb-2">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Simpanan Wajib</label>
                                 <div class="col-sm-9">
                                     <input type="number" name="simp_sukarela" class="form-control" id="simp_sukarela" placeholder="Simpanan Sukarela"  value="{{ old('simp_sukarela') }}">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-sm-12 text-center">
                                     <button type="submit" class="btn btn-primary btn-sm w-md"><i class="fa fa-save"></i> Simpan Data</button>
@@ -91,13 +91,11 @@
 <script type="text/javascript" src="{{ asset('js') }}/parsley.min.js"></script>
 <script>
     $('#form-tambah').parsley();
-    $(document).ready(function(){
-	});
-
+    $(document).ready(function() {});
 </script>
 <style>
-    .parsley-errors-list li{
-        color : red !important;
+    .parsley-errors-list li {
+        color: red !important;
         font-style: italic;
     }
 </style>

@@ -156,7 +156,7 @@ class Exports extends Controller
         $exportData = array();
         $exportData[] = ['', '', 'Potongan HRD'];
         $exportData[] = [''];
-        $exportData[] = ['NO', 'KODE PC', 'KODPEG', 'NAMA', 'TOTAL POTONGAN', 'POTONGAN KOPERASI', 'POTONGAN SEMBAKO', 'POTONGAN SIMPAS', 'POTONGAN DKM', 'SISA POTONGAN', 'POTONGAN POKOK', 'POTONGAN WAJIB'];
+        $exportData[] = ['KODE PC', 'KODPEG', 'NAMA', 'TOTAL POTONGAN', 'POTONGAN KOPERASI', 'POTONGAN SEMBAKO', 'POTONGAN SIMPAS', 'POTONGAN DKM', 'SISA POTONGAN', 'POTONGAN POKOK', 'POTONGAN WAJIB'];
         $no = 1;
         foreach ($anggota as $a) {
             if (count($a->simpananAnggota) > 0) {
@@ -183,22 +183,21 @@ class Exports extends Controller
 
             $totalPotongan = $totalAngsuranSimpas + $totalAngsuranPinjaman;
 
-            $collect[0] = $no++;
             if ($a->profits === null) {
-                $collect[1] = '-';
+                $collect[0] = '-';
             } else {
                 $collect[1] = $a->profits->kode;
             }
-            $collect[2] = $a->no_anggota;
-            $collect[3] = $a->nama;
-            $collect[4] = $totalPotongan;
-            $collect[5] = $a->sim_pokok;
-            $collect[6] = $a->sim_wajib;
-            $collect[7] = $totalAngsuranSimpas;
-            $collect[8] = 'simpanan_sembako';
-            $collect[9] = $totalAngsuranPinjaman;
-            $collect[10] = 'simpanan_dkm';
-            $collect[11] = $totalHutang;
+            $collect[1] = $a->no_anggota;
+            $collect[2] = $a->nama;
+            $collect[3] = $totalPotongan;
+            $collect[4] = $totalAngsuranPinjaman;
+            $collect[5] = '$row->db_POS';
+            $collect[6] = $totalAngsuranSimpas;
+            $collect[7] = '$row->dkm';
+            $collect[8] = $totalHutang;
+            $collect[9] = $a->sim_pokok;
+            $collect[10] = $a->sim_wajib;
             $exportData[] = $collect;
         }
         return  Excel::download(new ExportArray($exportData), 'potongan_hrd.xlsx');
