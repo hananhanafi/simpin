@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Data;
 
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\PlafonPinjaman;
 use Exception;
 use Illuminate\Support\Str;

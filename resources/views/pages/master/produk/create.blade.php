@@ -44,13 +44,13 @@ Tambah Data Master Produk
                             <div class="row mb-2">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Kode Produk<small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="kode" class="form-control" id="kode" placeholder="Kode Produk" required required data-parsley-required-message="Kode Produk" value="{{ old('kode') }}">
+                                    <input type="text" name="kode" class="form-control" id="kode" placeholder="Kode Produk" required data-parsley-required-message="Kode Produk" value="{{ old('kode') }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nama Produk<small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="nama_produk" class="form-control" id="nama_produk" placeholder="Nama Produk" required required data-parsley-required-message="Nama Produk" value="{{ old('nama_produk') }}">
+                                    <input type="text" name="nama_produk" class="form-control" id="nama_produk" placeholder="Nama Produk" required data-parsley-required-message="Nama Produk" value="{{ old('nama_produk') }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -76,13 +76,13 @@ Tambah Data Master Produk
                             <div class="row mb-2">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Admin Fee<small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="admin_fee" class="form-control" id="admin_fee" placeholder="Admin Fee" required required data-parsley-required-message="Admin Fee Harus Di Isi" value="{{ old('admin_fee') }}">
+                                    <input type="text" name="admin_fee" class="form-control" id="admin_fee" placeholder="Admin Fee" required data-parsley-required-message="Admin Fee Harus Di Isi" value="{{ old('admin_fee') }}">
                                 </div>
                             </div>
                             <div class="row mb-2" id="div-asuransi">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Asuransi</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="asuransis" class="form-control" id="asuransi" placeholder="Asuransi" required data-parsley-required-message="Asuransi Harus Di Isi" value="{{ old('asuransi') }}">
+                                    <input type="text" name="asuransis" class="form-control" id="asuransi" placeholder="Asuransi" value="{{ old('asuransi') }}">
                                 </div>
                             </div>
                         </div>
@@ -101,19 +101,20 @@ Tambah Data Master Produk
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($i=1; $i<=10 ;$i++) <tr id="row{{ $i }}">
+                                    @for ($i=1; $i<=1 ;$i++) 
+                                        <tr id="row{{ $i }}"  class="dynamic-row">
                                         <td class="text-center">{{ $i }}</td>
                                         <td class="text-center">
-                                            <input type="number" name="jangka_waktu[{{ $i }}]" class="form-control" id="jangka_waktu_{{ $i }}" placeholder="Dalam Bulan" onkeyup="hitungEfektif({{ $i }})">
+                                            <input type="number" name="jangka_waktu[{{ $i }}]" class="form-control" id="jangka_waktu_{{ $i }}" placeholder="Dalam Bulan" onkeyup="hitungEfektif({{ $i }})" required data-parsley-required-message="Jangka Waktu Harus Diisi">
                                         </td>
                                         <td class="text-center">
-                                            <input type="number" name="margin[{{ $i }}]" class="form-control" id="bunga_pa_{{ $i }}" placeholder="Persentase Margin" step=0.01 onkeyup="hitungEfektif({{ $i }})">
+                                            <input type="number" name="margin[{{ $i }}]" class="form-control" id="bunga_pa_{{ $i }}" placeholder="Persentase Margin" step=0.01 onkeyup="hitungEfektif({{ $i }})" required data-parsley-required-message="Persentase Margin Harus Diisi">
                                         </td>
                                         {{-- <td class="text-center">
                                                 <input type="number" name="margin_flat[{{ $i }}]" class="form-control" id="bunga_efektif_{{ $i }}" placeholder="Margin Flat" step=0.01 readonly>
                                         </td> --}}
                                         <td class="text-center">
-                                            <input type="number" name="asuransi[{{ $i }}]" class="form-control" placeholder="Persentase Asuransi" step="any">
+                                            <input type="number" name="asuransi[{{ $i }}]" class="form-control" placeholder="Persentase Asuransi" step="any" required data-parsley-required-message="Persentase Asuransi Harus Diisi">
                                         </td>
                                         <td>
                                             <button type="button" id="{{ $i }}" class="btn btn-sm btn-danger btn_remove"><i class="fa fa-times"></i></button>
@@ -175,20 +176,19 @@ Tambah Data Master Produk
             }
         });
         $('#tambah').click(function() {
-
-            html = '<tr id="row' + no + '">\
+            // console.log($('#dynamic-form tr').length)
+            // no = '{{ $i }}';
+            no = $('#dynamic-form tr').length;
+            html = '<tr id="row' + no + '" class="dynamic-row">\
                         <td class="text-center">' + no + '</td>\
                         <td>\
-                            <input type="number" name="jangka_waktu[' + no + ']" class="form-control" placeholder="Dalam Bulan"/>\
+                            <input type="number" name="jangka_waktu[' + no + ']" class="form-control" placeholder="Dalam Bulan" required data-parsley-required-message="Jangka Waktu Harus Diisi"/>\
                         </td>\
                         <td>\
-                            <input type="number" name="margin[' + no + ']" class="form-control" placeholder="Persentase Margin" step=0.01/>\
+                            <input type="number" name="margin[' + no + ']" class="form-control" placeholder="Persentase Margin" step=0.01 required data-parsley-required-message="Persentase Margin Harus Diisi"/>\
                         </td>\
                         <td>\
-                            <input type="number" name="margin_flat[' + no + ']" class="form-control" placeholder="Margin Flat" step=0.01/>\
-                        </td>\
-                        <td>\
-                            <input type="number" name="asuransi[' + no + ']" class="form-control" placeholder="Persentase Asuransi" step=0.01>\
+                            <input type="number" name="asuransi[' + no + ']" class="form-control" placeholder="Persentase Asuransi" step=0.01 required data-parsley-required-message="Persentase Asuransi Harus Diisi"/>\
                         </td>\
                         <td>\
                             <button type="button" id="' + no + '" class="btn btn-danger btn-sm btn_remove"><i class="fa fa-times"></i></button>\
@@ -201,6 +201,9 @@ Tambah Data Master Produk
         $(document).on('click', '.btn_remove', function() {
             var button_id = $(this).attr("id");
             $('#row' + button_id + '').remove();
+            $('#dynamic-form tr.dynamic-row').each( function( index, element ){
+                $( this ).find('td:first-child').text(index+1)
+            });
         });
     });
 
@@ -218,7 +221,7 @@ Tambah Data Master Produk
         $('#div-margin').show();
         $('#tambah').show()
         $('#tipe-margin').show()
-        $('#div-asuransi').hide()
+        // $('#div-asuransi').hide()
         // }
     }
 

@@ -60,8 +60,8 @@ class Exports extends Controller
             $collect[0] = $no++;
             $collect[1] = $a->kode;
             $collect[2] = $a->nama_produk;
-            $collect[3] = $a->tipe_produk;
-            $collect[4] = $a->tipe_akad;
+            $collect[3] = $a->tipe;
+            $collect[4] = $a->jenis_label;
             $collect[5] = $a->admin_fee;
             $exportData[] = $collect;
         }

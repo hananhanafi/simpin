@@ -24,8 +24,24 @@ class DatatableLaporanController extends Controller
             if ($request->bulan != '')
                 $bulan = $request->bulan;
         }
+        if (isset($request->tahun_end)) {
+            if ($request->tahun_end != '')
+                $tahun_end = $request->tahun_end;
+        }
+        if (isset($request->bulan_end)) {
+            if ($request->bulan_end != '')
+                $bulan_end = $request->bulan_end;
+        }
 
-        $anggota = Anggota::whereMonth('reg_date', $bulan)->whereYear('reg_date', $tahun)->orderBy('reg_date');
+        $fromDate = date($tahun.'-'.$bulan.'-01');
+        $endDate = date($tahun_end.'-'.$bulan_end.'-31');
+
+        $anggota = Anggota::
+            whereDate('reg_date','>=',$fromDate)
+            ->whereDate('reg_date','<=',$endDate)
+            // whereMonth('reg_date', '>=', $bulan)
+            // ->whereYear('reg_date', '>=', $tahun)
+            ->orderBy('reg_date');
         // return $bulan.'-'.$tahun;
         return DataTables::of($anggota)
             ->addIndexColumn()

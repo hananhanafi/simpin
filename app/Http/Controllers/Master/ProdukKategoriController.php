@@ -38,7 +38,13 @@ class ProdukKategoriController extends Controller
             Session::flash('success','Data Produk Type Berhasil Di Simpan');
         } catch(Exception $ex){
             DB::rollback();
-            Session::flash('fail','Data Produk Type Tidak Berhasil Di Simpan');
+            $message = $ex->getMessage();
+            if(strpos( $message, "Duplicate entry") !== false){
+                Session::flash('fail','Kode Produk Type Harus Unik');
+                return redirect()->back();
+            }else {
+                Session::flash('fail','Data Produk Type Tidak Berhasil Di Simpan');
+            }
         }
         return redirect()->route('master.produk-kategori.index');
     }
@@ -65,7 +71,13 @@ class ProdukKategoriController extends Controller
             Session::flash('success','Update Data Produk Type Berhasil Di Simpan');
         } catch(Exception $ex){
             DB::rollback();
-            Session::flash('fail','Update Data Produk Type Tidak Berhasil Di Simpan');
+            $message = $ex->getMessage();
+            if(strpos( $message, "Duplicate entry") !== false){
+                Session::flash('fail','Kode Produk Type Harus Unik');
+                return redirect()->back();
+            }else {
+                Session::flash('fail','Update Data Produk Type Tidak Berhasil Di Simpan');
+            }
         }
         return redirect()->route('master.produk-kategori.index');
     }
@@ -80,6 +92,7 @@ class ProdukKategoriController extends Controller
     public function importXlsProses(Request $request){
 
         try{
+            DB::beginTransaction();
             $file = $request->file('file');
             $nama_file = time().'_'.$file->getClientOriginalName();
             // $file->storeAs('public/donatur', $nama_file);
@@ -124,9 +137,16 @@ class ProdukKategoriController extends Controller
         catch(Exception $ex)
         {
             DB::rollback();
-            if (config('app.env') == 'local') {
-                Session::flash('fail',$ex->getMessage());
-            } else {
+            // if (config('app.env') == 'local') {
+            //     Session::flash('fail',$ex->getMessage());
+            // } else {
+            //     Session::flash('fail','Import Data Tipe Produk Tidak Berhasil');
+            // }
+            $message = $ex->getMessage();
+            if(strpos( $message, "Duplicate entry") !== false){
+                Session::flash('fail','Import Data Tipe Produk Tidak Berhasil, Kode Harus Unik');
+                return redirect()->back();
+            }else {
                 Session::flash('fail','Import Data Tipe Produk Tidak Berhasil');
             }
             return redirect()->route('master.produk-kategori.index');
