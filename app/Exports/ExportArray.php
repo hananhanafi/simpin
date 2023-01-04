@@ -3,8 +3,9 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class ExportArray implements FromArray, ShouldAutoSize
+class ExportArray implements FromArray, WithChunkReading
 {
     protected $datas;
 
@@ -16,5 +17,10 @@ class ExportArray implements FromArray, ShouldAutoSize
     function array(): array
     {
         return $this->datas;
+    }
+    
+    public function chunkSize(): int
+    {
+        return 1000;
     }
 }

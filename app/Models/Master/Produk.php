@@ -50,6 +50,17 @@ class Produk extends Model
         } else
             return '<i class="text-muted">not-set</i>';
     }
+
+    function getJenisLabelAttribute()
+    {
+        if (isset($this->tipePr->tipe_produk)) {
+            if ($this->tipePr->tipe_produk == 1)
+                return 'Simpanan';
+            else
+                return 'Pinjaman';
+        } else
+            return '-';
+    }
     
     function getTipeJenisAttribute()
     {

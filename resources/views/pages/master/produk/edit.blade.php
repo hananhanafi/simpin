@@ -105,18 +105,17 @@
                                     </div>
                                 </div>
 
-                                @if ($produk->kode == 'S04')
+                                {{-- @if ($produk->kode == 'S04') --}}
                                     <div class="row mb-2" id="div-asuransi">
                                         <label for="horizontal-firstname-input"
                                             class="col-sm-3 col-form-label">Asuransi</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="asuransis" class="form-control" id="asuransi"
                                                 step="0.1" placeholder="Asuransi" 
-                                                required data-parsley-required-message="Asuransi Harus Di Isi"
                                                 value="{{ $produk->asuransi }}">
                                         </div>
                                     </div>
-                                @endif
+                                {{-- @endif --}}
                             </div>
                             @php
                                 $no = 1;
@@ -141,20 +140,22 @@
                                                 $no = 1;
                                             @endphp
                                             @foreach ($produk->margin as $i => $item)
-                                                <tr id="row{{ $item->id }}">
+                                                <tr id="row{{ $item->id }}"  class="dynamic-row">
                                                     <td class="text-center">{{ $no }}</td>
                                                     <td class="text-center">
                                                         <input type="number" name="jangka_waktu[{{ $item->id }}]"
                                                             class="form-control" id="jangka_waktu_{{ $i }}"
                                                             placeholder="Dalam Bulan" value="{{ $item->jangka_waktu }}"
-                                                            onkeyup="hitungEfektif({{ $i }})">
+                                                            onkeyup="hitungEfektif({{ $i }})"
+                                                            required data-parsley-required-message="Jangka Waktu Harus Diisi">
                                                     </td>
                                                     <td class="text-center">
                                                         <input type="number" name="margin[{{ $item->id }}]"
                                                             class="form-control" id="bunga_pa_{{ $i }}"
                                                             placeholder="Persentase Margin" step=0.00000001
                                                             value="{{ $item->margin }}"
-                                                            onkeyup="hitungEfektif({{ $i }})">
+                                                            onkeyup="hitungEfektif({{ $i }})"
+                                                            required data-parsley-required-message="Persentase Margin Harus Diisi">
                                                     </td>
                                                     {{-- <td class="text-center">
                                                     @if ($item->margin_flat == 0)
@@ -170,7 +171,8 @@
                                                     <td class="text-center">
                                                         <input type="number" name="asuransi[{{ $item->id }}]"
                                                             class="form-control" placeholder="Persentase Asuransi"
-                                                            step="any" value="{{ $item->asuransi }}">
+                                                            step="any" value="{{ $item->asuransi }}"
+                                                            required data-parsley-required-message="Persentase Margin Harus Diisi">
                                                     </td>
                                                     <td>
                                                         <button type="button" id="{{ $item->id }}"
@@ -182,7 +184,7 @@
                                                     $no++;
                                                 @endphp
                                             @endforeach
-                                            @for ($i = 10000; $i <= 10005; $i++)
+                                            {{-- @for ($i = 10000; $i <= 10005; $i++)
                                                 <tr id="row{{ $i }}">
                                                     <td class="text-center">{{ $no }}</td>
                                                     <td class="text-center">
@@ -197,9 +199,6 @@
                                                             placeholder="Persentase Margin" step=0.00000001
                                                             onkeyup="hitungEfektif({{ $i }})">
                                                     </td>
-                                                    {{-- <td class="text-center">
-                                                    
-                                                </td> --}}
                                                     <input type="hidden" name="margin_flat[{{ $i }}]"
                                                         id="bunga_efektif_{{ $i }}" class="form-control"
                                                         placeholder="Margin Flat" step=0.01 value="0">
@@ -217,7 +216,7 @@
                                                 @php
                                                     $no++;
                                                 @endphp
-                                            @endfor
+                                            @endfor --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -261,7 +260,7 @@
             $('#div-margin').show();
             $('#tambah').show()
             $('#tipe-margin').show()
-            $('#div-asuransi').hide()
+            // $('#div-asuransi').hide()
             // }
 
             $('#admin_fee').on({
@@ -292,19 +291,17 @@
             var html
             $('#tambah').click(function() {
 
-                html = '<tr id="row' + no + '">\
+                no = $('#dynamic-form tr').length;
+                html = '<tr id="row' + no + '" class="dynamic-row">\
                             <td class="text-center">' + no + '</td>\
                             <td>\
-                                <input type="number" name="jangka_waktu[' + no + ']" class="form-control" placeholder="Dalam Bulan"/>\
+                                <input type="number" name="jangka_waktu[' + no + ']" class="form-control" placeholder="Dalam Bulan" required data-parsley-required-message="Jangka Waktu Harus Diisi"/>\
                             </td>\
                             <td>\
-                                <input type="number" name="margin[' + no + ']" class="form-control" placeholder="Persentase Margin" step=0.01>\
-                            </td>\
-                            <td style="display:none">\
-                                <input type="number" name="margin_flat[' + no + ']" class="form-control" placeholder="Margin Flat" step=0.01 value="0">\
+                                <input type="number" name="margin[' + no + ']" class="form-control" placeholder="Persentase Margin" step=0.01  required data-parsley-required-message="Persentase Margin Harus Diisi"/>\
                             </td>\
                             <td>\
-                                <input type="number" name="asuransi[' + no + ']" class="form-control" placeholder="Persentase Asuransi" step=0.01>\
+                                <input type="number" name="asuransi[' + no + ']" class="form-control" placeholder="Persentase Asuransi" step=0.01 required data-parsley-required-message="Persentase Asuransi Harus Diisi"/>\
                             </td>\
                             <td>\
                                 <button type="button" id="' + no + '" class="btn btn-danger btn-sm btn_remove"><i class="fa fa-times"></i></button>\
@@ -317,6 +314,9 @@
             $(document).on('click', '.btn_remove', function() {
                 var button_id = $(this).attr("id");
                 $('#row' + button_id + '').remove();
+                $('#dynamic-form tr.dynamic-row').each( function( index, element ){
+                    $( this ).find('td:first-child').text(index+1)
+                });
             });
         });
 
@@ -343,7 +343,7 @@
             $('#div-margin').show();
             $('#tambah').show()
             $('#tipe-margin').show()
-            $('#div-asuransi').hide()
+            // $('#div-asuransi').hide()
             // }
         }
     </script>

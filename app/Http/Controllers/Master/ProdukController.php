@@ -50,6 +50,9 @@ class ProdukController extends Controller
 
             if ($request->asuransis != '')
                 $produk->asuransi            = str_replace('.', '', $request->asuransis);
+            else 
+                $produk->asuransi            = 0;
+
 
             $produk->minimal_saldo        = 0;
             $produk->status_produk        = 0;
@@ -96,10 +99,18 @@ class ProdukController extends Controller
             Session::flash('success', 'Data Produk Berhasil Di Simpan');
         } catch (Exception $ex) {
             DB::rollback();
-            if (config('app.env') == 'local')
-                Session::flash('fail', $ex->getMessage() . ', Baris :' . $ex->getLine());
-            else
+            // if (config('app.env') == 'local')
+            //     Session::flash('fail', $ex->getMessage() . ', Baris :' . $ex->getLine());
+            // else{
+            //     Session::flash('fail', 'Data Produk Tidak Berhasil Di Simpan');
+            // }
+            $message = $ex->getMessage();
+            if(strpos( $message, "Duplicate entry") !== false){
+                Session::flash('fail','Kode Produk Harus Unik');
+                return redirect()->back();
+            }else {
                 Session::flash('fail', 'Data Produk Tidak Berhasil Di Simpan');
+            }
         }
         return redirect()->route('master.produk.index');
     }
@@ -136,8 +147,11 @@ class ProdukController extends Controller
 
             if ($request->asuransis != '')
                 $produk->asuransi            = str_replace('.', '', $request->asuransis);
+            else 
+                $produk->asuransi            = 0;
 
             $produk->minimal_saldo        = 0;
+            $produk->status_produk        = 0;
             $produk->kode_potongan_hrd    = '-';
             $produk->created_date        = date('Y-m-d H:i:s');
             $produk->created_by         = 0;
@@ -177,12 +191,20 @@ class ProdukController extends Controller
             // }
 
             DB::commit();
-            Session::flash('success', 'Data Produk Berhasil Di Update');
+            Session::flash('success', 'Data Produk Berhasil Di Update. Menunggu Approval Kembali.');
         } catch (Exception $ex) {
-            if (config('app.env') == 'local')
-                Session::flash('fail', $ex->getMessage() . ', Baris :' . $ex->getLine());
-            else
+            // if (config('app.env') == 'local')
+            //     Session::flash('fail', $ex->getMessage() . ', Baris :' . $ex->getLine());
+            // else{
+            //     Session::flash('fail', 'Data Produk Tidak Berhasil Di Update');
+            // }
+            $message = $ex->getMessage();
+            if(strpos( $message, "Duplicate entry") !== false){
+                Session::flash('fail','Kode Produk Harus Unik');
+                return redirect()->back();
+            }else {
                 Session::flash('fail', 'Data Produk Tidak Berhasil Di Update');
+            }
         }
         return redirect()->route('master.produk.index');
     }

@@ -115,6 +115,12 @@ Edit Data Anggota
                                     <input class="form-control" type="text" name="no_kk" id="no_kk" maxlength="50" value="{{ $anggota->no_kk }}" placeholder="Masukan No KK">
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Gaji</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="gaji" id="gaji" maxlength="50" value="{{ number_format($anggota->gaji,0,',','.') }}" placeholder="Masukan Gaji">
+                                </div>
+                            </div>
 
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Noka BPJS</label>
@@ -215,6 +221,15 @@ Edit Data Anggota
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Status E-Banking</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" style="width: 100%;" name="status_ebanking">
+                                        <option value="1" {{ $anggota->status_ebanking == 1 ? 'selected' : '' }}>Aktif</option>
+                                        <option value="2" {{ $anggota->status_ebanking == 2 ? 'selected' : '' }}>Tidak Aktif</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Mulai Bekerja</label>
                                 <div class="col-sm-8">
                                     <input type="date" name="masukkerja_date" class="form-control" id="masukkerja_date" placeholder="Tanggal Mulai Kerja" value="{{ $anggota->masukkerja_date }}">
@@ -247,6 +262,18 @@ Edit Data Anggota
             width: '100%'
         })
 
+        $('#gaji').on({
+            keyup: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val);
+                $(this).val(input_val);
+            },
+            blur: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val, true, true);
+                $(this).val(input_val);
+            }
+        });
         $('#grade_id').on('change', function() {
             var get = $(this).val().split('__')
             $('#simpanan_pokok').val(numberToCurrency(get[1]))
