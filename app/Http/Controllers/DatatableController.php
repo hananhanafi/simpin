@@ -460,6 +460,7 @@ class DatatableController extends Controller
 
             $pinjaman = Pinjaman::select(DB::raw('t_pembiayaan.id as id_pinjaman,t_pembiayaan.produk_id,t_pembiayaan.jml_pinjaman,t_pembiayaan.no_rekening,t_pembiayaan.status_rekening as status,t_anggota.id,t_anggota.no_anggota, t_anggota.nama, t_anggota.alamat, p_departemen.departemen, t_anggota.telepon, t_anggota.status_anggota '))
                 ->leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
+                ->leftJoin('p_sumberdana', 'p_sumberdana.biaya_admin', '=', 't_pembiayaan.biaya_bank')
                 ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
                 ->with(['jenispinjaman', 'anggota'])
                 ->where('t_anggota.nama', '!=', '')

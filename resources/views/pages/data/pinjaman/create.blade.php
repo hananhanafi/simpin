@@ -27,7 +27,7 @@ Tambah Data Pinjaman Baru
                 <div class="row">
 
                     <div class="col-md-6">
-                        <h4 class="card-title">Form Tambah Data Pinjaman Baru Sukarela Berjangka (SSB)</h4>
+                        <h4 class="card-title">Form Tambah Data Pinjaman Baru</h4>
                         <p class="card-title-desc">Data berasal dari Sumber yang tersimpan dalam database</code>.</p>
                     </div>
                     <div class="col-md-6">
@@ -86,58 +86,76 @@ Tambah Data Pinjaman Baru
                                     </select>
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Sumber Dana<small class="text-danger"></small></label>
+                                <div class="col-sm-7">
+                                    <select class="form-control" style="width: 100%;" name="sumber_dana" required data-parsley-required-message="Sumber Dana" onchange="pilihSumberDana(this.value)" id="sumber_dana">
+                                        <option value="">-Pilih Sumber Dana-</option>
+                                        @foreach ($produk as $item)
+                                        <option value="{{ $item->id }}__{{ $item->sumber_dana }}>
+                                            {{ $item->kode }} - {{ $item->nama_produk }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="pb-3 col-md-6">
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jumlah
-                                    Bulan<small class="text-danger">*</small></label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="jumlah_bulan" class="form-control" id="jumlah_bulan" placeholder="Jumlah Bulan" required data-parsley-required-message="Jumlah Bulan Harus Diisi" value="{{ old('jumlah_bulan') }}" onkeyup="pageSimulasi(this.value,0)">
-                                </div>
-                            </div>
-                            <div class="row mb-3" id="bunga-efektif">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Bunga
-                                    Efektif(%)<small class="text-danger">*</small></label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="jumlah_bunga_efektif" readonly class="form-control" id="jumlah_bunga_efektif" placeholder=" Bunga Efektif(%)" value="{{ old('jumlah_bunga_efektif') }}" onkeyup="pageSimulasiEfektif(this.value)">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Margin
-                                    Flat(%)<small class="text-danger">*</small></label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="jumlah_bunga" class="form-control" id="jumlah_bunga" readonly placeholder="Margin Flat (%)" required data-parsley-required-message="Jumlah Bunga Harus Diisi" value="{{ old('jumlah_bunga') }}" onkeyup="pageSimulasi(0,this.value)">
-                                </div>
-                            </div>
-                            {{-- <input type="hidden" name="jumlah_bunga_efektif" class="form-control" id="jumlah_bunga_efektif" placeholder=" Bunga Efektif(%)" value="{{ old('jumlah_bunga_efektif') }}" onkeyup="pageSimulasi(0,0)"> --}}
+                        <div class=" pb-3 col-md-6">
+                                            <div class="row mb-3">
+                                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jumlah
+                                                    Bulan<small class="text-danger">*</small></label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="jumlah_bulan" class="form-control" id="jumlah_bulan" placeholder="Jumlah Bulan" required data-parsley-required-message="Jumlah Bulan Harus Diisi" value="{{ old('jumlah_bulan') }}" onkeyup="pageSimulasi(this.value,0)">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3" id="bunga-efektif">
+                                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Bunga
+                                                    Efektif(%)<small class="text-danger">*</small></label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="jumlah_bunga_efektif" readonly class="form-control" id="jumlah_bunga_efektif" placeholder=" Bunga Efektif(%)" value="{{ old('jumlah_bunga_efektif') }}" onkeyup="pageSimulasiEfektif(this.value)">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Margin
+                                                    Flat(%)<small class="text-danger">*</small></label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="jumlah_bunga" class="form-control" id="jumlah_bunga" readonly placeholder="Margin Flat (%)" required data-parsley-required-message="Jumlah Bunga Harus Diisi" value="{{ old('jumlah_bunga') }}" onkeyup="pageSimulasi(0,this.value)">
+                                                </div>
+                                            </div>
+                                            {{-- <input type="hidden" name="jumlah_bunga_efektif" class="form-control" id="jumlah_bunga_efektif" placeholder=" Bunga Efektif(%)" value="{{ old('jumlah_bunga_efektif') }}" onkeyup="pageSimulasi(0,0)"> --}}
 
 
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Asuransi</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="asuransi" class="form-control" id="asuransi" placeholder="Asuransi" value="{{ old('asuransi') }}">
+                                            <div class="row mb-3">
+                                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Asuransi</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="asuransi" class="form-control" id="asuransi" placeholder="Asuransi" value="{{ old('asuransi') }}">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Administrasi</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="admin_bank" class="form-control" id="admin_bank" placeholder="Administrasi" value="{{ old('admin_bank') }}">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Admin Bank</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="" class="form-control" id="biaya_bank" placeholder="Admin Bank" value="{{ old('biaya_bank') }}">
+                                                </div>
+                                            </div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Admin
-                                    Bank</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="admin_bank" class="form-control" id="admin_bank" placeholder="Admin Bank" value="{{ old('admin_bank') }}">
+                            <hr>
+                            <div class="pb-3 col-md-12">
+                                <div id="pages-simulasi"></div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-sm w-md"><i class="fa fa-save"></i>
+                                        Simpan Data</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="pb-3 col-md-12">
-                        <div id="pages-simulasi"></div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <button type="submit" class="btn btn-primary btn-sm w-md"><i class="fa fa-save"></i>
-                                Simpan Data</button>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>
@@ -181,7 +199,8 @@ Tambah Data Pinjaman Baru
         })
         var produk_id = $('#produk_id').val();
         pilihProduk(produk_id);
-        $('#jumlah_pinjaman,#asuransi,#admin_bank').on({
+
+        $('#jumlah_pinjaman,#asuransi,#admin_bank,#biaya_bank').on({
             keyup: function() {
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val);
@@ -302,10 +321,16 @@ Tambah Data Pinjaman Baru
         var jumlahPinjaman = $('#jumlah_pinjaman').val()
         const jumlahPinjamanInt = parseInt(jumlahPinjaman.replaceAll('.', ''))
         const asuransi = jangkaWaktuList.find(jw => jw.jangka_waktu == jumlahBulan).asuransi
-        let calculateAsuransi = (jumlahPinjamanInt * asuransi)/100
+        let calculateAsuransi = (jumlahPinjamanInt * asuransi) / 100
         $('#asuransi').val(numberToCurrency(calculateAsuransi))
 
         pageSimulasi(get[0], get[1])
+    }
+
+    function pilihSumberDana(val) {
+        var get = val.split('__')
+        $('#sumber_dana').val(get[1])
+        pageSimulasi(0, 0);
     }
 
     function unduhSimulasi(produk_id, bunga, bulan, saldo, bunga_efektif, no_anggota) {

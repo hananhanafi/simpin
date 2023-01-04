@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Tambah Data Master Sumber Dana
+Tambah Data Master Sumber Dana
 @endsection
 
 @section('content')
@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="pb-3 col-md-6">
                             @csrf
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Kode Sumber Dana<small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
                                     <input type="text" name="kode" class="form-control" id="kode" placeholder="Kode Sumber Dana" required required data-parsley-required-message="Kode Sumber Dana Harus Diisi" value="{{ old('kode') }}">
@@ -51,6 +51,12 @@
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Sumber Dana<small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
                                     <input type="text" name="sumber_dana" class="form-control" id="sumber_dana" placeholder="Sumber Dana" required required data-parsley-required-message="Nama Sumber Dana Harus Diisi" value="{{ old('sumber_dana') }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Biaya Admin Bank<small class="text-danger">*</small></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="biaya_bank" class="form-control" id="biaya_bank" placeholder="Kode Sumber Dana" required required data-parsley-required-message="Kode Sumber Dana Harus Diisi" value="{{ old('biaya_bank') }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -73,13 +79,11 @@
 <script type="text/javascript" src="{{ asset('js') }}/parsley.min.js"></script>
 <script>
     $('#form-tambah').parsley();
-    $(document).ready(function(){
-	});
-
+    $(document).ready(function() {});
 </script>
 <style>
-    .parsley-errors-list li{
-        color : red !important;
+    .parsley-errors-list li {
+        color: red !important;
         font-style: italic;
     }
 </style>

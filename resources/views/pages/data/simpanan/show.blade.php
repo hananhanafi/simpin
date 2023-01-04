@@ -87,7 +87,7 @@ Detail Data Simpanan
                         <div class="row">
                             <div class="col-md-12">
                                 <h4>SIMULAI SSB (SIMPANAN SUKARELA BERJANGKA)</h4>
-                                <h5>BUNGA ROLLOVER</h5>
+                                <h5>BUNGA MAJEMUK</h5>
                                 <table class="table table-bordered table-striped simulasi">
                                     <thead>
                                         <tr>

@@ -85,23 +85,29 @@ Info Pencairan Pinjaman
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="40%">Biaya Administrasi</td>
+                                    <td width="40%">Biaya Asuransi</td>
                                     <td width="60%">
-                                        Rp. <?php echo (number_format($pinjamanDetail->admin_fee, '0', ',', '.')); ?>
+                                        Rp. <?php echo (number_format($pinjamanDetail->asuransi, '0', ',', '.')); ?>
                                         {{--<div style="display: flex;width:100%; align-items:center">
-                                            <span style="margin-right: 8px">Rp. </span><input type="text" name="admin_fee" class="form-control" id="admin_fee" placeholder="Biaya Administrasi" required data-parsley-required-message="Biaya Administrasi harus diisi" value="{{ number_format($pinjamanDetail->admin_fee, '0', ',', '.') }}">
-                    </div>--}}
+                                            <span style="margin-right: 8px">Rp. </span><input type="text" name="asuransi" class="form-control" id="asuransi" placeholder="Biaya Administrasi" required data-parsley-required-message="Biaya Administrasi harus diisi" value="{{ number_format($pinjamanDetail->asuransi, '0', ',', '.') }}">
+                    </div> --}}
+                    {{-- <input type='text' value='Rp. <?php echo (number_format($pinjamanDetail->asuransi, '0', ',', '.')); ?>' />  --}}
                     </td>
                     </tr>
                     <tr>
-                        <td width="40%">Biaya Asuransi</td>
+                        <td width="40%">Biaya Administrasi</td>
                         <td width="60%">
-                            Rp. <?php echo (number_format($pinjamanDetail->asuransi, '0', ',', '.')); ?>
+                            Rp. <?php echo (number_format($pinjamanDetail->admin_fee, '0', ',', '.')); ?>
                             {{--<div style="display: flex;width:100%; align-items:center">
-                                            <span style="margin-right: 8px">Rp. </span><input type="text" name="asuransi" class="form-control" id="asuransi" placeholder="Biaya Administrasi" required data-parsley-required-message="Biaya Administrasi harus diisi" value="{{ number_format($pinjamanDetail->asuransi, '0', ',', '.') }}">
-                </div> --}}
-                {{-- <input type='text' value='Rp. <?php echo (number_format($pinjamanDetail->asuransi, '0', ',', '.')); ?>' />  --}}
+                                            <span style="margin-right: 8px">Rp. </span><input type="text" name="admin_fee" class="form-control" id="admin_fee" placeholder="Biaya Administrasi" required data-parsley-required-message="Biaya Administrasi harus diisi" value="{{ number_format($pinjamanDetail->admin_fee, '0', ',', '.') }}">
+                </div>--}}
                 </td>
+                </tr>
+                <tr>
+                    <td width="40%">Admin Bank</td>
+                    <td width="60%">
+                        Rp. <span id="biaya_bank"><?php echo ('0'); ?></span>
+                    </td>
                 </tr>
                 <tr>
                     <td width="40%">Pelunasan Hutang</td>

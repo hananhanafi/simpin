@@ -100,6 +100,7 @@ class PinjamanController extends Controller
         $produk     = Produk::whereHas('tipePr', function ($qry) {
             $qry->where('tipe_produk', 2);
         })->where('status_produk', 1)->orderBy('kode')->get();
+        //$sumberdana = SumberDana::whereHas()
         return view('pages.data.pinjaman.create')
             ->with('produk', $produk)
             ->with('request', $request);
@@ -150,6 +151,7 @@ class PinjamanController extends Controller
             $asuransi = intVal(str_replace('.', '', $request->asuransi));
             $adminFee = intVal(str_replace('.', '', $request->admin_bank));
             $bunga          = $request->jumlah_bunga;
+            $sumber_dana          = $request->sumber_dana;
             $margin         = $bunga / 100 * $jumlahPinjaman;
             $totalPinjaman  = $margin + $jumlahPinjaman;
             $bulan          = $request->jumlah_bulan;
@@ -202,6 +204,8 @@ class PinjamanController extends Controller
             $newPinjaman->approv_note       = '-';
             $newPinjaman->approv_lunas_by   = 0;
             $newPinjaman->delete_by         = 0;
+            $newPinjaman->biaya_bank         = 0;
+            $newPinjaman->sumber_dana         = $request->sumber_dana;
             // $newPinjaman->save();
 
             if ($bulan >= 12) {
@@ -344,7 +348,7 @@ class PinjamanController extends Controller
         //     // ->with('bunga_efektif', $bunga_efektif)
         //     // ->with('bunga', $bunga);
         // ;
-        
+
         $pdf = PDF::loadView('pages.data.pinjaman.simulasi-plafon-pdf', [
             'pinjaman' => $pinjaman,
             'jml_baru' => $jml_baru,
@@ -354,7 +358,7 @@ class PinjamanController extends Controller
             'request' => $request,
             'angsuran' => $angsuran,
         ]);
-        
+
 
         return $pdf->download('plafonpinjaman.pdf');
     }

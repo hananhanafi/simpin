@@ -11,51 +11,57 @@ use App\Http\Requests\Master\RequestSumberDana;
 
 class SumberDanaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('pages.master.sumber-dana.index');
     }
-    public function create(){
+    public function create()
+    {
         return view('pages.master.sumber-dana.create');
     }
 
-    public function store(RequestSumberDana $request){
-        try{
+    public function store(RequestSumberDana $request)
+    {
+        try {
             DB::beginTransaction();
 
             $sumberdana = new SumberDana;
             $sumberdana->kode           = $request->kode;
             $sumberdana->sumber_dana    = $request->sumber_dana;
+            $sumberdana->biaya_bank         = $request->biaya_bank;
             $sumberdana->save();
 
             DB::commit();
-            Session::flash('success','Tambah Data Sumber DanaBaru Berhasil');
-
-        }catch(Exception $ex){
+            Session::flash('success', 'Tambah Data Sumber DanaBaru Berhasil');
+        } catch (Exception $ex) {
             DB::rollback();
-            Session::flash('fail','Tambah Data Sumber DanaBaru Tidak Berhasil');
+            Session::flash('fail', 'Tambah Data Sumber DanaBaru Tidak Berhasil');
         }
         return redirect()->route('master.sumber-dana.index');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $sumberdana = SumberDana::find($id);
         return view('pages.master.sumber-dana.edit')
             ->with('sumberdana', $sumberdana)
-            ->with('id',$id);
+            ->with('id', $id);
     }
 
-    public function show($id){
-        $sumberdana = SumberDana::where('id',$id)
-                    ->with('sub_sumber-dana')
-                    ->first();
+    public function show($id)
+    {
+        $sumberdana = SumberDana::where('id', $id)
+            ->with('sub_sumber-dana')
+            ->first();
 
         return view('pages.master.sumber-dana.show')
-                ->with('id', $id)
-                ->with('sumberdana', $sumberdana);
+            ->with('id', $id)
+            ->with('sumberdana', $sumberdana);
     }
 
-    public function update(RequestSumberDana $request,$id){
-        try{
+    public function update(RequestSumberDana $request, $id)
+    {
+        try {
             DB::beginTransaction();
 
             $sumberdana = SumberDana::find($id);
@@ -64,19 +70,19 @@ class SumberDanaController extends Controller
             $sumberdana->save();
 
             DB::commit();
-            Session::flash('success','Update Data Sumber Dana Berhasil');
-
-        }catch(Exception $ex){
+            Session::flash('success', 'Update Data Sumber Dana Berhasil');
+        } catch (Exception $ex) {
             DB::rollback();
-            Session::flash('fail','Update Data Sumber Dana Tidak Berhasil');
+            Session::flash('fail', 'Update Data Sumber Dana Tidak Berhasil');
         }
         return redirect()->route('master.sumber-dana.index');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $sumberdana = SumberDana::find($id);
         $sumberdana->delete();
-        Session::flash('success','Hapus Data Sumber Dana Berhasil');
+        Session::flash('success', 'Hapus Data Sumber Dana Berhasil');
         return redirect()->route('master.sumber-dana.index');
     }
 }

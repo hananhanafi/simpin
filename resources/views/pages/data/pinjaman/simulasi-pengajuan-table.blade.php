@@ -222,10 +222,9 @@
 
         request += 'no_anggota=' + no_anggota + '&'
         request += 'bulan=' + bulan + '&'
-        request += 'saldo=' + parseInt(saldo.replaceAll('.','')) + '&'
+        request += 'saldo=' + parseInt(saldo.replaceAll('.', '')) + '&'
         request += 'totalAngsuran=' + totalAngsuran
 
-        console.log('asd', totalAngsuran)
         window.open(
             "{{ route('data.pinjaman.plafon') }}?" + request, '_blank');
     }

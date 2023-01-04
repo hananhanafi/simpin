@@ -219,7 +219,7 @@ Tambah Data Anggota
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Status E-Banking</label>
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Rekening Atas Nama</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="bank_nama" class="form-control" id="bank_nama" placeholder="Masukan Atas Nama Rekening" value="{{ old('bank_nama') }}">
                                 </div>
