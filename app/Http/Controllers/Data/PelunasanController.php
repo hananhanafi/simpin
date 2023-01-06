@@ -252,12 +252,12 @@ class PelunasanController extends Controller
                 $newPinjaman->update_by         = 0;
                 $newPinjaman->approv_by         = 0;
                 $newPinjaman->pencairan_by      = 0;
-                $newPinjaman->approv_note       = '-';
+                $newPinjaman->reject_note       = '-';
                 $newPinjaman->approv_lunas_by   = 0;
                 $newPinjaman->delete_by         = 0;
 
                 $newPinjaman->status_rekening   = 1;
-                $newPinjaman->approv_note       = "PELUNASAN TOPUP";
+                $newPinjaman->reject_note       = "PELUNASAN TOPUP";
                 $newPinjaman->approv_by         = 1;
                 $newPinjaman->update_by         = Auth::user()->id;
                 $newPinjaman->update_date       = date('Y-m-d H:i:s');

@@ -77,9 +77,29 @@ Tambah Data Master Sumber Dana
 <link rel="stylesheet" href="{{ asset('packages/select2/dist/css/select2.css') }}">
 <script src="{{ asset('packages/select2/dist/js/select2.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js') }}/parsley.min.js"></script>
+<script type="text/javascript" src="{{ asset('js') }}/currency.js"></script>
 <script>
     $('#form-tambah').parsley();
-    $(document).ready(function() {});
+    $(document).ready(function() {
+        
+        $('#biaya_bank').on({
+            keyup: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val);
+                $(this).val(input_val);
+            },
+            blur: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val, true, true);
+                $(this).val(input_val);
+            },
+            change: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val, true, true);
+                $(this).val(input_val);
+            },
+        });
+    });
 </script>
 <style>
     .parsley-errors-list li {

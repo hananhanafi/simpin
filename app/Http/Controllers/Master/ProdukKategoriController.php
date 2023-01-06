@@ -24,6 +24,12 @@ class ProdukKategoriController extends Controller
     }
 
     public function store(RequestProdukType $request){
+        $produkTypeCheck = ProdukKategori::where('kode','=',$request->kode)->whereNull('deleted_at')->get();
+        dd($produkTypeCheck);
+        if(count($produkTypeCheck)>0){
+            Session::flash('fail','Kode ' . $request->kode . ' Sudah Ada. Silahkan Gunakan Kode Produk Lain');
+            return redirect()->back()->withInput();
+        }
         try{
             DB::beginTransaction();
 
@@ -38,12 +44,10 @@ class ProdukKategoriController extends Controller
             Session::flash('success','Data Produk Type Berhasil Di Simpan');
         } catch(Exception $ex){
             DB::rollback();
-            $message = $ex->getMessage();
-            if(strpos( $message, "Duplicate entry") !== false){
-                Session::flash('fail','Kode Produk Type Harus Unik');
-                return redirect()->back();
-            }else {
-                Session::flash('fail','Data Produk Type Tidak Berhasil Di Simpan');
+            if (config('app.env') == 'local')
+                Session::flash('fail', $ex->getMessage() . ', Baris :' . $ex->getLine());
+            else{
+                Session::flash('fail', 'Data Produk Type Tidak Berhasil Di Simpan');
             }
         }
         return redirect()->route('master.produk-kategori.index');
@@ -105,23 +109,28 @@ class ProdukKategoriController extends Controller
 
             foreach($array[0] as $index => $value)
             {
-                if($index!=0)
+                if($index>2)
                 {
                     if($value[0]!='')
                     {
-                        if(!in_array($value[1], $donatur)){
-                            
-                            $newDonatur = new ProdukKategori();
-                            $newDonatur->kode               = $value[1];
-                            $newDonatur->nama               = $value[2];
-                            $newDonatur->tipe_produk        = $value[3];
-                            $newDonatur->created_at         = date('Y-m-d H:i:s');
-                            $newDonatur->updated_at         = date('Y-m-d H:i:s');
-                            $newDonatur->save();
+                        $produkTypeCheck = ProdukKategori::where('kode','=',$value[1])->whereNull('deleted_at')->get();
+                        if(count($produkTypeCheck)>0){
+                            ProdukKategori::where('kode','=',$value[1])->whereNull('deleted_at')->update([
+                                'nama' => $value[2],
+                                'tipe_produk' => $value[3],
+                            ]);
                             $count++;
-
                         }
-
+                        else {
+                            $newProdukType = new ProdukKategori();
+                            $newProdukType->kode               = $value[1];
+                            $newProdukType->nama               = $value[2];
+                            $newProdukType->tipe_produk        = $value[3];
+                            $newProdukType->created_at         = date('Y-m-d H:i:s');
+                            $newProdukType->updated_at         = date('Y-m-d H:i:s');
+                            $newProdukType->save();
+                            $count++;
+                        };
                     }
                 }
             }

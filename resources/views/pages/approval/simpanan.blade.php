@@ -155,31 +155,32 @@
 
         });
 
-        function tolak(uuid) {
+        function approve(uuid) {
             var url = '{{ route('approval.simpanan.approve') }}';
             $('#aproval-form').attr('action', url);
             $('#id_simpanan').val(uuid)
-            swal({
-                    title: "Apakah Anda Yakin !",
-                    text: "Ingin Menolak Data Ini ?.",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#802d34",
-                    confirmButtonText: "Ya, Tolak",
-                    cancelButtonText: "Cancel",
-                    closeOnConfirm: false,
-                    closeOnCancel: true
-                },
-                function(isConfirm) {
-                    if (isConfirm) {
-                        $('#aproval-form').submit();
-                    }
-                });
+            $('#aproval-form').submit();
+            // swal({
+            //         title: "Apakah Anda Yakin !",
+            //         text: "Ingin Menolak Data Ini ?.",
+            //         type: "warning",
+            //         showCancelButton: true,
+            //         confirmButtonColor: "#802d34",
+            //         confirmButtonText: "Ya, Tolak",
+            //         cancelButtonText: "Cancel",
+            //         closeOnConfirm: false,
+            //         closeOnCancel: true
+            //     },
+            //     function(isConfirm) {
+            //         if (isConfirm) {
+            //             $('#aproval-form').submit();
+            //         }
+            //     });
         }
 
-        function approve(id) {
+        function tolak(id) {
             $('#id-simpanan').val(id);
-            $('#modal-approve').modal('show')
+            $('#modal-reject').modal('show')
         }
 
         function penutupan(id, nama, noanggota) {
@@ -195,7 +196,7 @@
 @endsection
 
 @section('modal')
-    <div id="modal-approve" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="modal-reject" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form action="{{ route('approval.simpanan.approve') }}" method="POST" id="post-approve">

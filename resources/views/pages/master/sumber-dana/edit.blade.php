@@ -54,6 +54,12 @@
                                     <input type="text" name="sumber_dana" class="form-control" id="sumber_dana" placeholder="Sumber Dana" required required data-parsley-required-message="Nama Sumber Dana Harus Diisi" value="{{ $sumberdana->sumber_dana }}">
                                 </div>
                             </div>
+                            <div class="row mb-2">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Biaya Admin Bank<small class="text-danger">*</small></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="biaya_bank" class="form-control" id="biaya_bank" placeholder="Kode Sumber Dana" required required data-parsley-required-message="Kode Sumber Dana Harus Diisi" value="{{ number_format($sumberdana->biaya_bank,0,',','.') }}">
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-12 text-center">
                                     <button type="submit" class="btn btn-primary btn-sm w-md"><i class="fa fa-save"></i> Simpan Data</button>
@@ -72,9 +78,28 @@
 <link rel="stylesheet" href="{{ asset('packages/select2/dist/css/select2.css') }}">
 <script src="{{ asset('packages/select2/dist/js/select2.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js') }}/parsley.min.js"></script>
+<script type="text/javascript" src="{{ asset('js') }}/currency.js"></script>
 <script>
     $('#form-tambah').parsley();
     $(document).ready(function(){
+        
+        $('#biaya_bank').on({
+            keyup: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val);
+                $(this).val(input_val);
+            },
+            blur: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val, true, true);
+                $(this).val(input_val);
+            },
+            change: function() {
+                let input_val = $(this).val();
+                input_val = numberToCurrency(input_val, true, true);
+                $(this).val(input_val);
+            },
+        });
 	});
 
 </script>

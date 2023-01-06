@@ -158,7 +158,8 @@
                 <div class="modal-body">
                     <div class="form-group mb-4">
                         <h6 class="card-title">Unduh Contoh File</h6>
-                        <a href="{{ asset('file/contoh-product-type.xls') }}" class="text-success"><i class="fa fa-download"></i> Unduh</a>
+                        {{-- <a href="{{ asset('file/contoh-product-type.xls') }}" class="text-success"><i class="fa fa-download"></i> Unduh</a> --}}
+                        <a href="{{ route('export.produk_kategori') }}" class="text-success"><i class="fa fa-download"></i> Unduh</a>
                     </div>
 
                     <div class="form-group mb-4">

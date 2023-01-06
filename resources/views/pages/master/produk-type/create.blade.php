@@ -50,7 +50,7 @@
                             <div class="row mb-2">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nama Produk Type<small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Produk Type" required required data-parsley-required-message="Nama Produk Type" value="{{ old('nama_produk-kategori') }}">
+                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Produk Type" required required data-parsley-required-message="Nama Produk Type" value="{{ old('nama') }}">
                                 </div>
                             </div>
                             <div class="row mb-2">

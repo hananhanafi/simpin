@@ -32,6 +32,13 @@ class ProdukController extends Controller
 
     public function store(RequestProduk $request)
     {
+        $produkCheck = Produk::where('kode','=',$request->kode)->whereNull('deleted_at')->get();
+        // dd($produkCheck);
+        if(count($produkCheck)>0){
+            Session::flash('fail','Kode ' . $request->kode . ' Sudah Ada. Silahkan Gunakan Kode Produk Type Lain');
+            // return redirect()->back();
+            return redirect()->route('master.produk.index');
+        }
         // return $request;
         try {
             DB::beginTransaction();
@@ -61,7 +68,7 @@ class ProdukController extends Controller
             $produk->created_by         = Auth::user()->id;
             $produk->approv_date        = date('Y-m-d H:i:s');
             $produk->approv_by          = 0;
-            $produk->approv_note        = '-';
+            $produk->reject_note        = '-';
             $produk->updated_date        = date('Y-m-d H:i:s');
             $produk->updated_by         = 0;
             $produk->delete_date        = date('Y-m-d H:i:s');
@@ -99,16 +106,9 @@ class ProdukController extends Controller
             Session::flash('success', 'Data Produk Berhasil Di Simpan');
         } catch (Exception $ex) {
             DB::rollback();
-            // if (config('app.env') == 'local')
-            //     Session::flash('fail', $ex->getMessage() . ', Baris :' . $ex->getLine());
-            // else{
-            //     Session::flash('fail', 'Data Produk Tidak Berhasil Di Simpan');
-            // }
-            $message = $ex->getMessage();
-            if (strpos($message, "Duplicate entry") !== false) {
-                Session::flash('fail', 'Kode Produk Harus Unik');
-                return redirect()->back();
-            } else {
+            if (config('app.env') == 'local')
+                Session::flash('fail', $ex->getMessage() . ', Baris :' . $ex->getLine());
+            else{
                 Session::flash('fail', 'Data Produk Tidak Berhasil Di Simpan');
             }
         }
@@ -157,7 +157,7 @@ class ProdukController extends Controller
             $produk->created_by         = 0;
             $produk->approv_date        = date('Y-m-d H:i:s');
             $produk->approv_by          = 0;
-            $produk->approv_note        = '-';
+            $produk->reject_note        = '-';
             $produk->updated_date        = date('Y-m-d H:i:s');
             $produk->updated_by         = Auth::user()->id;
             $produk->delete_date        = date('Y-m-d H:i:s');
@@ -252,37 +252,80 @@ class ProdukController extends Controller
             $donatur = Produk::pluck('kode')->toArray();
 
             foreach ($array[0] as $index => $value) {
-                if ($index != 0) {
+                if ($index > 2) {
                     if ($value[0] != '') {
-                        if (!in_array($value[1], $donatur)) {
-
-                            $newProduk = new Produk();
-                            $newProduk->kode                = $value[1];
-                            $newProduk->nama_produk         = $value[2];
-                            $newProduk->tipe_produk         = $value[3];
-                            $newProduk->tipe_margin         = $value[4];
-                            $newProduk->tipe_akad           = $value[5];
-                            $newProduk->nilai_margin        = $value[6] == '' ? 0 : $value[6];
-                            $newProduk->tenor               = $value[7] == '' ? 0 : $value[7];
-                            $newProduk->admin_fee           = $value[8] == '' ? 0 : $value[8];
-                            $newProduk->asuransi            = 0;
-                            $newProduk->minimal_saldo        = $value[9] == '' ? 0 : $value[9];
-                            $newProduk->status_produk        = $value[10];
-                            $newProduk->kode_potongan_hrd    = $value[11] == '' ? '-' : $value[11];
-                            $newProduk->created_date        = date('Y-m-d H:i:s');
-                            $newProduk->created_by            = 0;
-                            $newProduk->approv_date            = date('Y-m-d H:i:s');
-                            $newProduk->approv_by            = 0;
-                            $newProduk->approv_note            = 0;
-                            $newProduk->updated_date        = date('Y-m-d H:i:s');
-                            $newProduk->updated_by            = 0;
-                            $newProduk->delete_date            = date('Y-m-d H:i:s');
-                            $newProduk->delete_by            = 0;
-                            $newProduk->created_at          = date('Y-m-d H:i:s');
-                            $newProduk->updated_at          = date('Y-m-d H:i:s');
-                            $newProduk->save();
-                            $count++;
+                        // dd($value);
+                        $produkCheck = Produk::where('kode','=',strval($value[1]))->whereNull('deleted_at')->get();
+                        $produkTypeCheck = ProdukKategori::where('nama','=',$value[3])->whereNull('deleted_at')->get();
+                        if(count($produkTypeCheck) > 0){
+                            if(count($produkCheck)>0){
+                                Produk::where('kode','=',strval($value[1]))->whereNull('deleted_at')->update([
+                                    'nama_produk' => strval($value[2]),
+                                    'tipe_produk' => $produkTypeCheck[0]->kode,
+                                    'admin_fee' => $value[5] == '' ? 0 : $value[5],
+                                    'updated_date' => date('Y-m-d H:i:s'),
+                                    'updated_by' => Auth::user()->id,
+                                ]);
+                                $count++;
+                            }
+                            else {
+                                $newProduk = new Produk();
+                                $newProduk->kode                = strval($value[1]);
+                                $newProduk->nama_produk         = strval($value[2]);
+                                $newProduk->tipe_produk         = $produkTypeCheck[0]->kode;
+                                $newProduk->admin_fee           = $value[5] == '' ? 0 : $value[5];
+                                $newProduk->tipe_margin        = '2';
+                                $newProduk->tipe_akad           = 0;
+                                $newProduk->nilai_margin        = 0;
+                                $newProduk->tenor               = 0;
+                                $newProduk->asuransi            = 0;
+                                $newProduk->minimal_saldo        = 0;
+                                $newProduk->status_produk        = 0;
+                                $newProduk->kode_potongan_hrd    = '-';
+                                $newProduk->created_date        = date('Y-m-d H:i:s');
+                                $newProduk->created_by            = 0;
+                                $newProduk->approv_date            = date('Y-m-d H:i:s');
+                                $newProduk->approv_by            = 0;
+                                $newProduk->reject_note            = 0;
+                                $newProduk->updated_date        = date('Y-m-d H:i:s');
+                                $newProduk->updated_by            = 0;
+                                $newProduk->delete_date            = date('Y-m-d H:i:s');
+                                $newProduk->delete_by            = 0;
+                                $newProduk->created_at          = date('Y-m-d H:i:s');
+                                $newProduk->updated_at          = date('Y-m-d H:i:s');
+                                $newProduk->save();
+                                $count++;
+                            };
                         }
+                        // if (!in_array($value[1], $donatur)) {
+
+                        //     $newProduk = new Produk();
+                        //     $newProduk->kode                = $value[1];
+                        //     $newProduk->nama_produk         = $value[2];
+                        //     $newProduk->tipe_produk         = $value[3];
+                        //     $newProduk->tipe_margin         = $value[4];
+                        //     $newProduk->tipe_akad           = $value[5];
+                        //     $newProduk->nilai_margin        = $value[6] == '' ? 0 : $value[6];
+                        //     $newProduk->tenor               = $value[7] == '' ? 0 : $value[7];
+                        //     $newProduk->admin_fee           = $value[8] == '' ? 0 : $value[8];
+                        //     $newProduk->asuransi            = 0;
+                        //     $newProduk->minimal_saldo        = $value[9] == '' ? 0 : $value[9];
+                        //     $newProduk->status_produk        = $value[10];
+                        //     $newProduk->kode_potongan_hrd    = $value[11] == '' ? '-' : $value[11];
+                        //     $newProduk->created_date        = date('Y-m-d H:i:s');
+                        //     $newProduk->created_by            = 0;
+                        //     $newProduk->approv_date            = date('Y-m-d H:i:s');
+                        //     $newProduk->approv_by            = 0;
+                        //     $newProduk->approv_note            = 0;
+                        //     $newProduk->updated_date        = date('Y-m-d H:i:s');
+                        //     $newProduk->updated_by            = 0;
+                        //     $newProduk->delete_date            = date('Y-m-d H:i:s');
+                        //     $newProduk->delete_by            = 0;
+                        //     $newProduk->created_at          = date('Y-m-d H:i:s');
+                        //     $newProduk->updated_at          = date('Y-m-d H:i:s');
+                        //     $newProduk->save();
+                        //     $count++;
+                        // }
                     }
                 }
             }

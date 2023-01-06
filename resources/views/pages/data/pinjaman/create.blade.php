@@ -91,9 +91,9 @@ Tambah Data Pinjaman Baru
                                 <div class="col-sm-7">
                                     <select class="form-control" style="width: 100%;" name="sumber_dana" required data-parsley-required-message="Sumber Dana" onchange="pilihSumberDana(this.value)" id="sumber_dana">
                                         <option value="">-Pilih Sumber Dana-</option>
-                                        @foreach ($produk as $item)
-                                        <option value="{{ $item->id }}__{{ $item->sumber_dana }}>
-                                            {{ $item->kode }} - {{ $item->nama_produk }}
+                                        @foreach ($sumberdana as $item)
+                                        <option value="{{ $item->id }}__{{ $item->kode }}__{{ $item->sumber_dana }}__{{ $item->biaya_bank }}">
+                                            {{ $item->kode }} - {{ $item->sumber_dana }}
                                         </option>
                                         @endforeach
                                     </select>
@@ -329,8 +329,8 @@ Tambah Data Pinjaman Baru
 
     function pilihSumberDana(val) {
         var get = val.split('__')
-        $('#sumber_dana').val(get[1])
-        pageSimulasi(0, 0);
+        $('#biaya_bank').val(numberToCurrency(get[3]))
+        // pageSimulasi(0, 0);
     }
 
     function unduhSimulasi(produk_id, bunga, bulan, saldo, bunga_efektif, no_anggota) {

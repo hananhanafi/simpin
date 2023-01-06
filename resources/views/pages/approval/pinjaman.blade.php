@@ -150,33 +150,33 @@ Data Aktivasi Pinjaman
         ],
     });
 
-    function tolak(uuid) {
+    function approve(uuid) {
         var url = "{{ route('approval.pinjaman.approve') }}";
         $('#aproval-form').attr('action', url);
         // $('#id_pinjaman').val(uuid)
         $("input[name='id_pinjaman']").val(uuid);
-        swal({
-                title: "Apakah Anda Yakin !",
-                text: "Ingin Menolak Data Ini ?.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#802d34",
-                confirmButtonText: "Ya, Tolak",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: false,
-                closeOnCancel: true
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    $('#aproval-form').submit();
-                }
-            });
+        $('#aproval-form').submit();
+        // swal({
+        //         title: "Apakah Anda Yakin !",
+        //         text: "Ingin Menolak Data Ini ?.",
+        //         type: "warning",
+        //         showCancelButton: true,
+        //         confirmButtonColor: "#802d34",
+        //         confirmButtonText: "Ya, Tolak",
+        //         cancelButtonText: "Cancel",
+        //         closeOnConfirm: false,
+        //         closeOnCancel: true
+        //     },
+        //     function(isConfirm) {
+        //         if (isConfirm) {
+        //             $('#aproval-form').submit();
+        //         }
+        //     });
     }
 
-    function approve(id) {
+    function tolak(id) {
         $("input[name='id_pinjaman']").val(id);
-        $('#modal-approve').modal('show')
-
+        $('#modal-reject').modal('show')
     }
 
     function penutupan(id, nama, noanggota) {
@@ -192,7 +192,7 @@ Data Aktivasi Pinjaman
 @endsection
 
 @section('modal')
-<div id="modal-approve" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal-reject" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="{{ route('approval.pinjaman.approve') }}" method="POST" id="post-approve">
@@ -204,7 +204,7 @@ Data Aktivasi Pinjaman
                 </div>
                 <div class="modal-body">
                     <div class="form-group mb-4">
-                        <h6 class="card-title">Alasan Di Approve</h6>
+                        <h6 class="card-title">Alasan Ditolak</h6>
                         <textarea class="form-control" name="keterangan" id="keterangan" required placeholder="Masukan Keterangan"></textarea>
                     </div>
 

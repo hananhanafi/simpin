@@ -27,21 +27,21 @@ class ApprovalController extends Controller
 
             if (isset($request->keterangan)) {
 
+                $produk->status_produk  = 5;
+                $produk->reject_note    = $request->keterangan;
+                $produk->updated_by      = Auth::user()->id;
+                $produk->updated_date    = date('Y-m-d H:i:s');
+                $produk->save();
+
+                Session::flash('success', 'Data Produk Telah Di Tolak');
+            } else {
                 $produk->status_produk  = 1;
-                $produk->approv_note    = $request->keterangan;
                 $produk->approv_by      = Auth::user()->id;
                 $produk->approv_date    = date('Y-m-d H:i:s');
                 $produk->updated_by      = Auth::user()->id;
                 $produk->updated_date    = date('Y-m-d H:i:s');
                 $produk->save();
-
                 Session::flash('success', 'Data Produk Telah Di Setujui');
-            } else {
-                $produk->status_produk  = 5;
-                $produk->updated_by      = Auth::user()->id;
-                $produk->updated_date    = date('Y-m-d H:i:s');
-                $produk->save();
-                Session::flash('success', 'Data Produk Telah Di Tolak');
             }
         } else {
             Session::flash('fail', 'Data Produk Tidak Di Temukan');
@@ -117,11 +117,18 @@ class ApprovalController extends Controller
         if ($simpanan) {
 
             if (isset($request->keterangan)) {
+                $simpanan->status_rekening  = 5;
+                $simpanan->reject_note       = $request->keterangan;
+                $simpanan->update_by      = Auth::user()->id;
+                $simpanan->update_date    = date('Y-m-d H:i:s');
+                $simpanan->save();
 
+                Session::flash('success', 'Data Simpanan Tidak Di Approve');
+            } else {
                 if ($simpanan->status_rekening == 4) {
 
                     $simpanan->status_rekening   = 5;
-                    $simpanan->approv_note       = $request->keterangan;
+                    $simpanan->reject_note       = "-";
                     $simpanan->update_by         = Auth::user()->id;
                     $simpanan->update_date       = date('Y-m-d H:i:s');
                     $simpanan->save();
@@ -129,20 +136,13 @@ class ApprovalController extends Controller
                     Session::flash('success', 'Data Simpanan Telah Di Terminasi');
                 } else {
                     $simpanan->status_rekening   = 1;
-                    $simpanan->approv_note       = $request->keterangan;
+                    $simpanan->reject_note       = "-";
                     $simpanan->update_by         = Auth::user()->id;
                     $simpanan->update_date       = date('Y-m-d H:i:s');
                     $simpanan->save();
 
                     Session::flash('success', 'Data Simpanan Telah Di Aktivasi');
                 }
-            } else {
-                $simpanan->status_rekening  = 5;
-                $simpanan->update_by      = Auth::user()->id;
-                $simpanan->update_date    = date('Y-m-d H:i:s');
-                $simpanan->save();
-
-                Session::flash('success', 'Data Simpanan Tidak Di Approve');
             }
         } else {
             Session::flash('fail', 'Data Simpanan Tidak Di Temukan');
@@ -164,11 +164,17 @@ class ApprovalController extends Controller
         if ($pinjaman) {
 
             if (isset($request->keterangan)) {
-
+                $pinjaman->status_rekening  = 5;
+                $pinjaman->reject_note       = $request->keterangan;
+                $pinjaman->update_by      = Auth::user()->id;
+                $pinjaman->update_date    = date('Y-m-d H:i:s');
+                $pinjaman->save();
+                Session::flash('success', 'Data Pinjaman Tidak Di Approve');
+            } else {
+                $pinjaman->reject_note       = "-";
                 if ($pinjaman->status_rekening == 4) {
 
                     $pinjaman->status_rekening   = 5;
-                    $pinjaman->approv_note       = $request->keterangan;
                     $pinjaman->update_by         = Auth::user()->id;
                     $pinjaman->update_date       = date('Y-m-d H:i:s');
                     $pinjaman->save();
@@ -177,15 +183,14 @@ class ApprovalController extends Controller
                 } else {
                     if ($pinjaman->approv_by == 1) {
                         $pinjaman->status_rekening   = 1;
-                        $pinjaman->pencairan_by      = 0;
+                        $pinjaman->approv_by      = 0;
                         $pinjaman->update_by         = Auth::user()->id;
-                        $pinjaman->pencairan_date    = '';
+                        $pinjaman->update_date       = date('Y-m-d H:i:s');
                         $pinjaman->save();
 
                         Session::flash('success', 'Data Pinjaman Telah Di Aktivasi');
                     } else {
                         $pinjaman->status_rekening   = 1;
-                        $pinjaman->approv_note       = $request->keterangan;
                         $pinjaman->approv_by         = 1;
                         $pinjaman->update_by         = Auth::user()->id;
                         $pinjaman->update_date       = date('Y-m-d H:i:s');
@@ -194,13 +199,6 @@ class ApprovalController extends Controller
                         Session::flash('success', 'Data Pinjaman Telah Di Aktivasi');
                     }
                 }
-            } else {
-                $pinjaman->status_rekening  = 5;
-                $pinjaman->update_by      = Auth::user()->id;
-                $pinjaman->update_date    = date('Y-m-d H:i:s');
-                $pinjaman->save();
-
-                Session::flash('success', 'Data Pinjaman Tidak Di Approve');
             }
         } else {
             Session::flash('fail', 'Data Pinjaman Tidak Di Temukan');

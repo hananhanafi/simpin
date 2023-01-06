@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Master;
 
+use Exception;
 use App\Models\Master\SumberDana;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,10 +26,11 @@ class SumberDanaController extends Controller
         try {
             DB::beginTransaction();
 
+            $biayaBank = intVal(str_replace('.', '', $request->biaya_bank));
             $sumberdana = new SumberDana;
             $sumberdana->kode           = $request->kode;
             $sumberdana->sumber_dana    = $request->sumber_dana;
-            $sumberdana->biaya_bank         = $request->biaya_bank;
+            $sumberdana->biaya_bank         = $biayaBank;
             $sumberdana->save();
 
             DB::commit();
@@ -64,9 +66,11 @@ class SumberDanaController extends Controller
         try {
             DB::beginTransaction();
 
+            $biayaBank = intVal(str_replace('.', '', $request->biaya_bank));
             $sumberdana = SumberDana::find($id);
             $sumberdana->kode           = $request->kode;
             $sumberdana->sumber_dana    = $request->sumber_dana;
+            $sumberdana->biaya_bank         = $biayaBank;
             $sumberdana->save();
 
             DB::commit();

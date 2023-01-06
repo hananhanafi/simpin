@@ -126,30 +126,31 @@
         });
 
 
-        function tolak(uuid){
+        function approve(id){
             var url = '{{ route("approval.produk.approve") }}';
             $('#aproval-form').attr('action', url);
-            $('#id_produk').val(uuid)
-            swal({
-                title: "Apakah Anda Yakin !",
-                text: "Ingin Menolak Data Ini ?.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#802d34",
-                confirmButtonText: "Ya, Tolak",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: false,
-                closeOnCancel: true
-            },
-            function (isConfirm) {
-                if (isConfirm) {
-                    $('#aproval-form').submit();
-                }
-            });
+            $('#id_produk').val(id)
+            $('#aproval-form').submit();
+            // swal({
+            //     title: "Apakah Anda Yakin !",
+            //     text: "Ingin Menolak Data Ini ?.",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#802d34",
+            //     confirmButtonText: "Ya, Tolak",
+            //     cancelButtonText: "Cancel",
+            //     closeOnConfirm: false,
+            //     closeOnCancel: true
+            // },
+            // function (isConfirm) {
+            //     if (isConfirm) {
+            //         $('#aproval-form').submit();
+            //     }
+            // });
         }
-        function approve(id){
+        function tolak(id){
             $('#id-produk').val(id);
-            $('#modal-approve').modal('show')
+            $('#modal-reject').modal('show')
         }
         $(document).ready(function(){
             $('#post-approve').parsley()
@@ -158,7 +159,7 @@
 @endsection
 
 @section('modal')
-<div id="modal-approve" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal-reject" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="{{ route('approval.produk.approve') }}" method="POST" id="post-approve">
@@ -170,7 +171,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="id_produk" id="id-produk">
                     <div class="form-group mb-4">
-                        <h6 class="card-title">Alasan Di Approve</h6>
+                        <h6 class="card-title">Alasan Ditolak</h6>
                         <textarea class="form-control" name="keterangan" id="keterangan" placeholder="Masukan Keterangan" required></textarea>
                     </div>
 

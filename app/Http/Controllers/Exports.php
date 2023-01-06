@@ -35,7 +35,7 @@ class Exports extends Controller
         $exportData = array();
         $exportData[] = ['', '', 'Master Data Produk Type'];
         $exportData[] = [''];
-        $exportData[] = ['NO', 'KODE', 'NAMA PRODUK', 'TIPE PRODUK'];
+        $exportData[] = ['NO', 'KODE', 'NAMA PRODUK', 'TIPE PRODUK (1=Simpanan, 2=Pinnjaman)'];
         $no = 1;
         foreach ($produk as $a) {
             $collect[0] = $no++;

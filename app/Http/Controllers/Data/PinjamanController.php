@@ -19,6 +19,7 @@ use App\Exports\SimulasiPinjaman;
 use Illuminate\Support\Facades\DB;
 use App\Models\Data\PinjamanDetail;
 use App\Http\Controllers\Controller;
+use App\Models\Master\SumberDana;
 use App\Models\Temp\Anggota as TempAnggota;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -100,9 +101,10 @@ class PinjamanController extends Controller
         $produk     = Produk::whereHas('tipePr', function ($qry) {
             $qry->where('tipe_produk', 2);
         })->where('status_produk', 1)->orderBy('kode')->get();
-        //$sumberdana = SumberDana::whereHas()
+        $sumberdana = SumberDana::get();
         return view('pages.data.pinjaman.create')
             ->with('produk', $produk)
+            ->with('sumberdana', $sumberdana)
             ->with('request', $request);
     }
 
@@ -133,6 +135,7 @@ class PinjamanController extends Controller
             DB::beginTransaction();
             list($noAnggota, $namaAnggota)          = explode('__', $request->no_anggota);
             list($idProduk, $tipeProduk, $namaProduk) = explode('__', $request->produk_id);
+            list($idSumberDana, $kodeSumberDana, $namaSumberDana, $biayaBankSumberDana) = explode('__', $request->sumber_dana);
 
             $getPinjaman   = Pinjaman::select(DB::raw('substring(no_rekening,10)+1 as next_norek'))->where('no_anggota', $noAnggota)->orderBy('no_rekening', 'desc')->get();
             if ($getPinjaman->count() != 0) {
@@ -201,11 +204,11 @@ class PinjamanController extends Controller
             $newPinjaman->update_by         = 0;
             $newPinjaman->approv_by         = 0;
             $newPinjaman->pencairan_by      = 0;
-            $newPinjaman->approv_note       = '-';
+            $newPinjaman->reject_note       = '-';
             $newPinjaman->approv_lunas_by   = 0;
             $newPinjaman->delete_by         = 0;
-            $newPinjaman->biaya_bank         = 0;
-            $newPinjaman->sumber_dana         = $request->sumber_dana;
+            $newPinjaman->biaya_bank         = $biayaBankSumberDana;
+            $newPinjaman->sumber_dana         = $idSumberDana;
             // $newPinjaman->save();
 
             if ($bulan >= 12) {
@@ -217,7 +220,7 @@ class PinjamanController extends Controller
             // $newPinjaman->angsuran         = $totalAngsuran;
             $newPinjaman->angsuran        = $totalAngsuran;
             $newPinjaman->dana_mengendap        = $danaditahan;
-            $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee + $danaditahan);
+            $nilaiPencairan = $jumlahPinjaman - ($asuransi + $adminFee + $danaditahan + $biayaBankSumberDana);
             $newPinjaman->nilai_pencairan   = $nilaiPencairan;
             $newPinjaman->save();
 

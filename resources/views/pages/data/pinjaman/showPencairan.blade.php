@@ -106,7 +106,7 @@ Info Pencairan Pinjaman
                 <tr>
                     <td width="40%">Admin Bank</td>
                     <td width="60%">
-                        Rp. <span id="biaya_bank"><?php echo ('0'); ?></span>
+                        Rp. <span id="biaya_bank"><?php echo (number_format($pinjamanDetail->biaya_bank, '0', ',', '.')); ?></span>
                     </td>
                 </tr>
                 <tr>

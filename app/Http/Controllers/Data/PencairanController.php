@@ -24,7 +24,7 @@ class PencairanController extends Controller
                                             t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
                                             t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
                                             t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening, t_pembiayaan.nilai_pencairan,
-                                            t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi')
+                                            t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi, t_pembiayaan.biaya_bank')
             ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
             ->where('t_pembiayaan.id', $idPencairan)
             ->with('detail')
@@ -35,7 +35,7 @@ class PencairanController extends Controller
                 t_pembiayaan.jangka_waktu, t_pembiayaan.margin, t_pembiayaan.saldo_akhir_pokok, 
                 t_pembiayaan.saldo_akhir_margin, t_pembiayaan.cicilan, t_pembiayaan.tanggal_mulai, 
                 t_pembiayaan.tanggal_akhir, t_pembiayaan.created_date, t_pembiayaan.status_rekening, t_pembiayaan.nilai_pencairan,
-                t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi')
+                t_pembiayaan.admin_fee, t_pembiayaan.nilai_pelunasan, t_pembiayaan.dana_mengendap, t_pembiayaan.asuransi, t_pembiayaan.biaya_bank')
             ->leftJoin('p_produk', 't_pembiayaan.produk_id', '=', 'p_produk.id')
             ->where('t_pembiayaan.no_anggota', $pinjamanDetail->no_anggota)
             ->with('detail')
