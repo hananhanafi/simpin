@@ -10,6 +10,7 @@ use App\Models\Master\Produk;
 use App\Helpers\FunctionHelper;
 use App\Helpers\FinancialHelper;
 use App\Models\Data\Pinjaman;
+use App\Models\Data\Simpanan;
 use Illuminate\Routing\Controller;
 use App\Models\Master\ProdukMargin;
 
@@ -156,6 +157,7 @@ class AjaxController extends Controller
             if (Str::slug($produk->nama_produk) == 'simpanan-sukarela-berjangka') {
                 // return $saldo;
                 return view('pages.data.simpanan.simulasi-ssb')
+                    ->with('request', $request)
                     ->with('bulan', $bulan)
                     ->with('saldo', $saldo)
                     ->with('request', $request)
@@ -173,6 +175,7 @@ class AjaxController extends Controller
                 $simpas     = FunctionHelper::hitungSimpas($bulan, $bunga_efektif, $bunga, $saldo);
 
                 return view('pages.data.simpanan.simulasi-simpas')
+                    ->with('request', $request)
                     ->with('bulan', $bulan)
                     ->with('saldo', $saldo)
                     ->with('request', $request)
@@ -255,10 +258,11 @@ class AjaxController extends Controller
 
         if ($request->gaji) {
             $gaji40 = str_replace('.', '', $request->gaji) * 0.4;
-            $request->gaji = str_replace('.', '', $request->gaji);
+            $gajiAnggota = str_replace('.', '', $request->gaji);
         }
         // return $gaji40;
         $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")->get();
+        $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")->get();
 
         // $bunga = $request->bunga;
         $jml_baru = str_replace('.', '', $request->jml_pengajuan_baru ?? 0);
@@ -282,8 +286,61 @@ class AjaxController extends Controller
         $financial = new FinancialHelper;
         return view('pages.data.pinjaman.simulasi-plafon-table')
             ->with('pinjaman', $pinjaman)
+            ->with('simpanan', $simpanan)
             ->with('jml_baru', $jml_baru)
             ->with('gaji40', $gaji40)
+            ->with('gajiAnggota', $gajiAnggota)
+            ->with('anggota', $anggota)
+            ->with('financial', $financial)
+            ->with('request', $request)
+            ->with('angsuran', $angsuran)
+            // ->with('produk', $produk)
+            // ->with('simpas', $simpas)
+            // ->with('rangeBulan', $rangeBulan)
+            // ->with('bunga_efektif', $bunga_efektif)
+            // ->with('bunga', $bunga);
+        ;
+    }
+
+    public function simpananPlafon(Request $request)
+    {
+        // return $request;
+        $gaji40 = 0;
+
+        if ($request->gaji) {
+            $gaji40 = str_replace('.', '', $request->gaji) * 0.4;
+            $gajiAnggota = str_replace('.', '', $request->gaji);
+        }
+        // return $gaji40;
+        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")->get();
+        $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")->get();
+
+        // $bunga = $request->bunga;
+        $jml_baru = str_replace('.', '', $request->jml_pengajuan_baru ?? 0);
+        $angsuran = str_replace('.', '', $request->angsuran ?? 0);
+        // $bunga_efektif = $request->bunga_efektif;
+        // $bulan = $request->bulan;
+        if ($request->no_anggota) {
+            $anggota = Anggota::where('no_anggota', $request->no_anggota)->firstOrFail();
+        } else {
+            $anggota = null;
+        }
+
+        // $startBulan = date('n');
+        // $startTahun = date('Y');
+        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $bulan);
+        // $produk = Produk::find($produk_id);
+        // $saldo = ($request->saldo == null ? 0 : $saldo);
+        // $bulan = ($request->bulan == null ? 1 : $bulan);
+        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, ($bulan + 1));
+        // $simpas     = FunctionHelper::hitungSimpas($bulan, $bunga_efektif, $bunga, $saldo);
+        $financial = new FinancialHelper;
+        return view('pages.data.simpanan.simulasi-plafon-table')
+            ->with('pinjaman', $pinjaman)
+            ->with('simpanan', $simpanan)
+            ->with('jml_baru', $jml_baru)
+            ->with('gaji40', $gaji40)
+            ->with('gajiAnggota', $gajiAnggota)
             ->with('anggota', $anggota)
             ->with('financial', $financial)
             ->with('request', $request)

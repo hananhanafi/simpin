@@ -57,6 +57,9 @@ class DatatableLaporanController extends Controller
             ->editColumn('profit', function ($row) {
                 return '<b>' . strtoupper($row->profit_nama) . '</b>';
             })
+            ->editColumn('departemen', function ($row) {
+                return '<b>' . strtoupper($row->departemen_nama) . '</b>';
+            })
             ->editColumn('tanggal_gabung', function ($row) {
                 return '<b>' . date('d-m-Y', strtotime($row->reg_date)) . '</b>';
             })
@@ -70,7 +73,7 @@ class DatatableLaporanController extends Controller
                 else
                     return '<span class="badge font-size-13 bg-danger">Tidak Aktif</span>';
             })
-            ->rawColumns(['no_anggota', 'nama', 'grade', 'profit', 'status', 'tanggal_gabung'])
+            ->rawColumns(['no_anggota', 'nama', 'grade', 'profit', 'departemen', 'status', 'tanggal_gabung'])
             ->toJson();
     }
 
@@ -87,9 +90,25 @@ class DatatableLaporanController extends Controller
             if ($request->bulan != '')
                 $bulan = $request->bulan;
         }
+        if (isset($request->tahun_end)) {
+            if ($request->tahun_end != '')
+                $tahun_end = $request->tahun_end;
+        }
+        if (isset($request->bulan_end)) {
+            if ($request->bulan_end != '')
+                $bulan_end = $request->bulan_end;
+        }
+        $fromDate = date($tahun.'-'.$bulan.'-01');
+        $endDate = date($tahun_end.'-'.$bulan_end.'-31');
 
         // $simpanan = TempAnggota::whereMonth('reg_date', $bulan)->whereYear('reg_date', $tahun)->orderBy('reg_date');
-        $simpanan = TempAnggota::with(['anggota'])->orderBy('no_anggota');
+        // $simpanan = TempAnggota::with(['anggota'])->orderBy('no_anggota');
+        $simpanan    = Anggota::
+            whereDate('reg_date','>=',$fromDate)
+            ->whereDate('reg_date','<=',$endDate)
+            // whereMonth('reg_date', '>=', $bulan)
+            // ->whereYear('reg_date', '>=', $tahun)
+            ->orderBy('reg_date');
         // return $simpanan;
         // return $bulan.'-'.$tahun;
         return DataTables::of($simpanan)
@@ -98,16 +117,22 @@ class DatatableLaporanController extends Controller
                 return '<b>' . $row->no_anggota . '</b>';
             })
             ->addColumn('nama', function ($row) {
-                return '<b>' . ($row->anggota->nama) . '</b>';
+                // return '<b>' . ($row->anggota->nama) . '</b>';
+                return '<b>' . ($row->nama) . '</b>';
             })
-            ->editColumn('simwa', function ($row) {
-                return '<b> Rp. ' . number_format($row->simwa, 0, ',', '.') . '</b>';
+            ->editColumn('sim_wajib', function ($row) {
+                return '<b>' . number_format($row->sim_wajib, 0) . '</b>';
             })
-            ->editColumn('simp_pokok', function ($row) {
-                return '<b> Rp. ' . number_format($row->anggota->grades->simp_pokok, 0, ',', '.') . '</b>';
+            ->editColumn('sim_pokok', function ($row) {
+                return '<b>' . number_format($row->sim_pokok, 0) . '</b>';
+                // return '<b> Rp. ' . number_format($row->anggota->grades->simp_pokok, 0, ',', '.') . '</b>';
+            })
+            ->editColumn('sim_khusus', function ($row) {
+                return '<b>' . 0 . '</b>';
             })
             ->addColumn('total', function ($row) {
-                return '<b> Rp. ' . number_format(($row->simwa + $row->anggota->grades->simp_pokok), 0, ',', '.') . '</b>';
+                // return '<b> Rp. ' . number_format(($row->simwa + $row->anggota->grades->simp_pokok), 0, ',', '.') . '</b>';
+                return '<b> Rp. ' . number_format(($row->sim_wajib + $row->sim_pokok), 0, ',', '.') . '</b>';
             })
             // ->addColumn('status', function ($row) {
             //     if ($row->status_anggota == 0)
@@ -119,7 +144,7 @@ class DatatableLaporanController extends Controller
             //     else
             //         return '<span class="badge font-size-13 bg-danger">Tidak Aktif</span>';
             // })
-            ->rawColumns(['no_anggota', 'nama', 'simp_pokok', 'simwa', 'total'])
+            ->rawColumns(['no_anggota', 'nama', 'sim_pokok', 'sim_wajib', 'sim_khusus', 'total'])
             ->toJson();
     }
 
@@ -136,8 +161,22 @@ class DatatableLaporanController extends Controller
             if ($request->bulan != '')
                 $bulan = $request->bulan;
         }
+        if (isset($request->tahun_end)) {
+            if ($request->tahun_end != '')
+                $tahun_end = $request->tahun_end;
+        }
+        if (isset($request->bulan_end)) {
+            if ($request->bulan_end != '')
+                $bulan_end = $request->bulan_end;
+        }
+        $fromDate = date($tahun.'-'.$bulan.'-01');
+        $endDate = date($tahun_end.'-'.$bulan_end.'-31');
 
-        $simpanan = Simpanan::with('anggota')->where('produk_id', 3)->whereMonth('created_date', $bulan)->whereYear('created_date', $tahun)->orderBy('created_date');
+        $simpanan = Simpanan::with('anggota')->where('produk_id', 3)
+        // ->whereMonth('created_date', $bulan)->whereYear('created_date', $tahun)
+        ->whereDate('created_date','>=',$fromDate)
+        ->whereDate('created_date','<=',$endDate)
+        ->orderBy('created_date');
         // $simpanan = TempAnggota::with(['anggota'])->orderBy('no_anggota');
         // return $simpanan;
         // return $bulan.'-'.$tahun;
@@ -188,8 +227,22 @@ class DatatableLaporanController extends Controller
             if ($request->bulan != '')
                 $bulan = $request->bulan;
         }
+        if (isset($request->tahun_end)) {
+            if ($request->tahun_end != '')
+                $tahun_end = $request->tahun_end;
+        }
+        if (isset($request->bulan_end)) {
+            if ($request->bulan_end != '')
+                $bulan_end = $request->bulan_end;
+        }
+        $fromDate = date($tahun.'-'.$bulan.'-01');
+        $endDate = date($tahun_end.'-'.$bulan_end.'-31');
 
-        $simpanan = Simpanan::with('anggota')->where('produk_id', 4)->whereMonth('created_date', $bulan)->whereYear('created_date', $tahun)->orderBy('created_date');
+        $simpanan = Simpanan::with('anggota')->where('produk_id', 4)
+        // ->whereMonth('created_date', $bulan)->whereYear('created_date', $tahun)
+        ->whereDate('created_date','>=',$fromDate)
+        ->whereDate('created_date','<=',$endDate)
+        ->orderBy('created_date');
         // $simpanan = TempAnggota::with(['anggota'])->orderBy('no_anggota');
         // return $simpanan;
         // return $bulan.'-'.$tahun;

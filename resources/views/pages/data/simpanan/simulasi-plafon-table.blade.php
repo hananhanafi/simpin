@@ -5,7 +5,7 @@
         @elseif ($gajiAnggota == '' || $gajiAnggota == null)
         <h2>Silahkan Isi Gaji Pokok Terlebih Dahulu</h2>
         @else
-        <h4>PLAFON PINJAMAN</h4>
+        <h4>PLAFON SIMPANAN</h4>
 
         <div class="row">
             <div class="col-md-5">
@@ -143,7 +143,7 @@
         </div>
 
         <hr>
-        <h6>PINJAMAN BARU</h6>
+        <h6>SIMPANAN BARU</h6>
         <div class="row">
             <div class="col-12">
                 <table class="table">
@@ -162,7 +162,7 @@
                     @endphp
                     <tbody>
                         <tr>
-                            <td>Pinjaman Baru</td>
+                            <td>Simpanan Baru</td>
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
@@ -245,7 +245,7 @@
                         @endphp
                         @endforeach
                         <tr>
-                            <td>Pinjaman Baru</td>
+                            <td>Simpanan Baru</td>
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>

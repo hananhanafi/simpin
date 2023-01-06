@@ -39,7 +39,7 @@
                 <div class="card-body">
                     @include('includes.alert')
                     <div class="row mb-2">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             Bulan<br>
                             <select class="form-control" name="bulan" id="bulan" onchange="ssb()">
                                 @for ($i = 1; $i <= 12; $i++)
@@ -75,10 +75,46 @@
                         <div class="col-md-4">
 
                         </div>
-                        <div class="col-md-3 text-right">
+                        <div class="col-md-4 text-right">
                             &nbsp;<br>
                             {{-- <button class="btn btn-sm btn-success"><i class="fas fa-download"></i> Unduh Laporan</button> --}}
                             <div id="buttonExport" class="pull-right"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            Sampai
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-2">
+                            Bulan<br>
+                            <select class="form-control" name="bulan_end" id="bulan_end" onchange="simpanan()">
+                                @for ($i = 1; $i <=12; $i++) @if ($bulan !='' ) @if ($bulan==$i) <option selected value="{{ $i }}">{{ FunctionHelper::bulan($i) }}</option>
+                                    @else
+                                    <option value="{{ $i }}">{{ FunctionHelper::bulan($i) }}</option>
+                                    @endif
+                                    @else
+                                    <option value="{{ $i }}">{{ FunctionHelper::bulan($i) }}</option>
+                                    @endif
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            Tahun <br>
+                            <select class="form-control" name="tahun_end" id="tahun_end" onchange="simpanan()">
+                                @for ($i = date('Y'); $i >=(date('Y')-20); $i--)
+                                @if ($tahun != '')
+                                @if ($tahun == $i)
+                                <option selected value="{{ $i }}">{{ $i }}</option>
+                                @else
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endif
+                                @else
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endif
+                                @endfor
+                            </select>
                         </div>
                     </div>
                     <hr>
@@ -164,6 +200,8 @@
         function ssb() {
             var tahun = $('#tahun').val()
             var bulan = $('#bulan').val()
+            var tahun_end = $('#tahun_end').val()
+            var bulan_end = $('#bulan_end').val()
             var dt = $('#datatable').DataTable({
                     searching: false,
                     processing: true,
@@ -174,7 +212,9 @@
                         dataType: "json",
                         data: {
                             bulan: bulan,
-                            tahun: tahun
+                            tahun: tahun,
+                            bulan_end: bulan_end,
+                            tahun_end: tahun_end,
                         }
                     },
                     dom: 'Bfrtip',

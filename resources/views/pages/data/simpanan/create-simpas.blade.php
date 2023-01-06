@@ -204,10 +204,12 @@ Tambah Data Simpanan Baru
         var saldo = $('#saldo_minimal').val()
         var jenis_ssb = $('#jenis_ssb').val()
 
+        var get_no_anggota = $('#no_anggota').val()
+        var no_anggota = get_no_anggota.split('__')
 
         $('#pages-simulasi').load("{{ route('ajax.simpanan.simulasi') }}?produk_id=" + id_produk + '&bunga=' + bunga +
             '&bulan=' + bulan + '&saldo=' + saldo + '&bunga_efektif=' + jumlah_bunga_efektif + '&jenis-ssb=' +
-            jenis_ssb);
+            jenis_ssb + '&no_anggota=' + no_anggota[0]);
     }
 
     function pageSimulasiEfektif(val) {

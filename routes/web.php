@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pinjaman-mutasi', 'PinjamanController@mutasi')->name('pinjaman.mutasi');
         Route::get('pinjaman-simulasi-xls', 'PinjamanController@pinjamanSimulasiXls')->name('pinjaman.simulasi.xls');
         Route::get('pinjaman-plafon', 'PinjamanController@plafon')->name('pinjaman.plafon');
+        Route::get('simpanan-plafon', 'SimpananController@plafon')->name('simpanan.plafon');
         Route::get('pinjaman-plafon-xls', 'PinjamanController@plafonXls')->name('pinjaman.plafon.xls');
         Route::get('pinjaman-pengajuan-xls', 'PinjamanController@pinjamanPengajuanXls')->name('pinjaman.pengajuan.xls');
         Route::get('pinjaman-pengajuan-pdf', 'PinjamanController@pinjamanPengajuanPdf')->name('pinjaman.pengajuan.pdf');
@@ -138,6 +139,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('simpanan-simulasi', 'AjaxController@simpananSimulasi')->name('simpanan.simulasi');
         Route::get('pinjaman-simulasi', 'AjaxController@pinjamanSimulasi')->name('pinjaman.simulasi');
         Route::get('pinjaman-plafon', 'AjaxController@pinjamanPlafon')->name('pinjaman.plafon');
+        Route::get('simpanan-plafon', 'AjaxController@simpananPlafon')->name('simpanan.plafon');
         Route::get('pinjaman-pengajuan', 'AjaxController@pinjamanPengajuanSimulasi')->name('pinjaman.pengajuan');
         Route::get('shu-simulasi', 'AjaxController@shuSimulasi')->name('shu.simulasi');
         Route::post('get-bungapa-by-marginflat', 'AjaxController@getBungapaByMarginflat');

@@ -21,7 +21,7 @@ class Simpanan extends Model
 
     function detail()
     {
-        return $this->hasMany(SimpananSsbDetail::class, 'simpanan_id');
+        return $this->hasMany(SimpananSsbDetail::class, 'simpanan_id', 'id');
     }
 
     function detailsimpas()

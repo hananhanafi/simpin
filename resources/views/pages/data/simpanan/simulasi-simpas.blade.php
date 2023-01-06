@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-10 text-right">
-        <a href="javascript:PlafonSimulasi" class=" btn btn-success"><i class="fa fa-download"></i> Plafon SIMPAS </a>
+        <a href="javascript:PlafonSimulasi('{{ $request->no_anggota }}','{{ $request->saldo }}','{{ $request->bulan }}','{{ $request->totalAngsuran }}' )" class=" btn btn-success"><i class="fa fa-download"></i> Plafon SIMPAS </a>
     </div>
     <div class="col-md-2 text-right">
         <a href="javascript:unduhSimulasi('{{ $request->produk_id }}','{{ $request->bunga }}','{{ $request->bulan }}','{{ $request->saldo }}','{{ $request->bunga_efektif }}')" class="btn btn-success"><i class="fa fa-download"></i> Unduh Hasil Simulasi</a>
@@ -116,7 +116,12 @@
                         // // $saldoPerBulan += $tabPerBulan + $bungaPerBulan;
                         // $totalBunga += $bungaPerBulan;
                         // }
-                        // if ($i < $bulan + 1) { $totaltabPerBulan +=$tabPerBulan; } $totalBunga +=$bungaPerBulan; $totaltabPerBulan +=$tabPerBulan + $bungaPerBulan; $totalAngsuran +=$tabPerBulan; @endphp <input type="hidden" name="simulasi[simpas][totaltabPerBulan][{{ $i }}]" value="{{ $totaltabPerBulan }}">
+                        // if ($i < $bulan + 1) { $totaltabPerBulan +=$tabPerBulan; } 
+                        $totalBunga +=$bungaPerBulan; 
+                        $totaltabPerBulan +=$tabPerBulan + $bungaPerBulan; 
+                        $totalAngsuran +=$tabPerBulan; 
+                        @endphp 
+                        <input type="hidden" name="simulasi[simpas][totaltabPerBulan][{{ $i }}]" value="{{ $totaltabPerBulan }}">
                             Rp. {{ number_format($totaltabPerBulan, 0, ',', '.') }}
                     </td>
                     </tr>
@@ -148,16 +153,16 @@
 </div>
 <script>
     function PlafonSimulasi(no_anggota, saldo, bulan, totalAngsuran) {
-        // var totalAngsuran = <?php echo $totalAngsuran ?>;
-        // var request = '';
+        var totalAngsuran = <?php echo $totalAngsuran ?>;
+        var request = '';
 
-        // request += 'no_anggota=' + no_anggota + '&'
-        // request += 'bulan=' + bulan + '&'
-        // request += 'saldo=' + parseInt(saldo.replaceAll('.', '')) + '&'
-        // request += 'totalAngsuran=' + totalAngsuran
+        request += 'no_anggota=' + no_anggota + '&'
+        request += 'bulan=' + bulan + '&'
+        request += 'saldo=' + parseInt(saldo.replaceAll('.', '')) + '&'
+        request += 'totalAngsuran=' + totalAngsuran
 
         console.log('asd')
-        // window.open(
-        //     "{{ route('data.pinjaman.plafon') }}?" + request, '_blank');
+        window.open(
+            "{{ route('data.simpanan.plafon') }}?" + request, '_blank');
     }
 </script>

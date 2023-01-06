@@ -82,4 +82,23 @@ class LaporanController extends Controller
             ->with('bulan', $bulan)
             ->with('request', $request);
     }
+    
+    public function pinjaman(Request $request)
+    {
+        $tahun = date('Y');
+        $bulan = date('n');
+        if (isset($request->tahun)) {
+            if ($request->tahun != '')
+                $tahun = $request->tahun;
+        }
+        if (isset($request->bulan)) {
+            if ($request->bulan != '')
+                $bulan = $request->bulan;
+        }
+
+        return view('pages.laporan.pinjaman.index')
+            ->with('tahun', $tahun)
+            ->with('bulan', $bulan)
+            ->with('request', $request);
+    }
 }

@@ -275,6 +275,25 @@ class SimpananController extends Controller
         Session::flash('success', 'Hapus Data Simpanan Berhasil');
         return redirect()->route('data.simpanan.index');
     }
+    
+
+    public function plafon(Request $request)
+    {
+
+        $anggota = Anggota::where('no_anggota', '=', $request->no_anggota)->firstOrFail();
+        $today = Date('Y-m-d H:i:s');
+        // dd(gettype($anggota->masukkerja_date));
+        // $interval = $anggota->masukkerja_date ? ($today->diff($today))->y : 0;
+        // $workDateEpoch = strtotime($anggota->masukkerja_date);
+        // $workDate = Date($workDateEpoch);
+        // dd(gettype($today));
+        // $interval = $anggota->masukkerja_date ? ($anggota->masukkerja_date->diff($today))->y : 0;
+        $masa_kerja = $anggota->masukkerja_date ? date_diff(date_create($anggota->masukkerja_date), date_create())->y : 0;
+        return view('pages.data.simpanan.plafon')
+            ->with('anggota', $anggota)
+            ->with('masa_kerja', $masa_kerja)
+            ->with('request', $request);
+    }
 
     public function simpasSimulasiXls(Request $request)
     {
