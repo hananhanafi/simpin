@@ -137,6 +137,13 @@ Tambah Data Anggota
                                     <input class="form-control" type="text" name="npwp" id="npwp" maxlength="100" value="{{ old('npwp') }}" placeholder="Masukan NPWP">
                                 </div>
                             </div>
+
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Mulai Bekerja</label>
+                                <div class="col-sm-8">
+                                    <input type="date" name="masukkerja_date" class="form-control" id="masukkerja_date" placeholder="Tanggal Lahir" value="{{ old('masukkerja_date') }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="pb-3 col-md-6">
 
@@ -204,49 +211,59 @@ Tambah Data Anggota
                                         <input type="text" name="simpanan_wajib" class="form-control" id="simpanan_wajib" value="{{ old('simpanan_wajib') }}" readonly>
                                     </div>
                                 </div>
+                                <div id="div-grade">
+                                    <div class="row mb-3">
+                                        <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Simpanan Khusus</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="simpanan_pokok" class="form-control" placeholder="Simpanan Khusus" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
+                                        </div>
+                                    </div>
 
-                            </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Nama Bank</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="bank_code" class="form-control" id="bank_code" placeholder="Masukan Nama Bank" value="{{ old('bank_code') }}">
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">No Rekening Bank</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="bank_norek" class="form-control" id="bank_norek" placeholder="Masukan No Rekening Bank" value="{{ old('bank_norek') }}">
+                                <div id="div-grade">
+                                    <div class="row mb-3">
+                                        <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">DKM</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="simpanan_pokok" class="form-control" placeholder="Jumlah DKM" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Rekening Atas Nama</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="bank_nama" class="form-control" id="bank_nama" placeholder="Masukan Atas Nama Rekening" value="{{ old('bank_nama') }}">
+                                <div class="row mb-3">
+                                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Nama Bank</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="bank_code" class="form-control" id="bank_code" placeholder="Masukan Nama Bank" value="{{ old('bank_code') }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Status E-Banking</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" style="width: 100%;" name="status_ebanking">
-                                        <option value="1" {{ old('status_ebanking') == 1 ? 'selected' : '' }}>Aktif</option>
-                                        <option value="2" {{ old('status_ebanking') == 2 ? 'selected' : '' }}>Tidak Aktif</option>
-                                    </select>
+                                <div class="row mb-3">
+                                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">No Rekening Bank</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="bank_norek" class="form-control" id="bank_norek" placeholder="Masukan No Rekening Bank" value="{{ old('bank_norek') }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Mulai Bekerja</label>
-                                <div class="col-sm-8">
-                                    <input type="date" name="masukkerja_date" class="form-control" id="masukkerja_date" placeholder="Tanggal Lahir" value="{{ old('masukkerja_date') }}">
+                                <div class="row mb-3">
+                                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Rekening Atas Nama</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="bank_nama" class="form-control" id="bank_nama" placeholder="Masukan Atas Nama Rekening" value="{{ old('bank_nama') }}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Status E-Banking</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" style="width: 100%;" name="status_ebanking">
+                                            <option value="1" {{ old('status_ebanking') == 1 ? 'selected' : '' }}>Aktif</option>
+                                            <option value="2" {{ old('status_ebanking') == 2 ? 'selected' : '' }}>Tidak Aktif</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <button type="submit" class="btn btn-primary btn-sm w-md"><i class="fa fa-save"></i> Simpan Data</button>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-sm w-md"><i class="fa fa-save"></i> Simpan Data</button>
+                            </div>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>

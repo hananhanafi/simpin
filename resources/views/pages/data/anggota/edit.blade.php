@@ -134,6 +134,12 @@ Edit Data Anggota
                                     <input class="form-control" type="text" name="npwp" id="npwp" maxlength="100" value="{{ $anggota->npwp }}" placeholder="Masukan NPWP">
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Mulai Bekerja</label>
+                                <div class="col-sm-8">
+                                    <input type="date" name="masukkerja_date" class="form-control" id="masukkerja_date" placeholder="Tanggal Mulai Kerja" value="{{ $anggota->masukkerja_date }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="pb-3 col-md-6">
                             <div class="row mb-3">
@@ -202,6 +208,24 @@ Edit Data Anggota
                                 </div>
 
                             </div>
+                            <div id="div-grade">
+                                <div class="row mb-3">
+                                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Simpanan Khusus</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="simpanan_pokok" class="form-control" placeholder="Simpanan Khusus" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="div-grade">
+                                <div class="row mb-3">
+                                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">DKM</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="simpanan_pokok" class="form-control" placeholder="Jumlah DKM" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Nama Bank</label>
                                 <div class="col-sm-8">
@@ -227,12 +251,6 @@ Edit Data Anggota
                                         <option value="1" {{ $anggota->status_ebanking == 1 ? 'selected' : '' }}>Aktif</option>
                                         <option value="2" {{ $anggota->status_ebanking == 2 ? 'selected' : '' }}>Tidak Aktif</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Mulai Bekerja</label>
-                                <div class="col-sm-8">
-                                    <input type="date" name="masukkerja_date" class="form-control" id="masukkerja_date" placeholder="Tanggal Mulai Kerja" value="{{ $anggota->masukkerja_date }}">
                                 </div>
                             </div>
                         </div>

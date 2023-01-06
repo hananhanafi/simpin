@@ -126,6 +126,7 @@ Data Anggota
                             <th>No Anggota</th>
                             <th>Nama</th>
                             <th>Profit Center</th>
+                            <th>Departemen</th>
                             <th>Grade</th>
                             <th>Status</th>
                             <th>Tanggal Gabung</th>
@@ -238,6 +239,9 @@ Data Anggota
                     },
                     {
                         data: "profit"
+                    },
+                    {
+                        data: "departemen"
                     },
                     {
                         data: "grade"
