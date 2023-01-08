@@ -70,7 +70,7 @@ Tambah Data Simpanan Baru
                             {{-- <option value="">-Pilih Produk-</option> --}}
                             @foreach ($produk as $item)
                             {{-- <option value="{{ $item->id }}__{{ $item->tipe_produk }}__{{ $item->nama_produk }}">{{ $item->kode }} - {{ $item->nama_produk }}</option> --}}
-                            @if ($item->nama_produk == 'SIMPANAN SUKARELA BERJANGKA')
+                            @if (strtolower($item->nama_produk) == strtolower('SIMPANAN SUKARELA BERJANGKA') || strtolower($item->nama_produk) == strtolower('SIMPANAN SUKARELA BERJANGKA (SSB)'))
                             <input type="hidden" name="produk_id" id="produk_id" value="{{ $item->id }}__{{ $item->tipe_produk }}__{{ $item->nama_produk }}">
                             @endif
                             @endforeach
@@ -220,11 +220,12 @@ Tambah Data Simpanan Baru
 
     function pilihProduk(val) {
 
+        $('#div-ssb').show()
         var value = val.split('__')
-        if (value[2] == 'SIMPANAN SUKARELA BERJANGKA')
-            $('#div-ssb').show()
-        else
-            $('#div-ssb').hide()
+        // if (value[2] == 'SIMPANAN SUKARELA BERJANGKA')
+        //     $('#div-ssb').show()
+        // else
+        //     $('#div-ssb').hide()
         // if(value[1] == '105')
         //     $('#bunga-efektif').show()
         // else

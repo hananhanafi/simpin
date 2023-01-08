@@ -25,8 +25,8 @@
                     <div class="row">
 
                         <div class="col-md-10">
-                            <h4 class="card-title">{{ 'Sertifikat ' . ucwords(strtolower($simpanan->produk->nama_produk)) }}
-                            </h4>
+                            {{-- <h4 class="card-title">{{ 'Sertifikat ' . ucwords(strtolower($simpanan->produk->nama_produk)) }}
+                            </h4> --}}
                         </div>
                         <div class="col-md-2">
                             <!--<button id="generatePDF" class="btn btn-success">Cetak PDF</button>-->

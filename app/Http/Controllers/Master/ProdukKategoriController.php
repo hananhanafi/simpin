@@ -25,7 +25,6 @@ class ProdukKategoriController extends Controller
 
     public function store(RequestProdukType $request){
         $produkTypeCheck = ProdukKategori::where('kode','=',$request->kode)->whereNull('deleted_at')->get();
-        dd($produkTypeCheck);
         if(count($produkTypeCheck)>0){
             Session::flash('fail','Kode ' . $request->kode . ' Sudah Ada. Silahkan Gunakan Kode Produk Lain');
             return redirect()->back()->withInput();

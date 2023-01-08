@@ -168,6 +168,8 @@ Data Simpanan
                 $('#no-anggota').val(noanggota)
                 $('#nama-anggota').val(nama)
                 $('#id_simpanan').val(id)
+                const pinalti = parseInt(res.saldo_akhir) * 0.01
+                $('#pinalti').val(pinalti)
                 $('#modal-tutup').modal('show')
             }
         });

@@ -154,7 +154,8 @@ class AjaxController extends Controller
         // return $rangeBulan;
         $produk = Produk::find($produk_id);
         if ($produk) {
-            if (Str::slug($produk->nama_produk) == 'simpanan-sukarela-berjangka') {
+            // if (Str::slug($produk->nama_produk) == 'simpanan-sukarela-berjangka') {
+            if (strpos(Str::slug($produk->nama_produk), "simpanan-sukarela-berjangka") !== false) {
                 // return $saldo;
                 return view('pages.data.simpanan.simulasi-ssb')
                     ->with('request', $request)

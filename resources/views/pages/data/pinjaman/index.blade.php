@@ -44,8 +44,14 @@ Data Pinjaman
                             <th class="text-center">No Rekening</th>
                             <th class="text-center">No Anggota</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">Alamat</th>
-                            <th class="text-center">Telepon</th>
+                            {{-- <th class="text-center">Alamat</th>
+                            <th class="text-center">Telepon</th> --}}
+                            <th class="text-center">Mulai</th>
+                            <th class="text-center">Akhir</th>
+                            <th class="text-center">Angsuran</th>
+                            <th class="text-center">Jangka Waktu</th>
+                            <th class="text-center">Saldo</th>
+                            
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
                         </tr>
@@ -121,13 +127,28 @@ Data Pinjaman
                 "data": "nama",
                 name: 'anggota.nama',
             },
+            // {
+            //     "data": "alamat"
+            //     // name: 'anggota.alamat',
+            // },
+            // {
+            //     "data": "telepon",
+            //     // name: 'anggota.telepon',
+            // },
             {
-                "data": "alamat"
-                // name: 'anggota.alamat',
+                "data": "mulai"
             },
             {
-                "data": "telepon",
-                // name: 'anggota.telepon',
+                "data": "akhir"
+            },
+            {
+                "data": "angsuran"
+            },
+            {
+                "data": "jangka_waktu"
+            },
+            {
+                "data": "saldo"
             },
             {
                 "data": "status"
@@ -138,7 +159,7 @@ Data Pinjaman
         ],
         "columnDefs": [{
                 "className": 'text-center',
-                "targets": [0, 1, 3, 4, 5]
+                "targets": [0, 1, 3, 4, 5, 6, 7, 8, 9, 10]
             },
             {
                 "searchable": false,

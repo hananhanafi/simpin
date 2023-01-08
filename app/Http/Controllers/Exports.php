@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Terbilang;
 use App\Exports\ExportArray;
+use App\Exports\ExportArrayProduk;
+use App\Exports\ExportArrayPotongan;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -23,6 +25,7 @@ use App\Models\Master\SumberDana;
 use App\Models\Data\Anggota;
 
 use App\Models\Data\Simpanan;
+use Illuminate\Support\Str;
 
 
 
@@ -65,7 +68,7 @@ class Exports extends Controller
             $collect[5] = $a->admin_fee;
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData), 'master_produk.xlsx');
+        return  Excel::download(new ExportArrayProduk($exportData), 'master_produk.xlsx');
     }
 
     public function master_grade()
@@ -200,7 +203,7 @@ class Exports extends Controller
             $collect[10] = $a->sim_wajib;
             $exportData[] = $collect;
         }
-        return  Excel::download(new ExportArray($exportData), 'potongan_hrd.xlsx');
+        return  Excel::download(new ExportArrayPotongan($exportData), 'potongan_hrd.xlsx');
     }
 
     public function master_sumber()
@@ -236,8 +239,10 @@ class Exports extends Controller
         $sheet->getColumnDimension('E')->setWidth(20);
         $sheet->getColumnDimension('F')->setWidth(20);
 
-        $sheet->mergeCells('A1:F1');
-        $sheet->mergeCells('A2:F2');
+        $sheet->mergeCells('A1:A2');
+        $sheet->mergeCells('F1:F2');
+        $sheet->mergeCells('B1:E1');
+        $sheet->mergeCells('B2:E2');
         $sheet->mergeCells('A3:F3');
         $sheet->mergeCells('A4:F4');
 
@@ -266,9 +271,11 @@ class Exports extends Controller
         $sheet->mergeCells('A15:F15');
         $sheet->mergeCells('A16:F16');
         $sheet->mergeCells('A17:F17');
-        $sheet->mergeCells('A18:F18');
+        $sheet->mergeCells('B18:E18');
+        $sheet->mergeCells('A18:A19');
+        $sheet->mergeCells('F18:F19');
 
-        $sheet->mergeCells('A19:F19');
+        $sheet->mergeCells('B19:E19');
         $sheet->mergeCells('A20:F20');
         $sheet->mergeCells('A21:F21');
 
@@ -285,31 +292,39 @@ class Exports extends Controller
 
         $sheet->mergeCells('A32:F32');
         $sheet->mergeCells('A33:F33');
-        $sheet->mergeCells('A34:B34');
-        $sheet->mergeCells('C35:C40');
-        $sheet->mergeCells('D35:D40');
-        $sheet->mergeCells('E35:E40');
-        $sheet->mergeCells('F35:F40');
-        $sheet->mergeCells('A41:F41');
+        // $sheet->mergeCells('A34:B34');
+        // $sheet->mergeCells('C35:C40');
+        // $sheet->mergeCells('D35:D40');
+        // $sheet->mergeCells('E35:E40');
+        // $sheet->mergeCells('F35:F40');
+        // $sheet->mergeCells('A41:F41');
+        $sheet->mergeCells('A34:F34');
+        $sheet->mergeCells('A35:F35');
 
         $boldStyle = ['font' => ['bold' => true]];
         $sheet->getStyle('A1:F2')->applyFromArray($boldStyle);
         $sheet->getStyle('A18:F19')->applyFromArray($boldStyle);
 
         $borderStyle = ['borders' => ['outline' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM]]];
-        $sheet->getStyle('A34:B34')->applyFromArray($borderStyle);
-        $sheet->getStyle('A35:B40')->applyFromArray($borderStyle);
-        $sheet->getStyle('C34:C34')->applyFromArray($borderStyle);
-        $sheet->getStyle('C35:C40')->applyFromArray($borderStyle);
-        $sheet->getStyle('E34:E34')->applyFromArray($borderStyle);
-        $sheet->getStyle('E35:E40')->applyFromArray($borderStyle);
-        $sheet->getStyle('F34:F34')->applyFromArray($borderStyle);
-        $sheet->getStyle('F35:F40')->applyFromArray($borderStyle);
+        // $sheet->getStyle('A34:B34')->applyFromArray($borderStyle);
+        // $sheet->getStyle('A35:B40')->applyFromArray($borderStyle);
+        // $sheet->getStyle('C34:C34')->applyFromArray($borderStyle);
+        // $sheet->getStyle('C35:C40')->applyFromArray($borderStyle);
+        // $sheet->getStyle('E34:E34')->applyFromArray($borderStyle);
+        // $sheet->getStyle('E35:E40')->applyFromArray($borderStyle);
+        // $sheet->getStyle('F34:F34')->applyFromArray($borderStyle);
+        // $sheet->getStyle('F35:F40')->applyFromArray($borderStyle);
         $sheet->getStyle('A3:F3')->getBorders()->getTop()->setBorderStyle(Border::BORDER_THICK);
         $sheet->getStyle('A20:F20')->getBorders()->getTop()->setBorderStyle(Border::BORDER_THICK);
 
-        $sheet->getStyle('A1:F2')->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('A18:F19')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('B1:E1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('B2:E2')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal('left');
+        $sheet->getStyle('F1')->getAlignment()->setHorizontal('right');
+        $sheet->getStyle('A18')->getAlignment()->setHorizontal('left');
+        $sheet->getStyle('F18')->getAlignment()->setHorizontal('right');
+        
+        $sheet->getStyle('B18:E19')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A34:F40')->getAlignment()->setHorizontal('center');
 
         $sheet->getStyle('A3')->getAlignment()->setHorizontal('right');
@@ -319,22 +334,68 @@ class Exports extends Controller
         $sheet->getStyle('A5:F14')->getAlignment()->setHorizontal('left');
         $sheet->getStyle('A22:F31')->getAlignment()->setHorizontal('left');
 
-        $sheet->setCellValue('A1', "SERTIFIKAT");
+        
+        $sheet->getStyle('A33')->getAlignment()->setHorizontal('right');
+        $sheet->getStyle('A34')->getAlignment()->setHorizontal('right');
+        $sheet->getStyle('A35')->getAlignment()->setHorizontal('right');
+        
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('PhpSpreadsheet logo');
+        $drawing->setDescription('PhpSpreadsheet logo');
+        $drawing->setPath('assets/images/sertif-logo-left.jpg'); // put your path and image here
+        $drawing->setHeight(36);
+        $drawing->setCoordinates('A1');
+        $drawing->setOffsetX(10);
+        $drawing->setWorksheet($spreadsheet->getActiveSheet());
+        
+        
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setName('sertif-logo-right');
+        $drawing2->setDescription('sertif-logo-right');
+        $drawing2->setPath('assets/images/sertif-logo-right.jpg'); // put your path and image here
+        $drawing2->setHeight(36);
+        $drawing2->setCoordinates('F1');
+        $drawing2->setOffsetX(10);
+        $drawing2->setWorksheet($spreadsheet->getActiveSheet());
+
+        
+        $drawing18 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing18->setName('PhpSpreadsheet logo');
+        $drawing18->setDescription('PhpSpreadsheet logo');
+        $drawing18->setPath('assets/images/sertif-logo-left.jpg'); // put your path and image here
+        $drawing18->setHeight(36);
+        $drawing18->setCoordinates('A18');
+        $drawing18->setOffsetX(10);
+        $drawing18->setWorksheet($spreadsheet->getActiveSheet());
+        
+        
+        $drawingf18 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawingf18->setName('sertif-logo-right');
+        $drawingf18->setDescription('sertif-logo-right');
+        $drawingf18->setPath('assets/images/sertif-logo-right.jpg'); // put your path and image here
+        $drawingf18->setHeight(36);
+        $drawingf18->setCoordinates('F18');
+        $drawingf18->setOffsetX(10);
+        $drawingf18->setWorksheet($spreadsheet->getActiveSheet());
+
+        $sheet->setCellValue('B1', "SERTIFIKAT");
         // $sheet->setCellValue('A2', "Simpanan Sukarela Berjangka");
-        $sheet->setCellValue('A2',  $simpanan->produk->nama_produk);
+        $sheet->setCellValue('B2',  $simpanan->produk->nama_produk);
 
-        $sheet->setCellValue('A3', "Copy Ke 1");
+        $sheet->setCellValue('A3', "ASLI");
 
-        $sheet->setCellValue('A18', "TANDA TANGAN");
+        $sheet->setCellValue('B18', "SERTIFIKAT");
         // $sheet->setCellValue('A19', "Simpanan Sukarela Berjangka");
-        $sheet->setCellValue('A19', $simpanan->produk->nama_produk);
-        $sheet->setCellValue('A20', "Copy Ke 2");
+        $sheet->setCellValue('B19', $simpanan->produk->nama_produk);
+        $sheet->setCellValue('A20', "COPY");
 
-        $sheet->setCellValue('A34', "TTD 1");
-        $sheet->setCellValue('C34', "TTD 2");
-        $sheet->setCellValue('E34', "Petugas Koperasi");
-        $sheet->setCellValue('F34', "Diperiksa/Disahkan");
-        $sheet->setCellValue('A41', "Mohon Tanda Tangan Tidak Melewati Kotak");
+        // $sheet->setCellValue('A34', "TTD 1");
+        // $sheet->setCellValue('C34', "TTD 2");
+        // $sheet->setCellValue('E34', "Petugas Koperasi");
+        // $sheet->setCellValue('F34', "Diperiksa/Disahkan");
+        $sheet->setCellValue('A33', "KOPERASI KARYAWAN MULIA INDUSTRY");
+        $sheet->setCellValue('A34', date('d M Y'));
+        // $sheet->setCellValue('A41', "Mohon Tanda Tangan Tidak Melewati Kotak");
 
         $sheet->setCellValue('D5', ':');
         $sheet->setCellValue('D6', ':');
@@ -357,30 +418,40 @@ class Exports extends Controller
         $sheet->setCellValue('D30', ':');
         $sheet->setCellValue('D31', ':');
 
-        $sheet->setCellValue('A5', 'Nomor Sertifikat');
-        $sheet->setCellValue('A6', 'Nomor Anggota');
-        $sheet->setCellValue('A7', 'Nama Anggota');
-        $sheet->setCellValue('A8', 'Jumlah Nominal');
-        $sheet->setCellValue('A9', 'Terbilang');
-        $sheet->setCellValue('A10', 'Jangka Waktu');
-        $sheet->setCellValue('A11', 'Bunga per tahun	');
-        $sheet->setCellValue('A12', 'Jenis Simpanan');
-        $sheet->setCellValue('A13', 'Tanggal Penempatan');
-        $sheet->setCellValue('A14', 'Tangga Jatuh Tempo');
+        $sheet->setCellValue('A5', 'NOMOR SERTIFIKAT');
+        $sheet->setCellValue('A6', 'NIK/NOMOR ANGGOTA');
+        $sheet->setCellValue('A7', 'NAMA ANGGOTA');
+        $sheet->setCellValue('A8', 'JUMLAH NOMINAL');
+        $sheet->setCellValue('A9', 'TERBILANG');
+        $sheet->setCellValue('A10', 'JANGKA WAKTU');
+        $sheet->setCellValue('A11', 'BUNGA PER TAHUN');
+        if(strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false){
+            $sheet->setCellValue('A12', 'ANGSURAN PER BULAN');
+        }else {
+            $sheet->setCellValue('A12', 'JENIS BUNGA');
+        }
+        // $sheet->setCellValue('A12', 'Jenis Simpanan');
+        $sheet->setCellValue('A13', 'TANGGAL PENEMPATAN');
+        $sheet->setCellValue('A14', 'TANGGAL JATUH TEMPO');
 
-        $sheet->setCellValue('A22', 'Nomor Sertifikat');
-        $sheet->setCellValue('A23', 'Nomor Anggota');
-        $sheet->setCellValue('A24', 'Nama Anggota');
-        $sheet->setCellValue('A25', 'Jumlah Nominal');
-        $sheet->setCellValue('A26', 'Terbilang');
-        $sheet->setCellValue('A27', 'Jangka Waktu');
-        $sheet->setCellValue('A28', 'Bunga per tahun	');
-        $sheet->setCellValue('A29', 'Jenis Simpanan');
-        $sheet->setCellValue('A30', 'Tanggal Penempatan');
-        $sheet->setCellValue('A31', 'Tangga Jatuh Tempo');
+        $sheet->setCellValue('A22', 'NOMOR SERTIFIKAT');
+        $sheet->setCellValue('A23', 'NIK/NOMOR ANGGOTA');
+        $sheet->setCellValue('A24', 'NAMA ANGGOTA');
+        $sheet->setCellValue('A25', 'JUMLAH NOMINAL');
+        $sheet->setCellValue('A26', 'TERBILANG');
+        $sheet->setCellValue('A27', 'JANGKA WAKTU');
+        $sheet->setCellValue('A28', 'BUNGA PER TAHUN');
+        if(strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false){
+            $sheet->setCellValue('A29', 'ANGSURAN PER BULAN');
+        }else {
+            $sheet->setCellValue('A29', 'JENIS BUNGA');
+        }
+        // $sheet->setCellValue('A29', 'Jenis Simpanan');
+        $sheet->setCellValue('A30', 'TANGGAL PENEMPATAN');
+        $sheet->setCellValue('A31', 'TANGGAL JATUH TEMPO');
 
-        $sheet->setCellValue('A15', "Koperasi Karyawan Mulia Industri");
-        $sheet->setCellValue('A16', "22 Desember 2022");
+        $sheet->setCellValue('A15', "KOPERASI KARYAWAN MULIA INDUSTRY");
+        $sheet->setCellValue('A16', date('d M Y'));
 
         $created = $simpanan->created_at;
         $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months -1 day';
@@ -391,10 +462,15 @@ class Exports extends Controller
         $word_3 = $simpanan->nama;
         $word_4 = 'Rp. ' . number_format($simpanan->saldo_akhir, 0, ',', '.');
         $word_5 =  strtoupper(Terbilang::make($simpanan->saldo_akhir, ' rupiah'));
-        $word_6 = $simpanan->jangka_waktu;
+        $word_6 = $simpanan->jangka_waktu . ' Bulan';
         $word_7 = $simpanan->jumlah_bunga . '%';
         // $word_8 = strtoupper($simpanan->detail[0]->jenis);
-        $word_8 = strtoupper($simpanan->produk->nama_produk);
+        // $word_8 = strtoupper($simpanan->produk->nama_produk);
+        if(strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false){
+            $word_8 = 'Rp. '.number_format($simpanan->detailsimpas[0]->tabungan_per_bulan ?? 0,2,',','.');
+        }else {
+            $word_8 = strtoupper($simpanan->detail[0]->jenis ?? '-');
+        }
         $word_9 = date('d M Y', strtotime($simpanan->created_at));
         $word_10 = $tempo;
 
@@ -420,18 +496,18 @@ class Exports extends Controller
         $sheet->setCellValue('E30', $word_9);
         $sheet->setCellValue('E31', $word_10);
 
-        $sheet->setCellValue('A17', 'ooooooooooooooooooooo');
-        $sheet->setCellValue('A32', 'ooooooooooooooooooooo');
-        $sheet->setCellValue('A36', 'ooooooooooooooooooooo');
-        $sheet->setCellValue('A37', 'ooooooooooooooooooooo');
-        $sheet->setCellValue('A38', 'ooooooooooooooooooooo');
-        $sheet->setCellValue('A39', 'ooooooooooooooooooooo');
-        $sheet->setCellValue('A40', 'ooooooooooooooooooooo');
+        // $sheet->setCellValue('A17', 'ooooooooooooooooooooo');
+        // $sheet->setCellValue('A32', 'ooooooooooooooooooooo');
+        // $sheet->setCellValue('A36', 'ooooooooooooooooooooo');
+        // $sheet->setCellValue('A37', 'ooooooooooooooooooooo');
+        // $sheet->setCellValue('A38', 'ooooooooooooooooooooo');
+        // $sheet->setCellValue('A39', 'ooooooooooooooooooooo');
+        // $sheet->setCellValue('A40', 'ooooooooooooooooooooo');
 
-        $transparent = array('font' => array('color' => array('rgb' => 'FFFFFF')));
-        $sheet->getStyle('A17')->applyFromArray($transparent);
-        $sheet->getStyle('A32')->applyFromArray($transparent);
-        $sheet->getStyle('A35:F40')->applyFromArray($transparent);
+        // $transparent = array('font' => array('color' => array('rgb' => 'FFFFFF')));
+        // $sheet->getStyle('A17')->applyFromArray($transparent);
+        // $sheet->getStyle('A32')->applyFromArray($transparent);
+        // $sheet->getStyle('A35:F40')->applyFromArray($transparent);
 
         /*
         $writer = new Xlsx($spreadsheet);
@@ -441,7 +517,7 @@ class Exports extends Controller
         $writer->save('php://output');
         */
         header("Content-type:application/pdf");
-        header('Content-Disposition:attachment;filename="Sertifikat-SSB-' . $word_1 . '.pdf"');
+        header('Content-Disposition:attachment;filename="Sertifikat-'. Str::slug($simpanan->produk->nama_produk) . '-' . $word_1 . '.pdf"');
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf($spreadsheet);
         ob_end_clean();
         $writer->save('php://output');
