@@ -323,7 +323,7 @@ class Exports extends Controller
         $sheet->getStyle('F1')->getAlignment()->setHorizontal('right');
         $sheet->getStyle('A18')->getAlignment()->setHorizontal('left');
         $sheet->getStyle('F18')->getAlignment()->setHorizontal('right');
-        
+
         $sheet->getStyle('B18:E19')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A34:F40')->getAlignment()->setHorizontal('center');
 
@@ -334,11 +334,11 @@ class Exports extends Controller
         $sheet->getStyle('A5:F14')->getAlignment()->setHorizontal('left');
         $sheet->getStyle('A22:F31')->getAlignment()->setHorizontal('left');
 
-        
+
         $sheet->getStyle('A33')->getAlignment()->setHorizontal('right');
         $sheet->getStyle('A34')->getAlignment()->setHorizontal('right');
         $sheet->getStyle('A35')->getAlignment()->setHorizontal('right');
-        
+
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('PhpSpreadsheet logo');
         $drawing->setDescription('PhpSpreadsheet logo');
@@ -347,8 +347,8 @@ class Exports extends Controller
         $drawing->setCoordinates('A1');
         $drawing->setOffsetX(10);
         $drawing->setWorksheet($spreadsheet->getActiveSheet());
-        
-        
+
+
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setName('sertif-logo-right');
         $drawing2->setDescription('sertif-logo-right');
@@ -358,7 +358,7 @@ class Exports extends Controller
         $drawing2->setOffsetX(10);
         $drawing2->setWorksheet($spreadsheet->getActiveSheet());
 
-        
+
         $drawing18 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing18->setName('PhpSpreadsheet logo');
         $drawing18->setDescription('PhpSpreadsheet logo');
@@ -367,8 +367,8 @@ class Exports extends Controller
         $drawing18->setCoordinates('A18');
         $drawing18->setOffsetX(10);
         $drawing18->setWorksheet($spreadsheet->getActiveSheet());
-        
-        
+
+
         $drawingf18 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawingf18->setName('sertif-logo-right');
         $drawingf18->setDescription('sertif-logo-right');
@@ -425,9 +425,9 @@ class Exports extends Controller
         $sheet->setCellValue('A9', 'TERBILANG');
         $sheet->setCellValue('A10', 'JANGKA WAKTU');
         $sheet->setCellValue('A11', 'BUNGA PER TAHUN');
-        if(strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false){
+        if (strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false) {
             $sheet->setCellValue('A12', 'ANGSURAN PER BULAN');
-        }else {
+        } else {
             $sheet->setCellValue('A12', 'JENIS BUNGA');
         }
         // $sheet->setCellValue('A12', 'Jenis Simpanan');
@@ -441,9 +441,9 @@ class Exports extends Controller
         $sheet->setCellValue('A26', 'TERBILANG');
         $sheet->setCellValue('A27', 'JANGKA WAKTU');
         $sheet->setCellValue('A28', 'BUNGA PER TAHUN');
-        if(strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false){
+        if (strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false) {
             $sheet->setCellValue('A29', 'ANGSURAN PER BULAN');
-        }else {
+        } else {
             $sheet->setCellValue('A29', 'JENIS BUNGA');
         }
         // $sheet->setCellValue('A29', 'Jenis Simpanan');
@@ -457,7 +457,7 @@ class Exports extends Controller
         $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months -1 day';
         $tempo = date('d M Y', strtotime($add_month, strtotime($created)));
 
-        $word_1 = date('Y', strtotime($simpanan->created_at)) . $simpanan->id . $simpanan->no_anggota;
+
         $word_2 = $simpanan->no_anggota;
         $word_3 = $simpanan->nama;
         $word_4 = 'Rp. ' . number_format($simpanan->saldo_akhir, 0, ',', '.');
@@ -466,9 +466,12 @@ class Exports extends Controller
         $word_7 = $simpanan->jumlah_bunga . '%';
         // $word_8 = strtoupper($simpanan->detail[0]->jenis);
         // $word_8 = strtoupper($simpanan->produk->nama_produk);
-        if(strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false){
-            $word_8 = 'Rp. '.number_format($simpanan->detailsimpas[0]->tabungan_per_bulan ?? 0,2,',','.');
-        }else {
+        if (strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false) {
+            $word_1 = 'SP' . date('Y', strtotime($simpanan->created_at)) . $simpanan->id . $simpanan->no_anggota;
+            $word_8 = 'Rp. ' . number_format($simpanan->detailsimpas[0]->tabungan_per_bulan ?? 0, 2, ',', '.');
+        } else {
+            $word_1 = 'SSB' . date('Y', strtotime($simpanan->created_at)) . $simpanan->id . $simpanan->no_anggota;
+
             $word_8 = strtoupper($simpanan->detail[0]->jenis ?? '-');
         }
         $word_9 = date('d M Y', strtotime($simpanan->created_at));
@@ -517,7 +520,7 @@ class Exports extends Controller
         $writer->save('php://output');
         */
         header("Content-type:application/pdf");
-        header('Content-Disposition:attachment;filename="Sertifikat-'. Str::slug($simpanan->produk->nama_produk) . '-' . $word_1 . '.pdf"');
+        header('Content-Disposition:attachment;filename="Sertifikat-' . Str::slug($simpanan->produk->nama_produk) . '-' . $word_1 . '.pdf"');
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf($spreadsheet);
         ob_end_clean();
         $writer->save('php://output');

@@ -211,20 +211,17 @@ Tambah Data Anggota
                                         <input type="text" name="simpanan_wajib" class="form-control" id="simpanan_wajib" value="{{ old('simpanan_wajib') }}" readonly>
                                     </div>
                                 </div>
-                                <div id="div-grade">
-                                    <div class="row mb-3">
-                                        <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Simpanan Khusus</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" name="simpanan_pokok" class="form-control" placeholder="Simpanan Khusus" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
-                                        </div>
+                                <div class="row mb-3">
+                                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Simpanan Khusus</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" name="sim_khusus" id="sim_khusus" maxlength="50" value="{{ old('simpanan_khusus') }}" placeholder="Simpanan Khusus">
                                     </div>
-
                                 </div>
                                 <div id="div-grade">
                                     <div class="row mb-3">
                                         <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">DKM</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="simpanan_pokok" class="form-control" placeholder="Jumlah DKM" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
+                                            <input type="text" name="dkm" class="form-control" placeholder="Jumlah DKM" id="dkm" value="{{ old('dkm') }}">
                                         </div>
                                     </div>
 
@@ -283,7 +280,7 @@ Tambah Data Anggota
             width: '100%'
         })
 
-        $('#gaji').on({
+        $('#gaji, #sim_khusus, #dkm').on({
             keyup: function() {
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val);
