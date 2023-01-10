@@ -26,7 +26,7 @@ class AddNullableTableSimpanan extends Migration
             $table->integer('created_by')->nullable()->default(0)->change();
             $table->string('approv_date')->nullable()->change();
             $table->integer('approv_by')->nullable()->default(0)->change();
-            $table->string('approv_note')->nullable()->change();
+            $table->string('reject_note')->nullable()->change();
             $table->string('update_date')->nullable()->change();
             $table->integer('update_by')->nullable()->default(0)->change();
             $table->string('delete_date')->nullable()->change();

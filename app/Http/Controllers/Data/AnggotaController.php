@@ -167,7 +167,7 @@ class AnggotaController extends Controller
             $anggota->sim_khusus         = $simpKhusus;
             $anggota->dkm         = $dkm;
             $anggota->gaji              = $gaji;
-            $anggota->gaji_updated     = date('Y-m-d H:i:s');
+            $anggota->gaji_updated      = date('Y-m-d H:i:s');
             $anggota->bank_nama         = $request->bank_nama;
             $anggota->bank_code         = $request->bank_code;
             $anggota->bank_cabang       = '';

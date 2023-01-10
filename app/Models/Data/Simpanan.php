@@ -28,7 +28,7 @@ class Simpanan extends Model
     {
         return $this->hasMany(SimpananSimpasDetail::class, 'simpanan_id', 'id');
     }
-    
+
     function anggota()
     {
         return $this->belongsTo(Anggota::class, 'no_anggota', 'no_anggota');

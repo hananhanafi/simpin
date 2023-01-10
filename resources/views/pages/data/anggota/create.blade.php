@@ -218,7 +218,6 @@ Tambah Data Anggota
                                             <input type="text" name="simpanan_khusus" class="form-control" placeholder="Simpanan Khusus" id="simpanan_khusus" value="{{ old('simpanan_khusus') }}">
                                         </div>
                                     </div>
-
                                 </div>
                                 <div id="div-grade">
                                     <div class="row mb-3">
