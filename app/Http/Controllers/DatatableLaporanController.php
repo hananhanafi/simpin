@@ -128,7 +128,7 @@ class DatatableLaporanController extends Controller
                 // return '<b> Rp. ' . number_format($row->anggota->grades->simp_pokok, 0, ',', '.') . '</b>';
             })
             ->editColumn('sim_khusus', function ($row) {
-                return '<b>' . 0 . '</b>';
+                return '<b>' . number_format($row->sim_khusus, 0) . '</b>';
             })
             ->addColumn('total', function ($row) {
                 // return '<b> Rp. ' . number_format(($row->simwa + $row->anggota->grades->simp_pokok), 0, ',', '.') . '</b>';

@@ -212,7 +212,7 @@ Edit Data Anggota
                                 <div class="row mb-3">
                                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Simpanan Khusus</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="simpanan_pokok" class="form-control" placeholder="Simpanan Khusus" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
+                                        <input type="text" name="simpanan_khusus" class="form-control" placeholder="Simpanan Khusus" id="simpanan_khusus" value="{{ $anggota->sim_khusus }}">
                                     </div>
                                 </div>
 
@@ -221,7 +221,7 @@ Edit Data Anggota
                                 <div class="row mb-3">
                                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">DKM</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="simpanan_pokok" class="form-control" placeholder="Jumlah DKM" id="simpanan_pokok" value="{{ old('simpanan_pokok') }}">
+                                        <input type="text" name="dkm" class="form-control" placeholder="Jumlah DKM" id="dkm" value="{{ $anggota->dkm }}">
                                     </div>
                                 </div>
 
@@ -280,7 +280,7 @@ Edit Data Anggota
             width: '100%'
         })
 
-        $('#gaji').on({
+        $('#gaji,#simpanan_khusus,#dkm').on({
             keyup: function() {
                 let input_val = $(this).val();
                 input_val = numberToCurrency(input_val);

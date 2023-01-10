@@ -38,6 +38,8 @@ class AnggotaController extends Controller
             DB::beginTransaction();
 
             $gaji = intval(str_replace('.', '', $request->gaji));
+            $simpKhusus = intval(str_replace('.', '', $request->simpanan_khusus));
+            $dkm = intval(str_replace('.', '', $request->dkm));
 
             list($gradeId, $simpPokok, $simpWajib) = explode('__', $request->grade_id);
 
@@ -66,6 +68,8 @@ class AnggotaController extends Controller
             $anggota->profit_id         = $request->profit_id;
             $anggota->sim_pokok         = $simpPokok;
             $anggota->sim_wajib         = $simpWajib;
+            $anggota->sim_khusus         = $simpKhusus;
+            $anggota->dkm         = $dkm;
             $anggota->gaji              = $gaji;
             $anggota->gaji_updated     = date('Y-m-d H:i:s');
             $anggota->bank_nama         = $request->bank_nama;
@@ -130,6 +134,8 @@ class AnggotaController extends Controller
         try {
             DB::beginTransaction();
             $gaji = intval(str_replace('.', '', $request->gaji));
+            $simpKhusus = intval(str_replace('.', '', $request->simpanan_khusus));
+            $dkm = intval(str_replace('.', '', $request->dkm));
 
             list($gradeId, $simpPokok, $simpWajib) = explode('__', $request->grade_id);
 
@@ -158,6 +164,8 @@ class AnggotaController extends Controller
             $anggota->profit_id         = $request->profit_id;
             $anggota->sim_pokok         = $simpPokok;
             $anggota->sim_wajib         = $simpWajib;
+            $anggota->sim_khusus         = $simpKhusus;
+            $anggota->dkm         = $dkm;
             $anggota->gaji              = $gaji;
             $anggota->gaji_updated     = date('Y-m-d H:i:s');
             $anggota->bank_nama         = $request->bank_nama;
