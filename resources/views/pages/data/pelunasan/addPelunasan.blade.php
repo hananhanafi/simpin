@@ -79,7 +79,7 @@ Tambah Data Pelunasan
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Angsuran<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required value="{{ number_format($pinjamanDetail->angsuran, '0', ',', '.') }}" onkeyup="pageSimulasi(0,0)" readonly>
+                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required value="{{ number_format(floatval($pinjamanDetail->angsuran), '0', ',', '.') }}" onkeyup="pageSimulasi(0,0)" readonly>
                                 </div>
                             </div>
                             {{-- <div class="row mb-3">
@@ -117,7 +117,7 @@ Tambah Data Pelunasan
                 <div class="row mb-3">
                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Total Pelunasan<small class="text-danger">*</small></label>
                     <div class="col-sm-7">
-                        <input type="text" name="nilai_trans" class="form-control" id="nilai_trans" placeholder="Total Pelunasan" required data-parsley-required-message="Total Pelunasan Harus Diisi" value="{{ number_format($pinjamanDetail->angsuran, '0', ',', '.') }}">
+                        <input type="text" name="nilai_trans" class="form-control" id="nilai_trans" placeholder="Total Pelunasan" required data-parsley-required-message="Total Pelunasan Harus Diisi" value="{{ number_format(floatval($pinjamanDetail->angsuran), '0', ',', '.') }}">
                     </div>
                 </div>
                 @elseif ($request->type == 3)
@@ -235,7 +235,7 @@ Tambah Data Pelunasan
                 <div class="row mb-3">
                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Total Pelunasan<small class="text-danger">*</small></label>
                     <div class="col-sm-7">
-                        <input type="text" name="nilai_trans" class="form-control" id="nilai_trans" placeholder="Total Pelunasan" required data-parsley-required-message="Total Pelunasan Harus Diisi" value="{{ number_format($pinjamanDetail->angsuran, '0', ',', '.') }}">
+                        <input type="text" name="nilai_trans" class="form-control" id="nilai_trans" placeholder="Total Pelunasan" required data-parsley-required-message="Total Pelunasan Harus Diisi" value="{{ number_format(floatval($pinjamanDetail->angsuran), '0', ',', '.') }}">
                     </div>
                 </div>
                 @endif
