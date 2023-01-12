@@ -154,14 +154,15 @@
 <script>
     function PlafonSimulasi(no_anggota, saldo, bulan, totalAngsuran) {
         var totalAngsuran = <?php echo $totalAngsuran ?>;
+        var angsuran = <?php echo $angsuran ?>;
         var request = '';
 
         request += 'no_anggota=' + no_anggota + '&'
         request += 'bulan=' + bulan + '&'
         request += 'saldo=' + parseInt(saldo.replaceAll('.', '')) + '&'
-        request += 'totalAngsuran=' + totalAngsuran
+        request += 'totalAngsuran=' + totalAngsuran + '&'
+        request += 'angsuran=' + angsuran
 
-        console.log('asd')
         window.open(
             "{{ route('data.simpanan.plafon') }}?" + request, '_blank');
     }

@@ -90,7 +90,7 @@ Plafon Simpanan
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Angsuran<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required data-parsley-required-message="Angsuran Harus Diisi" value="{{ number_format($request->totalAngsuran, '0', ',', '.') }}" onkeyup="pagePlafon(0,0)">
+                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required data-parsley-required-message="Angsuran Harus Diisi" value="{{ number_format($request->angsuran, '0', ',', '.') }}" onkeyup="pagePlafon(0,0)">
                                 </div>
                             </div>
                             {{-- <div class="row mb-3" id="bunga-efektif">
