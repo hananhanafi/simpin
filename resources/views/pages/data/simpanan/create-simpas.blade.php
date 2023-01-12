@@ -235,6 +235,7 @@ Tambah Data Simpanan Baru
     function pilihAnggota(val) {
         var get = val.split('__')
         $('#nama').val(get[1])
+        pageSimulasi()
     }
 
     function pilihProduk(val) {

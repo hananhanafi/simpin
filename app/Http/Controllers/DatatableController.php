@@ -867,7 +867,7 @@ class DatatableController extends Controller
                 }
             })
             ->editColumn('potongan_dkm', function ($row) {
-                return '<b>' . 0 . '</b>';
+                return '<b>' . number_format($row->dkm, 0) . '</b>';
             })
             ->editColumn('sisa_potongan', function ($row) {
                 $pinjamanArr = json_decode(json_encode($row->pinjamanAnggota), true);

@@ -251,17 +251,17 @@ class Exports extends Controller
         $sheet->mergeCells('A7:C7');
         $sheet->mergeCells('A8:C8');
         $sheet->mergeCells('A9:C9');
-        $sheet->mergeCells('A10:C10');
-        $sheet->mergeCells('A11:C11');
-        $sheet->mergeCells('A12:C12');
-        $sheet->mergeCells('A13:C13');
-        $sheet->mergeCells('A14:C14');
 
         $sheet->mergeCells('E5:F5');
         $sheet->mergeCells('E6:F6');
         $sheet->mergeCells('E7:F7');
         $sheet->mergeCells('E8:F8');
         $sheet->mergeCells('E9:F9');
+        $sheet->mergeCells('A10:C10');
+        $sheet->mergeCells('A11:C11');
+        $sheet->mergeCells('A12:C12');
+        $sheet->mergeCells('A13:C13');
+        $sheet->mergeCells('A14:C14');
         $sheet->mergeCells('E10:F10');
         $sheet->mergeCells('E11:F11');
         $sheet->mergeCells('E12:F12');
@@ -343,7 +343,7 @@ class Exports extends Controller
         $drawing->setName('PhpSpreadsheet logo');
         $drawing->setDescription('PhpSpreadsheet logo');
         $drawing->setPath('assets/images/sertif-logo-left.jpg'); // put your path and image here
-        $drawing->setHeight(36);
+        $drawing->setHeight(50);
         $drawing->setCoordinates('A1');
         $drawing->setOffsetX(10);
         $drawing->setWorksheet($spreadsheet->getActiveSheet());
@@ -353,7 +353,7 @@ class Exports extends Controller
         $drawing2->setName('sertif-logo-right');
         $drawing2->setDescription('sertif-logo-right');
         $drawing2->setPath('assets/images/sertif-logo-right.jpg'); // put your path and image here
-        $drawing2->setHeight(36);
+        $drawing2->setHeight(50);
         $drawing2->setCoordinates('F1');
         $drawing2->setOffsetX(10);
         $drawing2->setWorksheet($spreadsheet->getActiveSheet());
@@ -363,7 +363,7 @@ class Exports extends Controller
         $drawing18->setName('PhpSpreadsheet logo');
         $drawing18->setDescription('PhpSpreadsheet logo');
         $drawing18->setPath('assets/images/sertif-logo-left.jpg'); // put your path and image here
-        $drawing18->setHeight(36);
+        $drawing18->setHeight(50);
         $drawing18->setCoordinates('A18');
         $drawing18->setOffsetX(10);
         $drawing18->setWorksheet($spreadsheet->getActiveSheet());
@@ -373,7 +373,7 @@ class Exports extends Controller
         $drawingf18->setName('sertif-logo-right');
         $drawingf18->setDescription('sertif-logo-right');
         $drawingf18->setPath('assets/images/sertif-logo-right.jpg'); // put your path and image here
-        $drawingf18->setHeight(36);
+        $drawingf18->setHeight(50);
         $drawingf18->setCoordinates('F18');
         $drawingf18->setOffsetX(10);
         $drawingf18->setWorksheet($spreadsheet->getActiveSheet());
@@ -384,16 +384,40 @@ class Exports extends Controller
 
         $sheet->setCellValue('A3', "ASLI");
 
+        $sheet->getRowDimension('3')->setRowHeight(30);
+        $sheet->getStyle('A3:F3')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getRowDimension('1')->setRowHeight(30);
+        $sheet->getRowDimension('2')->setRowHeight(30);
+        $sheet->getStyle('B1:E1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
+        $sheet->getStyle('B2:E2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+        $sheet->getStyle('B1:E1')->getFont()->setSize(12);
+        $sheet->getStyle('B2:E2')->getFont()->setSize(12);
+        $sheet->getStyle('A1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('F1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
         $sheet->setCellValue('B18', "SERTIFIKAT");
         // $sheet->setCellValue('A19', "Simpanan Sukarela Berjangka");
         $sheet->setCellValue('B19', $simpanan->produk->nama_produk);
         $sheet->setCellValue('A20', "COPY");
+        
+        $sheet->getRowDimension('20')->setRowHeight(30);
+        $sheet->getStyle('A20:F20')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getRowDimension('18')->setRowHeight(30);
+        $sheet->getRowDimension('19')->setRowHeight(30);
+        $sheet->getStyle('B18:E18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
+        $sheet->getStyle('B19:E19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+        $sheet->getStyle('B18:E18')->getFont()->setSize(12);
+        $sheet->getStyle('B19:E19')->getFont()->setSize(12);
+        $sheet->getStyle('A18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('F18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
         // $sheet->setCellValue('A34', "TTD 1");
         // $sheet->setCellValue('C34', "TTD 2");
         // $sheet->setCellValue('E34', "Petugas Koperasi");
         // $sheet->setCellValue('F34', "Diperiksa/Disahkan");
         $sheet->setCellValue('A33', "KOPERASI KARYAWAN MULIA INDUSTRY");
+        $sheet->getRowDimension('33')->setRowHeight(20);
+        $sheet->getStyle('A33:F33')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
         $sheet->setCellValue('A34', date('d M Y'));
         // $sheet->setCellValue('A41', "Mohon Tanda Tangan Tidak Melewati Kotak");
 
@@ -433,6 +457,9 @@ class Exports extends Controller
         // $sheet->setCellValue('A12', 'Jenis Simpanan');
         $sheet->setCellValue('A13', 'TANGGAL PENEMPATAN');
         $sheet->setCellValue('A14', 'TANGGAL JATUH TEMPO');
+        
+        $sheet->getStyle('A5:A14')->applyFromArray($boldStyle);
+        $sheet->getStyle('A22:A31')->applyFromArray($boldStyle);
 
         $sheet->setCellValue('A22', 'NOMOR SERTIFIKAT');
         $sheet->setCellValue('A23', 'NIK/NOMOR ANGGOTA');
@@ -451,6 +478,9 @@ class Exports extends Controller
         $sheet->setCellValue('A31', 'TANGGAL JATUH TEMPO');
 
         $sheet->setCellValue('A15', "KOPERASI KARYAWAN MULIA INDUSTRY");
+        $sheet->getRowDimension('15')->setRowHeight(20);
+        $sheet->getStyle('A15:F15')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
+        
         $sheet->setCellValue('A16', date('d M Y'));
 
         $created = $simpanan->created_at;
@@ -466,11 +496,19 @@ class Exports extends Controller
         $word_7 = $simpanan->jumlah_bunga . '%';
         // $word_8 = strtoupper($simpanan->detail[0]->jenis);
         // $word_8 = strtoupper($simpanan->produk->nama_produk);
+        $numberingSertif = [
+            '1' => '0000',
+            '2' => '000',
+            '3' => '00',
+            '4' => '0',
+            '5' => '',
+        ];
         if (strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false) {
-            $word_1 = 'SP' . date('Y', strtotime($simpanan->created_at)) . $simpanan->id . $simpanan->no_anggota;
+            $word_1 = 'SP' . date('Y', strtotime($simpanan->created_at)) . $numberingSertif[(strlen($simpanan->id))] . $simpanan->id;
             $word_8 = 'Rp. ' . number_format($simpanan->detailsimpas[0]->tabungan_per_bulan ?? 0, 2, ',', '.');
         } else {
-            $word_1 = 'SSB' . date('Y', strtotime($simpanan->created_at)) . $simpanan->id . $simpanan->no_anggota;
+            $word_1 = 'SSB' . date('Y', strtotime($simpanan->created_at)) . $numberingSertif[(strlen($simpanan->id))] . $simpanan->id;
+            // $word_1 = 'SSB' . $numberingSertif[(strlen($simpanan->id))];
 
             $word_8 = strtoupper($simpanan->detail[0]->jenis ?? '-');
         }

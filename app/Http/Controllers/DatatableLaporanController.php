@@ -13,31 +13,19 @@ class DatatableLaporanController extends Controller
 {
     public function anggota(Request $request)
     {
-
-        $tahun = date('Y');
-        $bulan = date('n');
-        if (isset($request->tahun)) {
-            if ($request->tahun != '')
-                $tahun = $request->tahun;
+        $startDate = date('Y-m-d');
+        $endDate = date('Y-m-d');
+        if (isset($request->startDate)) {
+            if ($request->startDate != '')
+                $startDate = $request->startDate;
         }
-        if (isset($request->bulan)) {
-            if ($request->bulan != '')
-                $bulan = $request->bulan;
+        if (isset($request->endDate)) {
+            if ($request->endDate != '')
+                $endDate = $request->endDate;
         }
-        if (isset($request->tahun_end)) {
-            if ($request->tahun_end != '')
-                $tahun_end = $request->tahun_end;
-        }
-        if (isset($request->bulan_end)) {
-            if ($request->bulan_end != '')
-                $bulan_end = $request->bulan_end;
-        }
-
-        $fromDate = date($tahun.'-'.$bulan.'-01');
-        $endDate = date($tahun_end.'-'.$bulan_end.'-31');
 
         $anggota = Anggota::
-            whereDate('reg_date','>=',$fromDate)
+            whereDate('reg_date','>=',$startDate)
             ->whereDate('reg_date','<=',$endDate)
             // whereMonth('reg_date', '>=', $bulan)
             // ->whereYear('reg_date', '>=', $tahun)

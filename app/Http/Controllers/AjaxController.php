@@ -314,7 +314,10 @@ class AjaxController extends Controller
         }
         // return $gaji40;
         $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")->get();
-        $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")->get();
+        $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->where('produk_id',4)
+        ->whereNotIn('status_rekening',[0,5])
+        ->get();
 
         // $bunga = $request->bunga;
         $jml_baru = str_replace('.', '', $request->jml_pengajuan_baru ?? 0);

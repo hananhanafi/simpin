@@ -168,8 +168,26 @@ Data Simpanan
                 $('#no-anggota').val(noanggota)
                 $('#nama-anggota').val(nama)
                 $('#id_simpanan').val(id)
-                const pinalti = parseInt(res.saldo_akhir) * 0.01
+                
+                let pinalti = parseInt(res.saldo_akhir) * 0.01
+                let pph = 0
+                if (res.jenis_simpanan.toLowerCase().includes("simpanan pasti")){
+                    pinalti = 0
+                }else {
+                    if(res.detail && res.detail.length > 0){
+                        pph = res.detail.reduce((accumulator, object) => {
+                            return accumulator + object.bunga_dibayar;
+                        }, 0)
+
+                        pph = Math.ceil(pph * 0.01)
+                    }
+                }
+
                 $('#pinalti').val(pinalti)
+                $('#pph').val(pph)
+                $("#pinalti").prop('disabled', true);
+                $("#pph").prop('disabled', true);
+
                 $('#modal-tutup').modal('show')
             }
         });

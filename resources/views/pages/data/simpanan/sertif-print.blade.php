@@ -61,7 +61,16 @@
                                             <td>NOMOR SERTIFIKAT</td>
                                             <td>:</td>
                                             {{-- <td>{{strtotime($simpanan->created_at)}}</td> --}}
-                                            <td>{{ count($simpanan->detail) ? 'SSB' : 'SP' }}{{ date('Y', strtotime($simpanan->created_at)) . $simpanan->id . $simpanan->no_anggota }}
+                                            @php
+                                                $numberingSertif = [
+                                                    '1' => '0000',
+                                                    '2' => '000',
+                                                    '3' => '00',
+                                                    '4' => '0',
+                                                    '5' => '',
+                                                ]
+                                            @endphp
+                                            <td>{{ count($simpanan->detail) ? 'SSB' : 'SP' }}{{ date('Y', strtotime($simpanan->created_at)). $numberingSertif[(strlen($simpanan->id))] . $simpanan->id}}
                                             </td>
                                         </tr>
                                         {{-- <tr></tr> --}}
@@ -150,7 +159,7 @@
                                         <td>NOMOR SERTIFIKAT</td>
                                         <td>:</td>
                                         {{-- <td>{{strtotime($simpanan->created_at)}}</td> --}}
-                                        <td>{{ count($simpanan->detail) ? 'SSB' : 'SP' }}{{ date('Y', strtotime($simpanan->created_at)) . $simpanan->id . $simpanan->no_anggota }}
+                                        <td>{{ count($simpanan->detail) ? 'SSB' : 'SP' }}{{ date('Y', strtotime($simpanan->created_at)). $numberingSertif[(strlen($simpanan->id))] . $simpanan->id}}
                                         </td>
                                     </tr>
                                     {{-- <tr></tr> --}}
