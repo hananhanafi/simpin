@@ -38,79 +38,20 @@ Data Simpanan
         <div class="card-body">
             @include('includes.alert')
             <div class="row mb-2">
-                <div class="col-md-2">
-                    Bulan<br>
-                    <select class="form-control" name="bulan" id="bulan" onchange="simpanan()">
-                        @for ($i = 1; $i <= 12; $i++) @if ($bulan !='' ) @if ($bulan==$i) <option selected value="{{ $i }}">{{ FunctionHelper::bulan($i) }}
-                            </option>
-                            @else
-                            <option value="{{ $i }}">{{ FunctionHelper::bulan($i) }}</option>
-                            @endif
-                            @else
-                            <option value="{{ $i }}">{{ FunctionHelper::bulan($i) }}</option>
-                            @endif
-                            @endfor
-                    </select>
+                <div class="col-md-4 col-12">
+                    Tanggal<br>
+                    <input type="date" name="start_date" class="form-control" id="start_date" placeholder="Tanggal Lahir" value="{{ date('Y-m-d') }}" onchange="simpanan()">
                 </div>
-                <div class="col-md-2">
-                    Tahun <br>
-                    <select class="form-control" name="tahun" id="tahun" onchange="simpanan()">
-                        @for ($i = date('Y'); $i >= date('Y') - 20; $i--)
-                        @if ($tahun != '')
-                        @if ($tahun == $i)
-                        <option selected value="{{ $i }}">{{ $i }}</option>
-                        @else
-                        <option value="{{ $i }}">{{ $i }}</option>
-                        @endif
-                        @else
-                        <option value="{{ $i }}">{{ $i }}</option>
-                        @endif
-                        @endfor
-                    </select>
+                <div class="col-12 my-2">
                 </div>
-                <div class="col-md-4">
-
+                <div class="col-md-4 col-12">
+                    Sampai<br>
+                    <input type="date" name="end_date" class="form-control" id="end_date" placeholder="Tanggal Lahir" value="{{ date('Y-m-d') }}" onchange="simpanan()">
                 </div>
-                <div class="col-md-4 text-right">
+                <div class="col-12 text-right">
                     &nbsp;<br>
                     {{-- <button class="btn btn-sm btn-success"><i class="fas fa-download"></i> Unduh Laporan</button> --}}
                     <div id="buttonExport" class="pull-right"></div>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-12">
-                    Sampai
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-md-2">
-                    Bulan<br>
-                    <select class="form-control" name="bulan_end" id="bulan_end" onchange="simpanan()">
-                        @for ($i = 1; $i <=12; $i++) @if ($bulan !='' ) @if ($bulan==$i) <option selected value="{{ $i }}">{{ FunctionHelper::bulan($i) }}</option>
-                            @else
-                            <option value="{{ $i }}">{{ FunctionHelper::bulan($i) }}</option>
-                            @endif
-                            @else
-                            <option value="{{ $i }}">{{ FunctionHelper::bulan($i) }}</option>
-                            @endif
-                            @endfor
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    Tahun <br>
-                    <select class="form-control" name="tahun_end" id="tahun_end" onchange="simpanan()">
-                        @for ($i = date('Y'); $i >=(date('Y')-20); $i--)
-                        @if ($tahun != '')
-                        @if ($tahun == $i)
-                        <option selected value="{{ $i }}">{{ $i }}</option>
-                        @else
-                        <option value="{{ $i }}">{{ $i }}</option>
-                        @endif
-                        @else
-                        <option value="{{ $i }}">{{ $i }}</option>
-                        @endif
-                        @endfor
-                    </select>
                 </div>
             </div>
             <hr>
@@ -192,10 +133,8 @@ Data Simpanan
     simpanan();
 
     function simpanan() {
-        var tahun = $('#tahun').val()
-        var bulan = $('#bulan').val()
-        var tahun_end = $('#tahun_end').val()
-        var bulan_end = $('#bulan_end').val()
+        var start_date = $('#start_date').val()
+        var end_date = $('#end_date').val()
         var dt = $('#datatable').DataTable({
                 pageLength: 30,
                 searching: false,
@@ -206,10 +145,8 @@ Data Simpanan
                     url: "{{ route('datatable.laporan.simpanan') }}",
                     dataType: "json",
                     data: {
-                        bulan: bulan,
-                        tahun: tahun,
-                        bulan_end: bulan_end,
-                        tahun_end: tahun_end,
+                        start_date: start_date,
+                        end_date: end_date,
                     }
                 },
                 dom: 'Bfrtip',
