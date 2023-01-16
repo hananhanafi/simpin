@@ -15,13 +15,13 @@ class DatatableLaporanController extends Controller
     {
         $startDate = date('Y-m-d');
         $endDate = date('Y-m-d');
-        if (isset($request->startDate)) {
-            if ($request->startDate != '')
-                $startDate = $request->startDate;
+        if (isset($request->start_date)) {
+            if ($request->start_date != '')
+                $startDate = $request->start_date;
         }
-        if (isset($request->endDate)) {
-            if ($request->endDate != '')
-                $endDate = $request->endDate;
+        if (isset($request->end_date)) {
+            if ($request->end_date != '')
+                $endDate = $request->end_date;
         }
 
         $anggota = Anggota::
@@ -68,31 +68,20 @@ class DatatableLaporanController extends Controller
     public function simpanan(Request $request)
     {
 
-        $tahun = date('Y');
-        $bulan = date('n');
-        if (isset($request->tahun)) {
-            if ($request->tahun != '')
-                $tahun = $request->tahun;
+        $startDate = date('Y-m-d');
+        $endDate = date('Y-m-d');
+        if (isset($request->start_date)) {
+            if ($request->start_date != '')
+                $startDate = $request->start_date;
         }
-        if (isset($request->bulan)) {
-            if ($request->bulan != '')
-                $bulan = $request->bulan;
+        if (isset($request->end_date)) {
+            if ($request->end_date != '')
+                $endDate = $request->end_date;
         }
-        if (isset($request->tahun_end)) {
-            if ($request->tahun_end != '')
-                $tahun_end = $request->tahun_end;
-        }
-        if (isset($request->bulan_end)) {
-            if ($request->bulan_end != '')
-                $bulan_end = $request->bulan_end;
-        }
-        $fromDate = date($tahun.'-'.$bulan.'-01');
-        $endDate = date($tahun_end.'-'.$bulan_end.'-31');
-
         // $simpanan = TempAnggota::whereMonth('reg_date', $bulan)->whereYear('reg_date', $tahun)->orderBy('reg_date');
         // $simpanan = TempAnggota::with(['anggota'])->orderBy('no_anggota');
         $simpanan    = Anggota::
-            whereDate('reg_date','>=',$fromDate)
+            whereDate('reg_date','>=',$startDate)
             ->whereDate('reg_date','<=',$endDate)
             // whereMonth('reg_date', '>=', $bulan)
             // ->whereYear('reg_date', '>=', $tahun)
@@ -138,31 +127,19 @@ class DatatableLaporanController extends Controller
 
     public function simp_ssb(Request $request)
     {
-
-        $tahun = date('Y');
-        $bulan = date('n');
-        if (isset($request->tahun)) {
-            if ($request->tahun != '')
-                $tahun = $request->tahun;
+        $startDate = date('Y-m-d');
+        $endDate = date('Y-m-d');
+        if (isset($request->start_date)) {
+            if ($request->start_date != '')
+                $startDate = $request->start_date;
         }
-        if (isset($request->bulan)) {
-            if ($request->bulan != '')
-                $bulan = $request->bulan;
+        if (isset($request->end_date)) {
+            if ($request->end_date != '')
+                $endDate = $request->end_date;
         }
-        if (isset($request->tahun_end)) {
-            if ($request->tahun_end != '')
-                $tahun_end = $request->tahun_end;
-        }
-        if (isset($request->bulan_end)) {
-            if ($request->bulan_end != '')
-                $bulan_end = $request->bulan_end;
-        }
-        $fromDate = date($tahun.'-'.$bulan.'-01');
-        $endDate = date($tahun_end.'-'.$bulan_end.'-31');
-
         $simpanan = Simpanan::with('anggota')->where('produk_id', 3)
         // ->whereMonth('created_date', $bulan)->whereYear('created_date', $tahun)
-        ->whereDate('created_date','>=',$fromDate)
+        ->whereDate('created_date','>=',$startDate)
         ->whereDate('created_date','<=',$endDate)
         ->orderBy('created_date');
         // $simpanan = TempAnggota::with(['anggota'])->orderBy('no_anggota');
@@ -204,31 +181,19 @@ class DatatableLaporanController extends Controller
 
     public function simpas(Request $request)
     {
-
-        $tahun = date('Y');
-        $bulan = date('n');
-        if (isset($request->tahun)) {
-            if ($request->tahun != '')
-                $tahun = $request->tahun;
+        $startDate = date('Y-m-d');
+        $endDate = date('Y-m-d');
+        if (isset($request->start_date)) {
+            if ($request->start_date != '')
+                $startDate = $request->start_date;
         }
-        if (isset($request->bulan)) {
-            if ($request->bulan != '')
-                $bulan = $request->bulan;
+        if (isset($request->end_date)) {
+            if ($request->end_date != '')
+                $endDate = $request->end_date;
         }
-        if (isset($request->tahun_end)) {
-            if ($request->tahun_end != '')
-                $tahun_end = $request->tahun_end;
-        }
-        if (isset($request->bulan_end)) {
-            if ($request->bulan_end != '')
-                $bulan_end = $request->bulan_end;
-        }
-        $fromDate = date($tahun.'-'.$bulan.'-01');
-        $endDate = date($tahun_end.'-'.$bulan_end.'-31');
-
         $simpanan = Simpanan::with('anggota')->where('produk_id', 4)
         // ->whereMonth('created_date', $bulan)->whereYear('created_date', $tahun)
-        ->whereDate('created_date','>=',$fromDate)
+        ->whereDate('created_date','>=',$startDate)
         ->whereDate('created_date','<=',$endDate)
         ->orderBy('created_date');
         // $simpanan = TempAnggota::with(['anggota'])->orderBy('no_anggota');
