@@ -289,6 +289,7 @@ class Exports extends Controller
         $sheet->mergeCells('A29:C29');
         $sheet->mergeCells('A30:C30');
         $sheet->mergeCells('A31:C31');
+        $sheet->mergeCells('E26:F26');
 
         $sheet->mergeCells('A32:F32');
         $sheet->mergeCells('A33:F33');
@@ -399,17 +400,17 @@ class Exports extends Controller
         // $sheet->setCellValue('A19', "Simpanan Sukarela Berjangka");
         $sheet->setCellValue('B19', $simpanan->produk->nama_produk);
         $sheet->setCellValue('A20', "COPY");
-        
+
         $sheet->getRowDimension('20')->setRowHeight(30);
         $sheet->getStyle('A20:F20')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getRowDimension('18')->setRowHeight(30);
+        $sheet->getRowDimension('18')->setRowHeight(100);
         $sheet->getRowDimension('19')->setRowHeight(30);
         $sheet->getStyle('B18:E18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
         $sheet->getStyle('B19:E19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
         $sheet->getStyle('B18:E18')->getFont()->setSize(12);
         $sheet->getStyle('B19:E19')->getFont()->setSize(12);
-        $sheet->getStyle('A18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle('F18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
+        $sheet->getStyle('F18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
 
         // $sheet->setCellValue('A34', "TTD 1");
         // $sheet->setCellValue('C34', "TTD 2");
@@ -457,7 +458,7 @@ class Exports extends Controller
         // $sheet->setCellValue('A12', 'Jenis Simpanan');
         $sheet->setCellValue('A13', 'TANGGAL PENEMPATAN');
         $sheet->setCellValue('A14', 'TANGGAL JATUH TEMPO');
-        
+
         $sheet->getStyle('A5:A14')->applyFromArray($boldStyle);
         $sheet->getStyle('A22:A31')->applyFromArray($boldStyle);
 
@@ -480,7 +481,7 @@ class Exports extends Controller
         $sheet->setCellValue('A15', "KOPERASI KARYAWAN MULIA INDUSTRY");
         $sheet->getRowDimension('15')->setRowHeight(20);
         $sheet->getStyle('A15:F15')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
-        
+
         $sheet->setCellValue('A16', date('d M Y'));
 
         $created = $simpanan->created_at;

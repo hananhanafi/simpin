@@ -168,18 +168,18 @@ Data Simpanan
                 $('#no-anggota').val(noanggota)
                 $('#nama-anggota').val(nama)
                 $('#id_simpanan').val(id)
-                
+
                 let pinalti = parseInt(res.saldo_akhir) * 0.01
                 let pph = 0
-                if (res.jenis_simpanan.toLowerCase().includes("simpanan pasti")){
+                if (res.jenis_simpanan.toLowerCase().includes("simpanan pasti")) {
                     pinalti = 0
-                }else {
-                    if(res.detail && res.detail.length > 0){
+                } else {
+                    if (res.detail && res.detail.length > 0) {
                         pph = res.detail.reduce((accumulator, object) => {
-                            return accumulator + object.bunga_dibayar;
+                            return accumulator + object.pph;
                         }, 0)
-
-                        pph = Math.ceil(pph * 0.01)
+                        pph = Math.ceil(pph)
+                        // pph = bunga >= 240000 ? Math.ceil(bunga * 0.01) : 0
                     }
                 }
 

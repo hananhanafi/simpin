@@ -13,7 +13,7 @@ impor
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Data</a></li>
-                    <li class="breadcrumb-item">Potongan HRD</li>
+                    <li class="breadcrumb-item">Potongan Payroll</li>
                 </ol>
             </div>
 
