@@ -239,8 +239,8 @@ class Exports extends Controller
         $sheet->getColumnDimension('E')->setWidth(20);
         $sheet->getColumnDimension('F')->setWidth(20);
 
-        $sheet->mergeCells('A1:A2');
-        $sheet->mergeCells('F1:F2');
+        // $sheet->mergeCells('A1:A2');
+        // $sheet->mergeCells('F1:F2');
         $sheet->mergeCells('B1:E1');
         $sheet->mergeCells('B2:E2');
         $sheet->mergeCells('A3:F3');
@@ -272,8 +272,8 @@ class Exports extends Controller
         $sheet->mergeCells('A16:F16');
         $sheet->mergeCells('A17:F17');
         $sheet->mergeCells('B18:E18');
-        $sheet->mergeCells('A18:A19');
-        $sheet->mergeCells('F18:F19');
+        // $sheet->mergeCells('A18:A19');
+        // $sheet->mergeCells('F18:F19');
 
         $sheet->mergeCells('B19:E19');
         $sheet->mergeCells('A20:F20');
@@ -322,8 +322,8 @@ class Exports extends Controller
         $sheet->getStyle('B2:E2')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('left');
         $sheet->getStyle('F1')->getAlignment()->setHorizontal('right');
-        $sheet->getStyle('A18')->getAlignment()->setHorizontal('left');
-        $sheet->getStyle('F18')->getAlignment()->setHorizontal('right');
+        $sheet->getStyle('A19')->getAlignment()->setHorizontal('left');
+        $sheet->getStyle('F19')->getAlignment()->setHorizontal('right');
 
         $sheet->getStyle('B18:E19')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A34:F40')->getAlignment()->setHorizontal('center');
@@ -365,7 +365,7 @@ class Exports extends Controller
         $drawing18->setDescription('PhpSpreadsheet logo');
         $drawing18->setPath('assets/images/sertif-logo-left.jpg'); // put your path and image here
         $drawing18->setHeight(50);
-        $drawing18->setCoordinates('A18');
+        $drawing18->setCoordinates('A19');
         $drawing18->setOffsetX(10);
         $drawing18->setWorksheet($spreadsheet->getActiveSheet());
 
@@ -375,42 +375,43 @@ class Exports extends Controller
         $drawingf18->setDescription('sertif-logo-right');
         $drawingf18->setPath('assets/images/sertif-logo-right.jpg'); // put your path and image here
         $drawingf18->setHeight(50);
-        $drawingf18->setCoordinates('F18');
+        $drawingf18->setCoordinates('F19');
         $drawingf18->setOffsetX(10);
         $drawingf18->setWorksheet($spreadsheet->getActiveSheet());
 
-        $sheet->setCellValue('B1', "SERTIFIKAT");
+        $sheet->setCellValue('B1', "SERTIFIKAT\n".$simpanan->produk->nama_produk);
         // $sheet->setCellValue('A2', "Simpanan Sukarela Berjangka");
-        $sheet->setCellValue('B2',  $simpanan->produk->nama_produk);
+        // $sheet->setCellValue('B2',  $simpanan->produk->nama_produk);
 
         $sheet->setCellValue('A3', "ASLI");
 
         $sheet->getRowDimension('3')->setRowHeight(30);
         $sheet->getStyle('A3:F3')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->getRowDimension('1')->setRowHeight(30);
-        $sheet->getRowDimension('2')->setRowHeight(30);
-        $sheet->getStyle('B1:E1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
+        $sheet->getRowDimension('2')->setRowHeight(10);
+        $sheet->getStyle('B1:E1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->getStyle('B2:E2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
         $sheet->getStyle('B1:E1')->getFont()->setSize(12);
         $sheet->getStyle('B2:E2')->getFont()->setSize(12);
         $sheet->getStyle('A1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->getStyle('F1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
-        $sheet->setCellValue('B18', "SERTIFIKAT");
+        // $sheet->setCellValue('B18', "SERTIFIKAT");
+        $sheet->setCellValue('B19', "SERTIFIKAT\n".$simpanan->produk->nama_produk);
         // $sheet->setCellValue('A19', "Simpanan Sukarela Berjangka");
-        $sheet->setCellValue('B19', $simpanan->produk->nama_produk);
+        // $sheet->setCellValue('B19', $simpanan->produk->nama_produk);
         $sheet->setCellValue('A20', "COPY");
 
         $sheet->getRowDimension('20')->setRowHeight(30);
         $sheet->getStyle('A20:F20')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->getRowDimension('18')->setRowHeight(100);
-        $sheet->getRowDimension('19')->setRowHeight(30);
+        $sheet->getRowDimension('19')->setRowHeight(60);
         $sheet->getStyle('B18:E18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
-        $sheet->getStyle('B19:E19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+        $sheet->getStyle('B19:E19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->getStyle('B18:E18')->getFont()->setSize(12);
         $sheet->getStyle('B19:E19')->getFont()->setSize(12);
-        $sheet->getStyle('A18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
-        $sheet->getStyle('F18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
+        $sheet->getStyle('A19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('F19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
         // $sheet->setCellValue('A34', "TTD 1");
         // $sheet->setCellValue('C34', "TTD 2");
