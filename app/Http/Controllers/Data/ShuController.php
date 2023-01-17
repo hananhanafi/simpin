@@ -8,11 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Imports\ImportExcel;
 use App\Models\Data\ShuDetail;
 use Illuminate\Support\Facades\Session;
-use Maatwebsite\Excel\Facades\Excel;
-use Mockery\Undefined;
 
 class ShuController extends Controller
 {
@@ -49,58 +46,34 @@ class ShuController extends Controller
     {
         try {
 
-            // FILE UPLOAD
-            $file = $request->file('file');
-            $nama_file = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/shu', $nama_file);
-            // $file->move('file/shu', $nama_file);
-            $files = storage_path('app/public/shu/' . $nama_file);
-            $array = Excel::toArray(new ImportExcel, $files);
-
-            // $shuId = Shu::latest('deleted_at')->first();
-            // if ($shuId == null) {
-            //     $shuId = 1;
-            // } else {
-            //     $shuId = $shuId->id + 1;
-            // }
-
-            // dd($shuId);
             DB::beginTransaction();
-
-            $arr = $array[0];
 
             $shu = new Shu;
             $shu->uuid          = Str::uuid();
-            $shu->tahun         = $arr[0][1];
-            $shu->alokasi_shu    = $arr[25][2];
-            $shu->shu_pengurus    = $arr[31][2];
-            $shu->persen_pengurus = ($arr[31][1] * 100);
-            $shu->shu_anggota    = $arr[26][2];
-            $shu->persen_anggota = ($arr[26][1] * 100);
+            $shu->tahun         = $request->tahun;
+            $shu->persen_anggota = str_replace(',', '.', str_replace('.', '', $request->shu_anggota_persen));
+            $shu->persen_pengurus = str_replace(',', '.', str_replace('.', '', $request->shu_pengurus_persen));
+            $shu->alokasi_shu    = str_replace(',', '.', str_replace('.', '', $request->alokasi_shu));
+            $shu->shu_pengurus    = str_replace(',', '.', str_replace('.', '', $request->shu_pengurus));
+            $shu->shu_anggota    = str_replace(',', '.', str_replace('.', '', $request->shu_anggota));
             $shu->status        = 0;
             $shu->save();
 
-            $arrDet = [$arr[2], $arr[3], $arr[5], $arr[6], $arr[7]];
-            for ($i = 27; $i < 31; $i++) {
-                array_push($arrDet, $arr[$i]);
-            }
-            // return $arrDet;
+            $shuId = $shu->id;
+            $pengurus_persen = $request->ppengurus_persen;
 
-            foreach ($arrDet as $idx => $item) {
-                $shuKet = $idx > 4 ? 'pengurus' : 'anggota';
-                $persen = $item[4] == null ? $item[1] : $item[4];
+            foreach ($request->pengurus as $idx => $item) {
 
                 $shuDetail = new ShuDetail();
-                $shuDetail->shu_id      = $shu->id;
-                $shuDetail->uuid        = Str::uuid();
-                $shuDetail->tahun       = $shu->tahun;
-                $shuDetail->keterangan  = $item[0];
-
-                $shuDetail->kategori    = $shuKet;
-                $shuDetail->nilai_shu   = $item[5] == null ? $item[2] : $item[5];
-                $shuDetail->persen      = $persen * 100;
+                $shuDetail->shu_id          = $shuId;
+                $shuDetail->uuid              = Str::uuid();
+                $shuDetail->tahun             = $request->tahun;
+                $shuDetail->keterangan      = $idx;
+                $shuDetail->nilai_shu       = str_replace(',', '.', str_replace('.', '', $item));
+                $shuDetail->persen            = $pengurus_persen[$idx];
                 $shuDetail->save();
             }
+
 
             DB::commit();
             Session::flash('success', 'Simpan Data SHU Berhasil, Dan Menunggu Approval');
@@ -122,10 +95,5 @@ class ShuController extends Controller
         $shu->delete();
         Session::flash('success', 'Hapus Data SHU Berhasil');
         return redirect()->route('data.shu.index');
-    }
-
-    public function rincian_anggota()
-    {
-        return view('pages.data.shu.rincian-anggota.index');
     }
 }
