@@ -229,6 +229,10 @@ class SimpananController extends Controller
         }
         return redirect()->route('data.simpanan.index');
     }
+    public function pencairan()
+    {
+        return view('pages.data.simpanan.pencairan');
+    }
 
     public function pencairanApprove(Request $request)
     {
@@ -275,7 +279,7 @@ class SimpananController extends Controller
         Session::flash('success', 'Hapus Data Simpanan Berhasil');
         return redirect()->route('data.simpanan.index');
     }
-    
+
 
     public function plafon(Request $request)
     {

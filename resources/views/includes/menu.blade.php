@@ -87,8 +87,8 @@
                     <span data-key="t-calendar">Pembukaan SSB</span>
                 </a>
             </li>
-            <li class="{{ request()->is('*data/simpanan') ? 'mm-active' : '' }}">
-                <a href="{{ route('data.simpanan.index') }}" {{ request()->is('*data/simpanan*') ? 'active' : '' }}>
+            <li class="{{ request()->is('*data/simpanan/pencairan') ? 'mm-active' : '' }}">
+                <a href="{{ route('data.simpanan.pencairan') }}" {{ request()->is('*data/simpanan/pencairan*') ? 'active' : '' }}>
                     <span data-key="t-calendar">Pencairan</span>
                 </a>
             </li>
