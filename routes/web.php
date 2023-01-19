@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ssb-simulasi-xls', 'SimpananController@ssbSimulasiXls')->name('simpanan.simulasi-ssb.xls');
         Route::get('simpanan-sertif', 'SimpananController@sertif')->name('simpanan.sertif');
         Route::get('simpanan-sertif-pdf/{id}', 'SimpananController@sertifPdf')->name('simpanan.sertif-pdf');
-        Route::post('simpanan-pencairan', 'SimpananController@pencairan')->name('simpanan.pencairan');
+        Route::get('simpanan-pencairan', 'SimpananController@pencairan')->name('simpanan.pencairan');
 
         Route::resource('pinjaman', 'PinjamanController');
         Route::get('pinjaman-simulasi', 'PinjamanController@simulasi')->name('pinjaman.simulasi');

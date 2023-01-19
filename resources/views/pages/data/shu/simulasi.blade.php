@@ -21,7 +21,7 @@
 
 <table class="table table-bordered simulasi mt-5">
     <thead>
-        <tr style="">
+        <tr>
             <th style="text-align:center">
                 Kategori
             </th>
