@@ -56,7 +56,7 @@ Tambah Data SHU
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Alokasi SHU<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="alokasi_shu" class="form-control" id="alokasi_shu" placeholder="Jumlah Alokasi SHU" required data-parsley-required-message="Jumlah Alokasi SHU Harus Diisi" value="{{ old('alokasi_shu') }}" onkeyup="pageSimulasi(0,0)">
+                                    <input type="text" name="alokasi_shu" class="form-control" id="alokasi_shu" placeholder="Jumlah Alokasi SHU" required data-parsley-required-message="Jumlah Alokasi SHU Harus Diisi" value="{{ old('alokasi_shu') }}" onkeyup="pageSimulasi()">
                                 </div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ Tambah Data SHU
     pageSimulasi();
 
     function pageSimulasi() {
-        var alokasi_shu = $('#alokasi_shu').val();
+        var alokasi_shu = parseInt($('#alokasi_shu').val().replaceAll('.',''));
         var tahun = $('#tahun').val();
         var shu_anggota_persen = $('input[name=shu_anggota_persen]').val()
         var pengurus_persen = $('#pengurus_persen').val()
@@ -136,7 +136,8 @@ Tambah Data SHU
         var karyawan_persen = $('#karyawan_persen').val()
         var pendidikan_persen = $('#pendidikan_persen').val()
         var shu_pengurus_persen = $('input[name=shu_pengurus_persen]').val()
-        $('#pages-simulasi').load('{{ route("ajax.shu.simulasi") }}?tahun=' + tahun + '&alokasi_shu=' + alokasi_shu + '&shu_anggota_persen=' + shu_anggota_persen + '&pengurus_persen=' + pengurus_persen + '&pengawas_persen=' + pengawas_persen + '&karyawan_persen=' + karyawan_persen + '&pendidikan_persen=' + pendidikan_persen + '&shu_pengurus_persen=' + shu_pengurus_persen);
+        // $('#pages-simulasi').load('{{ route("ajax.shu.simulasi") }}?tahun=' + tahun + '&alokasi_shu=' + alokasi_shu + '&shu_anggota_persen=' + shu_anggota_persen + '&pengurus_persen=' + pengurus_persen + '&pengawas_persen=' + pengawas_persen + '&karyawan_persen=' + karyawan_persen + '&pendidikan_persen=' + pendidikan_persen + '&shu_pengurus_persen=' + shu_pengurus_persen);
+        $('#pages-simulasi').load('{{ route("ajax.shu.simulasi") }}?alokasi_shu=' + alokasi_shu + '&tahun=' + tahun);
     }
 </script>
 @endsection

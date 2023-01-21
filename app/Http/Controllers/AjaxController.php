@@ -359,7 +359,8 @@ class AjaxController extends Controller
 
     public function shuSimulasi(Request $request)
     {
-        $alokasi_shu    = str_replace('.', '', $request->alokasi_shu);
+        // $alokasi_shu    = str_replace('.', '', $request->alokasi_shu);
+        $alokasi_shu    = $request->alokasi_shu;
         $tahun          = $request->tahun;
         // return $request;
         return view('pages.data.shu.simulasi')
