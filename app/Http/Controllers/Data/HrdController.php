@@ -29,8 +29,12 @@ class HrdController extends Controller
 
     public function show()
     {
+        $tahun = date('Y');
+        $bulan = date('n');
 
-        return view('pages.data.hrd.show');
+        return view('pages.data.hrd.show')
+        ->with('tahun', $tahun)
+        ->with('bulan', $bulan);
     }
 
     public function upload()

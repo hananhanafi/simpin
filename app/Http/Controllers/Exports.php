@@ -12,6 +12,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
+use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -131,26 +132,35 @@ class Exports extends Controller
     }
 
 
-    public function potongan_hrd()
+    public function potongan_hrd(Request $request)
     {
         $anggota = new Anggota;
         // $anggota = $anggota->get();
 
         $anggota = Anggota::select(DB::raw('*'))
             ->with([
-                'simpananAnggota' => function ($q) {
+                'simpananAnggota' => function ($q) use ($request) {
                     $q
-                        ->with(['detailSimpas' => function ($q2) {
+                        ->with(['detailSimpas' => function ($q2) use ($request) {
                             $q2
-                                ->whereNull('deleted_at');
+                                ->whereNull('deleted_at')
+                                ->where('tahun',$request->tahun)
+                                ->where('bulan',$request->bulan);
                         }])
                         ->where([
                             ['produk_id', '=', 4],
                             ['status_rekening', '=', 1]
                         ]);
                 },
-                'pinjamanAnggota' => function ($q) {
-                    $q->whereIn('status_rekening', [2, 3])
+                'pinjamanAnggota' => function ($q) use ($request){
+                    $q
+                        ->with(['detail' => function ($q2) use($request){
+                            $q2
+                                ->whereNull('deleted_at')
+                                ->where('tahun',$request->tahun)
+                                ->where('bulan',$request->bulan);
+                        }])
+                        ->whereIn('status_rekening', [2, 3])
                         ->where('sisa_hutangs', '>', '0');
                 }
             ])
@@ -164,20 +174,26 @@ class Exports extends Controller
         foreach ($anggota as $a) {
             if (count($a->simpananAnggota) > 0) {
                 $simpananArr = json_decode(json_encode($a->simpananAnggota), true);
-                $detailSimpasArr = array_map(function ($val) {
-                    if (count($val['detail_simpas']) > 0) {
-                        return $val['detail_simpas'][0]['tabungan_per_bulan'];
-                    } else {
-                        return 0;
-                    }
-                }, $simpananArr);
-                $totalAngsuranSimpas = array_sum($detailSimpasArr);
+                $totalAngsuranSimpas = 0;
+                if (count($simpananArr)>0 && count($simpananArr[0]['detail_simpas']) > 0) {
+                    $detailsimpananArr = array_map(function ($val) {
+                        return $val['tabungan_per_bulan'];
+                    }, $simpananArr[0]['detail_simpas']);
+                    $totalAngsuranSimpas = array_sum($detailsimpananArr);
+                }
             } else {
                 $totalAngsuranSimpas = 0;
             }
             if (count($a->pinjamanAnggota) > 0) {
                 $pinjamanArr = json_decode(json_encode($a->pinjamanAnggota), true);
-                $totalAngsuranPinjaman = array_sum(array_column($pinjamanArr, 'angsuran'));
+                // $totalAngsuranPinjaman = array_sum(array_column($pinjamanArr, 'angsuran'));
+                $totalAngsuranPinjaman = 0;
+                if (count($pinjamanArr)>0 && count($pinjamanArr[0]['detail']) > 0) {
+                    $detailPinjamanArr = array_map(function ($val) {
+                        return $val['total_angsuran'];
+                    }, $pinjamanArr[0]['detail']);
+                    $totalAngsuranPinjaman = array_sum($detailPinjamanArr);
+                }
                 $totalHutang = array_sum(array_column($pinjamanArr, 'sisa_hutangs'));
             } else {
                 $totalAngsuranPinjaman = 0;
@@ -197,7 +213,7 @@ class Exports extends Controller
             $collect[4] = $totalAngsuranPinjaman;
             $collect[5] = '$row->db_POS';
             $collect[6] = $totalAngsuranSimpas;
-            $collect[7] = '$row->dkm';
+            $collect[7] = $a->dkm;
             $collect[8] = $totalHutang;
             $collect[9] = $a->sim_pokok;
             $collect[10] = $a->sim_wajib;

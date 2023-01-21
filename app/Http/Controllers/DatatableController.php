@@ -788,19 +788,28 @@ class DatatableController extends Controller
         // $anggota = Anggota::orderBy('no_anggota');
         $anggota = Anggota::select(DB::raw('*'))
             ->with([
-                'simpananAnggota' => function ($q) {
+                'simpananAnggota' => function ($q) use($request) {
                     $q
-                        ->with(['detailSimpas' => function ($q2) {
+                        ->with(['detailSimpas' => function ($q2) use($request){
                             $q2
-                                ->whereNull('deleted_at');
+                                ->whereNull('deleted_at')
+                                ->where('tahun',$request->tahun)
+                                ->where('bulan',$request->bulan);
                         }])
                         ->where([
                             ['produk_id', '=', 4],
                             ['status_rekening', '=', 1]
                         ]);
                 },
-                'pinjamanAnggota' => function ($q) {
-                    $q->whereIn('status_rekening', [2, 3])
+                'pinjamanAnggota' => function ($q) use($request) {
+                    $q
+                        ->with(['detail' => function ($q2) use($request){
+                            $q2
+                                ->whereNull('deleted_at')
+                                ->where('tahun',$request->tahun)
+                                ->where('bulan',$request->bulan);
+                        }])
+                        ->whereIn('status_rekening', [2, 3])
                         ->where('sisa_hutangs', '>', '0');
                 }
             ])
@@ -824,16 +833,21 @@ class DatatableController extends Controller
             })
             ->editColumn('total_potongan', function ($row) {
                 $simpananArr = json_decode(json_encode($row->simpananAnggota), true);
-                $detailSimpasArr = array_map(function ($val) {
-                    if (count($val['detail_simpas']) > 0) {
-                        return $val['detail_simpas'][0]['tabungan_per_bulan'];
-                    } else {
-                        return 0;
-                    }
-                }, $simpananArr);
-                $totalAngsuranSimpas = array_sum($detailSimpasArr);
+                $totalAngsuranSimpas = 0;
+                if (count($simpananArr)>0 && count($simpananArr[0]['detail_simpas']) > 0) {
+                    $detailsimpananArr = array_map(function ($val) {
+                        return $val['tabungan_per_bulan'];
+                    }, $simpananArr[0]['detail_simpas']);
+                    $totalAngsuranSimpas = array_sum($detailsimpananArr);
+                }
                 $pinjamanArr = json_decode(json_encode($row->pinjamanAnggota), true);
-                $totalAngsuran = array_sum(array_column($pinjamanArr, 'angsuran'));
+                $totalAngsuran = 0;
+                if (count($pinjamanArr)>0 && count($pinjamanArr[0]['detail']) > 0) {
+                    $detailPinjamanArr = array_map(function ($val) {
+                        return $val['total_angsuran'];
+                    }, $pinjamanArr[0]['detail']);
+                    $totalAngsuran = array_sum($detailPinjamanArr);
+                }
                 $totalPotongan = $totalAngsuranSimpas + $totalAngsuran;
                 return '<b>' . number_format($totalPotongan, 0) . '</b>';
             })
@@ -842,7 +856,13 @@ class DatatableController extends Controller
                     return '<b>' . 0 . '</b>';
                 } else {
                     $pinjamanArr = json_decode(json_encode($row->pinjamanAnggota), true);
-                    $totalAngsuran = array_sum(array_column($pinjamanArr, 'angsuran'));
+                    $totalAngsuran = 0;
+                    if (count($pinjamanArr)>0 && count($pinjamanArr[0]['detail']) > 0) {
+                        $detailPinjamanArr = array_map(function ($val) {
+                            return $val['total_angsuran'];
+                        }, $pinjamanArr[0]['detail']);
+                        $totalAngsuran = array_sum($detailPinjamanArr);
+                    }
                     return '<b>' . number_format($totalAngsuran, 0) . '</b>';
                 }
             })
@@ -855,14 +875,13 @@ class DatatableController extends Controller
                 } else {
                     // return '<b>' . $row->simpananAnggota . '</b>';
                     $simpananArr = json_decode(json_encode($row->simpananAnggota), true);
-                    $detailSimpasArr = array_map(function ($val) {
-                        if (count($val['detail_simpas']) > 0) {
-                            return $val['detail_simpas'][0]['tabungan_per_bulan'];
-                        } else {
-                            return 0;
-                        }
-                    }, $simpananArr);
-                    $totalAngsuranSimpas = array_sum($detailSimpasArr);
+                    $totalAngsuranSimpas = 0;
+                    if (count($simpananArr)>0 && count($simpananArr[0]['detail_simpas']) > 0) {
+                        $detailsimpananArr = array_map(function ($val) {
+                            return $val['tabungan_per_bulan'];
+                        }, $simpananArr[0]['detail_simpas']);
+                        $totalAngsuranSimpas = array_sum($detailsimpananArr);
+                    }
                     return '<b>' . number_format($totalAngsuranSimpas, 0) . '</b>';
                 }
             })

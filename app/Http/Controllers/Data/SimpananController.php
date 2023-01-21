@@ -196,6 +196,7 @@ class SimpananController extends Controller
 
                 $simpanan->status_rekening  = 4;
                 $simpanan->delete_note      = $request->keterangan;
+                $simpanan->delete_date      = $request->tgl_penutupan;
                 $simpanan->update_date      = date('Y-m-d H:i:s');
                 $simpanan->update_by        = Auth::user()->id;
                 $simpanan->saldo_akhir        = $request->saldo - ($request->pinalti + $request->pph);

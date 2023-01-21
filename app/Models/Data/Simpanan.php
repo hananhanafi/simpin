@@ -82,6 +82,8 @@ class Simpanan extends Model
             $xstatus = '<span class="badge font-size-13 bg-warning">Pengajuan Penutupan</span>';
         } elseif ($this->status_rekening == "5") {
             $xstatus = "<span class='btn btn-sm btn-rounded btn-danger'>Tidak Aktif</span>";
+        } elseif ($this->status_rekening == "6") {
+            $xstatus = "<span class='btn btn-sm btn-rounded btn-danger'>Break</span>";
         }
         return $xstatus;
     }

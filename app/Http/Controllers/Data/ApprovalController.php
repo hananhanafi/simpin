@@ -126,8 +126,24 @@ class ApprovalController extends Controller
                 Session::flash('success', 'Data Simpanan Tidak Di Approve');
             } else {
                 if ($simpanan->status_rekening == 4) {
-
-                    $simpanan->status_rekening   = 5;
+                    $date = date_create($simpanan->delete_date);
+                    $year = date_format($date,"Y");
+                    $month = date_format($date,"n");
+                    $lastSimpanan = null;
+                    if (count($simpanan->detailsimpas) > 0) {
+                        $lastSimpanan = $simpanan->detailsimpas[$simpanan->jangka_waktu-1];
+                    } else {
+                        $lastSimpanan = $simpanan->detail[$simpanan->jangka_waktu-1];
+                    }
+                    if($year < $lastSimpanan->tahun) {
+                        $simpanan->status_rekening   = 6;
+                    }else {
+                        if($month < $lastSimpanan->bulan) {
+                            $simpanan->status_rekening   = 6;
+                        }else {
+                            $simpanan->status_rekening   = 5;
+                        }
+                    }
                     $simpanan->reject_note       = "-";
                     $simpanan->update_by         = Auth::user()->id;
                     $simpanan->update_date       = date('Y-m-d H:i:s');
