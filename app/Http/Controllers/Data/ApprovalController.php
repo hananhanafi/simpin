@@ -230,26 +230,26 @@ class ApprovalController extends Controller
     public function shuApprove(Request $request)
     {
         // return $request;
-        $Shu = Shu::where('uuid', 'like', "%$request->uuid%")->first();
+        $Shu = Shu::where('uuid', 'like', "%$request->id_shu%")->first();
 
         // return $pinjaman;
         if ($Shu) {
 
             if (isset($request->keterangan)) {
 
+                $Shu->status  = 5;
+                $Shu->reject_note       = $request->keterangan;
+                $Shu->save();
+
+                Session::flash('success', 'Data SHU Tidak Di Approve');
+            } else {
                 $Shu->status   = 1;
-                $Shu->approve_note       = $request->keterangan;
                 $Shu->save();
 
                 Session::flash('success', 'Data SHU Telah Di Aktivasi');
-            } else {
-                $Shu->status  = 5;
-                $Shu->save();
-
-                Session::flash('success', 'Data Pinjaman Tidak Di Approve');
             }
         } else {
-            Session::flash('fail', 'Data Pinjaman Tidak Di Temukan');
+            Session::flash('fail', 'Data SHU Tidak Di Temukan');
         }
         return redirect()->route('approval.shu');
     }

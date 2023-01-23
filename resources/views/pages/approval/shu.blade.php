@@ -127,30 +127,32 @@
 
         });
 
-        function tolak(uuid){
+        function approve(uuid){
             var url = '{{ route("approval.shu.approve") }}';
             $('#aproval-form').attr('action', url);
-            $('#id_pinjaman').val(uuid)
-            swal({
-                title: "Apakah Anda Yakin !",
-                text: "Ingin Menolak Data Ini ?.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#802d34",
-                confirmButtonText: "Ya, Tolak",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: false,
-                closeOnCancel: true
-            },
-            function (isConfirm) {
-                if (isConfirm) {
-                    $('#aproval-form').submit();
-                }
-            });
+            $("input[name='id_shu']").val(uuid);
+            $('#aproval-form').submit();
+
+            // swal({
+            //     title: "Apakah Anda Yakin !",
+            //     text: "Ingin Menolak Data Ini ?.",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#802d34",
+            //     confirmButtonText: "Ya, Tolak",
+            //     cancelButtonText: "Cancel",
+            //     closeOnConfirm: false,
+            //     closeOnCancel: true
+            // },
+            // function (isConfirm) {
+            //     if (isConfirm) {
+            //         $('#aproval-form').submit();
+            //     }
+            // });
         }
-        function approve(id){
-            $('#id-shu').val(id);
-            $('#modal-approve').modal('show')
+        function tolak(id){
+            $("input[name='id_shu']").val(id);
+            $('#modal-reject').modal('show')
         }
         
         $(document).ready(function(){
@@ -160,7 +162,7 @@
 @endsection
 
 @section('modal')
-<div id="modal-approve" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal-reject" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="{{ route('approval.shu.approve') }}" method="POST" id="post-approve">

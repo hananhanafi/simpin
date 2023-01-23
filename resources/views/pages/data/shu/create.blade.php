@@ -47,7 +47,7 @@ Tambah Data SHU
                                 <div class="col-sm-7">
                                     <select class="form-control select2" style="width: 100%;" name="tahun" id="tahun">
                                         @php
-                                        for ($i=1;$i<=10;$i++) { $it=date("Y") - 10 + $i; echo "<option value=\"".$it." \""; if ($it==$thn) { echo " selected" ; } echo ">" .$it."</option>";
+                                        for ($i=1;$i<=10;$i++) { $it=date("Y") - 10 + $i; echo "<option value=\"".$it."\""; if ($it==$thn) { echo " selected" ; } echo ">" .$it."</option>";
                                             }
                                             @endphp
                                     </select>
@@ -130,14 +130,14 @@ Tambah Data SHU
     function pageSimulasi() {
         var alokasi_shu = parseInt($('#alokasi_shu').val().replaceAll('.',''));
         var tahun = $('#tahun').val();
-        var shu_anggota_persen = $('input[name=shu_anggota_persen]').val()
-        var pengurus_persen = $('#pengurus_persen').val()
-        var pengawas_persen = $('#pengawas_persen').val()
-        var karyawan_persen = $('#karyawan_persen').val()
-        var pendidikan_persen = $('#pendidikan_persen').val()
-        var shu_pengurus_persen = $('input[name=shu_pengurus_persen]').val()
-        // $('#pages-simulasi').load('{{ route("ajax.shu.simulasi") }}?tahun=' + tahun + '&alokasi_shu=' + alokasi_shu + '&shu_anggota_persen=' + shu_anggota_persen + '&pengurus_persen=' + pengurus_persen + '&pengawas_persen=' + pengawas_persen + '&karyawan_persen=' + karyawan_persen + '&pendidikan_persen=' + pendidikan_persen + '&shu_pengurus_persen=' + shu_pengurus_persen);
-        $('#pages-simulasi').load('{{ route("ajax.shu.simulasi") }}?alokasi_shu=' + alokasi_shu + '&tahun=' + tahun);
+        var shu_anggota_persen = $('input[name=shu_anggota_persen]').val() === undefined ? 80 : $('input[name=shu_anggota_persen]').val()
+        var pengurus_persen = $('#pengurus_persen').val() === undefined ? 4 : $('#pengurus_persen').val()
+        var pengawas_persen = $('#pengawas_persen').val() === undefined ? 1 : $('#pengawas_persen').val()
+        var karyawan_persen = $('#karyawan_persen').val() === undefined ? 8 : $('#karyawan_persen').val()
+        var pendidikan_persen = $('#pendidikan_persen').val() === undefined ? 7 : $('#pendidikan_persen').val()
+        var shu_pengurus_persen = $('input[name=shu_pengurus_persen]').val() === undefined ? 20 : $('input[name=shu_pengurus_persen]').val()
+        $('#pages-simulasi').load('{{ route("ajax.shu.simulasi") }}?tahun=' + tahun + '&alokasi_shu=' + alokasi_shu + '&shu_anggota_persen=' + shu_anggota_persen + '&pengurus_persen=' + pengurus_persen + '&pengawas_persen=' + pengawas_persen + '&karyawan_persen=' + karyawan_persen + '&pendidikan_persen=' + pendidikan_persen + '&shu_pengurus_persen=' + shu_pengurus_persen);
+
     }
 </script>
 @endsection
