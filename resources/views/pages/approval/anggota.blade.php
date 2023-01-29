@@ -122,30 +122,32 @@
         });
 
 
-        function tolak(uuid){
+        function approve(uuid){
             var url = '{{ route("approval.anggota.approve") }}';
             $('#aproval-form').attr('action', url);
             $('#id_anggota').val(uuid)
-            swal({
-                title: "Apakah Anda Yakin !",
-                text: "Ingin Menolak Data Ini ?.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#802d34",
-                confirmButtonText: "Ya, Tolak",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: false,
-                closeOnCancel: true
-            },
-            function (isConfirm) {
-                if (isConfirm) {
-                    $('#aproval-form').submit();
-                }
-            });
+            $('#aproval-form').submit();
+            // swal({
+            //     title: "Apakah Anda Yakin !",
+            //     text: "Ingin Menolak Data Ini ?.",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#802d34",
+            //     confirmButtonText: "Ya, Tolak",
+            //     cancelButtonText: "Cancel",
+            //     closeOnConfirm: false,
+            //     closeOnCancel: true
+            // },
+            // function (isConfirm) {
+            //     if (isConfirm) {
+            //         $('#aproval-form').submit();
+            //     }
+            // });
         }
-        function approve(id){
-            $('#id-anggota').val(id);
-            $('#modal-approve').modal('show')
+
+        function tolak(id) {
+            $("input[name='id_anggota']").val(id);
+            $('#modal-reject').modal('show')
         }
         $(document).ready(function(){
             $('#post-approve').parsley()
@@ -154,7 +156,7 @@
 @endsection
 
 @section('modal')
-<div id="modal-approve" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal-reject" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="{{ route('approval.anggota.approve') }}" method="POST" id="post-approve">

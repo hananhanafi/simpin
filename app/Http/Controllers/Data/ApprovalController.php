@@ -62,18 +62,22 @@ class ApprovalController extends Controller
         // return $anggota;
         if ($anggota) {
 
-
             if (isset($request->keterangan)) {
+                $anggota->status_anggota  = 5;
+                $anggota->update_by      = Auth::user()->id;
+                $anggota->update_date    = date('Y-m-d H:i:s');
+                $anggota->catatan           = $request->keterangan;
+                $anggota->save();
 
+                Session::flash('success', 'Data Anggota Telah Di Tolak');
 
-
-
+            } else {
+                
                 if ($anggota->status_anggota == 4) {
 
                     $anggota->status_anggota  = 5;
                     $anggota->terminate_by    = Auth::user()->id;
                     $anggota->update_by       = Auth::user()->id;
-                    $anggota->catatan           = $request->keterangan;
                     $anggota->terminate_date  = date('Y-m-d H:i:s');
                     $anggota->update_date     = date('Y-m-d H:i:s');
                     $anggota->save();
@@ -81,20 +85,12 @@ class ApprovalController extends Controller
                     Session::flash('success', 'Data Anggota Telah Di Terminasi');
                 } else {
                     $anggota->status_anggota    = 1;
-                    $anggota->catatan           = $request->keterangan;
                     $anggota->update_by         = Auth::user()->id;
                     $anggota->update_date       = date('Y-m-d H:i:s');
                     $anggota->save();
 
                     Session::flash('success', 'Data Anggota Telah Di Aktivasi');
                 }
-            } else {
-                $anggota->status_anggota  = 5;
-                $anggota->update_by      = Auth::user()->id;
-                $anggota->update_date    = date('Y-m-d H:i:s');
-                $anggota->save();
-
-                Session::flash('success', 'Data Anggota Telah Di Tolak');
             }
         } else {
             Session::flash('fail', 'Data Anggota Tidak Di Temukan');
