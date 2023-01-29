@@ -247,12 +247,13 @@ class Exports extends Controller
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
+        $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
 
         $sheet->getColumnDimension('A')->setWidth(20);
         $sheet->getColumnDimension('B')->setWidth(2);
-        $sheet->getColumnDimension('C')->setWidth(20);
+        $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(2);
-        $sheet->getColumnDimension('E')->setWidth(20);
+        $sheet->getColumnDimension('E')->setWidth(45);
         $sheet->getColumnDimension('F')->setWidth(20);
 
         // $sheet->mergeCells('A1:A2');
@@ -407,8 +408,8 @@ class Exports extends Controller
         $sheet->getRowDimension('2')->setRowHeight(10);
         $sheet->getStyle('B1:E1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->getStyle('B2:E2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
-        $sheet->getStyle('B1:E1')->getFont()->setSize(12);
-        $sheet->getStyle('B2:E2')->getFont()->setSize(12);
+        $sheet->getStyle('B1:E1')->getFont()->setSize(16);
+        $sheet->getStyle('B2:E2')->getFont()->setSize(16);
         $sheet->getStyle('A1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->getStyle('F1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
@@ -420,12 +421,12 @@ class Exports extends Controller
 
         $sheet->getRowDimension('20')->setRowHeight(30);
         $sheet->getStyle('A20:F20')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getRowDimension('18')->setRowHeight(100);
+        $sheet->getRowDimension('18')->setRowHeight(60);
         $sheet->getRowDimension('19')->setRowHeight(60);
         $sheet->getStyle('B18:E18')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
         $sheet->getStyle('B19:E19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle('B18:E18')->getFont()->setSize(12);
-        $sheet->getStyle('B19:E19')->getFont()->setSize(12);
+        $sheet->getStyle('B18:E18')->getFont()->setSize(16);
+        $sheet->getStyle('B19:E19')->getFont()->setSize(16);
         $sheet->getStyle('A19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->getStyle('F19')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
@@ -461,39 +462,63 @@ class Exports extends Controller
         $sheet->setCellValue('D31', ':');
 
         $sheet->setCellValue('A5', 'NOMOR SERTIFIKAT');
+        $sheet->getRowDimension('5')->setRowHeight(22);
         $sheet->setCellValue('A6', 'NIK/NOMOR ANGGOTA');
+        $sheet->getRowDimension('6')->setRowHeight(22);
         $sheet->setCellValue('A7', 'NAMA ANGGOTA');
+        $sheet->getRowDimension('7')->setRowHeight(32);
         $sheet->setCellValue('A8', 'JUMLAH NOMINAL');
+        $sheet->getRowDimension('8')->setRowHeight(22);
         $sheet->setCellValue('A9', 'TERBILANG');
+        $sheet->getRowDimension('9')->setRowHeight(32);
         $sheet->setCellValue('A10', 'JANGKA WAKTU');
+        $sheet->getRowDimension('10')->setRowHeight(22);
         $sheet->setCellValue('A11', 'BUNGA PER TAHUN');
+        $sheet->getRowDimension('11')->setRowHeight(22);
         if (strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false) {
             $sheet->setCellValue('A12', 'ANGSURAN PER BULAN');
         } else {
             $sheet->setCellValue('A12', 'JENIS BUNGA');
         }
+        $sheet->getRowDimension('12')->setRowHeight(32);
         // $sheet->setCellValue('A12', 'Jenis Simpanan');
         $sheet->setCellValue('A13', 'TANGGAL PENEMPATAN');
+        $sheet->getRowDimension('13')->setRowHeight(22);
         $sheet->setCellValue('A14', 'TANGGAL JATUH TEMPO');
+        $sheet->getRowDimension('14')->setRowHeight(22);
+        $sheet->getStyle('A5:F14')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+        $sheet->getStyle('A5:F16')->getFont()->setSize(12);
 
         $sheet->getStyle('A5:A14')->applyFromArray($boldStyle);
         $sheet->getStyle('A22:A31')->applyFromArray($boldStyle);
 
         $sheet->setCellValue('A22', 'NOMOR SERTIFIKAT');
+        $sheet->getRowDimension('22')->setRowHeight(22);
         $sheet->setCellValue('A23', 'NIK/NOMOR ANGGOTA');
+        $sheet->getRowDimension('23')->setRowHeight(22);
         $sheet->setCellValue('A24', 'NAMA ANGGOTA');
+        $sheet->getRowDimension('24')->setRowHeight(32);
         $sheet->setCellValue('A25', 'JUMLAH NOMINAL');
+        $sheet->getRowDimension('25')->setRowHeight(22);
         $sheet->setCellValue('A26', 'TERBILANG');
+        $sheet->getRowDimension('26')->setRowHeight(32);
         $sheet->setCellValue('A27', 'JANGKA WAKTU');
+        $sheet->getRowDimension('27')->setRowHeight(22);
         $sheet->setCellValue('A28', 'BUNGA PER TAHUN');
+        $sheet->getRowDimension('28')->setRowHeight(22);
         if (strpos(Str::slug($simpanan->produk->nama_produk), "simpanan-pasti") !== false) {
             $sheet->setCellValue('A29', 'ANGSURAN PER BULAN');
         } else {
             $sheet->setCellValue('A29', 'JENIS BUNGA');
         }
+        $sheet->getRowDimension('29')->setRowHeight(32);
         // $sheet->setCellValue('A29', 'Jenis Simpanan');
         $sheet->setCellValue('A30', 'TANGGAL PENEMPATAN');
+        $sheet->getRowDimension('30')->setRowHeight(22);
         $sheet->setCellValue('A31', 'TANGGAL JATUH TEMPO');
+        $sheet->getRowDimension('31')->setRowHeight(22);
+        $sheet->getStyle('A22:F31')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+        $sheet->getStyle('A22:F33')->getFont()->setSize(12);
 
         $sheet->setCellValue('A15', "KOPERASI KARYAWAN MULIA INDUSTRY");
         $sheet->getRowDimension('15')->setRowHeight(20);
