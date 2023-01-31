@@ -65,7 +65,8 @@
                             <th>Jumlah</th>
                             <th>Masa</th>
                             <th>Angsuran</th>
-                            <th>Tanggal Mulai</th>
+                            <th>Periode Awal</th>
+                            <th>Periode Akhir</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,6 +89,9 @@
                             </td>
                             <td>
                                 {{ date('M-Y', strtotime($pinjam->tanggal_mulai)) ?? '-' }}
+                            </td>
+                            <td>
+                                {{ date('M-Y', strtotime($pinjam->tanggal_akhir)) ?? '-' }}
                             </td>
                         </tr>
                         @php
@@ -122,6 +126,9 @@
                             </td>
                             <td>
                                 {{ date('M-Y', strtotime($sim->created_date)) ?? '-' }}
+                            </td>
+                            <td>
+                                {{ $sim->tgl_jatuh_tempo ?? '-' }}
                             </td>
                         </tr>
                         @php
@@ -153,6 +160,8 @@
                             <th>Jumlah</th>
                             <th>Masa</th>
                             <th>Angsuran</th>
+                            <th>Periode Awal</th>
+                            <th>Periode Akhir</th>
                         </tr>
                     </thead>
                     @php
@@ -166,6 +175,8 @@
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
+                            <td>{{ $rangeBulan[1]['bulan'] ?? '' }}</td>
+                            <td>{{ $rangeBulan[$bulan_baru ?? 1]['bulan'] ?? '' }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -183,7 +194,8 @@
                             <th>Jumlah</th>
                             <th>Masa</th>
                             <th>Angsuran</th>
-                            <th>Tanggal Mulai</th>
+                            <th>Periode Awal</th>
+                            <th>Periode Akhir</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -207,6 +219,9 @@
                             </td>
                             <td>
                                 {{ date('M-Y', strtotime($p->tanggal_mulai)) }}
+                            </td>
+                            <td>
+                                {{ date('M-Y', strtotime($p->tanggal_akhir)) }}
                             </td>
                         </tr>
                         @endforeach
@@ -238,6 +253,9 @@
                             <td>
                                 {{ date('M-Y', strtotime($sim->created_date)) ?? '-' }}
                             </td>
+                            <td>
+                                {{ ($sim->tgl_jatuh_tempo) ?? '-' }}
+                            </td>
                         </tr>
                         @php
                         $ntotalPinjaman += $pnj;
@@ -249,7 +267,8 @@
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>
-                            <td></td>
+                            <td>{{ $rangeBulan[1]['bulan'] ?? '' }}</td>
+                            <td>{{ $rangeBulan[$bulan_baru ?? 1]['bulan'] ?? '' }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -263,6 +282,7 @@
                             {{-- <td><strong>Rp. {{ $angsuran }}</strong></td> --}}
                             <td></td>
                             <td><strong>Rp. {{ number_format($ntotalAngsuran, 0, ',', '.') }}</strong></td>
+                            <td></td>
                             <td></td>
                         </tr>
                     </tfoot>

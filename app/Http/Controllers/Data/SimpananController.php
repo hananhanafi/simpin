@@ -8,6 +8,8 @@ use App\Exports\SimulasiSsb;
 use App\Models\Data\Anggota;
 use Illuminate\Http\Request;
 use App\Models\Data\Simpanan;
+use App\Models\Data\Pinjaman;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Master\Produk;
 use App\Exports\SimulasiSimpas;
 use App\Helpers\FunctionHelper;
@@ -78,12 +80,12 @@ class SimpananController extends Controller
                 $insertSimpanan->status_rekening    = 0;
                 $insertSimpanan->created_date       = date('Y-m-d H:i:s');
                 $insertSimpanan->created_by         = Auth::user()->id;
-                $insertSimpanan->save();
-
+                
 
                 if (isset($request->simulasi)) {
                     $simulasis = $request->simulasi;
                     if (isset($simulasis['ssb'])) {
+                        $insertSimpanan->tgl_jatuh_tempo = $simulasis['ssb']['blnThn'][$request->jumlah_bulan];
                         foreach ($simulasis['ssb'] as $jns => $simulasi) {
 
                             if (isset($simulasi['blnThn'])) {
@@ -122,6 +124,7 @@ class SimpananController extends Controller
                         }
                     }
                     if (isset($simulasis['simpas'])) {
+                        $insertSimpanan->tgl_jatuh_tempo = $simulasis['simpas']['blnThn'][$request->jumlah_bulan];
                         // foreach($simulasis['simpas'] as $jns => $simulasi){
                         // return $simulasis['simpas'];
                         if (isset($simulasis['simpas']['blnThn'])) {
@@ -159,6 +162,7 @@ class SimpananController extends Controller
                         // }
                     }
                 }
+                $insertSimpanan->save();
 
                 DB::commit();
                 Session::flash('success', 'Simpan Data Simpanan Baru Berhasil dengan nomor Rekening : <b>' . $no_rekening . '</b>');
@@ -316,6 +320,79 @@ class SimpananController extends Controller
         $bungaEfektif = abs($financial->RATE($request->bunga / 100, $request->bulan, $saldo));
         // return $bungaEfektif;
         return Excel::download(new SimulasiSsb($request->produk_id, $request->bunga, $request->bulan, $request->saldo, $bungaEfektif), 'SimulasiSSB.xlsx');
+    }
+
+    
+    public function simpananPengajuanPdf(Request $request)
+    {
+        // dd($request);
+        // return $request;
+        $gaji40 = 0;
+
+        if ($request->gaji) {
+            $gaji40 = str_replace('.', '', $request->gaji) * 0.4;
+            $request->gaji = str_replace('.', '', $request->gaji);
+        }
+        // return $gaji40;
+        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->whereNotIn('status_rekening',[0,5])->get();
+        $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->whereNotIn('status_rekening',[0,5])->get();
+
+        // $bunga = $request->bunga;
+        $jml_baru = str_replace('.', '', $request->jml_pengajuan_baru ?? 0);
+        $angsuran = str_replace('.', '', $request->angsuran ?? 0);
+        // $bunga_efektif = $request->bunga_efektif;
+        // $bulan = $request->bulan;
+        if ($request->no_anggota) {
+            $anggota = Anggota::where('no_anggota', $request->no_anggota)->firstOrFail();
+        } else {
+            $anggota = null;
+        }
+
+        // $startBulan = date('n');
+        // $startTahun = date('Y');
+        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $bulan);
+        // $produk = Produk::find($produk_id);
+        // $saldo = ($request->saldo == null ? 0 : $saldo);
+        // $bulan = ($request->bulan == null ? 1 : $bulan);
+        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, ($bulan + 1));
+        // $simpas     = FunctionHelper::hitungSimpas($bulan, $bunga_efektif, $bunga, $saldo);
+        $financial = new FinancialHelper;
+        // return view('pages.data.pinjaman.simulasi-plafon-table')
+        //     ->with('pinjaman', $pinjaman)
+        //     ->with('jml_baru', $jml_baru)
+        //     ->with('gaji40', $gaji40)
+        //     ->with('anggota', $anggota)
+        //     ->with('financial', $financial)
+        //     ->with('request', $request)
+        //     ->with('angsuran', $angsuran)
+        //     // ->with('produk', $produk)
+        //     // ->with('simpas', $simpas)
+        //     // ->with('rangeBulan', $rangeBulan)
+        //     // ->with('bunga_efektif', $bunga_efektif)
+        //     // ->with('bunga', $bunga);
+        // ;
+        
+        
+        $startBulan         = date('n');
+        $startTahun         = date('Y');
+        $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $request->bulan);
+
+        $pdf = PDF::loadView('pages.data.simpanan.simulasi-plafon-pdf', [
+            'pinjaman' => $pinjaman,
+            'simpanan' => $simpanan,
+            'jml_baru' => $jml_baru,
+            'gaji40' => $gaji40,
+            'anggota' => $anggota,
+            'financial' => $financial,
+            'request' => $request,
+            'angsuran' => $angsuran,
+            'rangeBulan' => $rangeBulan[0],
+        ]);
+
+
+        return $pdf->download('plafonpinjaman.pdf');
     }
 
     public function sertif()

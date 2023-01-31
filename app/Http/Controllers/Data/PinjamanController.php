@@ -127,6 +127,7 @@ class PinjamanController extends Controller
             ->with('produk', $produk)
             ->with('request', $request);
     }
+    
 
     public function store(Request $request)
     {
@@ -193,8 +194,12 @@ class PinjamanController extends Controller
             $newPinjaman->pelunasan_note    = '-';
             $newPinjaman->penutupan_note    = '-';
             $newPinjaman->tanggal_mulai     = date('Y-m-d H:i:s');
-            $newPinjaman->tanggal_akhir     = date('Y-m-d H:i:s');
-            $newPinjaman->created_date      = date('Y-m-d H:i:s');
+            
+            $startDate = date('Y-m-d H:i:s'); // select date in Y-m-d format
+            // dd(date('Y-m-d H:i:s'));
+            $endDate = FunctionHelper::endCycle($startDate, intVal($request->jumlah_bulan));
+            $newPinjaman->tanggal_akhir     = $startDate;
+            $newPinjaman->created_date      = $endDate;
             // $newPinjaman->update_date       = date('Y-m-d');
             // $newPinjaman->pencairan_date    = date('Y-m-d');
             // $newPinjaman->approv_date       = date('Y-m-d');
@@ -315,7 +320,10 @@ class PinjamanController extends Controller
             $request->gaji = str_replace('.', '', $request->gaji);
         }
         // return $gaji40;
-        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")->get();
+        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->whereNotIn('status_rekening',[0,5])->get();
+        $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->whereNotIn('status_rekening',[0,5])->get();
 
         // $bunga = $request->bunga;
         $jml_baru = str_replace('.', '', $request->jml_pengajuan_baru ?? 0);
@@ -351,15 +359,22 @@ class PinjamanController extends Controller
         //     // ->with('bunga_efektif', $bunga_efektif)
         //     // ->with('bunga', $bunga);
         // ;
+        
+        
+        $startBulan         = date('n');
+        $startTahun         = date('Y');
+        $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $request->bulan);
 
         $pdf = PDF::loadView('pages.data.pinjaman.simulasi-plafon-pdf', [
             'pinjaman' => $pinjaman,
+            'simpanan' => $simpanan,
             'jml_baru' => $jml_baru,
             'gaji40' => $gaji40,
             'anggota' => $anggota,
             'financial' => $financial,
             'request' => $request,
             'angsuran' => $angsuran,
+            'rangeBulan' => $rangeBulan[0],
         ]);
 
 

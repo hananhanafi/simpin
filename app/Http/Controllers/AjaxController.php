@@ -262,58 +262,9 @@ class AjaxController extends Controller
             $gajiAnggota = str_replace('.', '', $request->gaji);
         }
         // return $gaji40;
-        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")->get();
-        $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")->get();
-
-        // $bunga = $request->bunga;
-        $jml_baru = str_replace('.', '', $request->jml_pengajuan_baru ?? 0);
-        $angsuran = str_replace('.', '', $request->angsuran ?? 0);
-        // $bunga_efektif = $request->bunga_efektif;
-        // $bulan = $request->bulan;
-        if ($request->no_anggota) {
-            $anggota = Anggota::where('no_anggota', $request->no_anggota)->firstOrFail();
-        } else {
-            $anggota = null;
-        }
-
-        // $startBulan = date('n');
-        // $startTahun = date('Y');
-        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $bulan);
-        // $produk = Produk::find($produk_id);
-        // $saldo = ($request->saldo == null ? 0 : $saldo);
-        // $bulan = ($request->bulan == null ? 1 : $bulan);
-        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, ($bulan + 1));
-        // $simpas     = FunctionHelper::hitungSimpas($bulan, $bunga_efektif, $bunga, $saldo);
-        $financial = new FinancialHelper;
-        return view('pages.data.pinjaman.simulasi-plafon-table')
-            ->with('pinjaman', $pinjaman)
-            ->with('simpanan', $simpanan)
-            ->with('jml_baru', $jml_baru)
-            ->with('gaji40', $gaji40)
-            ->with('gajiAnggota', $gajiAnggota)
-            ->with('anggota', $anggota)
-            ->with('financial', $financial)
-            ->with('request', $request)
-            ->with('angsuran', $angsuran)
-            // ->with('produk', $produk)
-            // ->with('simpas', $simpas)
-            // ->with('rangeBulan', $rangeBulan)
-            // ->with('bunga_efektif', $bunga_efektif)
-            // ->with('bunga', $bunga);
-        ;
-    }
-
-    public function simpananPlafon(Request $request)
-    {
-        // return $request;
-        $gaji40 = 0;
-
-        if ($request->gaji) {
-            $gaji40 = str_replace('.', '', $request->gaji) * 0.4;
-            $gajiAnggota = str_replace('.', '', $request->gaji);
-        }
-        // return $gaji40;
-        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")->get();
+        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->whereNotIn('status_rekening',[0,5])->get();
+        // $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")->get();
         $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
         ->where('produk_id',4)
         ->whereNotIn('status_rekening',[0,5])
@@ -338,6 +289,74 @@ class AjaxController extends Controller
         // $bulan = ($request->bulan == null ? 1 : $bulan);
         // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, ($bulan + 1));
         // $simpas     = FunctionHelper::hitungSimpas($bulan, $bunga_efektif, $bunga, $saldo);
+        
+        $startBulan         = date('n');
+        $startTahun         = date('Y');
+        $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $request->bulan);
+        // dd($rangeBulan[0]);
+        $financial = new FinancialHelper;
+        return view('pages.data.pinjaman.simulasi-plafon-table')
+            ->with('pinjaman', $pinjaman)
+            ->with('simpanan', $simpanan)
+            ->with('jml_baru', $jml_baru)
+            ->with('gaji40', $gaji40)
+            ->with('gajiAnggota', $gajiAnggota)
+            ->with('anggota', $anggota)
+            ->with('financial', $financial)
+            ->with('request', $request)
+            ->with('angsuran', $angsuran)
+            ->with('rangeBulan', $rangeBulan[0])
+            // ->with('produk', $produk)
+            // ->with('simpas', $simpas)
+            // ->with('rangeBulan', $rangeBulan)
+            // ->with('bunga_efektif', $bunga_efektif)
+            // ->with('bunga', $bunga);
+        ;
+    }
+
+    public function simpananPlafon(Request $request)
+    {
+        // return $request;
+        $gaji40 = 0;
+
+        if ($request->gaji) {
+            $gaji40 = str_replace('.', '', $request->gaji) * 0.4;
+            $gajiAnggota = str_replace('.', '', $request->gaji);
+        }
+        // return $gaji40;
+        $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->whereNotIn('status_rekening',[0,5])->get();
+        
+        // $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")->get();
+        $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->where('produk_id',4)
+        ->whereNotIn('status_rekening',[0,5])
+        ->get();
+        // dd($simpanan);
+
+        // $bunga = $request->bunga;
+        $jml_baru = str_replace('.', '', $request->jml_pengajuan_baru ?? 0);
+        $angsuran = str_replace('.', '', $request->angsuran ?? 0);
+        // $bunga_efektif = $request->bunga_efektif;
+        // $bulan = $request->bulan;
+        if ($request->no_anggota) {
+            $anggota = Anggota::where('no_anggota', $request->no_anggota)->firstOrFail();
+        } else {
+            $anggota = null;
+        }
+
+        // $startBulan = date('n');
+        // $startTahun = date('Y');
+        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $bulan);
+        // $produk = Produk::find($produk_id);
+        // $saldo = ($request->saldo == null ? 0 : $saldo);
+        // $bulan = ($request->bulan == null ? 1 : $bulan);
+        // $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, ($bulan + 1));
+        // $simpas     = FunctionHelper::hitungSimpas($bulan, $bunga_efektif, $bunga, $saldo);
+        
+        $startBulan         = date('n');
+        $startTahun         = date('Y');
+        $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $request->bulan);
         $financial = new FinancialHelper;
         return view('pages.data.simpanan.simulasi-plafon-table')
             ->with('pinjaman', $pinjaman)
@@ -349,6 +368,7 @@ class AjaxController extends Controller
             ->with('financial', $financial)
             ->with('request', $request)
             ->with('angsuran', $angsuran)
+            ->with('rangeBulan', $rangeBulan[0])
             // ->with('produk', $produk)
             // ->with('simpas', $simpas)
             // ->with('rangeBulan', $rangeBulan)

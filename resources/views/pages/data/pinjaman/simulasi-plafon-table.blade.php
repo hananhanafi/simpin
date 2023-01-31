@@ -17,7 +17,7 @@
                         </tr>
                         <tr>
                             <th style="width:40%;padding:0.2rem">NIK</th>
-                            <th style="width:60%;padding:0.2rem">{{ $anggota->nik }}</th>
+                            <th style="width:60%;padding:0.2rem">{{ $anggota->no_anggota }}</th>
                         </tr>
                         <tr>
                             <th style="width:40%;padding:0.2rem">Masa Kerja</th>
@@ -65,7 +65,8 @@
                             <th>Jumlah</th>
                             <th>Masa</th>
                             <th>Angsuran</th>
-                            <th>Tanggal Mulai</th>
+                            <th>Periode Awal</th>
+                            <th>Periode Akhir</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,6 +89,9 @@
                             </td>
                             <td>
                                 {{ date('M-Y', strtotime($pinjam->tanggal_mulai)) ?? '-' }}
+                            </td>
+                            <td>
+                                {{ date('M-Y', strtotime($pinjam->tanggal_akhir)) ?? '-' }}
                             </td>
                         </tr>
                         @php
@@ -123,6 +127,9 @@
                             <td>
                                 {{ date('M-Y', strtotime($sim->created_date)) ?? '-' }}
                             </td>
+                            <td>
+                                {{ $sim->tgl_jatuh_tempo }}
+                            </td>
                         </tr>
                         @php
                         $totalPinjaman += $pnj;
@@ -134,6 +141,7 @@
                             <td><strong>Rp. {{ number_format($totalPinjaman, 0, ',', '.') }}</strong></td>
                             <td></td>
                             <td><strong>Rp. {{ number_format($totalAngsuran, 0, ',', '.') }}</strong></td>
+                            <td></td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -153,6 +161,8 @@
                             <th>Jumlah</th>
                             <th>Masa</th>
                             <th>Angsuran</th>
+                            <th>Periode Awal</th>
+                            <th>Periode Akhir</th>
                         </tr>
                     </thead>
                     @php
@@ -166,6 +176,8 @@
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
+                            <td>{{ $rangeBulan[1]['bulan'] ?? '' }}</td>
+                            <td>{{ $rangeBulan[$bulan_baru ?? 1]['bulan'] ?? '' }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -183,7 +195,8 @@
                             <th>Jumlah</th>
                             <th>Masa</th>
                             <th>Angsuran</th>
-                            <th>Tanggal Mulai</th>
+                            <th>Periode Awal</th>
+                            <th>Periode Akhir</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -208,6 +221,9 @@
                             <td>
                                 {{ date('M-Y', strtotime($p->tanggal_mulai)) }}
                             </td>
+                            <td>
+                                {{ date('M-Y', strtotime($p->tanggal_akhir)) }}
+                            </td>
                         </tr>
                         @endforeach
                         
@@ -238,6 +254,9 @@
                             <td>
                                 {{ date('M-Y', strtotime($sim->created_date)) ?? '-' }}
                             </td>
+                            <td>
+                                {{ $sim->tgl_jatuh_tempo }}
+                            </td>
                         </tr>
                         @php
                         $ntotalPinjaman += $pnj;
@@ -249,7 +268,8 @@
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>
-                            <td></td>
+                            <td>{{ $rangeBulan[1]['bulan'] ?? '' }}</td>
+                            <td>{{ $rangeBulan[$bulan_baru ?? 1]['bulan'] ?? '' }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -263,6 +283,7 @@
                             {{-- <td><strong>Rp. {{ $angsuran }}</strong></td> --}}
                             <td></td>
                             <td><strong>Rp. {{ number_format($ntotalAngsuran, 0, ',', '.') }}</strong></td>
+                            <td></td>
                             <td></td>
                         </tr>
                     </tfoot>

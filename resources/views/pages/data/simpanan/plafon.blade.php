@@ -77,20 +77,20 @@ Plafon Simpanan
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Pengajuan
                                     Baru<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="jml_pengajuan_baru" class="form-control" id="jml_pengajuan_baru" placeholder="Jumlah Pengajuan Baru" required data-parsley-required-message="Jumlah Pengajuan Harus Diisi" value="{{ number_format($request->saldo, '0', ',', '.') }}" onkeyup="pagePlafon(0,0)">
+                                    <input type="text" name="jml_pengajuan_baru" class="form-control" id="jml_pengajuan_baru" placeholder="Jumlah Pengajuan Baru" required data-parsley-required-message="Jumlah Pengajuan Harus Diisi" value="{{ number_format($request->saldo, '0', ',', '.') }}" onkeyup="pagePlafon(0,0)" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jumlah
                                     Bulan<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="bulan" class="form-control" id="bulan" placeholder="Jumlah Bulan" required data-parsley-required-message="Jumlah Bulan Harus Diisi" value="{{ $request->bulan }}">
+                                    <input type="text" name="bulan" class="form-control" id="bulan" placeholder="Jumlah Bulan" required data-parsley-required-message="Jumlah Bulan Harus Diisi" value="{{ $request->bulan }}" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Angsuran<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required data-parsley-required-message="Angsuran Harus Diisi" value="{{ number_format($request->angsuran, '0', ',', '.') }}" onkeyup="pagePlafon(0,0)">
+                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required data-parsley-required-message="Angsuran Harus Diisi" value="{{ number_format($request->angsuran, '0', ',', '.') }}" onkeyup="pagePlafon(0,0)" readonly>
                                 </div>
                             </div>
                             {{-- <div class="row mb-3" id="bunga-efektif">
@@ -274,7 +274,7 @@ Plafon Simpanan
         request += 'jml_pengajuan_baru=' + jml_pengajuan_baru + '&'
         request += 'angsuran=' + angsuran
 
-        window.open("{{ route('data.pinjaman.pengajuan.pdf') }}?" + request, '_blank');
+        window.open("{{ route('data.simpanan.pengajuan.pdf') }}?" + request, '_blank');
 
     }
 </script>

@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('simpanan-setor-simpan', 'SimpananController@simpan_setor')->name('simpanan.setor.transaksi');
         Route::post('simpanan-tarik-simpan', 'SimpananController@simpan_tarik')->name('simpanan.tarik.transaksi');
         Route::get('simpas-simulasi-xls', 'SimpananController@simpasSimulasiXls')->name('simpanan.simulasi-simpan.xls');
+        Route::get('simpanan-pengajuan-pdf', 'SimpananController@simpananPengajuanPdf')->name('simpanan.pengajuan.pdf');
         Route::get('ssb-simulasi-xls', 'SimpananController@ssbSimulasiXls')->name('simpanan.simulasi-ssb.xls');
         Route::get('simpanan-sertif', 'SimpananController@sertif')->name('simpanan.sertif');
         Route::get('simpanan-sertif-pdf/{id}', 'SimpananController@sertifPdf')->name('simpanan.sertif-pdf');
@@ -69,6 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('hrd', 'HrdController');
         Route::get('show', 'HrdController@show')->name('hrd.show');
         Route::get('upload', 'HrdController@upload')->name('hrd.upload');
+        // Route::post('payroll-import-xls', 'HrdController@importXlsProses')->name('payroll.importXlsProses');
         //Route::get('pinjaman-mutasi', 'HrdController@mutasi')->name('pinjaman.mutasi');
 
         Route::resource('shu', 'ShuController');

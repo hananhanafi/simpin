@@ -5,7 +5,7 @@
         @elseif ($request->gaji == '' || $request->gaji == null)
         <h2>Silahkan Isi Gaji Pokok Terlebih Dahulu</h2>
         @else
-        <h3>PLAFON PINJAMAN</h3>
+        <h3>PLAFON SIMPANAN</h3>
 
         <div class="row">
             <div class="col-12">
@@ -180,7 +180,7 @@
         </div>
 
         {{-- <hr> --}}
-        <h4>PINJAMAN BARU</h4>
+        <h4>SIMPANAN BARU</h4>
         <div class="row">
             <div class="col-12">
                 <table class="table" style="border-collapse: collapse;width:100%">
@@ -207,7 +207,7 @@
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Periode Akhir</td>
                         </tr>
                         <tr>
-                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Pinjaman Baru</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">SIMPANAN Baru</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $bulan_baru ?? 0 }} bulan</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
@@ -266,45 +266,8 @@
                             </td>
                         </tr>
                         @endforeach
-                        
-                        @foreach ($simpanan as $sim)
-                        @php
-                        $pnj = $sim->saldo_akhir;
-                        if($sim->produk_id == 3){
-                            if(count($sim->detail) > 0){
-                                $angs = $sim->detail[0]->saldo;
-                            }else {
-                                $angs = 0;
-                            }
-                        }else {
-                            if(count($sim->detailsimpas) > 0){
-                                $angs = $sim->detailsimpas[0]->tabungan_per_bulan;
-                            }else {
-                                $angs = 0;
-                            }
-                        }
-                        @endphp
                         <tr>
-                            <td>{{ $sim->jenis_simpanan }}</td>
-                            <td>Rp. {{ number_format($pnj, 0, ',', '.') }}</td>
-                            <td>{{ $sim->jangka_waktu ?? '-' }} bulan</td>
-                            <td>Rp.
-                                {{ number_format($angs ?? '0', 0, ',', '.') }}
-                            </td>
-                            <td>
-                                {{ date('M-Y', strtotime($sim->created_date)) ?? '-' }}
-                            </td>
-                            <td>
-                                {{ $sim->tgl_jatuh_tempo }}
-                            </td>
-                        </tr>
-                        @php
-                        $totalPinjaman += $pnj;
-                        $totalAngsuran += $angs;
-                        @endphp
-                        @endforeach
-                        <tr>
-                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Pinjaman Baru</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">SIMPANAN Baru</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $bulan_baru ?? 0 }} bulan</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>
