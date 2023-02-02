@@ -81,11 +81,20 @@ class SimpananController extends Controller
                 $insertSimpanan->created_date       = date('Y-m-d H:i:s');
                 $insertSimpanan->created_by         = Auth::user()->id;
                 
-
                 if (isset($request->simulasi)) {
                     $simulasis = $request->simulasi;
                     if (isset($simulasis['ssb'])) {
                         $insertSimpanan->tgl_jatuh_tempo = $simulasis['ssb']['blnThn'][$request->jumlah_bulan];
+                    }
+                    if (isset($simulasis['simpas'])) {
+                        $insertSimpanan->tgl_jatuh_tempo = $simulasis['simpas']['blnThn'][$request->jumlah_bulan];
+                    }
+                }
+                $insertSimpanan->save();
+                
+
+                if (isset($request->simulasi)) {
+                    if (isset($simulasis['ssb'])) {
                         foreach ($simulasis['ssb'] as $jns => $simulasi) {
 
                             if (isset($simulasi['blnThn'])) {
@@ -124,7 +133,6 @@ class SimpananController extends Controller
                         }
                     }
                     if (isset($simulasis['simpas'])) {
-                        $insertSimpanan->tgl_jatuh_tempo = $simulasis['simpas']['blnThn'][$request->jumlah_bulan];
                         // foreach($simulasis['simpas'] as $jns => $simulasi){
                         // return $simulasis['simpas'];
                         if (isset($simulasis['simpas']['blnThn'])) {
@@ -162,7 +170,6 @@ class SimpananController extends Controller
                         // }
                     }
                 }
-                $insertSimpanan->save();
 
                 DB::commit();
                 Session::flash('success', 'Simpan Data Simpanan Baru Berhasil dengan nomor Rekening : <b>' . $no_rekening . '</b>');
