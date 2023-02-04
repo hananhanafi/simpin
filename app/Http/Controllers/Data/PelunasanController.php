@@ -307,13 +307,13 @@ class PelunasanController extends Controller
             } else {
 
                 $noTrans = $request->no_anggota . "_" . $request->id_pinjaman . "_" . $request->type . "_" . $request->cicilan;
-                list($noRekening, $noAnggota)          = explode('__', $request->no_rekening);
+                // list($noRekening, $noAnggota)          = explode('__', $request->no_rekening);
                 $jumlahPinjaman = intVal(str_replace('.', '', $request->jumlah_pinjaman));
                 $sisaHutang = intVal(str_replace('.', '', $request->sisa_hutang));
                 $nilaiTrans = intVal(str_replace('.', '', $request->nilai_trans));
 
                 $newPembiayaanTransaksi = new PembiayaanTransaksi();
-                $newPembiayaanTransaksi->no_rekening = $noRekening;
+                $newPembiayaanTransaksi->no_rekening = $request->bank_norek;
                 $newPembiayaanTransaksi->tgl_trans = $request->tgl_trans;
                 $newPembiayaanTransaksi->no_trans = $noTrans;
                 $newPembiayaanTransaksi->kode_trans = $noTrans;
@@ -322,7 +322,7 @@ class PelunasanController extends Controller
                 $newPembiayaanTransaksi->nilai_trans = $nilaiTrans;
                 $newPembiayaanTransaksi->margin_trans = 0;
                 $newPembiayaanTransaksi->keterangan = "";
-                $newPembiayaanTransaksi->user_trans = $noAnggota;
+                $newPembiayaanTransaksi->user_trans = $request->no_anggota;
                 $newPembiayaanTransaksi->date_trans = $request->tgl_trans;
                 $newPembiayaanTransaksi->created_at = date('Y-m-d H:i:s');
                 $newPembiayaanTransaksi->id_pembiayaan = $request->id_pinjaman;

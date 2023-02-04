@@ -37,13 +37,13 @@ class Pinjaman extends Model
             return '-';
     }
 
-    function getAngsuranAttribute()
-    {
-        if (isset($this->detail->total_angsuran))
-            return $this->detail->total_angsuran;
-        else
-            return '-';
-    }
+    // function getAngsuranAttribute()
+    // {
+    //     if (isset($this->detail->total_angsuran))
+    //         return $this->detail->total_angsuran;
+    //     else
+    //         return '-';
+    // }
 
     function getXStatusAttribute()
     {

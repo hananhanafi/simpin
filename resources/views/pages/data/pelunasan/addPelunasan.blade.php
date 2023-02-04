@@ -51,6 +51,8 @@ Tambah Data Pelunasan
                                     Anggota<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
                                     <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Anggota" required data-parsley-required-message="Nama Anggota Harus Diisi" value="{{ $anggota->nama }}" readonly>
+                                    <input type="text" hidden name="bank_norek" class="form-control" id="bank_norek" placeholder="No Rekening" required data-parsley-required-message="No Rekening Harus Diisi" value="{{ $anggota->bank_norek }}" readonly>
+                                    <input type="text" hidden name="no_anggota" class="form-control" id="no_anggota" placeholder="No Anggota" required data-parsley-required-message="No Anggota Harus Diisi" value="{{ $anggota->no_anggota }}" readonly>
                                 </div>
                             </div>
 
@@ -58,28 +60,28 @@ Tambah Data Pelunasan
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jumlah
                                     Pinjaman<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="total_hutang" class="form-control" id="total_hutang" placeholder="Jumlah Pinjaman" required data-parsley-required-message="Jumlah Pinjaman Harus Diisi" value="{{ number_format($pinjamanDetail->jml_pinjaman, '0', ',', '.') }}" onkeyup="pageSimulasi(0,0)" readonly>
+                                    <input type="text" name="total_hutang" class="form-control" id="total_hutang" placeholder="Jumlah Pinjaman" required data-parsley-required-message="Jumlah Pinjaman Harus Diisi" value="{{ number_format($pinjamanDetail->jml_pinjaman, '0', ',', '.') }}" readonly>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Jangka Waktu (Bulan)<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="jangka_waktu" class="form-control" id="jangka_waktu" placeholder="Jangka Waktu" required value="{{ $pinjamanDetail->jangka_waktu }}" onkeyup="pageSimulasi(0,0)" readonly>
+                                    <input type="text" name="jangka_waktu" class="form-control" id="jangka_waktu" placeholder="Jangka Waktu" required value="{{ $pinjamanDetail->jangka_waktu }}" readonly>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Sisa Hutang<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="sisa_hutang" class="form-control" id="sisa_hutang" placeholder="Sisa Hutang" required value="{{ number_format($pinjamanDetail->sisa_hutangs, '0', ',', '.') }}" onkeyup="pageSimulasi(0,0)" readonly>
+                                    <input type="text" name="sisa_hutang" class="form-control" id="sisa_hutang" placeholder="Sisa Hutang" required value="{{ number_format($pinjamanDetail->sisa_hutangs, '0', ',', '.') }}" readonly>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Angsuran<small class="text-danger">*</small></label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required value="{{ number_format(floatval($pinjamanDetail->angsuran), '0', ',', '.') }}" onkeyup="pageSimulasi(0,0)" readonly>
+                                    <input type="text" name="angsuran" class="form-control" id="angsuran" placeholder="Angsuran" required value="{{ number_format(floatval($pinjamanDetail->angsuran), '0', ',', '.') }}" readonly>
                                 </div>
                             </div>
                             {{-- <div class="row mb-3">
@@ -187,14 +189,14 @@ Tambah Data Pelunasan
                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Bunga
                         Efektif(%)<small class="text-danger">*</small></label>
                     <div class="col-sm-7">
-                        <input type="text" name="pinjaman[jumlah_bunga_efektif]" readonly class="form-control" id="jumlah_bunga_efektif" placeholder=" Bunga Efektif(%)" value="{{ old('jumlah_bunga_efektif') }}" onkeyup="pageSimulasiEfektif(this.value)">
+                        <input type="text" name="pinjaman[jumlah_bunga_efektif]" readonly class="form-control" id="jumlah_bunga_efektif" placeholder=" Bunga Efektif(%)" value="{{ old('jumlah_bunga_efektif') }}" >
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Margin
                         Flat(%)<small class="text-danger">*</small></label>
                     <div class="col-sm-7">
-                        <input type="text" name="pinjaman[jumlah_bunga]" class="form-control" id="jumlah_bunga" readonly placeholder="Margin Flat (%)" required data-parsley-required-message="Jumlah Bunga Harus Diisi" value="{{ old('jumlah_bunga') }}" onkeyup="pageSimulasi(0,this.value)">
+                        <input type="text" name="pinjaman[jumlah_bunga]" class="form-control" id="jumlah_bunga" readonly placeholder="Margin Flat (%)" required data-parsley-required-message="Jumlah Bunga Harus Diisi" value="{{ old('jumlah_bunga') }}" >
                     </div>
                 </div>
 
@@ -212,30 +214,30 @@ Tambah Data Pelunasan
                     </div>
                 </div>
                 @else
-                <div class="row mb-3">
+                {{-- <div class="row mb-3">
                     <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">No Rekening<small class="text-danger">*</small></label>
                     <div class="col-sm-7">
                         <select class="form-control select2" style="width: 100%;" name="no_rekening" id="no_rekening" required data-parsley-required-message="No Rekening Harus Diisi" onchange="pilihAnggota(this.value)">
                             <option value="">-Pilih Nomor Rekening-</option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row mb-3">
-                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Pelunasan</label>
+                    {{-- <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Pelunasan</label> --}}
                     <div class="col-sm-7">
-                        <input type="date" name="tgl_trans" class="form-control" id="tgl_trans" placeholder="Tanggal Pencairan" required data-parsley-required-message="Tanggal Pelunasan Harus Diisi" value="{{ old('tgl_trans') }}">
+                        <input type="date" hidden name="tgl_trans" class="form-control" id="tgl_trans" placeholder="Tanggal Pencairan" required data-parsley-required-message="Tanggal Pelunasan Harus Diisi" value="{{ date('Y-m-d') }}">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Cicilan Ke-<small class="text-danger">*</small></label>
+                    {{-- <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Cicilan Ke-<small class="text-danger">*</small></label> --}}
                     <div class="col-sm-7">
-                        <input type="number" name="cicilan" class="form-control" id="cicilan" placeholder="Masukkan cicilan ke-" required data-parsley-required-message="Cicilan Harus Diisi" value="{{ $cicilan }}">
+                        <input type="number" hidden name="cicilan" class="form-control" id="cicilan" placeholder="Masukkan cicilan ke-" required data-parsley-required-message="Cicilan Harus Diisi" value="{{ $cicilan }}">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Total Pelunasan<small class="text-danger">*</small></label>
+                    {{-- <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Total Pelunasan<small class="text-danger">*</small></label> --}}
                     <div class="col-sm-7">
-                        <input type="text" name="nilai_trans" class="form-control" id="nilai_trans" placeholder="Total Pelunasan" required data-parsley-required-message="Total Pelunasan Harus Diisi" value="{{ number_format(floatval($pinjamanDetail->angsuran), '0', ',', '.') }}">
+                        <input type="text" hidden name="nilai_trans" class="form-control" id="nilai_trans" placeholder="Total Pelunasan" required data-parsley-required-message="Total Pelunasan Harus Diisi" value="{{ number_format(floatval($pinjamanDetail->angsuran), '0', ',', '.') }}">
                     </div>
                 </div>
                 @endif
@@ -349,57 +351,6 @@ Tambah Data Pelunasan
     //     $("input[name='nilai_trans']").val(numberToCurrency(totalPelunasan))
     // }
 
-    function pageSimulasi(bulan = 0, bunga = 0) {
-
-
-        if (bulan == 0) {
-            var bulan = $('#jumlah_bulan').val()
-        }
-        if (bunga == 0) {
-            var bunga = $('#jumlah_bunga').val()
-        }
-
-        var produk_id = $('#produk_id').val()
-        var value = produk_id.split('__')
-
-        // var get_no_anggota = $('#no_anggota').val()
-        // var no_anggota = get_no_anggota.split('__')
-        var no_anggota = $('#no_anggota').val()
-
-
-        var id_produk = value[0] + '__' + value[1]
-
-        var efektif = bungaEfektifRate(bunga, bulan, 1)
-        $('#jumlah_bunga_efektif').val(efektif.toFixed(6))
-
-        var saldo = $('#jumlah_pinjaman').val()
-        var jenis_ssb = $('#jenis_ssb').val()
-
-        $('#pages-simulasi').load("{{ route('ajax.pinjaman.pengajuan') }}?produk_id=" + id_produk + '&bunga=' + bunga +
-            '&bulan=' + bulan + '&saldo=' + saldo + '&bunga_efektif=' + efektif + '&no_anggota=' + no_anggota)
-    }
-
-    function pageSimulasiEfektif(val) {
-
-        var bulan = $('#jumlah_bulan').val()
-        var bunga = $('#jumlah_bunga').val()
-
-        var produk_id = $('#produk_id').val()
-        var value = produk_id.split('__')
-
-        var id_produk = value[0] + '__' + value[1]
-
-        var jumlah_bunga_efektif = val
-        var saldo = $('#jumlah_pinjaman').val()
-        var jenis_ssb = $('#jenis_ssb').val()
-
-        var bPA = bungaPA(val, bulan, 1);
-        $('#jumlah_bunga').val(bPA.toFixed(6))
-        $('#pages-simulasi').load("{{ route('ajax.pinjaman.simulasi') }}?produk_id=" + id_produk + ' & bunga = ' + bunga +
-            '&bulan=' + bulan + '&saldo=' + saldo + '&bunga_efektif=' + jumlah_bunga_efektif + '&jenis-ssb=' +
-            jenis_ssb);
-        // $('#pages-simulasi').load('{{ route('ajax.pinjaman.simulasi') }}?produk_id='+id_produk+'&bunga='+bunga+'&bulan='+bulan+'&saldo='+saldo+'&bunga_efektif='+jumlah_bunga_efektif+'&jenis-ssb='+jenis_ssb);
-    }
 
     function pilihAnggota(val) {
         // var get = val.split('__')

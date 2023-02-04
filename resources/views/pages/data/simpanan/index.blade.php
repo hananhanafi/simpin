@@ -231,7 +231,7 @@ Data Simpanan
                 <div class="modal-body">
                     <div class="form-group mb-2">
                         <h6 class="card-title">Tanggal Penutupan</h6>
-                        <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ date('Y-m-d') }}">
+                        <input type="date" class="form-control" name="tgl_penutupan" id="tgl_penutupan" value="{{ date('Y-m-d') }}">
                     </div>
                     <div class="form-group mb-2">
                         <h6 class="card-title">Nomor Rekening</h6>

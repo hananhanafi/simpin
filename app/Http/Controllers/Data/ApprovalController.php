@@ -122,7 +122,10 @@ class ApprovalController extends Controller
                 Session::flash('success', 'Data Simpanan Tidak Di Approve');
             } else {
                 if ($simpanan->status_rekening == 4) {
+                    $startDate = date_create($simpanan->created_date);
+                    $dayStartDate = date_format($startDate,"j");
                     $date = date_create($simpanan->delete_date);
+                    $day = date_format($date,"j");
                     $year = date_format($date,"Y");
                     $month = date_format($date,"n");
                     $lastSimpanan = null;
@@ -134,7 +137,12 @@ class ApprovalController extends Controller
                     if($year < $lastSimpanan->tahun) {
                         $simpanan->status_rekening   = 6;
                     }else {
-                        if($month < $lastSimpanan->bulan) {
+                        if($month <= $lastSimpanan->bulan) {
+                            if($day < $dayStartDate) {
+                                $simpanan->status_rekening   = 6;
+                            }else {
+                                $simpanan->status_rekening   = 5;
+                            }
                             $simpanan->status_rekening   = 6;
                         }else {
                             $simpanan->status_rekening   = 5;

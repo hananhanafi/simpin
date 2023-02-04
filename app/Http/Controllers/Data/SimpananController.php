@@ -399,7 +399,7 @@ class SimpananController extends Controller
         ]);
 
 
-        return $pdf->download('plafonpinjaman.pdf');
+        return $pdf->download('plafonsimpanan.pdf');
     }
 
     public function sertif()
