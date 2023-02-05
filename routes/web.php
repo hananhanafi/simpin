@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('hrd', 'HrdController');
         Route::get('show', 'HrdController@show')->name('hrd.show');
         Route::get('upload', 'HrdController@upload')->name('hrd.upload');
-        // Route::post('payroll-import-xls', 'HrdController@importXlsProses')->name('payroll.importXlsProses');
+        Route::post('payroll-import-xls', 'HrdController@importXlsProses')->name('payroll.importXlsProses');
         //Route::get('pinjaman-mutasi', 'HrdController@mutasi')->name('pinjaman.mutasi');
 
         Route::resource('shu', 'ShuController');

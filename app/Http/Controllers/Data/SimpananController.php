@@ -76,7 +76,6 @@ class SimpananController extends Controller
                 $insertSimpanan->jumlah_bunga_efektif = $request->jumlah_bunga_efektif;
                 $insertSimpanan->saldo_akhir        = str_replace('.', '', $request->saldo_minimal);
                 $insertSimpanan->jangka_waktu       = $request->jumlah_bulan;
-                $insertSimpanan->setoran_per_bln    = 0;
                 $insertSimpanan->status_rekening    = 0;
                 $insertSimpanan->created_date       = date('Y-m-d H:i:s');
                 $insertSimpanan->created_by         = Auth::user()->id;
@@ -84,10 +83,12 @@ class SimpananController extends Controller
                 if (isset($request->simulasi)) {
                     $simulasis = $request->simulasi;
                     if (isset($simulasis['ssb'])) {
-                        $insertSimpanan->tgl_jatuh_tempo = $simulasis['ssb']['blnThn'][$request->jumlah_bulan];
+                        $insertSimpanan->tgl_jatuh_tempo = $simulasis['ssb'][$request->jenis_ssb]['blnThn'][$request->jumlah_bulan];
+                        $insertSimpanan->setoran_per_bln    = $simulasis['ssb'][$request->jenis_ssb]['saldo'][$request->jumlah_bulan];
                     }
                     if (isset($simulasis['simpas'])) {
                         $insertSimpanan->tgl_jatuh_tempo = $simulasis['simpas']['blnThn'][$request->jumlah_bulan];
+                        $insertSimpanan->setoran_per_bln = $simulasis['simpas']['tabunganPerBulan'][$request->jumlah_bulan];
                     }
                 }
                 $insertSimpanan->save();

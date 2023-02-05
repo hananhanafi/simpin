@@ -163,11 +163,11 @@ Data Pinjaman
             },
             {
                 "searchable": false,
-                "targets": [0, 4]
+                "targets": [0, 4, 5, 6, 7, 8, 9, 10]
             },
             {
                 "orderable": false,
-                "targets": [0, 4]
+                "targets": [0, 4, 5, 6, 7, 8, 9, 10]
             }
         ],
     });
