@@ -22,6 +22,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Data\SimpananSsbDetail;
 use Illuminate\Support\Facades\Session;
 use App\Models\Data\SimpananSimpasDetail;
+use App\Models\Data\SimpananTransaksi;
 use App\Http\Requests\Data\RequestSimpanan;
 
 class SimpananController extends Controller
@@ -190,11 +191,15 @@ class SimpananController extends Controller
 
     public function show($id)
     {
+        $pelunasan = SimpananTransaksi::selectRaw('*')
+            ->where('t_simpanan_transaksi.id_simpanan', $id)
+            ->get();
 
         // return $simpanan;
         $simpanan     = Simpanan::where('id', $id)->with(['produk', 'anggota', 'detail', 'detailsimpas'])->first();
         return view('pages.data.simpanan.show')
             ->with('id', $id)
+            ->with('pelunasan', $pelunasan)
             ->with('simpanan', $simpanan);
     }
 

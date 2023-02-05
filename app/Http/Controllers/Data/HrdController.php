@@ -129,7 +129,7 @@ class HrdController extends Controller
                             $newPembiayaanTransaksi->cicilan_ke = $cicilanKe;
                             $newPembiayaanTransaksi->nilai_trans = $pinjaman['angsuran'];
                             $newPembiayaanTransaksi->margin_trans = 0;
-                            $newPembiayaanTransaksi->keterangan = "";
+                            $newPembiayaanTransaksi->keterangan = "PAYROLL";
                             $newPembiayaanTransaksi->user_trans = $anggota->no_anggota;
                             $newPembiayaanTransaksi->date_trans = date('Y-m-d H:i:s');
                             $newPembiayaanTransaksi->created_at = date('Y-m-d H:i:s');
@@ -157,7 +157,7 @@ class HrdController extends Controller
                             $newSimpananTransaksi->no_trans = $noTrans;
                             $newSimpananTransaksi->kode_trans = strval($cicilanKe);
                             $newSimpananTransaksi->nilai_trans = $simpanan['setoran_per_bln'];
-                            $newSimpananTransaksi->keterangan = "";
+                            $newSimpananTransaksi->keterangan = "PAYROLL";
                             $newSimpananTransaksi->user_trans = $anggota->no_anggota;
                             $newSimpananTransaksi->date_trans = date('Y-m-d H:i:s');
                             $newSimpananTransaksi->created_at = date('Y-m-d H:i:s');

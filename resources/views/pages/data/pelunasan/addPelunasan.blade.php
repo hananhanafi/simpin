@@ -279,7 +279,7 @@ Tambah Data Pelunasan
                 <td>{{ $item->no_rekening }}</td>
                 <td> {{ $item->tipe_trans == 2 ? 'Pelunasan Dipercepat' : ($item->tipe_trans == 3 ? 'Pelunasan Topup' : 'Pelunasan Sesuai Cicilan') }}</td>
                 <td>{{ $item->cicilan_ke }}</td>
-                <td>{{ $item->nilai_trans }}</td>
+                <td>Rp.{{ number_format($item->nilai_trans, 0, ',', '.') }}</td>
                 <td>{{ $item->tgl_trans }}</td>
             </tr>
             @php

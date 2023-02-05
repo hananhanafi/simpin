@@ -327,14 +327,16 @@ Detail Data Simpanan
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>123123</td>
-                <td> qweqwe</td>
-                <td>poi</td>
-                <td>qwe</td>
-                <td>asd</td>
-            </tr>
+            @foreach ($pelunasan as $no => $item)
+                <tr>
+                    <td>{{ ($no+1) }}</td>
+                    <td>{{ $item->no_rekening }}</td>
+                    <td> {{ $item->keterangan }}</td>
+                    <td>{{ ($no+1) }}</td>
+                    <td>Rp. {{ number_format($item->nilai_trans, 0, ',', '.') }}</td>
+                    <td>{{ $item->tgl_trans }}</td>
+                </tr>
+            @endforeach
 
         </tbody>
     </table>
