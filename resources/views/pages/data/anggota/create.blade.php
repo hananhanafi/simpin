@@ -144,8 +144,6 @@ Tambah Data Anggota
                                     <input type="date" name="masukkerja_date" class="form-control" id="masukkerja_date" placeholder="Tanggal Lahir" value="{{ old('masukkerja_date') }}">
                                 </div>
                             </div>
-                        </div>
-                        <div class="pb-3 col-md-6">
 
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Email</label>
@@ -153,18 +151,67 @@ Tambah Data Anggota
                                     <input type="text" name="email" class="form-control" id="email" placeholder="Masukan Email" value="{{ old('email') }}">
                                 </div>
                             </div>
+
+
+
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Telepon</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="telepon" class="form-control" id="telepon" placeholder="Masukan Telepon" value="{{ old('telepon') }}">
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Telepon Ext</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="telepon_ext" class="form-control" id="telepon_ext" placeholder="Masukan Telepon Ext" value="{{ old('telepon_ext') }}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="pb-3 col-md-6">
+
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Nama Suami / Istri</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="nama_keluarga" class="form-control" id="nama_keluarga" placeholder="Masukan Nama Suami / Istri" value="{{ old('nama_keluarga') }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tempat Lahir Suami / Istri</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="tmp_lahir_keluarga" class="form-control" id="tmp_lahir_keluargan" placeholder="Tempat Lahir Suami / Istri" value="{{ old('tmp_lahir_keluarga') }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Lahir Suami / Istri</label>
+                                <div class="col-sm-8">
+                                    <input type="date" name="tgl_lahir_keluarga" class="form-control" id="tgl_lahir_keluarga" placeholder="Tanggal Lahir Suami / Istri" value="{{ old('tgl_lahir_keluarga') }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Nama Anak</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="nama_anak" class="form-control" id="nama_anak" placeholder="Masukan Nama Anak" value="{{ old('nama_anak') }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tempat Lahir Anak</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="tmp_lahir_anak" class="form-control" id="tmp_lahir_anak" placeholder="Tempat Lahir Anak" value="{{ old('tmp_lahir_anak') }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Tanggal Lahir Anak</label>
+                                <div class="col-sm-8">
+                                    <input type="date" name="tgl_lahir_anak" class="form-control" id="tgl_lahir_anak" placeholder="Tanggal Lahir Anak" value="{{ old('tgl_lahir_anak') }}">
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Departemen</label>
                                 <div class="col-sm-8">

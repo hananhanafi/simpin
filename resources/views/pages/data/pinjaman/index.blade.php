@@ -51,7 +51,7 @@ Data Pinjaman
                             <th class="text-center">Angsuran</th>
                             <th class="text-center">Jangka Waktu</th>
                             <th class="text-center">Saldo</th>
-                            
+
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
                         </tr>

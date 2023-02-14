@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use Terbilang;
+use Riskihajar\Terbilang\Facades\Terbilang;
 use App\Exports\ExportArray;
 use App\Exports\ExportArrayProduk;
 use App\Exports\ExportArrayPotongan;
@@ -144,21 +144,21 @@ class Exports extends Controller
                         ->with(['detailSimpas' => function ($q2) use ($request) {
                             $q2
                                 ->whereNull('deleted_at')
-                                ->where('tahun',$request->tahun)
-                                ->where('bulan',$request->bulan);
+                                ->where('tahun', $request->tahun)
+                                ->where('bulan', $request->bulan);
                         }])
                         ->where([
                             ['produk_id', '=', 4],
                             ['status_rekening', '=', 1]
                         ]);
                 },
-                'pinjamanAnggota' => function ($q) use ($request){
+                'pinjamanAnggota' => function ($q) use ($request) {
                     $q
-                        ->with(['detail' => function ($q2) use($request){
+                        ->with(['detail' => function ($q2) use ($request) {
                             $q2
                                 ->whereNull('deleted_at')
-                                ->where('tahun',$request->tahun)
-                                ->where('bulan',$request->bulan);
+                                ->where('tahun', $request->tahun)
+                                ->where('bulan', $request->bulan);
                         }])
                         ->whereIn('status_rekening', [2, 3])
                         ->where('sisa_hutangs', '>', '0');
@@ -175,7 +175,7 @@ class Exports extends Controller
             if (count($a->simpananAnggota) > 0) {
                 $simpananArr = json_decode(json_encode($a->simpananAnggota), true);
                 $totalAngsuranSimpas = 0;
-                if (count($simpananArr)>0 && count($simpananArr[0]['detail_simpas']) > 0) {
+                if (count($simpananArr) > 0 && count($simpananArr[0]['detail_simpas']) > 0) {
                     $detailsimpananArr = array_map(function ($val) {
                         return $val['tabungan_per_bulan'];
                     }, $simpananArr[0]['detail_simpas']);
@@ -188,7 +188,7 @@ class Exports extends Controller
                 $pinjamanArr = json_decode(json_encode($a->pinjamanAnggota), true);
                 // $totalAngsuranPinjaman = array_sum(array_column($pinjamanArr, 'angsuran'));
                 $totalAngsuranPinjaman = 0;
-                if (count($pinjamanArr)>0 && count($pinjamanArr[0]['detail']) > 0) {
+                if (count($pinjamanArr) > 0 && count($pinjamanArr[0]['detail']) > 0) {
                     $detailPinjamanArr = array_map(function ($val) {
                         return $val['total_angsuran'];
                     }, $pinjamanArr[0]['detail']);
@@ -396,7 +396,7 @@ class Exports extends Controller
         $drawingf18->setOffsetX(10);
         $drawingf18->setWorksheet($spreadsheet->getActiveSheet());
 
-        $sheet->setCellValue('B1', "SERTIFIKAT\n".$simpanan->produk->nama_produk);
+        $sheet->setCellValue('B1', "SERTIFIKAT\n" . $simpanan->produk->nama_produk);
         // $sheet->setCellValue('A2', "Simpanan Sukarela Berjangka");
         // $sheet->setCellValue('B2',  $simpanan->produk->nama_produk);
 
@@ -414,7 +414,7 @@ class Exports extends Controller
         $sheet->getStyle('F1')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
         // $sheet->setCellValue('B18', "SERTIFIKAT");
-        $sheet->setCellValue('B19', "SERTIFIKAT\n".$simpanan->produk->nama_produk);
+        $sheet->setCellValue('B19', "SERTIFIKAT\n" . $simpanan->produk->nama_produk);
         // $sheet->setCellValue('A19', "Simpanan Sukarela Berjangka");
         // $sheet->setCellValue('B19', $simpanan->produk->nama_produk);
         $sheet->setCellValue('A20', "COPY");

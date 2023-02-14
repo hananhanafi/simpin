@@ -452,12 +452,12 @@ class DatatableController extends Controller
             //     ->whereIn('t_pembiayaan.status_rekening', [0, 4])
             //     ->where('t_anggota.nama', '!=', '')
             //     ->orderBy('t_anggota.nama');
-                
+
             $pinjaman = Pinjaman::
-            // leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
-            // ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
-            with(['jenispinjaman', 'anggota','detail'])
-            ->whereIn('status_rekening', [0, 4]);
+                // leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
+                // ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
+                with(['jenispinjaman', 'anggota', 'detail'])
+                ->whereIn('status_rekening', [0, 4]);
             // ->where('t_anggota.nama', '!=', '')
             // ->orderBy('t_anggota.nama');
         } else {
@@ -477,9 +477,9 @@ class DatatableController extends Controller
                 // leftJoin('t_anggota', 't_anggota.no_anggota', '=', 't_pembiayaan.no_anggota')
                 // ->leftJoin('p_sumberdana', 'p_sumberdana.id', '=', 't_pembiayaan.sumber_dana')
                 // ->leftJoin('p_departemen', 'p_departemen.id', '=', 't_anggota.departement_id')
-                with(['jenispinjaman', 'anggota','detail']);
-                // ->where('t_anggota.nama', '!=', '')
-                // ->orderBy('t_anggota.nama');
+                with(['jenispinjaman', 'anggota', 'detail']);
+            // ->where('t_anggota.nama', '!=', '')
+            // ->orderBy('t_anggota.nama');
         }
         // dd($pinjaman->get());
         // return $pinjaman->get();
@@ -788,26 +788,26 @@ class DatatableController extends Controller
         // $anggota = Anggota::orderBy('no_anggota');
         $anggota = Anggota::select(DB::raw('*'))
             ->with([
-                'simpananAnggota' => function ($q) use($request) {
+                'simpananAnggota' => function ($q) use ($request) {
                     $q
-                        ->with(['detailSimpas' => function ($q2) use($request){
+                        ->with(['detailSimpas' => function ($q2) use ($request) {
                             $q2
                                 ->whereNull('deleted_at')
-                                ->where('tahun',$request->tahun)
-                                ->where('bulan',$request->bulan);
+                                ->where('tahun', $request->tahun)
+                                ->where('bulan', $request->bulan);
                         }])
                         ->where([
                             ['produk_id', '=', 4],
                             ['status_rekening', '=', 1]
                         ]);
                 },
-                'pinjamanAnggota' => function ($q) use($request) {
+                'pinjamanAnggota' => function ($q) use ($request) {
                     $q
-                        ->with(['detail' => function ($q2) use($request){
+                        ->with(['detail' => function ($q2) use ($request) {
                             $q2
                                 ->whereNull('deleted_at')
-                                ->where('tahun',$request->tahun)
-                                ->where('bulan',$request->bulan);
+                                ->where('tahun', $request->tahun)
+                                ->where('bulan', $request->bulan);
                         }])
                         ->whereIn('status_rekening', [2, 3])
                         ->where('sisa_hutangs', '>', '0');
@@ -834,7 +834,7 @@ class DatatableController extends Controller
             ->editColumn('total_potongan', function ($row) {
                 $simpananArr = json_decode(json_encode($row->simpananAnggota), true);
                 $totalAngsuranSimpas = 0;
-                if (count($simpananArr)>0 && count($simpananArr[0]['detail_simpas']) > 0) {
+                if (count($simpananArr) > 0 && count($simpananArr[0]['detail_simpas']) > 0) {
                     $detailsimpananArr = array_map(function ($val) {
                         return $val['tabungan_per_bulan'];
                     }, $simpananArr[0]['detail_simpas']);
@@ -842,7 +842,7 @@ class DatatableController extends Controller
                 }
                 $pinjamanArr = json_decode(json_encode($row->pinjamanAnggota), true);
                 $totalAngsuran = 0;
-                if (count($pinjamanArr)>0 && count($pinjamanArr[0]['detail']) > 0) {
+                if (count($pinjamanArr) > 0 && count($pinjamanArr[0]['detail']) > 0) {
                     $detailPinjamanArr = array_map(function ($val) {
                         return $val['total_angsuran'];
                     }, $pinjamanArr[0]['detail']);
@@ -857,7 +857,7 @@ class DatatableController extends Controller
                 } else {
                     $pinjamanArr = json_decode(json_encode($row->pinjamanAnggota), true);
                     $totalAngsuran = 0;
-                    if (count($pinjamanArr)>0 && count($pinjamanArr[0]['detail']) > 0) {
+                    if (count($pinjamanArr) > 0 && count($pinjamanArr[0]['detail']) > 0) {
                         $detailPinjamanArr = array_map(function ($val) {
                             return $val['total_angsuran'];
                         }, $pinjamanArr[0]['detail']);
@@ -876,7 +876,7 @@ class DatatableController extends Controller
                     // return '<b>' . $row->simpananAnggota . '</b>';
                     $simpananArr = json_decode(json_encode($row->simpananAnggota), true);
                     $totalAngsuranSimpas = 0;
-                    if (count($simpananArr)>0 && count($simpananArr[0]['detail_simpas']) > 0) {
+                    if (count($simpananArr) > 0 && count($simpananArr[0]['detail_simpas']) > 0) {
                         $detailsimpananArr = array_map(function ($val) {
                             return $val['tabungan_per_bulan'];
                         }, $simpananArr[0]['detail_simpas']);

@@ -23,6 +23,13 @@ class SumberDanaController extends Controller
 
     public function store(RequestSumberDana $request)
     {
+        $danaCheck = SumberDana::where('kode', '=', $request->kode)->whereNull('deleted_at')->get();
+        // dd($produkCheck);
+        if (count($danaCheck) > 0) {
+            Session::flash('fail', 'Kode ' . $request->kode . ' Sudah Ada. Silahkan Gunakan Kode Produk Type Lain');
+            // return redirect()->back();
+            return redirect()->route('master.sumber-dana.create');
+        }
         try {
             DB::beginTransaction();
 

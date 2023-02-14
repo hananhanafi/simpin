@@ -248,7 +248,7 @@ Tambah Data Pinjaman Baru
         $('#admin_bank').val(numberToCurrency(adminFee))
 
         var sumberdana = $('#sumber_dana').val().split('__')
-        const totalAdminBank = parseInt(sumberdana[3]) + Math.ceil(saldoInt*0.0125)
+        const totalAdminBank = parseInt(sumberdana[3]) + Math.ceil(saldoInt * 0.0125)
         $('#biaya_bank').val(numberToCurrency(totalAdminBank))
 
         $('#pages-simulasi').load("{{ route('ajax.pinjaman.pengajuan') }}?produk_id=" + id_produk + '&bunga=' + bunga +
@@ -334,7 +334,7 @@ Tambah Data Pinjaman Baru
         var saldo = $('#jumlah_pinjaman').val()
         const saldoInt = parseInt(saldo.replaceAll('.', ''))
         var get = val.split('__')
-        const totalAdminBank = parseInt(get[3]) + Math.ceil(saldoInt*0.0125)
+        const totalAdminBank = parseInt(get[3])
         $('#biaya_bank').val(numberToCurrency(totalAdminBank))
         // pageSimulasi(0, 0);
     }
