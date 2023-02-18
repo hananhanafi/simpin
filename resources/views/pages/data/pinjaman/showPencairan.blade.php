@@ -56,11 +56,11 @@ Info Pencairan Pinjaman
                                 </tr>
                                 <tr>
                                     <td width="40%">Departemen/Unit Kerja</td>
-                                    <td width="60%"><?php echo ($anggota->lokasi_kerja); ?></td>
+                                    <td width="60%"><?php echo ($anggota->departement); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Profit Center</td>
-                                    <td width="60%"><?php echo ($anggota->departemen); ?></td>
+                                    <td width="60%"><?php echo ($anggota->profit); ?></td>
                                 </tr>
                                 <tr>
                                     <td width="40%">Status Anggota</td>
@@ -69,6 +69,23 @@ Info Pencairan Pinjaman
                                 <tr>
                                     <td width="40%">Total Pinjaman</td>
                                     <td width="60%"><?php echo (number_format($anggota->total_pinjaman, '0', ',', '.')); ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table id="table" class="table table-striped table-bordered no-wrap">
+                            <tbody>
+                                <tr>
+                                    <td width="40%">BANK</td>
+                                    <td width="60%"><?php echo $anggota->bank_code; ?></td>
+                                </tr>
+                                <tr>
+                                    <td width="40%">No. Rekening</td>
+                                    <td width="60%"><?php echo $anggota->bank_norek; ?></td>
+                                </tr>
+                                <tr>
+                                    <td width="40%">A/N Rekening</td>
+                                    <td width="60%"><?php echo ($anggota->bank_nama); ?></td>
                                 </tr>
                             </tbody>
                         </table>

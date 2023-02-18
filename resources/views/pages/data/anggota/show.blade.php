@@ -178,8 +178,9 @@ Detail Data Anggota
                                     <th>No</th>
                                     <th>No Sertifikat</th>
                                     <th>Jenis Simpanan</th>
+                                    <th>Penempatan / Target</th>
+                                    <th>Setoran / bulan</th>
                                     <th>Saldo</th>
-                                    <th>Setoran / bln</th>
                                     <th>Status</th>
                                     <th>Tgl Aktivasi</th>
                                 </tr>
@@ -194,11 +195,14 @@ Detail Data Anggota
                                 <tr>
                                     <td class="text-center">{{ $no + 1 }}</td>
                                     <td class="text-center">{{ $item->no_rekening }}</td>
-                                    <td class="text-center">{{ $item->jenis_pembiayaan }}</td>
-                                    <td class="text-right">Rp.
+                                    <td class="text-center">{{ $item->jenis_pembiayaan }}asd</td>
+                                    <td class="text-center">Rp.
                                         {{ number_format($item->saldo_akhir, 0, ',', '.') }}
                                     </td>
-                                    <td class="text-right">Rp.
+                                    <td class="text-center">Rp.
+                                        {{ number_format($item->setoran_per_bln, 0, ',', '.') }}
+                                    </td>
+                                    <td class="text-center">Rp.
                                         {{ number_format($item->setoran_per_bln, 0, ',', '.') }}
                                     </td>
                                     <td class="text-center">{!! $item->status !!}</td>
@@ -211,14 +215,15 @@ Detail Data Anggota
                     </div>
                     <hr>
                     <div class="col-md-12">
-                        <h4>Data Pembiayaan</h4>
+                        <h4>Data Pinjaman</h4>
                         <table id="table" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>No Pembiayaan</th>
-                                    <th>Jenis Pembiayaan</th>
+                                    <th>No Pinjaman</th>
+                                    <th>Jenis Pinjaman</th>
                                     <th>Saldo Pokok</th>
+                                    <th>Sisa Hutang</th>
                                     <th>Cicilan / bln</th>
                                     <th>Status</th>
                                     <th>Tgl Aktivasi</th>
@@ -234,12 +239,14 @@ Detail Data Anggota
                                 @foreach ($anggota->pembiayaanAnggota as $no => $item)
                                 <tr>
                                     <td class="text-center">{{ $no + 1 }}</td>
-                                    <td class="text-center">{{ $item->no_rekening }}</td>
+                                    <td class="text-center">{{ $item->no_rekening }}asd</td>
                                     <td class="text-center">{{ $item->jenis_pembiayaan }}</td>
-                                    <td class="text-right">Rp.
+                                    <td class="text-center">Rp.
                                         {{ number_format($item->saldo_akhir_pokok, 0, ',', '.') }}
                                     </td>
-                                    <td class="text-right">Rp. {{ number_format($item->cicilan, 0, ',', '.') }}
+                                    <td class="text-center">Rp. {{ number_format($item->sisa_hutangs, 0, ',', '.') }}
+                                    </td>
+                                    <td class="text-center">Rp. {{ number_format($item->angsuran, 0, ',', '.') }}
                                     </td>
                                     <td class="text-center">{!! $item->status !!}</td>
                                     <td class="text-center">{!! date('d-m-Y', strtotime($item->created_date)) !!}</td>
