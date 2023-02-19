@@ -350,6 +350,7 @@ class SimpananController extends Controller
         $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")
         ->whereNotIn('status_rekening',[0,5])->get();
         $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->where('produk_id',1)
         ->whereNotIn('status_rekening',[0,5])->get();
 
         // $bunga = $request->bunga;

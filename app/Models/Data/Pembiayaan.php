@@ -28,17 +28,17 @@ class Pembiayaan extends Model
     {
         $xstatus = '';
         if ($this->status_rekening == "0") {
-            $xstatus = "<span class='badge badge-warning'>Pengajuan</span>";
+            $xstatus = "<span class='btn btn-sm btn-rounded btn-warning'>Pengajuan</span>";
         } elseif ($this->status_rekening == "1") {
-            $xstatus = "<span class='badge badge-success'>Aktif</span>";
+            $xstatus = "<span class='btn btn-sm btn-rounded btn-success'>Aktif</span>";
         } elseif ($this->status_rekening == "2") {
-            $xstatus = "<span class='badge badge-info'>Pencairan</span>";
+            $xstatus = "<span class='btn btn-sm btn-rounded btn-info'>Pencairan</span>";
         } elseif ($this->status_rekening == "3") {
-            $xstatus = "<span class='badge badge-primary'>Pelusanan</span>";
+            $xstatus = "<span class='btn btn-sm btn-rounded btn-primary'>Pelusanan</span>";
         } elseif ($this->status_rekening == "4") {
-            $xstatus = "<span class='badge badge-secondary'>Terminasi</span>";
+            $xstatus = "<span class='btn btn-sm btn-rounded btn-secondary'>Terminasi</span>";
         } elseif ($this->status_rekening == "5") {
-            $xstatus = "<span class='badge badge-danger'>Tidak Aktif</span>";
+            $xstatus = "<span class='btn btn-sm btn-rounded btn-danger'>Tidak Aktif</span>";
         }
         return $xstatus;
     }

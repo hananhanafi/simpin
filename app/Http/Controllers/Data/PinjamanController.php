@@ -293,8 +293,9 @@ class PinjamanController extends Controller
 
     public function plafon(Request $request)
     {
-
         $anggota = Anggota::where('no_anggota', '=', $request->no_anggota)->firstOrFail();
+        $produk = Produk::find($request->produk_id);
+        $nama_produk = $produk ? $produk->nama_produk : '';
         $today = Date('Y-m-d H:i:s');
         // dd(gettype($anggota->masukkerja_date));
         // $interval = $anggota->masukkerja_date ? ($today->diff($today))->y : 0;
@@ -306,13 +307,12 @@ class PinjamanController extends Controller
         return view('pages.data.pinjaman.plafon')
             ->with('anggota', $anggota)
             ->with('masa_kerja', $masa_kerja)
+            ->with('nama_produk', $nama_produk)
             ->with('request', $request);
     }
 
     public function pinjamanPengajuanPdf(Request $request)
     {
-        // dd($request);
-        // return $request;
         $gaji40 = 0;
 
         if ($request->gaji) {
@@ -323,6 +323,7 @@ class PinjamanController extends Controller
         $pinjaman = Pinjaman::where('no_anggota', 'like', "%$request->no_anggota%")
         ->whereNotIn('status_rekening',[0,5])->get();
         $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
+        ->where('produk_id',1)
         ->whereNotIn('status_rekening',[0,5])->get();
 
         // $bunga = $request->bunga;

@@ -207,7 +207,7 @@
                         <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Periode Akhir</td>
                     </tr>
                     <tr>
-                        <td style="border-bottom: .2px solid black;padding-bottom:.5rem">SIMPANAN Baru</td>
+                        <td style="border-bottom: .2px solid black;padding-bottom:.5rem">SIMPANAN PASTI</td>
                         <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ $pinj_baru ?? 0 }}</td>
                         <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $bulan_baru ?? 0 }} bulan</td>
                         <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
@@ -267,7 +267,7 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td style="border-bottom: .2px solid black;padding-bottom:.5rem">SIMPANAN Baru</td>
+                        <td style="border-bottom: .2px solid black;padding-bottom:.5rem">SIMPANAN PASTI</td>
                         <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ $pinj_baru ?? 0 }}</td>
                         <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $bulan_baru ?? 0 }} bulan</td>
                         <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>

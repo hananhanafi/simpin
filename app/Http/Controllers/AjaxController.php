@@ -234,6 +234,7 @@ class AjaxController extends Controller
         $startTahun = date('Y');
         $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, $bulan);
         $produk = Produk::find($produk_id);
+        $produk_id = $produk ? $produk->id : '';
         $saldo = ($request->saldo == null ? 0 : $saldo);
         $bulan = ($request->bulan == null ? 1 : $bulan);
         $rangeBulan = FunctionHelper::rangeBulan($startBulan, $startTahun, ($bulan + 1));
@@ -246,6 +247,7 @@ class AjaxController extends Controller
             ->with('request', $request)
             ->with('saldo', $saldo)
             ->with('produk', $produk)
+            ->with('produk_id', $produk_id)
             ->with('simpas', $simpas)
             ->with('rangeBulan', $rangeBulan)
             ->with('bunga_efektif', $bunga_efektif)
@@ -256,6 +258,8 @@ class AjaxController extends Controller
     {
         // return $request;
         $gaji40 = 0;
+        $produk = Produk::find($request->produk_id);
+        $nama_produk = $produk ? $produk->nama_produk : '';
 
         if ($request->gaji) {
             $gaji40 = str_replace('.', '', $request->gaji) * 0.4;
@@ -266,7 +270,7 @@ class AjaxController extends Controller
         ->whereNotIn('status_rekening',[0,5])->get();
         // $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")->get();
         $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
-        ->where('produk_id',4)
+        ->where('produk_id',1)
         ->whereNotIn('status_rekening',[0,5])
         ->get();
 
@@ -305,6 +309,7 @@ class AjaxController extends Controller
             ->with('financial', $financial)
             ->with('request', $request)
             ->with('angsuran', $angsuran)
+            ->with('nama_produk', $nama_produk)
             ->with('rangeBulan', $rangeBulan[0])
             // ->with('produk', $produk)
             // ->with('simpas', $simpas)
@@ -329,7 +334,7 @@ class AjaxController extends Controller
         
         // $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")->get();
         $simpanan = Simpanan::where('no_anggota', 'like', "%$request->no_anggota%")
-        ->where('produk_id',4)
+        ->where('produk_id',1)
         ->whereNotIn('status_rekening',[0,5])
         ->get();
         // dd($simpanan);

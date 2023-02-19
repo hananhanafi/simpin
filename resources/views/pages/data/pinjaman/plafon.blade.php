@@ -73,6 +73,9 @@ Plafon Pinjaman
                         </div>
 
                         <div class="pb-3 col-md-6">
+                            
+                            <input type="hidden" name="produk_id" class="form-control" id="produk_id" value="{{ $request->produk_id }}"
+                            onkeyup="pageSimulasi(0,0)">
                             <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Pengajuan
                                     Baru<small class="text-danger">*</small></label>
@@ -191,6 +194,7 @@ Plafon Pinjaman
         var jml_pengajuan_baru = $('#jml_pengajuan_baru').val()
         var bulan = $('#bulan').val()
         var angsuran = $('#angsuran').val()
+        var produk_id = $('#produk_id').val()
 
         jml_pengajuan_baru = numberToCurrency(jml_pengajuan_baru, true, true);
         angsuran = numberToCurrency(angsuran, true, true);
@@ -209,7 +213,11 @@ Plafon Pinjaman
         request += 'gaji=' + gaji + '&'
         request += 'bulan=' + bulan + '&'
         request += 'jml_pengajuan_baru=' + jml_pengajuan_baru + '&'
-        request += 'angsuran=' + angsuran
+        request += 'angsuran=' + angsuran + '&'
+        request += 'produk_id=' + produk_id
+
+        console.log('req',request)
+        console.log('produk_id',produk_id)
 
         $('#pages-simulasi').load("{{ route('ajax.pinjaman.plafon') }}?&" + request)
     }
@@ -263,7 +271,7 @@ Plafon Pinjaman
     }
     
 
-    function unduhSimulasiNew(no_anggota, masa_kerja, gaji, bulan, jml_pengajuan_baru, angsuran) {
+    function unduhSimulasiNew(no_anggota, masa_kerja, gaji, bulan, jml_pengajuan_baru, angsuran, nama_produk) {
 
         var request = ''
 
@@ -272,7 +280,8 @@ Plafon Pinjaman
         request += 'gaji=' + gaji + '&'
         request += 'bulan=' + bulan + '&'
         request += 'jml_pengajuan_baru=' + jml_pengajuan_baru + '&'
-        request += 'angsuran=' + angsuran
+        request += 'angsuran=' + angsuran + '&'
+        request += 'nama_produk=' + nama_produk
 
         window.open("{{ route('data.pinjaman.pengajuan.pdf') }}?" + request, '_blank');
 

@@ -50,7 +50,7 @@
                 </table>
             </div>
             <div class="col-md-2 text-right">
-                <a href="javascript:unduhSimulasiNew('{{ $anggota->no_anggota }}','{{ $request->masa }}','{{ $gajiAnggota }}','{{ $request->bulan }}','{{ $request->jml_pengajuan_baru }}','{{ $angsuran }}')" class="btn btn-success"><i class="fa fa-download"></i> Unduh Hasil </a>
+                <a href="javascript:unduhSimulasiNew('{{ $anggota->no_anggota }}','{{ $request->masa }}','{{ $gajiAnggota }}','{{ $request->bulan }}','{{ $request->jml_pengajuan_baru }}','{{ $angsuran }}','{{ $nama_produk }}')" class="btn btn-success"><i class="fa fa-download"></i> Unduh Hasil </a>
             </div>
         </div>
 
@@ -168,11 +168,11 @@
                     @php
                     $pinj_baru = $request->jml_pengajuan_baru;
                     $bulan_baru = $request->bulan;
-                    // $angsuran_baru = $request->angsuran;
+                    $nama_produk = $nama_produk;
                     @endphp
                     <tbody>
                         <tr>
-                            <td>Pinjaman Baru</td>
+                            <td>{{ $nama_produk }}</td>
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
@@ -264,7 +264,7 @@
                         @endphp
                         @endforeach
                         <tr>
-                            <td>Pinjaman Baru</td>
+                            <td>{{ $nama_produk }}</td>
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>

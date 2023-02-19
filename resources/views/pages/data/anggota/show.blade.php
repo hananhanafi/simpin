@@ -192,10 +192,14 @@ Detail Data Anggota
                                 </tr>
                                 @else
                                 @foreach ($anggota->simpananAnggota as $no => $item)
+                                @php
+                                    $getTabungan = FunctionHelper::tabunganPerbulan($item->jumlah_bunga, $item->jangka_waktu, $item->saldo_akhir);
+                                    $tabPerBulan = $getTabungan['tabunganPerBulan'];
+                                @endphp
                                 <tr>
                                     <td class="text-center">{{ $no + 1 }}</td>
                                     <td class="text-center">{{ $item->no_rekening }}</td>
-                                    <td class="text-center">{{ $item->jenis_pembiayaan }}asd</td>
+                                    <td class="text-center">{{ $item->jenis_simpanan }}</td>
                                     <td class="text-center">Rp.
                                         {{ number_format($item->saldo_akhir, 0, ',', '.') }}
                                     </td>
@@ -239,8 +243,8 @@ Detail Data Anggota
                                 @foreach ($anggota->pembiayaanAnggota as $no => $item)
                                 <tr>
                                     <td class="text-center">{{ $no + 1 }}</td>
-                                    <td class="text-center">{{ $item->no_rekening }}asd</td>
-                                    <td class="text-center">{{ $item->jenis_pembiayaan }}</td>
+                                    <td class="text-center">{{ $item->no_rekening }}</td>
+                                    <td class="text-center">{{ $item->produk->nama_produk }}</td>
                                     <td class="text-center">Rp.
                                         {{ number_format($item->saldo_akhir_pokok, 0, ',', '.') }}
                                     </td>

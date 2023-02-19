@@ -195,6 +195,7 @@
                     @php
                     $pinj_baru = $request->jml_pengajuan_baru;
                     $bulan_baru = $request->bulan;
+                    $nama_produk_baru = $request->nama_produk;
                     // $angsuran_baru = $request->angsuran;
                     @endphp
                     <tbody>
@@ -207,7 +208,7 @@
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Periode Akhir</td>
                         </tr>
                         <tr>
-                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Pinjaman Baru</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $nama_produk_baru ?? '' }}</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $bulan_baru ?? 0 }} bulan</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
@@ -304,7 +305,7 @@
                         @endphp
                         @endforeach
                         <tr>
-                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Pinjaman Baru</td>
+                            <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $nama_produk_baru ?? '' }}</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">{{ $bulan_baru ?? 0 }} bulan</td>
                             <td style="border-bottom: .2px solid black;padding-bottom:.5rem">Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>

@@ -103,7 +103,7 @@
         </table>
     </div>
     <div class="col-md-4 text-right">
-        <a href="javascript:PlafonSimulasi('{{ $request->no_anggota }}','{{ $request->saldo }}','{{ $request->bulan }}','{{ $request->totalAngsuran }}' )" class=" btn btn-success"><i class="fa fa-download"></i> Plafon Pinjaman </a>
+        <a href="javascript:PlafonSimulasi('{{ $request->no_anggota }}','{{ $request->saldo }}','{{ $request->bulan }}','{{ $request->totalAngsuran }}','{{ $produk_id }}' )" class=" btn btn-success"><i class="fa fa-download"></i> Plafon Pinjaman </a>
     </div>
 
     <div class="col-md-2 text-right">
@@ -216,14 +216,15 @@
 </div>
 </div>
 <script>
-    function PlafonSimulasi(no_anggota, saldo, bulan, totalAngsuran) {
+    function PlafonSimulasi(no_anggota, saldo, bulan, totalAngsuran, produk_id) {
         var totalAngsuran = <?php echo $totalAngsuran ?>;
         var request = '';
 
         request += 'no_anggota=' + no_anggota + '&'
         request += 'bulan=' + bulan + '&'
         request += 'saldo=' + parseInt(saldo.replaceAll('.', '')) + '&'
-        request += 'totalAngsuran=' + totalAngsuran
+        request += 'totalAngsuran=' + totalAngsuran + '&'
+        request += 'produk_id=' + produk_id
 
         window.open(
             "{{ route('data.pinjaman.plafon') }}?" + request, '_blank');

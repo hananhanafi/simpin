@@ -171,7 +171,7 @@
                     @endphp
                     <tbody>
                         <tr>
-                            <td>Simpanan Baru</td>
+                            <td>SIMPANAN PASTI</td>
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }} </td>
@@ -263,7 +263,7 @@
                         @endphp
                         @endforeach
                         <tr>
-                            <td>Simpanan Baru</td>
+                            <td>SIMPANAN PASTI</td>
                             <td>Rp. {{ $pinj_baru ?? 0 }}</td>
                             <td>{{ $bulan_baru ?? 0 }} bulan</td>
                             <td>Rp. {{ number_format($angsuran, 0, ',', '.') }}</td>

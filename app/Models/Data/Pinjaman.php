@@ -14,6 +14,12 @@ class Pinjaman extends Model
 
     protected $table = 't_pembiayaan';
 
+    function produk()
+    {
+        return $this->belongsTo(Produk::class, 'produk_id');
+    }
+
+
     function detail()
     {
         return $this->hasMany(PinjamanDetail::class, 'tabungan_id');

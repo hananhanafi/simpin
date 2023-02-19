@@ -137,7 +137,7 @@ class DatatableLaporanController extends Controller
             if ($request->end_date != '')
                 $endDate = $request->end_date;
         }
-        $simpanan = Simpanan::with('anggota')->where('produk_id', 3)
+        $simpanan = Simpanan::with('anggota')->where('produk_id', 2)
         // ->whereMonth('created_date', $bulan)->whereYear('created_date', $tahun)
         ->whereDate('created_date','>=',$startDate)
         ->whereDate('created_date','<=',$endDate)
@@ -191,7 +191,7 @@ class DatatableLaporanController extends Controller
             if ($request->end_date != '')
                 $endDate = $request->end_date;
         }
-        $simpanan = Simpanan::with('anggota')->where('produk_id', 4)
+        $simpanan = Simpanan::with('anggota')->where('produk_id', 1)
         // ->whereMonth('created_date', $bulan)->whereYear('created_date', $tahun)
         ->whereDate('created_date','>=',$startDate)
         ->whereDate('created_date','<=',$endDate)
