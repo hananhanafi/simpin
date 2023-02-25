@@ -116,11 +116,11 @@
                                             <td> {{ date('d M Y', strtotime($simpanan->created_at)) }}</td>
                                         </tr>
                                         <tr>
-                                            <td>TANGGA JATUH TEMPO</td>
+                                            <td>TANGGAL JATUH TEMPO</td>
                                             <td>:</td>
                                             @php
                                             $created = $simpanan->created_at;
-                                            $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months -1 day';
+                                            $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months';
                                             $tempo = date('d M Y', strtotime($add_month, strtotime($created)));
                                             @endphp
                                             <td> {{ $tempo }} </td>
@@ -205,11 +205,11 @@
                                         <td> {{ date('d M Y', strtotime($simpanan->created_at)) }}</td>
                                     </tr>
                                     <tr>
-                                        <td>TANGGA JATUH TEMPO</td>
+                                        <td>TANGGAL JATUH TEMPO</td>
                                         <td>:</td>
                                         @php
                                         $created = $simpanan->created_at;
-                                        $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months -1 day';
+                                        $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months';
                                         $tempo = date('d M Y', strtotime($add_month, strtotime($created)));
                                         @endphp
                                         <td> {{ $tempo }} </td>

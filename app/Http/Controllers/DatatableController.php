@@ -797,7 +797,7 @@ class DatatableController extends Controller
                                 ->where('bulan', $request->bulan);
                         }])
                         ->where([
-                            ['produk_id', '=', 4],
+                            ['produk_id', '=', 1],
                             ['status_rekening', '=', 1]
                         ]);
                 },

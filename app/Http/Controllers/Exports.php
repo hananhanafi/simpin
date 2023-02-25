@@ -527,7 +527,7 @@ class Exports extends Controller
         $sheet->setCellValue('A16', date('d M Y'));
 
         $created = $simpanan->created_at;
-        $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months -1 day';
+        $add_month = '+' . ($simpanan->jangka_waktu - 1) . ' months';
         $tempo = date('d M Y', strtotime($add_month, strtotime($created)));
 
 

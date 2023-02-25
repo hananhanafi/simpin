@@ -243,6 +243,7 @@
                                 $angs = 0;
                             }
                         }
+                        $ntotalAngsuran += $angs;
                         @endphp
                         <tr>
                             <td>{{ $sim->jenis_simpanan }}</td>
